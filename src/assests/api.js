@@ -10,8 +10,8 @@ const useLksService = () => {
     return res;
   };
 
-  const getPosts = async () => {
-    const res = await request(`${_apiBase}posts/?limit=4`);
+  const getPosts = async (offset) => {
+    const res = await request(`${_apiBase}posts/?limit=4&offset=${offset}`);
     return res;
   };
 
@@ -25,8 +25,8 @@ const useLksService = () => {
     return res;
   };
 
-  const getProducts = async () => {
-    const res = await request(`${_apiBase}products/?limit=4`);
+  const getProducts = async (offset) => {
+    const res = await request(`${_apiBase}products/?limit=4&offset=${offset}`);
     return res;
   };
 
