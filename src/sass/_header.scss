@@ -1,0 +1,16 @@
+.header {
+  position: relative;
+  margin: 0 auto;
+  padding: 40px 0 0;
+  width: 100%;
+  text-align: center;
+  &__label {
+    font-size: $fontSize1;
+    font-family: "Helvetica";
+  }
+  &__title {
+    font-size: 36px;
+    text-transform: uppercase;
+    color: #8a8e99;
+  }
+}

@@ -1,0 +1,84 @@
+.#{$namespace} {
+  // Buttons
+  &btn {
+    border: none;
+    white-space: nowrap;
+    background: white;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 5px 30px;
+    font-size: 18px;
+    border-radius: 500px;
+    font-weight: medium;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    color: #656d6d;
+    transition: background 0.4s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      background: #eee;
+      cursor: pointer;
+    }
+  }
+  &btn-bordered {
+    background: #fff;
+    border: 1px solid $color-main;
+    box-shadow: none;
+    font-size: 80%;
+  }
+  &btn-main {
+    background: $color-main;
+    color: #fff;
+    &:hover {
+      background: darken($color-main, 1.5);
+    }
+  }
+
+  &btn-icon-main {
+    background: $color-main;
+    color: #fff;
+    &:hover {
+      background: darken($color-main, 3);
+    }
+    .#{$namespace}btn-icon-icon {
+      background: white;
+    }
+  }
+
+  &btn-icon-bordered {
+    background: #fff;
+    border: 1px solid $color-main;
+    box-shadow: none;
+    font-size: 80%;
+    .#{$namespace}btn-icon-icon {
+      background: none !important;
+      border: 1px solid $color-main;
+    }
+  }
+
+  &btn-icon {
+    padding: 12px;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-text {
+      padding: 0px 24px;
+      @media screen and (max-width: 1427px) {
+        padding: 5px 15px;
+      }
+    }
+    &-icon {
+      box-sizing: border-box;
+      background: $color-main;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 300px;
+      height: 40px;
+      width: 40px !important;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+import Header from "./components/Header";
 import Menu from "./components/Menu";
 import Blog from "./components/Blog";
 import MainPage from "./components/MainPage";
@@ -9,6 +10,7 @@ import Products from "./components/Products";
 import Product from "./components/Product";
 import Post from "./components/Post";
 import Category from "./components/Category";
+import MainSlider from "./components/MainSlider";
 
 function App() {
   return (
@@ -18,8 +20,10 @@ function App() {
           path="/"
           element={
             <>
+              <Header />
               <Menu />
-              <MainPage />
+              {/* <MainPage /> */}
+              <MainSlider />
             </>
           }
         />
@@ -27,6 +31,7 @@ function App() {
           path="/blog"
           element={
             <>
+              <Header />
               <Menu />
               <Blog />
             </>
@@ -36,6 +41,7 @@ function App() {
           path="posts/:slug"
           element={
             <>
+              <Header />
               <Menu />
               <Post />
             </>
@@ -45,6 +51,7 @@ function App() {
           path="categories/:slug"
           element={
             <>
+              <Header />
               <Menu />
               <Category />
             </>
@@ -54,6 +61,7 @@ function App() {
           path="/shop"
           element={
             <>
+              <Header />
               <Menu />
               <Categories />
               <Products />
@@ -64,6 +72,7 @@ function App() {
           path="/products/:slug"
           element={
             <>
+              <Header />
               <Product />
             </>
           }

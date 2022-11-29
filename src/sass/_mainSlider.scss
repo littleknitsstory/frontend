@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
+.slider__mainImg {
+  height: 100%;
+  object-position: left;
+  object-fit: contain;
+}
+.carousel-item {
+  height: 550px;
+}
+
+.carousel-indicators {
+  display: none;
+}
+.carousel-control-prev,
+.carousel-control-next {
+  padding: 10px;
+  background: #3e4148;
+  color: white;
+  font-weight: bold;
+  line-height: 0.5;
+  font-size: 20px;
+  margin-left: 10px;
+  border-radius: 100%;
+  cursor: pointer;
+  top: unset;
+  width: unset;
+  opacity: unset;
+}
+
+.carousel-control-prev-icon {
+  left: 0;
+  background-image: url("../static/images/left-arrow.svg");
+  background-size: unset;
+}
+.carousel-control-next-icon {
+  right: 0;
+  background-image: url("../static/images/right-arrow.svg");
+  background-size: unset;
+}
+.carousel-control-prev {
+  left: 60px;
+  bottom: 25px;
+}
+
+.carousel-control-next {
+  right: unset;
+  left: 135px;
+  bottom: 25px;
+}
+
+.carousel-caption {
+  top: 0;
+  right: 0;
+  height: 100%;
+  left: unset;
+  width: 50vw;
+  display: flex;
+}
+.circle {
+  align-self: center;
+  z-index: 2;
+  background: $color-main;
+  height: 150%;
+  display: flex;
+  align-items: center;
+  width: 200vw;
+  position: relative;
+  border-radius: 100% 0 0 100%;
+  color: white;
+  & > div {
+    height: 66.66666%;
+    width: 90%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20%;
+    margin-top: 100px;
+
+    h5 {
+      font-family: "Pacifico", cursive;
+      font-size: 52px;
+    }
+    p {
+      margin: 40px 0px;
+      font-family: "Helvetica";
+      font-size: 20px;
+      text-align: left;
+    }
+  }
+}
+
+.btn-shop {
+  margin: 60px 0 50px 225px;
+  display: flex;
+  width: 255px;
+}
