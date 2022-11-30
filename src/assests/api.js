@@ -15,6 +15,11 @@ const useLksService = () => {
     return res;
   };
 
+  const getAllPosts = async () => {
+    const res = await request(`${_apiBase}posts`);
+    return res;
+  };
+
   const getPost = async (slug) => {
     const res = await request(`${_apiBase}posts/${slug}/`);
     return res;
@@ -59,6 +64,7 @@ const useLksService = () => {
     getProduct,
     getPost,
     getCategory,
+    getAllPosts,
   };
 };
 

@@ -19,42 +19,45 @@ const MainSlider = () => {
 
   return (
     <div className="lks-container">
-      {error || !loaded ? (
-        <Spinner />
-      ) : (
-        <Carousel variant="dark">
-          {slides.map((slide, index) => (
-            <Carousel.Item key={index}>
-              <img
-                className="d-block w-100 slider__mainImg"
-                src={`${_apiPictures}${slide.image_preview}`}
-                alt="First slide"
-              />
-              <Carousel.Caption>
-                <div className="circle">
-                  <div>
-                    <h5>{slide.title}</h5>
-                    <p>{slide.sub_title}</p>
-                    <Link to={`/shop`}>
-                      <button className="lks-btn btn-shop">
-                        <div className="lks-btn-icon-text">
-                          {" "}
-                          Перейти в каталог
-                        </div>
+      <div className="main-slider">
+        <div className="row">
+          <div className="col-12">
+            {error || !loaded ? (
+              <Spinner />
+            ) : (
+              <Carousel variant="dark">
+                {slides.map((slide, index) => (
+                  <Carousel.Item key={index}>
+                    <img
+                      className="d-block w-100 slider__mainImg"
+                      src={`${_apiPictures}${slide.image_preview}`}
+                      alt="First slide"
+                    />
+                    <Carousel.Caption>
+                      <div className="circle">
+                        <div>
+                          <h5>{slide.title}</h5>
+                          <p>{slide.sub_title}</p>
+                          <Link to={`/shop`}>
+                            <button className="lks-btn btn-shop">
+                              <div className="lks-btn-icon-text">
+                                {" "}
+                                Перейти в каталог
+                              </div>
 
-                        <img
-                          className="lks-btn-icon lks-btn-icon-icon "
-                          src={shoppingCart}
-                          alt="shoppingCart"
-                        />
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-              </Carousel.Caption>
-            </Carousel.Item>
-          ))}
-          {/* <Carousel.Item>
+                              <img
+                                className="lks-btn-icon lks-btn-icon-icon "
+                                src={shoppingCart}
+                                alt="shoppingCart"
+                              />
+                            </button>
+                          </Link>
+                        </div>
+                      </div>
+                    </Carousel.Caption>
+                  </Carousel.Item>
+                ))}
+                {/* <Carousel.Item>
       <img
         className="d-block w-100 slider__mainImg"
         src={secondPhoto}
@@ -85,8 +88,11 @@ const MainSlider = () => {
         </div>
       </Carousel.Caption>
     </Carousel.Item> */}
-        </Carousel>
-      )}
+              </Carousel>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

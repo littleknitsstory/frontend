@@ -1,0 +1,85 @@
+.lastPosts {
+  &__slider {
+    .carousel-control-prev,
+    .carousel-control-next {
+      background: green;
+    }
+  }
+  &__subtitle {
+    font-family: "Helvetica";
+    font-size: 18px;
+    line-height: 25px;
+    text-align: left;
+    color: #545353;
+    margin-bottom: 45px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  &__author {
+    position: relative;
+    background: #e0c0c3;
+    box-shadow: 20px 10px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    height: 450px;
+    .author-title {
+      font-family: "Helvetica";
+      font-size: 24px;
+      line-height: 33px;
+      z-index: 10;
+      color: #ffffff;
+      padding: 15px 0 0 20px;
+      font-weight: bold;
+      text-transform: uppercase;
+      width: 100px;
+    }
+    .circles {
+      z-index: 2;
+      width: 100%;
+      position: absolute;
+      top: 0;
+    }
+    .author-img {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      z-index: 10;
+    }
+    .author-name {
+      font-family: "Helvetica";
+      font-size: 18px;
+      line-height: 25px;
+      text-align: center;
+      color: #ffffff;
+      z-index: 12;
+      font-weight: bold;
+      position: absolute;
+      bottom: 130px;
+      left: 42%;
+      transform: translateX(-35%);
+    }
+    .author-about {
+      font-family: "Helvetica";
+      font-size: 14px;
+      line-height: 19px;
+      text-align: center;
+      color: #ffffff;
+      z-index: 12;
+      position: absolute;
+      bottom: 25px;
+    }
+    .author-social {
+      position: absolute;
+      top: 110px;
+      left: 45px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 140px;
+      a {
+        svg path {
+          fill: #fff;
+        }
+      }
+    }
+  }
+}

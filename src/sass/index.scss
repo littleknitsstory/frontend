@@ -3,6 +3,7 @@
 @import "./_mainSlider.scss";
 @import "./_header.scss";
 @import "./_buttons.scss";
+@import "./lastPostsSlider.scss";
 
 body {
   margin: 0;
@@ -20,4 +21,8 @@ code {
 
 a {
   text-decoration: none;
+}
+
+.lks-content {
+  margin: 40px 15%;
 }

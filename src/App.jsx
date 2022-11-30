@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Menu from "./components/Menu";
 import Blog from "./components/Blog";
-
+import LastPostsSlider from "./components/LastPostsSlider";
 import Categories from "./components/Categories";
 import Products from "./components/Products";
 import Product from "./components/Product";
@@ -27,6 +27,7 @@ function App() {
               <Header />
               <Menu isSaved={isSaved} hasProducts={hasProducts} />
               <MainSlider />
+              <LastPostsSlider />
             </>
           }
         />
