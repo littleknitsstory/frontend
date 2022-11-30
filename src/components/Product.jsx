@@ -24,7 +24,9 @@ const Product = () => {
             {product.title}
             {product.price}
             {product.categories.map((cat) => (
-              <div>{cat.title}</div>
+              <ul key={cat.title}>
+                <li>{cat.title}</li>
+              </ul>
             ))}
             <img src={`${_apiPictures}${product.image_preview}`}></img>
             <div
