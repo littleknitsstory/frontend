@@ -1,16 +1,19 @@
 .header {
   position: relative;
-  margin: 0 auto;
+  margin: 0 auto 56px auto;
   padding: 40px 0 0;
   width: 100%;
   text-align: center;
   &__label {
     font-size: $fontSize1;
     font-family: "Helvetica";
+    color: #545353;
   }
   &__title {
     font-size: 36px;
     text-transform: uppercase;
     color: #8a8e99;
+    font-weight: bold;
+    font-family: "Helvetica";
   }
 }

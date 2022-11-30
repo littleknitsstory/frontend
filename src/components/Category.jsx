@@ -2,10 +2,11 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import useLksService from "../assests/api";
+import Spinner from "./Spinner";
 
 const Category = () => {
   const [category, setCategory] = useState([]);
-  const { error, getCategory, _apiPictures } = useLksService();
+  const { error, getCategory, loaded } = useLksService();
 
   const { slug } = useParams();
 
@@ -15,8 +16,8 @@ const Category = () => {
 
   return (
     <div className="lks-container">
-      {error ? (
-        <h3>Что-то пошло не так, данные не получены</h3>
+      {error || !loaded ? (
+        <Spinner />
       ) : (
         category.map((product) => (
           <ul key={product.id}>

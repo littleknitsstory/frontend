@@ -2,10 +2,11 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useLksService from "../assests/api";
+import Spinner from "./Spinner";
 
 const Post = () => {
   const [post, setPost] = useState([]);
-  const { error, getPost, _apiPictures } = useLksService();
+  const { error, getPost, _apiPictures, loaded } = useLksService();
 
   const { slug } = useParams();
 
@@ -15,8 +16,8 @@ const Post = () => {
 
   return (
     <div className="lks-container">
-      {error ? (
-        <h3>Что-то пошло не так, данные не получены</h3>
+      {error || !loaded ? (
+        <Spinner />
       ) : (
         <ul>
           <li>

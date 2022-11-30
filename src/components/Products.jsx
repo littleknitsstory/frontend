@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useLksService from "../assests/api";
+import Spinner from "./Spinner";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -32,9 +33,9 @@ const Products = () => {
 
   return (
     <div className="lks-container">
-      {error ? (
-        <h3>Что-то пошло не так, данные не получены</h3>
-      ) : newProductLoading || loaded ? (
+      {error || !loaded ? (
+        <Spinner />
+      ) : (
         <div>
           <h3>Все продукты</h3>
           <button
@@ -62,8 +63,6 @@ const Products = () => {
             </ul>
           ))}
         </div>
-      ) : (
-        <h3>Ждем загрузку данных</h3>
       )}
     </div>
   );

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Menu from "./components/Menu";
 import Blog from "./components/Blog";
-import MainPage from "./components/MainPage";
+
 import Categories from "./components/Categories";
 import Products from "./components/Products";
 import Product from "./components/Product";
@@ -13,6 +13,10 @@ import Category from "./components/Category";
 import MainSlider from "./components/MainSlider";
 
 function App() {
+  //временно, для теста
+  const [isSaved, setIsSaved] = useState(true);
+  const [hasProducts, setHasProducts] = useState(false);
+
   return (
     <Router>
       <Routes>
@@ -21,8 +25,7 @@ function App() {
           element={
             <>
               <Header />
-              <Menu />
-              {/* <MainPage /> */}
+              <Menu isSaved={isSaved} hasProducts={hasProducts} />
               <MainSlider />
             </>
           }
@@ -32,7 +35,7 @@ function App() {
           element={
             <>
               <Header />
-              <Menu />
+              <Menu isSaved={isSaved} hasProducts={hasProducts} />
               <Blog />
             </>
           }
@@ -42,7 +45,7 @@ function App() {
           element={
             <>
               <Header />
-              <Menu />
+              <Menu isSaved={isSaved} hasProducts={hasProducts} />
               <Post />
             </>
           }
@@ -52,7 +55,7 @@ function App() {
           element={
             <>
               <Header />
-              <Menu />
+              <Menu isSaved={isSaved} hasProducts={hasProducts} />
               <Category />
             </>
           }
@@ -62,7 +65,7 @@ function App() {
           element={
             <>
               <Header />
-              <Menu />
+              <Menu isSaved={isSaved} hasProducts={hasProducts} />
               <Categories />
               <Products />
             </>
@@ -73,6 +76,7 @@ function App() {
           element={
             <>
               <Header />
+              <Menu isSaved={isSaved} hasProducts={hasProducts} />
               <Product />
             </>
           }

@@ -30,7 +30,7 @@
   text-decoration: none;
 }
 .links nav > ul {
-  margin: 0 20px;
+  margin: 0 60px;
   flex: 1;
   display: flex;
   justify-content: space-around;
@@ -63,7 +63,7 @@
 .social {
   order: 0;
   display: flex;
-  flex: 1;
+  flex: unset;
   justify-content: flex-start;
 }
 .social > * {
@@ -81,7 +81,7 @@
 }
 
 .carousel-item {
-  height: 550px;
+  height: 500px;
 }
 
 .carousel-indicators {
@@ -171,12 +171,12 @@
 .btn-shop {
   margin: 60px 0 50px 225px;
   display: flex;
-  width: 255px;
+  width: 265px;
 }
 
 .header {
   position: relative;
-  margin: 0 auto;
+  margin: 0 auto 56px auto;
   padding: 40px 0 0;
   width: 100%;
   text-align: center;
@@ -184,11 +184,14 @@
 .header__label {
   font-size: 14px;
   font-family: "Helvetica";
+  color: #545353;
 }
 .header__title {
   font-size: 36px;
   text-transform: uppercase;
   color: #8a8e99;
+  font-weight: bold;
+  font-family: "Helvetica";
 }
 
 .lks-btn {
@@ -251,7 +254,7 @@
   align-items: center;
 }
 .lks-btn-icon-text {
-  padding: 0px 24px;
+  padding: 0px 29px;
 }
 @media screen and (max-width: 1427px) {
   .lks-btn-icon-text {
