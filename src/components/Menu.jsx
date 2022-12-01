@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import useLksService from "../assests/api";
 import Spinner from "./Spinner";
+import Social from "./Social";
 
+import shoppingBag from "../static/images/shopping-bag.svg";
+import heart from "../static/images/heart.svg";
 import vk from "../static/images/logo-vk.svg";
 import instagram from "../static/images/logo-instagram.svg";
 import facebook from "../static/images/logo-facebook.svg";
 import pinterest from "../static/images/logo-pinterest.svg";
-import shoppingBag from "../static/images/shopping-bag.svg";
-import heart from "../static/images/heart.svg";
 
 const Menu = ({ hasProducts, isSaved }) => {
   const [menu, setMenu] = useState([]);
@@ -29,29 +30,12 @@ const Menu = ({ hasProducts, isSaved }) => {
         <div className="col-12">
           <div className="links">
             <nav>
-              <div className="social">
-                <a href="https://vk.com/littleknitsstory" target="_blank">
-                  <img src={vk} alt="vk" />
-                </a>
-                <a
-                  href="https://www.facebook.com/littleknitsstory/"
-                  target="_blank"
-                >
-                  <img src={facebook} alt="facebook" />
-                </a>
-                <a
-                  href="https://www.instagram.com/littleknitsstory/"
-                  target="_blank"
-                >
-                  <img src={instagram} alt="instagram" />
-                </a>
-                <a
-                  href="https://www.pinterest.ru/littleknitsstory/"
-                  target="_blank"
-                >
-                  <img src={pinterest} alt="pinterest" />
-                </a>
-              </div>
+              <Social
+                vk={vk}
+                instagram={instagram}
+                facebook={facebook}
+                pinterest={pinterest}
+              />
               <ul>
                 {error || !loaded ? (
                   <Spinner />

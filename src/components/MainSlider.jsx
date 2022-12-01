@@ -41,10 +41,8 @@ const MainSlider = () => {
                           <Link to={`/shop`}>
                             <button className="lks-btn btn-shop">
                               <div className="lks-btn-icon-text">
-                                {" "}
                                 Перейти в каталог
                               </div>
-
                               <img
                                 className="lks-btn-icon lks-btn-icon-icon "
                                 src={shoppingCart}

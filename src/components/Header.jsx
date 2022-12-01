@@ -1,10 +1,11 @@
 import React from "react";
+import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <section className="header">
-      <div className="lks-container">
+      <Container>
         <div className="row">
           <div className="col-12">
             <div className="header__label">Блог и магазин по вязанию</div>
@@ -13,7 +14,7 @@ const Header = () => {
             </Link>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 };

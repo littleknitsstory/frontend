@@ -11,7 +11,7 @@
     line-height: 25px;
     text-align: left;
     color: #545353;
-    margin-bottom: 45px;
+    margin: 45px 0;
     text-transform: uppercase;
     font-weight: bold;
   }
@@ -21,6 +21,8 @@
     box-shadow: 20px 10px 30px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
     height: 450px;
+    width: 290px;
+    margin-left: 10px;
     .author-title {
       font-family: "Helvetica";
       font-size: 24px;

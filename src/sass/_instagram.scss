@@ -1,0 +1,36 @@
+.instagram {
+  margin: 60px auto;
+  .mid-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    h2 {
+      font-family: "Helvetica";
+      font-size: 24px;
+      line-height: 41px;
+      text-align: center;
+
+      color: #000000;
+    }
+  }
+  min-height: 200px;
+  display: flex;
+  align-items: stretch;
+  & > * {
+    flex: 1;
+  }
+  .right-side {
+    background-image: url("../static/images/bitmap/ig-right.svg");
+    background-repeat: no-repeat;
+    background-position: right;
+    z-index: 2;
+  }
+
+  .left-side {
+    background-image: url("../static/images/bitmap/ig-left.svg");
+    background-repeat: no-repeat;
+    background-position: left;
+    z-index: 2;
+  }
+}

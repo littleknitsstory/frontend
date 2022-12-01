@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useLksService from "../assests/api";
 import Spinner from "./Spinner";
@@ -32,7 +33,7 @@ const Blog = () => {
   };
 
   return (
-    <div className="lks-container">
+    <Container>
       {error || !loaded ? (
         <Spinner />
       ) : (
@@ -64,7 +65,7 @@ const Blog = () => {
           ))}
         </div>
       )}
-    </div>
+    </Container>
   );
 };
 

@@ -11,6 +11,8 @@ import Product from "./components/Product";
 import Post from "./components/Post";
 import Category from "./components/Category";
 import MainSlider from "./components/MainSlider";
+import Instagram from "./components/Instagram";
+import Footer from "./components/Footer";
 
 function App() {
   //временно, для теста
@@ -28,6 +30,8 @@ function App() {
               <Menu isSaved={isSaved} hasProducts={hasProducts} />
               <MainSlider />
               <LastPostsSlider />
+              <Instagram />
+              <Footer />
             </>
           }
         />
