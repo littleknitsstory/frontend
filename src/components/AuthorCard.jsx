@@ -1,13 +1,11 @@
 import React from "react";
-import { useEffect, useState } from "react";
+
 import { Container } from "react-bootstrap";
-import Carousel from "react-bootstrap/Carousel";
-import useLksService from "../assests/api";
+
 import author_photo from "../static/images/author_photo.png";
 import circles from "../static/images/circles.svg";
-import Spinner from "./Spinner";
 
-const LastPostsSlider = () => {
+const AuthorCard = () => {
   return (
     <Container>
       <div className="lks-container">
@@ -87,4 +85,4 @@ const LastPostsSlider = () => {
   );
 };
 
-export default LastPostsSlider;
+export default AuthorCard;

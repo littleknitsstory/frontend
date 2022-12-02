@@ -1,8 +1,9 @@
 import React from "react";
+import { Container } from "react-bootstrap";
 
 const Instagram = () => {
   return (
-    <div className="lks-container">
+    <Container>
       <div className="row">
         <div className="col-12">
           <div className="instagram">
@@ -20,7 +21,7 @@ const Instagram = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

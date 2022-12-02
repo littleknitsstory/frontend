@@ -11,7 +11,7 @@ const useLksService = () => {
   };
 
   const getPosts = async (offset) => {
-    const res = await request(`${_apiBase}posts/?limit=4&offset=${offset}`);
+    const res = await request(`${_apiBase}posts/?limit=6&offset=${offset}`);
     return res;
   };
 

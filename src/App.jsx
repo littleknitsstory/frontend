@@ -4,11 +4,11 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Menu from "./components/Menu";
 import Blog from "./components/Blog";
-import LastPostsSlider from "./components/LastPostsSlider";
+import AuthorCard from "./components/AuthorCard";
 import Categories from "./components/Categories";
 import Products from "./components/Products";
 import Product from "./components/Product";
-import Post from "./components/Post";
+import PostDetail from "./components/PostDetail";
 import Category from "./components/Category";
 import MainSlider from "./components/MainSlider";
 import Instagram from "./components/Instagram";
@@ -29,7 +29,7 @@ function App() {
               <Header />
               <Menu isSaved={isSaved} hasProducts={hasProducts} />
               <MainSlider />
-              <LastPostsSlider />
+              <AuthorCard />
               <Instagram />
               <Footer />
             </>
@@ -42,6 +42,7 @@ function App() {
               <Header />
               <Menu isSaved={isSaved} hasProducts={hasProducts} />
               <Blog />
+              <Footer />
             </>
           }
         />
@@ -51,7 +52,7 @@ function App() {
             <>
               <Header />
               <Menu isSaved={isSaved} hasProducts={hasProducts} />
-              <Post />
+              <PostDetail />
             </>
           }
         />
