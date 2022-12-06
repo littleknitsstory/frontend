@@ -1,12 +1,20 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import useLksService from "../assests/api";
-import "../css/menu_style.css";
+import Spinner from "./Spinner";
+import Social from "./Social";
 
-const Menu = () => {
+import shoppingBag from "../static/images/shopping-bag.svg";
+import heart from "../static/images/heart.svg";
+import vk from "../static/images/logo-vk.svg";
+import instagram from "../static/images/logo-instagram.svg";
+import facebook from "../static/images/logo-facebook.svg";
+import pinterest from "../static/images/logo-pinterest.svg";
+
+const Menu = ({ hasProducts, isSaved }) => {
   const [menu, setMenu] = useState([]);
-  const { getMenu, error } = useLksService();
+  const { getMenu, error, loaded } = useLksService();
 
   function isExternal(url) {
     return url.search(/http(s?):\/\//) > -1;
@@ -18,33 +26,52 @@ const Menu = () => {
 
   return (
     <div className="lks-container">
-      <h1>Hello LKS!</h1>
-      <div className="links">
-        <nav>
-          <ul>
-            {error ? (
-              <h3>Что-то пошло не так, данные не получены</h3>
-            ) : (
-              menu
-                .sort((a, b) => {
-                  return Math.sign(a.ordering - b.ordering);
-                })
-                .map((item) => (
-                  <li key={item.id}>
-                    {isExternal(item.url) ? (
-                      <a href={item.url} target="_blank">
-                        {item.name}
-                      </a>
-                    ) : (
-                      <NavLink to={item.url} className="nav-current">
-                        {item.name}
-                      </NavLink>
-                    )}
-                  </li>
-                ))
-            )}
-          </ul>
-        </nav>
+      <div className="row">
+        <div className="col-12">
+          <div className="links">
+            <nav>
+              <Social
+                vk={vk}
+                instagram={instagram}
+                facebook={facebook}
+                pinterest={pinterest}
+              />
+              <ul>
+                {error || !loaded ? (
+                  <Spinner />
+                ) : (
+                  menu
+                    .sort((a, b) => {
+                      return Math.sign(a.ordering - b.ordering);
+                    })
+                    .map((item) => (
+                      <li key={item.id}>
+                        {isExternal(item.url) ? (
+                          <a href={item.url} target="_blank">
+                            {item.name}
+                          </a>
+                        ) : (
+                          <NavLink to={item.url} className="nav-current">
+                            {item.name}
+                          </NavLink>
+                        )}
+                      </li>
+                    ))
+                )}
+              </ul>
+              <div className="controls">
+                <Link to="/cart">
+                  <img src={shoppingBag} alt="shoppingBag" />
+                  <div className={hasProducts ? "dot lit" : "dot"}></div>
+                </Link>
+                <Link to="/saved">
+                  <img src={heart} alt="heart" />
+                  <div className={isSaved ? "dot lit" : "dot"}></div>
+                </Link>
+              </div>
+            </nav>
+          </div>
+        </div>
       </div>
     </div>
   );

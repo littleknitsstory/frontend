@@ -2,7 +2,7 @@ import { useHttp } from "./http.hook";
 
 const useLksService = () => {
   const { request, error, setError, loaded, setLoaded } = useHttp();
-  const _apiBase = "http://dev.backend.littleknitsstory.com:26363/api/v1/";
+  const _apiBase = "http://185.237.253.11:26363/api/v1/";
   const _apiPictures = "http://dev.backend.littleknitsstory.com:26363";
 
   const getMenu = async () => {
@@ -11,7 +11,12 @@ const useLksService = () => {
   };
 
   const getPosts = async (offset) => {
-    const res = await request(`${_apiBase}posts/?limit=4&offset=${offset}`);
+    const res = await request(`${_apiBase}posts/?limit=6&offset=${offset}`);
+    return res;
+  };
+
+  const getAllPosts = async () => {
+    const res = await request(`${_apiBase}posts`);
     return res;
   };
 
@@ -59,6 +64,7 @@ const useLksService = () => {
     getProduct,
     getPost,
     getCategory,
+    getAllPosts,
   };
 };
 

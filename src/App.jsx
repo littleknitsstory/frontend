@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+import Header from "./components/Header";
 import Menu from "./components/Menu";
 import Blog from "./components/Blog";
-import MainPage from "./components/MainPage";
+import AuthorCard from "./components/AuthorCard";
 import Categories from "./components/Categories";
 import Products from "./components/Products";
 import Product from "./components/Product";
-import Post from "./components/Post";
+import PostDetail from "./components/PostDetail";
 import Category from "./components/Category";
+import MainSlider from "./components/MainSlider";
+import Instagram from "./components/Instagram";
+import Footer from "./components/Footer";
 
 function App() {
+  //временно, для теста
+  const [isSaved, setIsSaved] = useState(true);
+  const [hasProducts, setHasProducts] = useState(false);
+
   return (
     <Router>
       <Routes>
@@ -18,8 +26,12 @@ function App() {
           path="/"
           element={
             <>
-              <Menu />
-              <MainPage />
+              <Header />
+              <Menu isSaved={isSaved} hasProducts={hasProducts} />
+              <MainSlider />
+              <AuthorCard />
+              <Instagram />
+              <Footer />
             </>
           }
         />
@@ -27,8 +39,10 @@ function App() {
           path="/blog"
           element={
             <>
-              <Menu />
+              <Header />
+              <Menu isSaved={isSaved} hasProducts={hasProducts} />
               <Blog />
+              <Footer />
             </>
           }
         />
@@ -36,8 +50,9 @@ function App() {
           path="posts/:slug"
           element={
             <>
-              <Menu />
-              <Post />
+              <Header />
+              <Menu isSaved={isSaved} hasProducts={hasProducts} />
+              <PostDetail />
             </>
           }
         />
@@ -45,7 +60,8 @@ function App() {
           path="categories/:slug"
           element={
             <>
-              <Menu />
+              <Header />
+              <Menu isSaved={isSaved} hasProducts={hasProducts} />
               <Category />
             </>
           }
@@ -54,7 +70,8 @@ function App() {
           path="/shop"
           element={
             <>
-              <Menu />
+              <Header />
+              <Menu isSaved={isSaved} hasProducts={hasProducts} />
               <Categories />
               <Products />
             </>
@@ -64,6 +81,8 @@ function App() {
           path="/products/:slug"
           element={
             <>
+              <Header />
+              <Menu isSaved={isSaved} hasProducts={hasProducts} />
               <Product />
             </>
           }

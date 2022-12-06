@@ -2,10 +2,11 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useLksService from "../assests/api";
+import Spinner from "./Spinner";
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
-  const { error, getCategories } = useLksService();
+  const { error, getCategories, loaded } = useLksService();
 
   useEffect(() => {
     getCategories().then((data) => setCategories(data));
@@ -13,8 +14,8 @@ const Categories = () => {
 
   return (
     <div className="lks-container">
-      {error ? (
-        <h3>Что-то пошло не так, данные не получены</h3>
+      {error || !loaded ? (
+        <Spinner />
       ) : (
         <div>
           <h3>Категории</h3>

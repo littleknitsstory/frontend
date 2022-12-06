@@ -1,0 +1,57 @@
+.post-detail {
+  margin: 50px 0;
+  padding: 0 100px;
+  .post-caption-detail {
+    font-family: "Helvetica";
+    font-size: 36px;
+    line-height: 50px;
+    text-align: center;
+
+    color: #545353;
+  }
+  .post-date-detail {
+    font-family: "Helvetica";
+    font-size: 12px;
+    line-height: 17px;
+
+    color: #c4c4c4;
+  }
+  .post-image-detail {
+    margin: 10px 0;
+    width: 100px;
+    height: 100px;
+    img {
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  .post-author-detail {
+    font-family: "Helvetica";
+    color: $color-text;
+    font-size: 14px;
+  }
+  .post-text-detail {
+    font-family: "Helvetica";
+    font-size: 20px;
+    line-height: 40px;
+
+    text-align: justify;
+
+    color: #545353;
+  }
+}
+
+.posts {
+  margin-top: 50px;
+}
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+.post {
+  display: inline-block;
+  margin: 10px;
+  width: 32%;
+  width: calc(33% - 20px);
+  min-width: 200px;
+}

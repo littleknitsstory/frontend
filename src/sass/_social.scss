@@ -1,0 +1,14 @@
+.social {
+  order: 0;
+  display: flex;
+  flex: unset;
+  justify-content: flex-start;
+  & > * {
+    padding: 0 1vw;
+  }
+  img {
+    &:hover {
+      filter: brightness(0.7);
+    }
+  }
+}
