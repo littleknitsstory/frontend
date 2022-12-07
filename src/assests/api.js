@@ -30,8 +30,10 @@ const useLksService = () => {
     return res;
   };
 
-  const getProducts = async (offset) => {
-    const res = await request(`${_apiBase}products/?limit=4&offset=${offset}`);
+  const getProducts = async (limit, offset) => {
+    const res = await request(
+      `${_apiBase}products/?limit=${limit}&offset=${offset}`
+    );
     return res;
   };
 

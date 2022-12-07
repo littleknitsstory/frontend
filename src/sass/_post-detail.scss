@@ -1,5 +1,5 @@
 .post-detail {
-  margin: 50px 0;
+  margin: 80px 0 0 0;
   padding: 0 100px;
   .post-caption-detail {
     font-family: "Helvetica";
@@ -42,7 +42,7 @@
 }
 
 .posts {
-  margin-top: 50px;
+  margin: 50px 0;
 }
 ul {
   list-style-type: none;
@@ -54,4 +54,15 @@ ul {
   width: 32%;
   width: calc(33% - 20px);
   min-width: 200px;
+}
+
+.post-subtitle {
+  font-family: "Helvetica";
+  font-size: 18px;
+  line-height: 25px;
+  text-align: left;
+  color: #545353;
+  margin: 45px 0;
+  text-transform: uppercase;
+  font-weight: bold;
 }

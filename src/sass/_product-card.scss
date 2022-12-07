@@ -1,0 +1,110 @@
+.product {
+  .product-controls {
+    position: absolute;
+    transition: 0.5s right;
+    z-index: 40;
+    right: -100%;
+    .product-control {
+      margin: 10px;
+      margin-right: 20px;
+      border-radius: 100px;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      justify-content: center;
+      background: $color-main;
+      cursor: pointer;
+      img {
+        filter: brightness(10);
+        width: 50%;
+      }
+      .dot {
+        background: white;
+        top: -9px;
+        left: 0;
+        &.lit {
+          background: crimson;
+        }
+      }
+    }
+  }
+  .product-card {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 345px;
+    width: 225px;
+    transition: 0.5s box-shadow;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-ov {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+  }
+  .quick-purchase {
+    visibility: hidden;
+    position: absolute;
+    background: white;
+    padding-top: 10px;
+    margin: 0 auto;
+    opacity: 0;
+    transition: 0.5s bottom;
+    font-family: "Helvetica";
+    bottom: -100%;
+  }
+  &:hover {
+    .product-controls {
+      right: 0;
+    }
+    .quick-purchase {
+      bottom: 10px;
+    }
+
+    .quick-purchase,
+    .product-controls .product-control {
+      visibility: visible;
+      opacity: 1;
+    }
+    border-radius: 10px;
+    box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.1);
+  }
+  .product-info {
+    padding: 10px;
+    overflow: hidden !important;
+    overflow: auto;
+  }
+  .product-image {
+    margin: 10px 0;
+    width: 150px;
+    height: 150px;
+    img {
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .product-title {
+    margin-top: 30px;
+    font-size: 18px;
+    text-align: center;
+    line-height: 25px;
+    color: $color-text;
+    margin-bottom: 16px;
+    font-family: "Helvetica";
+  }
+
+  .product-price {
+    font-size: 21px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 25px;
+    color: $color-text;
+    margin-bottom: 16px;
+    font-family: "Helvetica";
+  }
+}

@@ -42,41 +42,53 @@ const Blog = () => {
             <Spinner />
           ) : (
             <div className="blog">
-              <Carousel variant="dark" fade>
-                {posts.map((post, index) => (
-                  <Carousel.Item key={index}>
-                    <div className="slider-wrapper">
-                      <div className="slider-image">
-                        <img
-                          src="https://bipbap.ru/wp-content/uploads/2019/05/86ae0b2400c92d333751c8d9a9ae68e4.png"
-                          alt=""
-                        />
-                      </div>
-                      <div className="slider-body">
-                        <div className="post-caption">{post.title}</div>
-                        <div className="post-date">{post.created_at}</div>
-                        <p className="post-text">
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Sequi maxime, labore sed quo laudantium tempore
-                          quidem. Officiis laboriosam dolorum doloribus
-                          perspiciatis mollitia? Delectus voluptate cumque, quod
-                          nesciunt et velit necessitatibus!
-                        </p>
-                        <div className="post-author">
-                          Автор: Екатерина Анаприенко
+              <div className="blog-wrapper">
+                <Carousel variant="dark" fade>
+                  {posts.map((post, index) => (
+                    <Carousel.Item key={index}>
+                      <div className="slider-wrapper">
+                        <div className="slider-image">
+                          <img
+                            src={`${_apiPictures}${post.image_preview}`}
+                            alt=""
+                          />
+                        </div>
+                        <div className="slider-body">
+                          <div className="post-caption">{post.title}</div>
+                          <div className="post-date">{post.created_at}</div>
+                          <p className="post-text">
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Sequi maxime, labore sed quo laudantium
+                            tempore quidem. Officiis laboriosam dolorum
+                            doloribus perspiciatis mollitia? Delectus voluptate
+                            cumque, quod nesciunt et velit necessitatibus!
+                          </p>
+                          <div className="post-author">
+                            Автор: Екатерина Анаприенко
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="slider-button">
-                      <Link to={`/posts/${post.slug}`}>
-                        <button className="lks-btn lks-btn-main">Читать</button>
-                      </Link>
-                    </div>
+                      <div className="slider-button">
+                        <Link to={`/posts/${post.slug}`}>
+                          <button
+                            className="lks-btn lks-btn-main"
+                            onClick={() => {
+                              window.scrollTo({
+                                top: 0,
+                                behavior: "smooth",
+                              });
+                            }}
+                          >
+                            Читать
+                          </button>
+                        </Link>
+                      </div>
 
-                    <Carousel.Caption></Carousel.Caption>
-                  </Carousel.Item>
-                ))}
-              </Carousel>
+                      <Carousel.Caption></Carousel.Caption>
+                    </Carousel.Item>
+                  ))}
+                </Carousel>
+              </div>
               <Posts
                 posts={posts}
                 offset={offset}

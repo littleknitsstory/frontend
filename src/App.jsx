@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from "./components/Header";
 import Menu from "./components/Menu";
 import Blog from "./components/Blog";
-import AuthorCard from "./components/AuthorCard";
-import Categories from "./components/Categories";
+import LastPosts from "./components/LastPosts";
 import Products from "./components/Products";
-import Product from "./components/Product";
+import ProductDetail from "./components/ProductDetail";
 import PostDetail from "./components/PostDetail";
 import Category from "./components/Category";
 import MainSlider from "./components/MainSlider";
@@ -15,10 +14,6 @@ import Instagram from "./components/Instagram";
 import Footer from "./components/Footer";
 
 function App() {
-  //временно, для теста
-  const [isSaved, setIsSaved] = useState(true);
-  const [hasProducts, setHasProducts] = useState(false);
-
   return (
     <Router>
       <Routes>
@@ -27,9 +22,10 @@ function App() {
           element={
             <>
               <Header />
-              <Menu isSaved={isSaved} hasProducts={hasProducts} />
+              <Menu />
               <MainSlider />
-              <AuthorCard />
+              <LastPosts />
+              <Products limit={4} categoriesVisible="categories-visible-none" />
               <Instagram />
               <Footer />
             </>
@@ -40,7 +36,7 @@ function App() {
           element={
             <>
               <Header />
-              <Menu isSaved={isSaved} hasProducts={hasProducts} />
+              <Menu />
               <Blog />
               <Footer />
             </>
@@ -51,8 +47,9 @@ function App() {
           element={
             <>
               <Header />
-              <Menu isSaved={isSaved} hasProducts={hasProducts} />
+              <Menu />
               <PostDetail />
+              <Footer />
             </>
           }
         />
@@ -61,7 +58,7 @@ function App() {
           element={
             <>
               <Header />
-              <Menu isSaved={isSaved} hasProducts={hasProducts} />
+              <Menu />
               <Category />
             </>
           }
@@ -71,9 +68,9 @@ function App() {
           element={
             <>
               <Header />
-              <Menu isSaved={isSaved} hasProducts={hasProducts} />
-              <Categories />
-              <Products />
+              <Menu />
+              <Products limit={6} categoriesVisible="col-3" />
+              <Footer />
             </>
           }
         />
@@ -82,8 +79,11 @@ function App() {
           element={
             <>
               <Header />
-              <Menu isSaved={isSaved} hasProducts={hasProducts} />
-              <Product />
+              <Menu />
+              <ProductDetail />
+              <Products limit={4} categoriesVisible="categories-visible-none" />
+              <Instagram />
+              <Footer />
             </>
           }
         />

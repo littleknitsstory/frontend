@@ -1,0 +1,17 @@
+.products {
+  margin-bottom: 30px;
+  .quick-purchase {
+    .lks-btn-icon {
+      padding: 3px;
+    }
+    .lks-btn-icon-icon {
+      height: 30px;
+      width: 30px !important;
+      padding: 5px;
+    }
+  }
+  .products-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+}

@@ -5,7 +5,7 @@ import useLksService from "../assests/api";
 import Spinner from "./Spinner";
 import PostCard from "./PostCard";
 
-const PostDetal = () => {
+const PostDetail = () => {
   const [post, setPost] = useState([]);
   const { error, getPost, _apiPictures, loaded, getPosts } = useLksService();
 
@@ -34,7 +34,7 @@ const PostDetal = () => {
               <div className="post-author-detail">Катя Анаприенко</div>
               <div className="post-image-detail">
                 <img
-                  src="https://bipbap.ru/wp-content/uploads/2019/05/86ae0b2400c92d333751c8d9a9ae68e4.png"
+                  src={`${_apiPictures}${post.image_preview}`}
                   alt="img post"
                 />
               </div>
@@ -61,6 +61,8 @@ const PostDetal = () => {
                   title={post.title}
                   created_at={post.created_at}
                   slug={post.slug}
+                  readMore="read-more"
+                  image_preview={post.image_preview}
                 />
               ))}
             </div>
@@ -71,4 +73,4 @@ const PostDetal = () => {
   );
 };
 
-export default PostDetal;
+export default PostDetail;
