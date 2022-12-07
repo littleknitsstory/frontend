@@ -1,5 +1,7 @@
 .blog {
-  margin-top: 30px;
+  .blog-wrapper {
+    margin-top: 80px !important;
+  }
   .posts {
     margin-top: 50px;
   }
@@ -131,7 +133,7 @@
 
   .carousel-control-prev-icon {
     left: 0;
-    background-image: url("../static/images/blog-slider-arrow-left.svg");
+    background-image: url("../assests/images/blog-slider-arrow-left.svg");
     background-size: unset;
     filter: unset;
     position: relative;
@@ -139,7 +141,7 @@
   .carousel-control-next-icon {
     right: 0;
     position: relative;
-    background-image: url("../static/images/blog-slider-arrow-right.svg");
+    background-image: url("../assests/images/blog-slider-arrow-right.svg");
     background-size: unset;
     filter: unset;
     z-index: 10;

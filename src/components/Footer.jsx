@@ -1,17 +1,15 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-
 import { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import useLksService from "../assests/api";
 import Spinner from "./Spinner";
 import Social from "./Social";
-
-import cactus from "../static/images/cactus-logo.svg";
-import vk from "../static/images/logo-vk_white.svg";
-import instagram from "../static/images/logo-instagram_white.svg";
-import facebook from "../static/images/logo-facebook_white.svg";
-import pinterest from "../static/images/logo-pinterest_white.svg";
+import cactus from "../assests/images/cactus-logo.svg";
+import vk from "../assests/images/logo-vk_white.svg";
+import instagram from "../assests/images/logo-instagram_white.svg";
+import facebook from "../assests/images/logo-facebook_white.svg";
+import pinterest from "../assests/images/logo-pinterest_white.svg";
 
 const Footer = () => {
   const [menu, setMenu] = useState([]);
@@ -48,7 +46,16 @@ const Footer = () => {
                               {item.name}
                             </a>
                           ) : (
-                            <NavLink to={item.url} className="nav-current">
+                            <NavLink
+                              to={item.url}
+                              className="nav-current"
+                              onClick={() => {
+                                window.scrollTo({
+                                  top: 0,
+                                  behavior: "smooth",
+                                });
+                              }}
+                            >
                               {item.name}
                             </NavLink>
                           )}

@@ -31,12 +31,12 @@
 
   .carousel-control-prev-icon {
     left: 0;
-    background-image: url("../static/images/left-arrow.svg");
+    background-image: url("../assests/images/left-arrow.svg");
     background-size: unset;
   }
   .carousel-control-next-icon {
     right: 0;
-    background-image: url("../static/images/right-arrow.svg");
+    background-image: url("../assests/images/right-arrow.svg");
     background-size: unset;
   }
   .carousel-control-prev {
@@ -55,7 +55,7 @@
     right: 0;
     height: 100%;
     left: unset;
-    width: 50vw;
+    width: 60vw;
     display: flex;
   }
   .circle {

@@ -13,17 +13,15 @@ const Categories = () => {
   }, []);
 
   return (
-    <div className="lks-container">
+    <div>
       {error || !loaded ? (
         <Spinner />
       ) : (
-        <div>
-          <h3>Категории</h3>
+        <div className="categorized-menu lks-card-floating">
           {categories.map((category) => (
-            <ul key={category.slug}>
+            <ul className="categories" key={category.slug}>
               <Link to={`/categories/${category.slug}`}>
-                {" "}
-                <li>{category.title}</li>
+                <li className=" category lks-mod-pointer">{category.title}</li>
               </Link>
             </ul>
           ))}

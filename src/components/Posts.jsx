@@ -10,6 +10,8 @@ const Posts = ({ posts, offset, onRequest, newPostLoading, postEnded }) => {
           title={post.title}
           created_at={post.created_at}
           slug={post.slug}
+          readMore="read-more"
+          image_preview={post.image_preview}
         />
       ))}
 

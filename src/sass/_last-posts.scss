@@ -1,0 +1,32 @@
+.lastPosts {
+  margin-bottom: 50px;
+  .blog {
+    margin-top: 0 !important;
+    .carousel-indicators {
+      display: none !important;
+    }
+    .read-more-none {
+      display: none;
+    }
+  }
+  &__subtitle {
+    font-family: "Helvetica";
+    font-size: 18px;
+    line-height: 25px;
+    text-align: left;
+    color: #545353;
+    margin: 45px 0;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  &__author {
+    flex: 1;
+    position: relative;
+    background: #e0c0c3;
+    box-shadow: 20px 10px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    height: 450px;
+    width: 290px;
+    margin-left: 10px;
+  }
+}

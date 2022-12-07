@@ -1,0 +1,142 @@
+.product-detail {
+  margin-top: 90px;
+  .social {
+    flex-direction: column;
+    width: 50px;
+    height: 250px;
+    align-items: center;
+    justify-content: space-around;
+  }
+}
+
+.product-detail-wrapper {
+  display: flex;
+}
+.product-detail-image {
+  flex: 1;
+
+  height: 250px;
+  img {
+    height: 100%;
+    object-fit: contain;
+  }
+}
+.product-detail-info {
+  flex: 2;
+}
+
+.product-detail-title {
+  display: flex;
+  font-family: "Helvetica";
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  color: #545353;
+  font-weight: bold;
+  align-items: center;
+  justify-content: space-between;
+  .lks-btn {
+    padding: 5px 4px;
+  }
+}
+
+.product-detail-sale {
+  font-family: "Helvetica";
+  font-size: 18px;
+  line-height: 25px;
+  color: #ffa0a0;
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+.product-detail-descr {
+  margin: 15px 0;
+  font-family: "Helvetica";
+  font-size: 16px;
+  line-height: 22px;
+  text-align: justify;
+  color: #545353;
+}
+
+.price {
+  .product-amount {
+    line-height: 0.5;
+    .add,
+    .subtract {
+      padding: 15px;
+      cursor: pointer;
+    }
+    color: #fff;
+    background: $color-main;
+    font-family: "Helvetica";
+    border-radius: 500px;
+  }
+  & > * {
+    margin-right: 10px;
+  }
+}
+.product-price-tag {
+  width: 420px;
+  padding: 24px 20px;
+  background: $color-main;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  & > * {
+    margin-right: 20px;
+  }
+  position: relative;
+  .favorite {
+    position: absolute;
+    right: 0;
+    transform: translateX(45px);
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    &.activated {
+      background: white;
+      img {
+        filter: brightness(0.5) sepia(1) saturate(10000%) opacity(0.4);
+      }
+    }
+    img {
+      filter: brightness(400);
+    }
+  }
+}
+.product-size {
+  font-family: "Helvetica";
+  img {
+    margin-right: 10px;
+  }
+}
+
+.buttons {
+  justify-content: space-between;
+  margin: 10px 120px 50px 0;
+  .lks-btn-icon {
+    padding: 5px;
+  }
+}
+
+.spec {
+  color: $color-text;
+  margin: 30px;
+  font-family: "Helvetica";
+  font-size: 16px;
+  line-height: 25px;
+  color: #545353;
+  .spec-title {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+  .spec-subtitle {
+    line-height: 3;
+    font-size: 15px;
+  }
+  table {
+    width: 100%;
+    td {
+      padding: 10px 0;
+    }
+  }
+}
