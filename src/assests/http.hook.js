@@ -8,7 +8,10 @@ export const useHttp = () => {
       url,
       method = "GET",
       body = null,
-      headers = { "Content-Type": "application/json" }
+      headers = {
+        "Content-Type": "application/json",
+        "Accept-Language": "en-En",
+      }
     ) => {
       try {
         const response = await fetch(url, { method, body, headers });

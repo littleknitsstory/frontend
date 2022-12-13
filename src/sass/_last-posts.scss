@@ -25,8 +25,22 @@
     background: #e0c0c3;
     box-shadow: 20px 10px 30px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
-    height: 450px;
+    height: 445px;
     width: 290px;
     margin-left: 10px;
+  }
+  .posts-slider {
+    .post-card {
+      width: 250px;
+    }
+    .post {
+      margin: 10px 45px;
+    }
+  }
+  .carousel-control-prev {
+    right: 35px;
+  }
+  .carousel-control-next {
+    right: 0px;
   }
 }

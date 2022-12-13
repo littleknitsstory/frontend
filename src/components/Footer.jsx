@@ -46,9 +46,13 @@ const Footer = () => {
                               {item.name}
                             </a>
                           ) : (
-                            <NavLink
+                            <Link
                               to={item.url}
-                              className="nav-current"
+                              className={
+                                window.location.pathname == item.url
+                                  ? "nav-current-active"
+                                  : "nav-current"
+                              }
                               onClick={() => {
                                 window.scrollTo({
                                   top: 0,
@@ -57,7 +61,7 @@ const Footer = () => {
                               }}
                             >
                               {item.name}
-                            </NavLink>
+                            </Link>
                           )}
                         </li>
                       ))

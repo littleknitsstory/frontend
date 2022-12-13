@@ -10,7 +10,7 @@ const Blog = () => {
   const [posts, setPosts] = useState([]);
   const { getPosts, error, loaded, _apiPictures } = useLksService();
 
-  const [offset, setOffset] = useState(-6);
+  const [offset, setOffset] = useState(0);
   const [newPostLoading, setNewPostLoading] = useState(true);
   const [postEnded, setPostEnded] = useState(false);
 

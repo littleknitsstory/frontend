@@ -17,6 +17,7 @@
 @import "./_product-card.scss";
 @import "./_product-detail.scss";
 @import "./_containers.scss";
+@import "./_contacts.scss";
 
 body {
   margin: 0;
@@ -34,6 +35,10 @@ code {
 
 a {
   text-decoration: none;
+  color: white;
+  &:hover {
+    color: white;
+  }
 }
 
 .lks-content {

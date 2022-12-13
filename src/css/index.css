@@ -1,10 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+.fixed {
+  position: fixed;
+  top: 0;
+}
+
 .links {
-  order: 1;
   color: #545353;
   text-transform: uppercase;
   justify-content: space-between;
-  position: fixed;
   z-index: 50;
   width: 100%;
   height: 70px;
@@ -18,11 +21,8 @@
   backdrop-filter: blur(50px);
   background: rgba(255, 255, 255, 0.8);
   display: flex;
-  position: sticky;
   align-items: center;
   justify-content: center;
-  position: -webkit-sticky;
-  top: 0; /* required */
   z-index: 50;
   margin-bottom: 10px;
 }
@@ -34,7 +34,7 @@
   text-decoration: none;
 }
 .links nav > ul {
-  margin: 0 65px;
+  margin: 0 87px;
   flex: 1;
   display: flex;
   justify-content: space-around;
@@ -65,12 +65,12 @@
   padding: 0 1vw;
 }
 
-.nav-current.active {
+.nav-current-active {
   border-bottom: 2px solid #e0c0c3;
 }
 
 .main-slider {
-  margin-top: 80px;
+  margin-top: 30px;
 }
 .main-slider .slider__mainImg {
   height: 100%;
@@ -164,10 +164,13 @@
 
 .header {
   position: relative;
-  margin: 0 auto 30px auto;
-  padding: 40px 0 0;
   width: 100%;
   text-align: center;
+}
+.header img {
+  width: 100px;
+  height: 100px;
+  margin: 20px 0;
 }
 .header__label {
   font-size: 14px;
@@ -538,7 +541,7 @@
 }
 
 .blog .blog-wrapper {
-  margin-top: 80px !important;
+  margin-top: 20px !important;
 }
 .blog .posts {
   margin-top: 50px;
@@ -711,9 +714,21 @@
   background: #e0c0c3;
   box-shadow: 20px 10px 30px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
-  height: 450px;
+  height: 445px;
   width: 290px;
   margin-left: 10px;
+}
+.lastPosts .posts-slider .post-card {
+  width: 250px;
+}
+.lastPosts .posts-slider .post {
+  margin: 10px 45px;
+}
+.lastPosts .carousel-control-prev {
+  right: 35px;
+}
+.lastPosts .carousel-control-next {
+  right: 0px;
 }
 
 .post-card {
@@ -721,9 +736,10 @@
   display: flex;
   flex-direction: column;
   height: 430px;
-  width: 330px;
+  width: 300px;
   transition: 0.5s box-shadow;
   position: relative;
+  box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.1);
 }
 .post-card .card-ov {
   display: flex;
@@ -748,7 +764,7 @@
 }
 .post-card:hover {
   border-radius: 10px;
-  box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 10px 20px 30px #e0c0c3;
 }
 .post-card:hover .read-more {
   visibility: visible;
@@ -760,13 +776,14 @@
   overflow: auto;
 }
 .post-card .post-image {
-  margin: 10px 0;
-  width: 300px;
+  margin: 17px auto;
+  width: 200px;
   height: 200px;
+  justify-content: center;
 }
 .post-card .post-image img {
   height: 100%;
-  object-fit: contain;
+  width: 100%;
 }
 .post-card .post-date {
   font-size: 12px;
@@ -775,26 +792,26 @@
   font-family: "Helvetica";
 }
 .post-card .post-caption {
-  font-size: 18px;
+  font-size: 17px;
   text-align: center;
   line-height: 25px;
   color: #545353;
   font-weight: bold;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   font-family: "Helvetica";
 }
 .post-card .post-text {
   font-family: "Helvetica";
   max-height: 200px;
-  font-size: 18px;
+  font-size: 17px;
   margin-bottom: 24px;
-  text-align: center;
+  padding-left: 25px;
   line-height: 25px;
   color: #545353;
 }
 
 .post-detail {
-  margin: 80px 0 0 0;
+  margin: 20px 0 0 0;
   padding: 0 100px;
 }
 .post-detail .post-caption-detail {
@@ -916,6 +933,10 @@ ul {
   justify-content: space-between;
 }
 
+.products-top {
+  margin-top: 80px;
+}
+
 .product .product-controls {
   position: absolute;
   transition: 0.5s right;
@@ -924,7 +945,7 @@ ul {
 }
 .product .product-controls .product-control {
   margin: 10px;
-  margin-right: 20px;
+  margin-right: 1px;
   border-radius: 100px;
   width: 35px;
   height: 35px;
@@ -981,6 +1002,9 @@ ul {
 .product:hover .product-controls {
   right: 0;
 }
+.product:hover .product-card {
+  padding: 10px 50px 10px 10px;
+}
 .product:hover .quick-purchase {
   bottom: 10px;
 }
@@ -995,16 +1019,17 @@ ul {
   overflow: auto;
 }
 .product .product-image {
-  margin: 10px 0;
-  width: 150px;
-  height: 150px;
+  margin: 10px auto;
+  width: 170px;
+  height: 170px;
 }
 .product .product-image img {
   height: 100%;
+  width: 100%;
   object-fit: contain;
 }
 .product .product-title {
-  margin-top: 30px;
+  margin-top: 15px;
   font-size: 18px;
   text-align: center;
   line-height: 25px;
@@ -1224,6 +1249,18 @@ ul {
   font-weight: normal !important;
 }
 
+.form-head {
+  margin-bottom: 40px;
+  font-size: 20px;
+  font-weight: normal;
+  color: #545353;
+  line-height: 2;
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #e5e5e5;
+  font-family: "Helvetica";
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -1237,6 +1274,10 @@ code {
 
 a {
   text-decoration: none;
+  color: white;
+}
+a:hover {
+  color: white;
 }
 
 .lks-content {

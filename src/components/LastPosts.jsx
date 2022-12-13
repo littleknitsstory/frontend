@@ -13,6 +13,7 @@ const LastPosts = () => {
   useEffect(() => {
     getPosts().then((data) => setPosts(data.results));
   }, []);
+
   return (
     <Container>
       <div className="lks-container">
@@ -28,12 +29,22 @@ const LastPosts = () => {
                 <Carousel variant="dark">
                   {posts.map((post) => (
                     <Carousel.Item key={post.title}>
-                      <PostCard
-                        title={post.title}
-                        created_at={post.created_at}
-                        slug={post.slug}
-                        readMore="read-more-none"
-                      />
+                      <div className="posts-slider">
+                        <PostCard
+                          title={post.title}
+                          created_at={post.created_at}
+                          slug={post.slug}
+                          image_preview={post.image_preview}
+                          readMore="read-more-none"
+                        />
+                        <PostCard
+                          title={post.title}
+                          created_at={post.created_at}
+                          slug={post.slug}
+                          image_preview={post.image_preview}
+                          readMore="read-more-none"
+                        />
+                      </div>
 
                       <Carousel.Caption></Carousel.Caption>
                     </Carousel.Item>
