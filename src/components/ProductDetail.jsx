@@ -63,7 +63,12 @@ const ProductDetail = () => {
                     </strong>
                     <button className="lks-btn lks-btn-icon-main">
                       <div className="lks-btn-icon-text">
-                        Подписаться на инстаграм
+                        <a
+                          href="https://www.instagram.com/littleknitsstory/"
+                          target="_blank"
+                        >
+                          Подписаться на инстаграм
+                        </a>
                       </div>
                       <div className="lks-btn-icon lks-btn-icon-icon">
                         <img src={instagramPurple} alt="shoppingCart" />

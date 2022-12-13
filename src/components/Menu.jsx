@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useLksService from "../assests/api";
 import Spinner from "./Spinner";
 import Social from "./Social";
@@ -15,6 +15,7 @@ import pinterest from "../assests/images/logo-pinterest.svg";
 const Menu = ({ hasProducts, isSaved }) => {
   const [menu, setMenu] = useState([]);
   const { getMenu, error, loaded } = useLksService();
+  const [isFixed, setIsFixed] = useState(false);
 
   function isExternal(url) {
     return url.search(/http(s?):\/\//) > -1;
@@ -24,10 +25,20 @@ const Menu = ({ hasProducts, isSaved }) => {
     getMenu().then((data) => setMenu(data.results));
   }, []);
 
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 158) {
+        setIsFixed(true);
+      } else {
+        setIsFixed(false);
+      }
+    });
+  }, [isFixed]);
+
   return (
     <div className="row">
       <div className="col-12">
-        <div className="links">
+        <div className={isFixed ? "links fixed" : "links"}>
           <nav>
             <Social
               vk={vk}
@@ -50,9 +61,22 @@ const Menu = ({ hasProducts, isSaved }) => {
                           {item.name}
                         </a>
                       ) : (
-                        <NavLink to={item.url} className="nav-current">
+                        <Link
+                          to={item.url}
+                          className={
+                            window.location.pathname == item.url
+                              ? "nav-current-active"
+                              : "nav-current"
+                          }
+                          onClick={() => {
+                            window.scrollTo({
+                              top: 0,
+                              behavior: "smooth",
+                            });
+                          }}
+                        >
                           {item.name}
-                        </NavLink>
+                        </Link>
                       )}
                     </li>
                   ))

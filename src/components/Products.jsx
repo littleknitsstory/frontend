@@ -11,6 +11,7 @@ const Products = ({ limit, categoriesVisible }) => {
   const [offset, setOffset] = useState(-6);
   const [newProductLoading, setNewProductLoading] = useState(true);
   const [productEnded, setProductEnded] = useState(false);
+  const [category, setCategory] = useState("Toys");
 
   useEffect(() => {
     onRequest(offset, true);
@@ -34,7 +35,7 @@ const Products = ({ limit, categoriesVisible }) => {
 
   return (
     <div className="lks-container">
-      <div className="products">
+      <div className="products products-top">
         {error || !loaded ? (
           <Spinner />
         ) : (

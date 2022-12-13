@@ -1,6 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import logo from "../assests/images/logo.png";
 
 const Header = () => {
   return (
@@ -8,9 +9,9 @@ const Header = () => {
       <Container>
         <div className="row">
           <div className="col-12">
-            <div className="header__label">Блог и магазин по вязанию</div>
             <Link to="/">
-              <h1 className="header__title">Little Kniths Story </h1>
+              <img src={logo} alt="logo" />
+              <h1 className="header__title">Little Knits Story </h1>
             </Link>
           </div>
         </div>

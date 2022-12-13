@@ -8,7 +8,7 @@ import LastPosts from "./components/LastPosts";
 import Products from "./components/Products";
 import ProductDetail from "./components/ProductDetail";
 import PostDetail from "./components/PostDetail";
-import Category from "./components/Category";
+import Contacts from "./components/Contacts";
 import MainSlider from "./components/MainSlider";
 import Instagram from "./components/Instagram";
 import Footer from "./components/Footer";
@@ -53,16 +53,7 @@ function App() {
             </>
           }
         />
-        <Route
-          path="categories/:slug"
-          element={
-            <>
-              <Header />
-              <Menu />
-              <Category />
-            </>
-          }
-        />
+
         <Route
           path="/shop"
           element={
@@ -83,6 +74,17 @@ function App() {
               <ProductDetail />
               <Products limit={4} categoriesVisible="categories-visible-none" />
               <Instagram />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/contacts"
+          element={
+            <>
+              <Header />
+              <Menu />
+              <Contacts />
               <Footer />
             </>
           }
