@@ -19,3 +19,37 @@
 .products-top {
   margin-top: 80px;
 }
+
+@media screen and (max-width: 992px) {
+  .products {
+    .col-3 {
+      width: 47%;
+      padding-left: 80px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .products {
+    .col-3 {
+      width: 100%;
+      padding-left: 134px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .products {
+    .col-3 {
+      padding-left: 17px;
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .products {
+    .col-3 {
+      width: 25%;
+    }
+  }
+}

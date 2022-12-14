@@ -1,11 +1,16 @@
 import React from "react";
+import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+
 import author_photo from "../assests/images/author_photo.png";
 import circles from "../assests/images/circles.svg";
 
 const AuthorCard = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="col-3 lastPosts__author">
-      <div className="author-title">Об авторе</div>
+      <div className="author-title"> {t("About author")}</div>
       <img className="circles" src={circles} alt="circles" />
       <img className="author-img" src={author_photo} alt="author_photo"></img>
       <div className="author-social">
@@ -60,7 +65,7 @@ const AuthorCard = () => {
           </svg>
         </a>
       </div>
-      <div className="author-name">Катя Анаприенко</div>
+      <div className="author-name">{t("Kate Anaprienko")}</div>
       <div className="author-about">
         Etiam eu molestie eros, commodo hendrerit sapien. Maecenas tempus leo ac
         nisi iaculis porta. Sed sapien tortor, aliquet a velit ut.
@@ -69,4 +74,4 @@ const AuthorCard = () => {
   );
 };
 
-export default AuthorCard;
+export default withTranslation()(AuthorCard);

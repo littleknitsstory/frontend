@@ -44,6 +44,7 @@
   z-index: 12;
   position: absolute;
   bottom: 25px;
+  padding: 5px;
 }
 .author-social {
   position: absolute;
@@ -57,5 +58,38 @@
     svg path {
       fill: #fff;
     }
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .author-title {
+    font-size: 18px;
+  }
+
+  .author-img {
+    top: 100px;
+  }
+  .author-name {
+    font-size: 16px;
+    bottom: 147px;
+  }
+  .author-about {
+    font-size: 12px;
+  }
+  .author-social {
+    left: 18px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .author-img {
+    top: 60px;
+  }
+  .author-name {
+    bottom: 120px;
+  }
+
+  .author-social {
+    left: 18px;
   }
 }

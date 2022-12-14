@@ -13,6 +13,8 @@ import MainSlider from "./components/MainSlider";
 import Instagram from "./components/Instagram";
 import Footer from "./components/Footer";
 
+import "./i18n";
+
 function App() {
   return (
     <Router>

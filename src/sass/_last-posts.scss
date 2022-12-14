@@ -34,13 +34,105 @@
       width: 250px;
     }
     .post {
-      margin: 10px 45px;
+      margin: 10px 30px;
     }
   }
   .carousel-control-prev {
-    right: 35px;
+    right: 25px;
   }
   .carousel-control-next {
     right: 0px;
+  }
+  .one-post {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .lastPosts {
+    .carousel-control-prev,
+    .carousel-control-next {
+      display: none;
+    }
+    &__author {
+      flex: unset;
+      width: 158px;
+    }
+    .two-posts {
+      display: none;
+    }
+    .one-post {
+      display: block;
+      .posts-slider {
+        .post-card {
+          width: 370px;
+        }
+      }
+    }
+    .posts-slider {
+      .post-card {
+        width: 235px;
+      }
+      .post {
+        margin: 10px 21px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .lastPosts {
+    &__author {
+      flex: unset;
+    }
+    .two-posts {
+      display: none;
+    }
+    .col-9 {
+      width: 67%;
+    }
+    .one-post {
+      .posts-slider {
+        .post-card {
+          width: 280px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .lastPosts {
+    &__author {
+      width: 280px;
+      margin-left: 33px;
+    }
+    .col-9 {
+      width: 100%;
+    }
+    .one-post {
+      .posts-slider {
+        .post-card {
+          width: 280px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .lastPosts {
+    &__author {
+      width: 200px;
+      margin-left: 33px;
+    }
+
+    .one-post {
+      .posts-slider {
+        .post-card {
+          width: 200px;
+        }
+      }
+    }
   }
 }

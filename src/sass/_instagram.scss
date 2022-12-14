@@ -34,3 +34,18 @@
     z-index: 2;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .instagram {
+    & > * {
+      flex: unset;
+
+      margin-left: 80px;
+    }
+
+    .right-side,
+    .left-side {
+      display: none;
+    }
+  }
+}

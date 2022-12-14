@@ -1,17 +1,20 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import useLksService from "../assests/api";
 import Spinner from "./Spinner";
 import Social from "./Social";
-import cactus from "../assests/images/cactus-logo.svg";
+
 import vk from "../assests/images/logo-vk_white.svg";
 import instagram from "../assests/images/logo-instagram_white.svg";
 import facebook from "../assests/images/logo-facebook_white.svg";
 import pinterest from "../assests/images/logo-pinterest_white.svg";
 
 const Footer = () => {
+  const { t } = useTranslation();
   const [menu, setMenu] = useState([]);
   const { getMenu, error, loaded } = useLksService();
 
@@ -30,7 +33,7 @@ const Footer = () => {
           <div className="footer">
             <nav>
               <div className="footer__menu">
-                <h2>Навигация</h2>
+                <h2> {t("Navigation")}</h2>
                 <ul>
                   {error || !loaded ? (
                     <Spinner />
@@ -68,7 +71,7 @@ const Footer = () => {
                   )}
                 </ul>
               </div>
-              <div className="footer__personal-account">
+              {/* <div className="footer__personal-account">
                 <h2>Личный кабинет</h2>
                 <ul>
                   <li>
@@ -81,17 +84,18 @@ const Footer = () => {
                     <Link to="/saved">Сохраненные товары</Link>
                   </li>
                 </ul>
-              </div>
+              </div> */}
             </nav>
             <div className="subscribe-input">
-              <input type="email" placeholder="Ваш e-mail" />
-              <button className="lks btn">Подписаться</button>
+              <input type="email" placeholder={t("Your e-mail")} />
+              <button className="lks btn">{t("Subscribe")}</button>
             </div>
             <div className="subtitle">
-              Мы проводим специальные акции для наших клиентов. оформите
-              подписку и мы будем держать вас в курсе
+              {t(
+                "We run special promotions for our customers. subscribe and we will keep you informed"
+              )}
             </div>
-            <div className="social">
+            <div className="social-dark">
               <Social
                 vk={vk}
                 instagram={instagram}
@@ -102,8 +106,9 @@ const Footer = () => {
 
             <div className="copyright">
               Little Knits Story 2017 | All Rights Reserved
-              <img src={cactus} alt="Cactus Vision" />
-              Политика конфиденциальности
+              <br />
+              <br />
+              {t("Privacy Policy")}
             </div>
           </div>
         </div>
@@ -112,4 +117,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default withTranslation()(Footer);
