@@ -2,7 +2,7 @@ import { useHttp } from "./http.hook";
 
 const useLksService = () => {
   const { request, error, setError, loaded, setLoaded } = useHttp();
-  const _apiBase = "http://185.237.253.11:26363/api/v1/";
+  const _apiBase = "http://dev.backend.littleknitsstory.com:26363/api/v1/";
   const _apiPictures = "http://dev.backend.littleknitsstory.com:26363";
 
   const getMenu = async () => {
