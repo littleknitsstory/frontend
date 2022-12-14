@@ -27,9 +27,9 @@ const Menu = ({ hasProducts, isSaved }) => {
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 158) {
+      if (window.scrollY > 192) {
         setIsFixed(true);
-      } else {
+      } else if (window.scrollY < 190) {
         setIsFixed(false);
       }
     });

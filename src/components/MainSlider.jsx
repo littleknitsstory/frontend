@@ -2,11 +2,16 @@ import React from "react";
 import Carousel from "react-bootstrap/Carousel";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+
 import useLksService from "../assests/api";
 import Spinner from "./Spinner";
 import shoppingCart from "../assests/images/shopping-cart.svg";
 
 const MainSlider = () => {
+  const { t } = useTranslation();
+
   const [slides, setSlides] = useState([]);
   const { getSliders, error, _apiPictures, loaded } = useLksService();
 
@@ -17,7 +22,7 @@ const MainSlider = () => {
   return (
     <div className="main-slider">
       <div className="row">
-        <div className="col-12">
+        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12">
           {error || !loaded ? (
             <Spinner />
           ) : (
@@ -34,10 +39,10 @@ const MainSlider = () => {
                       <div>
                         <h5>{slide.title}</h5>
                         <p>{slide.sub_title}</p>
-                        <Link to={`/shop`}>
-                          <button className="lks-btn btn-shop">
+                        <Link to={`/shop`} className="btn-shop">
+                          <button className="lks-btn lks-btn-icon">
                             <div className="lks-btn-icon-text">
-                              Перейти в каталог
+                              {t("Open Catalog")}
                             </div>
                             <div className="lks-btn-icon lks-btn-icon-icon ">
                               <img src={shoppingCart} alt="shoppingCart" />
@@ -57,4 +62,4 @@ const MainSlider = () => {
   );
 };
 
-export default MainSlider;
+export default withTranslation()(MainSlider);

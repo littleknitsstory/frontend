@@ -38,6 +38,8 @@
   },
   "devDependencies": {
     "bootstrap": "^5.2.3",
-    "react-bootstrap": "^2.6.0"
+    "i18next": "^22.4.5",
+    "react-bootstrap": "^2.6.0",
+    "react-i18next": "^12.1.1"
   }
 }
