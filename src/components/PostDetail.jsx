@@ -1,11 +1,14 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import useLksService from "../assests/api";
 import Spinner from "./Spinner";
 import PostCard from "./PostCard";
 
 const PostDetail = () => {
+  const { t } = useTranslation();
   const [post, setPost] = useState([]);
   const { error, getPost, _apiPictures, loaded, getPosts } = useLksService();
 
@@ -31,11 +34,17 @@ const PostDetail = () => {
             <div className="post-detail">
               <div className="post-caption-detail">{post.title}</div>
               <div className="post-date-detail">{post.created_at}</div>
-              <div className="post-author-detail">Катя Анаприенко</div>
+              <div className="post-author-detail">
+                {t("Author: Kate Anaprienko")}
+              </div>
               <div className="post-image-detail">
-                <img
+                {/* <img
                   src={`${_apiPictures}${post.image_preview}`}
                   alt="img post"
+                /> */}
+                <img
+                  src="https://via.placeholder.com/180x200/300"
+                  alt="placeholder"
                 />
               </div>
 
@@ -53,11 +62,11 @@ const PostDetail = () => {
                 ducimus minus fuga soluta vitae ex aliquid ipsum.
               </article>
             </div>
-            <div className="post-subtitle">Предложенные посты</div>
+            <div className="post-subtitle">{t("Suggested Posts")}</div>
             <div className="posts">
-              {posts.map((post) => (
+              {posts.map((post, index) => (
                 <PostCard
-                  key={post.title}
+                  key={index}
                   title={post.title}
                   created_at={post.created_at}
                   slug={post.slug}
@@ -73,4 +82,4 @@ const PostDetail = () => {
   );
 };
 
-export default PostDetail;
+export default withTranslation()(PostDetail);

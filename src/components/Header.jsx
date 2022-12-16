@@ -23,7 +23,6 @@ const Header = () => {
           <div className="col-12">
             <Link to="/">
               <img src={logo} alt="logo" />
-              <h1 className="header__title">Little Knits Story</h1>
             </Link>
           </div>
         </div>

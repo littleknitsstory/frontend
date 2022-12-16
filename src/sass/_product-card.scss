@@ -1,7 +1,7 @@
 .product {
   .product-controls {
     position: absolute;
-    transition: 0.5s right;
+    transition: 0.4s right;
     z-index: 40;
     right: -100%;
     .product-control {
@@ -34,11 +34,12 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
-    height: 345px;
+    height: 308px;
     width: 225px;
     transition: 0.5s box-shadow;
     position: relative;
     overflow: hidden;
+    box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.1);
   }
   .card-ov {
     display: flex;
@@ -47,48 +48,44 @@
     height: 100%;
   }
   .quick-purchase {
-    visibility: hidden;
     position: absolute;
     background: white;
     padding-top: 10px;
-    margin: 0 auto;
-    opacity: 0;
-    transition: 0.5s bottom;
+    transition: 0.4s bottom;
     font-family: "Helvetica";
     bottom: -100%;
   }
   &:hover {
-    .product-controls {
-      right: 0;
+    .product-image {
+      bottom: 130px;
+      z-index: -4;
     }
-    .product-card {
-      padding: 10px 50px 10px 10px;
+    .product-info {
+      bottom: 60px;
+    }
+    .product-controls {
+      right: 18px;
+      top: 18px;
     }
     .quick-purchase {
-      bottom: 10px;
+      bottom: 23px;
+      left: 50%;
+      transform: translateX(-50%);
     }
-
-    .quick-purchase,
-    .product-controls .product-control {
-      visibility: visible;
-      opacity: 1;
-    }
-    border-radius: 10px;
-    box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.1);
   }
+
   .product-info {
-    padding: 10px;
     overflow: hidden !important;
     overflow: auto;
   }
   .product-image {
     margin: 10px auto;
-    width: 170px;
     height: 170px;
+    justify-content: center;
+
     img {
       height: 100%;
       width: 100%;
-      object-fit: contain;
     }
   }
 

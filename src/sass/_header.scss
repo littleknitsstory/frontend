@@ -3,8 +3,7 @@
   width: 100%;
   text-align: center;
   img {
-    width: 100px;
-    height: 100px;
+    width: 300px;
     margin: 20px 0;
   }
   &__label {
@@ -23,7 +22,7 @@
     padding: 10px;
     padding-top: 30px;
     position: absolute;
-    right: 21px;
+    left: 21px;
     top: 0px;
     background: #e0c0c3;
     button {

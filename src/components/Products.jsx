@@ -4,6 +4,7 @@ import useLksService from "../assests/api";
 import Spinner from "./Spinner";
 import ProductCard from "./ProductCard";
 import Categories from "./Categories";
+import { Container } from "react-bootstrap";
 
 const Products = ({ limit, categoriesVisible }) => {
   const [products, setProducts] = useState([]);
@@ -34,38 +35,40 @@ const Products = ({ limit, categoriesVisible }) => {
   };
 
   return (
-    <div className="lks-container">
-      <div className="products products-top">
-        {error || !loaded ? (
-          <Spinner />
-        ) : (
-          <div className="row">
-            <div className={categoriesVisible}>
-              <Categories />
+    <Container>
+      <div className="lks-container">
+        <div className="products products-top">
+          {error || !loaded ? (
+            <Spinner />
+          ) : (
+            <div className="row">
+              <div className={categoriesVisible}>
+                <Categories />
+              </div>
+              {products.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  slug={product.slug}
+                  title={product.title}
+                  price={product.price}
+                  image_preview={product.image_preview}
+                />
+              ))}
+              <p
+                className="lks-see-more"
+                onClick={() => {
+                  onRequest(offset);
+                }}
+                disabled={newProductLoading}
+                style={{ display: productEnded ? "none" : "block" }}
+              >
+                Смотреть еще
+              </p>
             </div>
-            {products.map((product) => (
-              <ProductCard
-                key={product.id}
-                slug={product.slug}
-                title={product.title}
-                price={product.price}
-                image_preview={product.image_preview}
-              />
-            ))}
-            <p
-              className="lks-see-more"
-              onClick={() => {
-                onRequest(offset);
-              }}
-              disabled={newProductLoading}
-              style={{ display: productEnded ? "none" : "block" }}
-            >
-              Смотреть еще
-            </p>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

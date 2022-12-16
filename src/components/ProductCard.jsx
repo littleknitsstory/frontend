@@ -38,9 +38,13 @@ const ProductCard = ({ title, slug, price, image_preview }) => {
             >
               <li>
                 <div className="product-image">
-                  <img
+                  {/* <img
                     src={`${_apiPictures}${image_preview}`}
                     alt="img product"
+                  /> */}
+                  <img
+                    src="https://via.placeholder.com/180x200/300"
+                    alt="placeholder"
                   />
                 </div>
                 <div className="product-title">{title}</div>

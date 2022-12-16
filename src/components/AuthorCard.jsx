@@ -14,7 +14,7 @@ const AuthorCard = () => {
       <img className="circles" src={circles} alt="circles" />
       <img className="author-img" src={author_photo} alt="author_photo"></img>
       <div className="author-social">
-        <a href="#" target="_blank">
+        <a href="https://vk.com/id744139287" target="_blank">
           <svg
             width="18"
             height="12"
@@ -28,7 +28,7 @@ const AuthorCard = () => {
             />
           </svg>
         </a>
-        <a href="#" target="_blank">
+        <a href="https://instagram.com/katyaanaprienko" target="_blank">
           <svg
             width="18"
             height="18"
