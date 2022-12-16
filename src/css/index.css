@@ -240,8 +240,7 @@
   text-align: center;
 }
 .header img {
-  width: 100px;
-  height: 100px;
+  width: 300px;
   margin: 20px 0;
 }
 .header__label {
@@ -260,7 +259,7 @@
   padding: 10px;
   padding-top: 30px;
   position: absolute;
-  right: 21px;
+  left: 21px;
   top: 0px;
   background: #e0c0c3;
 }
@@ -364,10 +363,10 @@
 }
 
 .circles {
-  z-index: 2;
+  z-index: 0;
   width: 100%;
   position: absolute;
-  top: 0;
+  top: 10px;
 }
 
 .author-img {
@@ -412,6 +411,10 @@
   flex-direction: column;
   justify-content: space-between;
   height: 140px;
+  cursor: pointer;
+}
+.author-social a {
+  cursor: pointer;
 }
 .author-social a svg path {
   fill: #fff;
@@ -698,7 +701,7 @@
   margin-top: 20px !important;
 }
 .blog .posts {
-  margin-top: 50px;
+  margin: 50px auto 0 auto;
 }
 .blog ul {
   list-style-type: none;
@@ -717,9 +720,6 @@
 }
 .blog .slider-wrapper .slider-image {
   flex: 1;
-  width: 250px;
-  height: 250px;
-  margin: 30px 0 0 100px;
 }
 .blog .slider-wrapper .slider-image img {
   height: 100%;
@@ -757,6 +757,7 @@
   font-family: "Helvetica";
   color: #545353;
   font-size: 14px;
+  padding-bottom: 20px;
 }
 .blog .slider-button {
   position: relative;
@@ -767,7 +768,8 @@
   right: 0;
 }
 .blog .carousel-indicators {
-  margin-right: 25%;
+  margin-right: 36%;
+  margin-bottom: unset;
 }
 .blog .carousel-indicators [data-bs-target] {
   border: 1px solid #c4c4c4;
@@ -840,8 +842,54 @@
   bottom: 0;
 }
 
+@media screen and (max-width: 1289px) {
+  .blog .slider-wrapper .slider-body {
+    margin: unset;
+  }
+}
+@media screen and (max-width: 992px) {
+  .blog .slider-wrapper {
+    margin-top: 80px !important;
+    display: block;
+  }
+  .blog .slider-wrapper .slider-body {
+    flex: 1 1;
+  }
+  .blog .post {
+    width: 45%;
+  }
+}
+@media screen and (max-width: 650px) {
+  .blog .carousel-control-prev-icon,
+.blog .carousel-control-next-icon {
+    display: none;
+  }
+  .blog .carousel-control-prev,
+.blog .carousel-control-next {
+    display: none;
+  }
+  .blog .post {
+    width: 80%;
+    margin: 0 10%;
+  }
+}
+@media screen and (max-width: 400px) {
+  .blog .slider-wrapper .slider-body .post-text {
+    font-size: 16px;
+  }
+  .blog .slider-wrapper .slider-body .post-author {
+    padding-bottom: 45px;
+  }
+  .blog .carousel-indicators {
+    display: none;
+  }
+  .blog .post {
+    width: 100%;
+    margin: 0 0;
+  }
+}
 .lastPosts {
-  margin-bottom: 50px;
+  margin: 0 auto 50px auto;
 }
 .lastPosts .blog {
   margin-top: 0 !important;
@@ -953,7 +1001,6 @@
   display: flex;
   flex-direction: column;
   height: 430px;
-  width: 300px;
   transition: 0.5s box-shadow;
   position: relative;
   box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.1);
@@ -994,7 +1041,6 @@
 }
 .post-card .post-image {
   margin: 17px auto;
-  width: 200px;
   height: 200px;
   justify-content: center;
 }
@@ -1061,13 +1107,13 @@
 .post-detail .post-text-detail {
   font-family: "Helvetica";
   font-size: 20px;
-  line-height: 40px;
+  line-height: 27px;
   text-align: justify;
   color: #545353;
 }
 
 .posts {
-  margin: 50px 0;
+  margin: 50px auto;
 }
 
 ul {
@@ -1094,6 +1140,34 @@ ul {
   font-weight: bold;
 }
 
+@media screen and (max-width: 845px) {
+  .post-detail {
+    margin: 100px 0 0 0;
+    padding: 0;
+  }
+  .post-detail .post-text-detail {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .post {
+    width: 45%;
+  }
+}
+@media screen and (max-width: 769px) {
+  .post-subtitle {
+    text-align: center;
+  }
+  .post {
+    width: 60%;
+    margin: 0 20%;
+  }
+}
+@media screen and (max-width: 400px) {
+  .post {
+    margin: 0 5%;
+  }
+}
 .categories-visible-none {
   display: none;
 }
@@ -1135,7 +1209,7 @@ ul {
 }
 
 .products {
-  margin-bottom: 30px;
+  margin: 0 auto 30px auto;
 }
 .products .quick-purchase .lks-btn-icon {
   padding: 3px;
@@ -1154,31 +1228,26 @@ ul {
   margin-top: 80px;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1399px) {
   .products .col-3 {
     width: 47%;
-    padding-left: 80px;
+    margin: 0 auto;
   }
 }
 @media screen and (max-width: 768px) {
   .products .col-3 {
     width: 100%;
-    padding-left: 134px;
+    padding-left: 64px;
   }
 }
 @media screen and (max-width: 500px) {
   .products .col-3 {
-    padding-left: 17px;
-  }
-}
-@media screen and (min-width: 992px) {
-  .products .col-3 {
-    width: 25%;
+    padding-left: 20px;
   }
 }
 .product .product-controls {
   position: absolute;
-  transition: 0.5s right;
+  transition: 0.4s right;
   z-index: 40;
   right: -100%;
 }
@@ -1211,11 +1280,12 @@ ul {
   padding: 10px;
   display: flex;
   flex-direction: column;
-  height: 345px;
+  height: 308px;
   width: 225px;
   transition: 0.5s box-shadow;
   position: relative;
   overflow: hidden;
+  box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.1);
 }
 .product .card-ov {
   display: flex;
@@ -1224,48 +1294,41 @@ ul {
   height: 100%;
 }
 .product .quick-purchase {
-  visibility: hidden;
   position: absolute;
   background: white;
   padding-top: 10px;
-  margin: 0 auto;
-  opacity: 0;
-  transition: 0.5s bottom;
+  transition: 0.4s bottom;
   font-family: "Helvetica";
   bottom: -100%;
 }
-.product:hover {
-  border-radius: 10px;
-  box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.1);
+.product:hover .product-image {
+  bottom: 130px;
+  z-index: -4;
+}
+.product:hover .product-info {
+  bottom: 60px;
 }
 .product:hover .product-controls {
-  right: 0;
-}
-.product:hover .product-card {
-  padding: 10px 50px 10px 10px;
+  right: 18px;
+  top: 18px;
 }
 .product:hover .quick-purchase {
-  bottom: 10px;
-}
-.product:hover .quick-purchase,
-.product:hover .product-controls .product-control {
-  visibility: visible;
-  opacity: 1;
+  bottom: 23px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .product .product-info {
-  padding: 10px;
   overflow: hidden !important;
   overflow: auto;
 }
 .product .product-image {
   margin: 10px auto;
-  width: 170px;
   height: 170px;
+  justify-content: center;
 }
 .product .product-image img {
   height: 100%;
   width: 100%;
-  object-fit: contain;
 }
 .product .product-title {
   margin-top: 15px;

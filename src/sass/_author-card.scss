@@ -10,10 +10,10 @@
   width: 100px;
 }
 .circles {
-  z-index: 2;
+  z-index: 0;
   width: 100%;
   position: absolute;
-  top: 0;
+  top: 10px;
 }
 .author-img {
   position: absolute;
@@ -54,7 +54,9 @@
   flex-direction: column;
   justify-content: space-between;
   height: 140px;
+  cursor: pointer;
   a {
+    cursor: pointer;
     svg path {
       fill: #fff;
     }

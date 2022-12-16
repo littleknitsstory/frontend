@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import useLksService from "../assests/api";
 
 const PostCard = ({ slug, created_at, title, readMore, image_preview }) => {
+  const { t } = useTranslation();
   const { _apiPictures } = useLksService();
   return (
-    <div className="col-4 post" key={title}>
+    <div className="col-4 post" key={created_at}>
       <div className="lks-card post-card ">
         <div className="post-info">
           <ul>
@@ -21,7 +24,11 @@ const PostCard = ({ slug, created_at, title, readMore, image_preview }) => {
               <li>
                 <div className="post-date">{created_at}</div>
                 <div className="post-image">
-                  <img src={`${_apiPictures}${image_preview}`} alt="img post" />
+                  {/* <img src={`${_apiPictures}${image_preview}`} alt="img post" /> */}
+                  <img
+                    src="https://via.placeholder.com/180x200/300"
+                    alt="placeholder"
+                  />
                 </div>
                 <div className="post-caption">{title}</div>
 
@@ -32,7 +39,7 @@ const PostCard = ({ slug, created_at, title, readMore, image_preview }) => {
                   architecto...
                 </article>
                 <div className={readMore}>
-                  <button className="lks-btn lks-btn-main">Читать</button>
+                  <button className="lks-btn lks-btn-main"> {t("Read")}</button>
                 </div>
               </li>
             </Link>
@@ -43,4 +50,4 @@ const PostCard = ({ slug, created_at, title, readMore, image_preview }) => {
   );
 };
 
-export default PostCard;
+export default withTranslation()(PostCard);

@@ -2,11 +2,14 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import { Link } from "react-router-dom";
+import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import useLksService from "../assests/api";
 import Spinner from "./Spinner";
 import Posts from "./Posts";
 
 const Blog = () => {
+  const { t } = useTranslation();
   const [posts, setPosts] = useState([]);
   const { getPosts, error, loaded, _apiPictures } = useLksService();
 
@@ -48,9 +51,13 @@ const Blog = () => {
                     <Carousel.Item key={index}>
                       <div className="slider-wrapper">
                         <div className="slider-image">
-                          <img
+                          {/* <img
                             src={`${_apiPictures}${post.image_preview}`}
                             alt=""
+                          /> */}
+                          <img
+                            src="https://via.placeholder.com/180x200/300"
+                            alt="placeholder"
                           />
                         </div>
                         <div className="slider-body">
@@ -64,7 +71,7 @@ const Blog = () => {
                             cumque, quod nesciunt et velit necessitatibus!
                           </p>
                           <div className="post-author">
-                            Автор: Екатерина Анаприенко
+                            {t("Author: Kate Anaprienko")}
                           </div>
                         </div>
                       </div>
@@ -79,7 +86,7 @@ const Blog = () => {
                               });
                             }}
                           >
-                            Читать
+                            {t("Read")}
                           </button>
                         </Link>
                       </div>
@@ -104,4 +111,4 @@ const Blog = () => {
   );
 };
 
-export default Blog;
+export default withTranslation()(Blog);

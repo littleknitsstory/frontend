@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   height: 430px;
-  width: 300px;
+  // width: 300px;
   transition: 0.5s box-shadow;
   position: relative;
   box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.1);
@@ -43,7 +43,7 @@
   }
   .post-image {
     margin: 17px auto;
-    width: 200px;
+
     height: 200px;
     justify-content: center;
     img {
