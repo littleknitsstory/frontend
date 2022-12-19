@@ -1,27 +1,30 @@
 .fixed {
   position: fixed;
   top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .links {
   color: #545353;
   text-transform: uppercase;
-  justify-content: space-between;
-  z-index: 50;
   width: 100%;
+  z-index: 50;
   height: 70px;
+  display: flex;
+  align-items: center;
   ul {
     list-style-type: none;
   }
 
   nav {
-    padding: 20px 15%;
+    padding: 20px 5%;
     flex: 2;
     backdrop-filter: blur(50px);
     background: rgba(255, 255, 255, 0.8);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     z-index: 50;
     margin-bottom: 10px;
   }
@@ -38,7 +41,6 @@
     display: flex;
     justify-content: center;
     font-family: "Helvetica";
-    width: 670px;
   }
 }
 
@@ -56,6 +58,7 @@
 }
 
 .controls {
+  justify-content: end;
   order: 1;
   align-items: center;
   display: inline-flex;
@@ -83,6 +86,7 @@
   nav {
     font-size: 13px;
     flex-direction: column;
+
     & > ul {
       width: 90%;
       padding-top: 10px;
@@ -103,6 +107,10 @@
     }
   }
   .links {
+    nav {
+      margin-top: 100px;
+      z-index: 0;
+    }
     nav > ul {
       width: 0;
       margin-top: 10px;

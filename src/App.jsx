@@ -27,7 +27,11 @@ function App() {
               <Menu />
               <MainSlider />
               <LastPosts />
-              <Products limit={4} categoriesVisible="categories-visible-none" />
+              <Products
+                limit={4}
+                categoriesVisible="categories-visible-none"
+                col={3}
+              />
               <Instagram />
               <Footer />
             </>
@@ -62,7 +66,11 @@ function App() {
             <>
               <Header />
               <Menu />
-              <Products limit={6} categoriesVisible="col-3" />
+              <Products
+                limit={6}
+                categoriesVisible="col-lg-3 col-xl-3 col-md-12 col-xs-12"
+                col={6}
+              />
               <Footer />
             </>
           }

@@ -13,6 +13,7 @@ export const translationEn = {
   Read: "Read",
   "See more": "See more",
   "Suggested Posts": "Suggested Posts",
+  Submit: "Submit",
 };
 
 export const translationRu = {
@@ -30,4 +31,5 @@ export const translationRu = {
   Read: "Читать",
   "See more": "Смотреть еще",
   "Suggested Posts": "Предложенные посты",
+  Submit: "Отправить",
 };

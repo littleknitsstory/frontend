@@ -2,27 +2,30 @@
 .fixed {
   position: fixed;
   top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .links {
   color: #545353;
   text-transform: uppercase;
-  justify-content: space-between;
-  z-index: 50;
   width: 100%;
+  z-index: 50;
   height: 70px;
+  display: flex;
+  align-items: center;
 }
 .links ul {
   list-style-type: none;
 }
 .links nav {
-  padding: 20px 15%;
+  padding: 20px 5%;
   flex: 2;
   backdrop-filter: blur(50px);
   background: rgba(255, 255, 255, 0.8);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   z-index: 50;
   margin-bottom: 10px;
 }
@@ -38,7 +41,6 @@
   display: flex;
   justify-content: center;
   font-family: "Helvetica";
-  width: 670px;
 }
 
 .dot {
@@ -55,6 +57,7 @@
 }
 
 .controls {
+  justify-content: end;
   order: 1;
   align-items: center;
   display: inline-flex;
@@ -97,6 +100,10 @@
   }
   nav > .controls > * {
     padding-right: 10px;
+  }
+  .links nav {
+    margin-top: 100px;
+    z-index: 0;
   }
   .links nav > ul {
     width: 0;
@@ -240,8 +247,8 @@
   text-align: center;
 }
 .header img {
-  width: 300px;
-  margin: 20px 0;
+  width: 275px;
+  margin: 20px auto;
 }
 .header__label {
   font-size: 14px;
@@ -527,6 +534,7 @@
   font-weight: normal;
   margin-bottom: 10px;
   font-family: "Helvetica";
+  text-align: center;
 }
 .footer .subscribe-input {
   margin: 20px auto 10px auto;
@@ -610,8 +618,8 @@
 .social {
   order: 0;
   display: flex;
-  flex: unset;
-  justify-content: flex-start;
+  flex: 1;
+  justify-content: start;
 }
 .social > * {
   padding: 0 1vw;
@@ -1001,6 +1009,7 @@
   display: flex;
   flex-direction: column;
   height: 430px;
+  width: 100%;
   transition: 0.5s box-shadow;
   position: relative;
   box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.1);
@@ -1173,8 +1182,8 @@ ul {
 }
 
 .categorized-menu {
-  margin-top: 50px;
-  width: 200px;
+  margin: 0 auto 20px auto;
+  width: 100%;
   padding: 15px 0 10px 20px;
 }
 .categorized-menu .categories {
@@ -1228,23 +1237,6 @@ ul {
   margin-top: 80px;
 }
 
-@media screen and (max-width: 1399px) {
-  .products .col-3 {
-    width: 47%;
-    margin: 0 auto;
-  }
-}
-@media screen and (max-width: 768px) {
-  .products .col-3 {
-    width: 100%;
-    padding-left: 64px;
-  }
-}
-@media screen and (max-width: 500px) {
-  .products .col-3 {
-    padding-left: 20px;
-  }
-}
 .product .product-controls {
   position: absolute;
   transition: 0.4s right;
@@ -1277,11 +1269,12 @@ ul {
   background: crimson;
 }
 .product .product-card {
+  margin: 0 auto 20px auto;
   padding: 10px;
   display: flex;
   flex-direction: column;
   height: 308px;
-  width: 225px;
+  width: 100%;
   transition: 0.5s box-shadow;
   position: relative;
   overflow: hidden;
@@ -1551,7 +1544,13 @@ ul {
   font-weight: normal !important;
 }
 
-.form-head {
+.contacts {
+  margin: 30px 0;
+}
+.contacts__box {
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.05);
+}
+.contacts .form-head {
   margin-bottom: 40px;
   font-size: 20px;
   font-weight: normal;
@@ -1561,6 +1560,49 @@ ul {
   padding: 10px;
   border-bottom: 1px solid #e5e5e5;
   font-family: "Helvetica";
+}
+.contacts .contact-info {
+  background-color: #e0c0c3;
+  padding: 40px 10px 0 20px;
+}
+.contacts .contact-info__title {
+  font-size: 20px;
+  color: #fff;
+  font-family: "Helvetica";
+}
+.contacts .contact-info__wrapper {
+  display: flex;
+  font-size: 18px;
+  margin: 25px 0;
+  font-family: "Helvetica";
+  color: #fff;
+  align-items: center;
+}
+.contacts .contact-info__wrapper img {
+  margin-right: 10px;
+}
+.contacts form input,
+.contacts form textarea {
+  margin-bottom: 10px;
+  background: #efefef;
+  font-size: 16px;
+  font-family: "Helvetica";
+}
+.contacts form input:focus,
+.contacts form textarea:focus {
+  background: #efefef;
+}
+.contacts form textarea {
+  height: 140px;
+}
+.contacts .lks-btn-main {
+  margin: 20px auto;
+}
+.contacts .agreement {
+  text-align: center;
+  margin: 15px 0;
+  color: #c4c4c4;
+  font-size: 14px;
 }
 
 body {

@@ -2,9 +2,10 @@
   position: relative;
   width: 100%;
   text-align: center;
+
   img {
-    width: 300px;
-    margin: 20px 0;
+    width: 275px;
+    margin: 20px auto;
   }
   &__label {
     font-size: $fontSize1;

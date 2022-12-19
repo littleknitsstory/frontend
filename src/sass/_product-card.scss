@@ -31,11 +31,12 @@
     }
   }
   .product-card {
+    margin: 0 auto 20px auto;
     padding: 10px;
     display: flex;
     flex-direction: column;
     height: 308px;
-    width: 225px;
+    width: 100%;
     transition: 0.5s box-shadow;
     position: relative;
     overflow: hidden;

@@ -6,14 +6,17 @@ import shoppingBag from "../assests/images/shopping-bag.svg";
 import heart from "../assests/images/heart.svg";
 import { useState } from "react";
 
-const ProductCard = ({ title, slug, price, image_preview }) => {
+const ProductCard = ({ title, slug, price, image_preview, col }) => {
   const { _apiPictures } = useLksService();
 
   const [isSaved, setIsSaved] = useState(false);
   const [hasProducts, setHasProducts] = useState(false);
 
   return (
-    <div className="col-3 product" key={title}>
+    <div
+      className={`col-xl-${col} col-lg-${col} col-md-6 col-xs-6 product`}
+      key={title}
+    >
       <div className="lks-card product-card ">
         <div className="product-controls">
           <div className="product-control lks-mod-pointer">
