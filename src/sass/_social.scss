@@ -1,8 +1,8 @@
 .social {
   order: 0;
   display: flex;
-  flex: unset;
-  justify-content: flex-start;
+  flex: 1;
+  justify-content: start;
   & > * {
     padding: 0 1vw;
   }

@@ -18,7 +18,7 @@ const Header = () => {
 
   return (
     <section className="header">
-      <Container>
+      <div className="lks-container">
         <div className="row">
           <div className="col-12">
             <Link to="/">
@@ -37,7 +37,7 @@ const Header = () => {
             {languageRu ? "EN" : "RU"}
           </button>
         </div>
-      </Container>
+      </div>
     </section>
   );
 };

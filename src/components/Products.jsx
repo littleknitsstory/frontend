@@ -6,7 +6,7 @@ import ProductCard from "./ProductCard";
 import Categories from "./Categories";
 import { Container } from "react-bootstrap";
 
-const Products = ({ limit, categoriesVisible }) => {
+const Products = ({ limit, categoriesVisible, col, colMd }) => {
   const [products, setProducts] = useState([]);
   const { error, getProducts, loaded } = useLksService();
   const [offset, setOffset] = useState(-6);
@@ -45,15 +45,22 @@ const Products = ({ limit, categoriesVisible }) => {
               <div className={categoriesVisible}>
                 <Categories />
               </div>
-              {products.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  slug={product.slug}
-                  title={product.title}
-                  price={product.price}
-                  image_preview={product.image_preview}
-                />
-              ))}
+
+              <div className="col">
+                <div className="row">
+                  {products.map((product) => (
+                    <ProductCard
+                      key={product.id}
+                      slug={product.slug}
+                      title={product.title}
+                      price={product.price}
+                      image_preview={product.image_preview}
+                      col={col}
+                    />
+                  ))}
+                </div>
+              </div>
+
               <p
                 className="lks-see-more"
                 onClick={() => {
