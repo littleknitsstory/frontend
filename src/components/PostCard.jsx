@@ -4,7 +4,14 @@ import { withTranslation } from "react-i18next";
 import { useTranslation } from "react-i18next";
 import useLksService from "../assests/api";
 
-const PostCard = ({ slug, created_at, title, readMore, image_preview }) => {
+const PostCard = ({
+  slug,
+  created_at,
+  title,
+  readMore,
+  image_preview,
+  content,
+}) => {
   const { t } = useTranslation();
   const { _apiPictures } = useLksService();
   return (
@@ -32,11 +39,16 @@ const PostCard = ({ slug, created_at, title, readMore, image_preview }) => {
                 </div>
                 <div className="post-caption">{title}</div>
 
-                <article className="post-text">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Eveniet aliquam nulla recusandae hic. Delectus sit omnis
-                  officia minus aliquam iure reprehenderit quaerat,
-                  architecto...
+                <article
+                  className="post-text"
+                  // dangerouslySetInnerHTML={{
+                  //   __html: content,
+                  // }}
+                >
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Sequi sint fugit impedit ut dicta labore, praesentium
+                  doloribus, vitae quae aut dolorum aspernatur quaerat
+                  distinctio sit sunt. Laboriosam, quae! Accusamus, minus!
                 </article>
                 <div className={readMore}>
                   <button className="lks-btn lks-btn-main"> {t("Read")}</button>

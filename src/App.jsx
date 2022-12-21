@@ -12,6 +12,9 @@ import Contacts from "./components/Contacts";
 import MainSlider from "./components/MainSlider";
 import Instagram from "./components/Instagram";
 import Footer from "./components/Footer";
+import Saved from "./components/Saved";
+import Cart from "./components/Cart";
+import Page404 from "./components/Page404";
 
 import "./i18n";
 
@@ -33,6 +36,28 @@ function App() {
                 col={3}
               />
               <Instagram />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/saved"
+          element={
+            <>
+              <Header />
+              <Menu />
+              <Saved />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <>
+              <Header />
+              <Menu />
+              <Cart />
               <Footer />
             </>
           }
@@ -95,6 +120,17 @@ function App() {
               <Header />
               <Menu />
               <Contacts />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <>
+              <Header />
+              <Menu />
+              <Page404 />
               <Footer />
             </>
           }

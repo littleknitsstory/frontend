@@ -37,6 +37,8 @@ const Blog = () => {
     setPostEnded(ended);
   };
 
+  console.log(posts);
+
   return (
     <div className="lks-container">
       <div className="row">
@@ -63,13 +65,13 @@ const Blog = () => {
                         <div className="slider-body">
                           <div className="post-caption">{post.title}</div>
                           <div className="post-date">{post.created_at}</div>
-                          <p className="post-text">
+                          <article className="post-text">
                             Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Sequi maxime, labore sed quo laudantium
-                            tempore quidem. Officiis laboriosam dolorum
-                            doloribus perspiciatis mollitia? Delectus voluptate
-                            cumque, quod nesciunt et velit necessitatibus!
-                          </p>
+                            elit. Illum alias possimus dolores delectus
+                            aspernatur natus tempore vero, distinctio porro id
+                            quasi temporibus nobis molestiae provident
+                            reprehenderit autem deleniti. Ipsum, totam.
+                          </article>
                           <div className="post-author">
                             {t("Author: Kate Anaprienko")}
                           </div>
