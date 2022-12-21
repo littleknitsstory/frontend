@@ -14,6 +14,8 @@ export const translationEn = {
   "See more": "See more",
   "Suggested Posts": "Suggested Posts",
   Submit: "Submit",
+  Nothing: "Nothing",
+  "Cart is empty": "Cart is empty",
 };
 
 export const translationRu = {
@@ -32,4 +34,6 @@ export const translationRu = {
   "See more": "Смотреть еще",
   "Suggested Posts": "Предложенные посты",
   Submit: "Отправить",
+  Nothing: "Ничего нет",
+  "Cart is empty": "Корзина пуста",
 };

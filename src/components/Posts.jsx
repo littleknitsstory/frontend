@@ -15,6 +15,7 @@ const Posts = ({ posts, offset, onRequest, newPostLoading, postEnded }) => {
           slug={post.slug}
           readMore="read-more"
           image_preview={post.image_preview}
+          content={post.content}
         />
       ))}
 

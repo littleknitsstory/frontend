@@ -15,7 +15,7 @@ const Contacts = () => {
     <div className="lks-container">
       <div className="contacts">
         <div className="row">
-          <div className="col-8 contacts__box">
+          <div className="col-xl-8 col-lg-8 contacts__box">
             <div className="form-head">Оставьте нам сообщение</div>
             <Form className="contact-form">
               <Row className="mb-2">
@@ -59,7 +59,7 @@ const Contacts = () => {
               данных
             </div>
           </div>
-          <div className="col-4 contact-info">
+          <div className="col-xl-4 col-lg-4 contact-info">
             <div className="contact-info__title">Контактная информация</div>
             <div className="contact-info__wrapper">
               <img src={map} alt="" />

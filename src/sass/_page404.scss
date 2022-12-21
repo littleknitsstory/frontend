@@ -1,0 +1,29 @@
+.page404 {
+  &__error {
+    margin-top: 50px;
+    line-height: 0.8;
+    font-size: 20vw;
+    color: #e0c0c3;
+    font-weight: bold;
+    font-family: "Helvetica";
+    text-align: center;
+  }
+  &__subtitle {
+    font-size: 5vw;
+    color: #c4c4c4;
+    font-family: "Helvetica";
+    text-align: center;
+  }
+  &__text {
+    margin: 20px auto;
+    color: #656d6d;
+    width: 35vw;
+    font-family: "Helvetica";
+    text-align: center;
+    span {
+      a {
+        color: #e0c0c3;
+      }
+    }
+  }
+}

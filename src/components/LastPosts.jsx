@@ -40,6 +40,7 @@ const LastPosts = () => {
                             slug={post.slug}
                             image_preview={post.image_preview}
                             readMore="read-more-none"
+                            content={post.content}
                           />
 
                           <PostCard
@@ -48,6 +49,7 @@ const LastPosts = () => {
                             slug={post.slug}
                             image_preview={post.image_preview}
                             readMore="read-more-none"
+                            content={post.content}
                           />
                         </div>
                       </div>
@@ -60,6 +62,7 @@ const LastPosts = () => {
                             slug={post.slug}
                             image_preview={post.image_preview}
                             readMore="read-more-none"
+                            content={post.content}
                           />
                         </div>
                       </div>
