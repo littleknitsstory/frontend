@@ -8,8 +8,8 @@ const Spinner = () => {
         background: "rgb(255, 255, 255)",
         display: "block",
       }}
-      width="200px"
-      height="200px"
+      width="220px"
+      height="220px"
       viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid"
     >

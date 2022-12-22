@@ -31,8 +31,7 @@ const MainSlider = () => {
                 <Carousel.Item key={index}>
                   <img
                     className="d-block w-100 slider__mainImg"
-                    // src={`${_apiPictures}${slide.image_preview}`}
-                    src="https://via.placeholder.com/400x300"
+                    src={`${_apiPictures}${slide.image_preview}`}
                     alt="First slide"
                   />
                   <Carousel.Caption>

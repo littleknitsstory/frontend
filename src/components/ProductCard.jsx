@@ -5,6 +5,7 @@ import quickPurchase from "../assests/images/lightning.svg";
 import shoppingBag from "../assests/images/shopping-bag.svg";
 import heart from "../assests/images/heart.svg";
 import { useState } from "react";
+import img_product from "../assests/images/img_product.png";
 
 const ProductCard = ({ title, slug, price, image_preview, col }) => {
   const { _apiPictures } = useLksService();
@@ -45,10 +46,7 @@ const ProductCard = ({ title, slug, price, image_preview, col }) => {
                     src={`${_apiPictures}${image_preview}`}
                     alt="img product"
                   /> */}
-                  <img
-                    src="https://via.placeholder.com/180x200/300"
-                    alt="placeholder"
-                  />
+                  <img src={img_product} alt="img_product" />
                 </div>
                 <div className="product-title">{title}</div>
 

@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import useLksService from "../assests/api";
 import Spinner from "./Spinner";
 import PostCard from "./PostCard";
+import img_post from "../assests/images/img_post.png";
 
 const PostDetail = () => {
   const { t } = useTranslation();
@@ -42,10 +43,7 @@ const PostDetail = () => {
                   src={`${_apiPictures}${post.image_preview}`}
                   alt="img post"
                 /> */}
-                <img
-                  src="https://via.placeholder.com/180x200/300"
-                  alt="placeholder"
-                />
+                <img src={img_post} alt="placeholder" />
               </div>
 
               <article
