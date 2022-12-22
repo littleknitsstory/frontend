@@ -14,6 +14,7 @@ import pinterest from "../assests/images/logo-pinterest_white.svg";
 import instagramPurple from "../assests/images/logo-instagram.svg";
 import quickPurchase from "../assests/images/bolt-pink.svg";
 import shoppingCart from "../assests/images/cart-pink.svg";
+import img_product from "../assests/images/img_product.png";
 
 const ProductDetail = () => {
   const [product, setProduct] = useState([]);
@@ -46,7 +47,8 @@ const ProductDetail = () => {
               <div className="product-detail-wrapper">
                 <div className="product-detail-image">
                   <img
-                    src={`${_apiPictures}${product.image_preview}`}
+                    // src={`${_apiPictures}${product.image_preview}`}
+                    src={img_product}
                     alt="img product"
                   />
                 </div>
@@ -54,12 +56,12 @@ const ProductDetail = () => {
                   <div className="product-detail-title">
                     {product.title}
                     <strong className="product-detail-sale">
-                      {Math.round(
+                      {/* {Math.round(
                         (parseInt(product.sale) /
                           (parseInt(product.price) + parseInt(product.sale))) *
                           100
-                      )}
-                      %
+                      )} */}
+                      10%
                     </strong>
                     <button className="lks-btn lks-btn-icon-main">
                       <div className="lks-btn-icon-text">
@@ -96,13 +98,9 @@ const ProductDetail = () => {
                     </div>
                     <div className="product-price-tag lks-flex lks-flex-aic lks-flex-jcsb">
                       <div className="price-label lks-flex lks-flex-jcsb">
-                        <img src={ruble} alt="" />
-                        <div className="lks-price-now">
-                          {parseInt(product.price)}
-                        </div>
-                        <strike className="lks-price-old">
-                          {parseInt(product.price) + parseInt(product.sale)}
-                        </strike>
+                        {/* <img src={ruble} alt="" /> */}
+                        <div className="lks-price-now">90€</div>
+                        <strike className="lks-price-old">100€</strike>
                       </div>
                       <div className="product-color">
                         <div className="lks-color-circle">

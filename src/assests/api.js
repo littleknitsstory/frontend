@@ -2,60 +2,57 @@ import { useHttp } from "./http.hook";
 
 const useLksService = () => {
   const { request, error, setError, loaded, setLoaded } = useHttp();
-  const apiPictures = "http://dev.backend.littleknitsstory.com:26363";
-  console.log(process.env);
+  const _apiPictures = "http://dev.backend.littleknitsstory.com:26363";
+
+  let apiBase = "http://dev.backend.littleknitsstory.com:26363/api/v1";
+  if (process.env.NODE_ENV === "production") {
+    apiBase = "http://backend.littleknitsstory.com:26363/api/v1";
+  }
+
   const getMenu = async () => {
-    const res = await request(`${process.env.REACT_APP_API_BASE}/menu/`);
+    const res = await request(`${apiBase}/menu/`);
     return res;
   };
 
   const getPosts = async (offset) => {
-    const res = await request(
-      `${process.env.REACT_APP_API_BASE}/posts/?limit=6&offset=${offset}/`
-    );
+    const res = await request(`${apiBase}/posts/?limit=6&offset=${offset}/`);
     return res;
   };
 
   const getAllPosts = async () => {
-    const res = await request(`${process.env.REACT_APP_API_BASE}/posts/`);
+    const res = await request(`${apiBase}/posts/`);
     return res;
   };
 
   const getPost = async (slug) => {
-    const res = await request(
-      `${process.env.REACT_APP_API_BASE}/posts/${slug}/`
-    );
+    const res = await request(`${apiBase}/posts/${slug}/`);
     return res;
   };
 
   const getSliders = async () => {
-    const res = await request(`${process.env.REACT_APP_API_BASE}/sliders/`);
+    const res = await request(`${apiBase}/sliders/`);
     return res;
   };
 
   const getProducts = async (limit, offset) => {
     const res = await request(
-      `${process.env.REACT_APP_API_BASE}/products/?limit=${limit}&offset=${offset}/`
+      `${apiBase}/products/?limit=${limit}&offset=${offset}/`
     );
     return res;
   };
 
   const getProduct = async (slug) => {
-    const res = await request(
-      `${process.env.REACT_APP_API_BASE}/products/${slug}/`
-    );
+    const res = await request(`${apiBase}/products/${slug}/`);
     return res;
   };
 
   const getCategories = async () => {
-    const res = await request(`${process.env.REACT_APP_API_BASE}/categories/`);
+    const res = await request(`${apiBase}/categories/`);
     return res;
   };
 
   const getCategory = async (slug) => {
-    const res = await request(
-      `${process.env.REACT_APP_API_BASE}/categories/${slug}/`
-    );
+    const res = await request(`${apiBase}/categories/${slug}/`);
     return res;
   };
 
@@ -67,7 +64,7 @@ const useLksService = () => {
     setError,
     getPosts,
     getSliders,
-    apiPictures,
+    _apiPictures,
     getProducts,
     getCategories,
     getProduct,

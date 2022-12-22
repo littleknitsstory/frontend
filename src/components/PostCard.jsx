@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { useTranslation } from "react-i18next";
 import useLksService from "../assests/api";
+import img_post from "../assests/images/img_post.png";
 
 const PostCard = ({
   slug,
@@ -32,10 +33,7 @@ const PostCard = ({
                 <div className="post-date">{created_at}</div>
                 <div className="post-image">
                   {/* <img src={`${_apiPictures}${image_preview}`} alt="img post" /> */}
-                  <img
-                    src="https://via.placeholder.com/180x200/300"
-                    alt="placeholder"
-                  />
+                  <img src={img_post} alt="img_post" />
                 </div>
                 <div className="post-caption">{title}</div>
 
