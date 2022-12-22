@@ -4,55 +4,60 @@ const useLksService = () => {
   const { request, error, setError, loaded, setLoaded } = useHttp();
   const _apiPictures = "http://dev.backend.littleknitsstory.com:26363";
 
-  let apiBase = "http://dev.backend.littleknitsstory.com:26363/api/v1";
-  if (process.env.NODE_ENV === "production") {
-    apiBase = "http://backend.littleknitsstory.com:26363/api/v1";
-  }
+  console.log(process.env);
 
   const getMenu = async () => {
-    const res = await request(`${apiBase}/menu/`);
+    const res = await request(`${process.env.REACT_APP_API_BASE}/menu/`);
     return res;
   };
 
   const getPosts = async (offset) => {
-    const res = await request(`${apiBase}/posts/?limit=6&offset=${offset}/`);
+    const res = await request(
+      `${process.env.REACT_APP_API_BASE}/posts/?limit=6&offset=${offset}/`
+    );
     return res;
   };
 
   const getAllPosts = async () => {
-    const res = await request(`${apiBase}/posts/`);
+    const res = await request(`${process.env.REACT_APP_API_BASE}/posts/`);
     return res;
   };
 
   const getPost = async (slug) => {
-    const res = await request(`${apiBase}/posts/${slug}/`);
+    const res = await request(
+      `${process.env.REACT_APP_API_BASE}/posts/${slug}/`
+    );
     return res;
   };
 
   const getSliders = async () => {
-    const res = await request(`${apiBase}/sliders/`);
+    const res = await request(`${process.env.REACT_APP_API_BASE}/sliders/`);
     return res;
   };
 
   const getProducts = async (limit, offset) => {
     const res = await request(
-      `${apiBase}/products/?limit=${limit}&offset=${offset}/`
+      `${process.env.REACT_APP_API_BASE}/products/?limit=${limit}&offset=${offset}/`
     );
     return res;
   };
 
   const getProduct = async (slug) => {
-    const res = await request(`${apiBase}/products/${slug}/`);
+    const res = await request(
+      `${process.env.REACT_APP_API_BASE}/products/${slug}/`
+    );
     return res;
   };
 
   const getCategories = async () => {
-    const res = await request(`${apiBase}/categories/`);
+    const res = await request(`${process.env.REACT_APP_API_BASE}/categories/`);
     return res;
   };
 
   const getCategory = async (slug) => {
-    const res = await request(`${apiBase}/categories/${slug}/`);
+    const res = await request(
+      `${process.env.REACT_APP_API_BASE}/categories/${slug}/`
+    );
     return res;
   };
 
