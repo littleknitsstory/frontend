@@ -3,58 +3,58 @@ import { useHttp } from "./http.hook";
 const useLksService = () => {
   const { request, error, setError, loaded, setLoaded } = useHttp();
   const apiPictures = "http://dev.backend.littleknitsstory.com:26363";
-
+  console.log(process.env);
   const getMenu = async () => {
-    const res = await request(`${process.env.REACT_APP_API_BASE}menu`);
+    const res = await request(`${process.env.REACT_APP_API_BASE}/menu/`);
     return res;
   };
 
   const getPosts = async (offset) => {
     const res = await request(
-      `${process.env.REACT_APP_API_BASE}posts/?limit=6&offset=${offset}`
+      `${process.env.REACT_APP_API_BASE}/posts/?limit=6&offset=${offset}/`
     );
     return res;
   };
 
   const getAllPosts = async () => {
-    const res = await request(`${process.env.REACT_APP_API_BASE}posts`);
+    const res = await request(`${process.env.REACT_APP_API_BASE}/posts/`);
     return res;
   };
 
   const getPost = async (slug) => {
     const res = await request(
-      `${process.env.REACT_APP_API_BASE}posts/${slug}/`
+      `${process.env.REACT_APP_API_BASE}/posts/${slug}/`
     );
     return res;
   };
 
   const getSliders = async () => {
-    const res = await request(`${process.env.REACT_APP_API_BASE}sliders`);
+    const res = await request(`${process.env.REACT_APP_API_BASE}/sliders/`);
     return res;
   };
 
   const getProducts = async (limit, offset) => {
     const res = await request(
-      `${process.env.REACT_APP_API_BASE}products/?limit=${limit}&offset=${offset}`
+      `${process.env.REACT_APP_API_BASE}/products/?limit=${limit}&offset=${offset}/`
     );
     return res;
   };
 
   const getProduct = async (slug) => {
     const res = await request(
-      `${process.env.REACT_APP_API_BASE}products/${slug}/`
+      `${process.env.REACT_APP_API_BASE}/products/${slug}/`
     );
     return res;
   };
 
   const getCategories = async () => {
-    const res = await request(`${process.env.REACT_APP_API_BASE}categories`);
+    const res = await request(`${process.env.REACT_APP_API_BASE}/categories/`);
     return res;
   };
 
   const getCategory = async (slug) => {
     const res = await request(
-      `${process.env.REACT_APP_API_BASE}categories/${slug}/`
+      `${process.env.REACT_APP_API_BASE}/categories/${slug}/`
     );
     return res;
   };
