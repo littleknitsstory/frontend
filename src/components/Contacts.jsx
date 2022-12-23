@@ -16,15 +16,23 @@ const Contacts = () => {
       <div className="contacts">
         <div className="row">
           <div className="col-xl-8 col-lg-8 contacts__box">
-            <div className="form-head">Оставьте нам сообщение</div>
+            <div className="form-head">{t("Leave us a message")}</div>
             <Form className="contact-form">
               <Row className="mb-2">
                 <Form.Group as={Col} md="6" controlId="validationCustom01">
-                  <Form.Control required type="text" placeholder="Ваше имя" />
+                  <Form.Control
+                    required
+                    type="text"
+                    placeholder={t("Your name")}
+                  />
                 </Form.Group>
 
                 <Form.Group as={Col} md="6" controlId="formBasicEmail">
-                  <Form.Control required type="email" placeholder="E-mail" />
+                  <Form.Control
+                    required
+                    type="email"
+                    placeholder={t("Your e-mail")}
+                  />
                 </Form.Group>
               </Row>
 
@@ -33,12 +41,15 @@ const Contacts = () => {
                   <Form.Control
                     required
                     type="text"
-                    placeholder="Ваш телефон"
+                    placeholder={t("Your mobile number")}
                   />
                 </Form.Group>
 
                 <Form.Group as={Col} md="6" controlId="validationCustom03">
-                  <Form.Control type="email" placeholder="Компания / Автор" />
+                  <Form.Control
+                    type="email"
+                    placeholder={t("Company / Author")}
+                  />
                 </Form.Group>
               </Row>
               <Row className="mb-1">
@@ -46,7 +57,7 @@ const Contacts = () => {
                   <Form.Control
                     required
                     as="textarea"
-                    placeholder="Сообщение"
+                    placeholder={t("Message")}
                   />
                 </Form.Group>
               </Row>
@@ -55,25 +66,26 @@ const Contacts = () => {
               {t("Submit")}
             </button>
             <div className="agreement">
-              Нажимая «Отправить», вы даете согласие на обработку персональных
-              данных
+              {t(
+                'By clicking "Send," you consent to the processing of personal data'
+              )}
             </div>
           </div>
           <div className="col-xl-4 col-lg-4 contact-info">
-            <div className="contact-info__title">Контактная информация</div>
+            <div className="contact-info__title">{t("Contact info")}</div>
             <div className="contact-info__wrapper">
               <img src={map} alt="" />
-              <div className="contact-info__text">
-                Serbia, Karadjordjeva 9. Rudnik
-              </div>
+              <div className="contact-info__text">{t("Montenegro, Budva")}</div>
             </div>
             <div className="contact-info__wrapper">
               <img src={phone} alt="" />
-              <div className="contact-info__text">8 800 665 00 88</div>
+              <div className="contact-info__text"> +382 67 00 00 00</div>
             </div>
             <div className="contact-info__wrapper">
               <img src={envelope} alt="" />
-              <div className="contact-info__text">mail@gmail.com</div>
+              <div className="contact-info__text">
+                littleknitsstory@mail.com
+              </div>
             </div>
           </div>
         </div>

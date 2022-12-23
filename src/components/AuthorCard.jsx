@@ -67,8 +67,9 @@ const AuthorCard = () => {
       </div>
       <div className="author-name">{t("Kate Anaprienko")}</div>
       <div className="author-about">
-        Etiam eu molestie eros, commodo hendrerit sapien. Maecenas tempus leo ac
-        nisi iaculis porta. Sed sapien tortor, aliquet a velit ut.
+        I really love knitting! I've been doing it for a few years now and my
+        love for thread, hooks and needles has no limits. Join us, let's create
+        together!
       </div>
     </div>
   );
