@@ -4,7 +4,7 @@ const useLksService = () => {
   const { request, error, setError, loaded, setLoaded } = useHttp();
   const _apiPictures = "http://dev.backend.littleknitsstory.com:26363";
 
-  const apiBase = "http://backend.littleknitsstory.com:26363/api/v1";
+  const apiBase = "http://dev.backend.littleknitsstory.com:26363/api/v1";
 
   const getMenu = async () => {
     const res = await request(`${apiBase}/menu/`);
