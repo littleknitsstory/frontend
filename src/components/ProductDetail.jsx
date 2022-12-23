@@ -1,6 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import useLksService from "../assests/api";
 import Spinner from "./Spinner";
 import Social from "./Social";
@@ -17,6 +19,7 @@ import shoppingCart from "../assests/images/cart-pink.svg";
 import img_product from "../assests/images/img_product.png";
 
 const ProductDetail = () => {
+  const { t } = useTranslation();
   const [product, setProduct] = useState([]);
   const { error, getProduct, _apiPictures, loaded } = useLksService();
 
@@ -69,7 +72,7 @@ const ProductDetail = () => {
                           href="https://www.instagram.com/littleknitsstory/"
                           target="_blank"
                         >
-                          Подписаться на инстаграм
+                          {t("Subscribe to instragram")}
                         </a>
                       </div>
                       <div className="lks-btn-icon lks-btn-icon-icon">
@@ -110,7 +113,7 @@ const ProductDetail = () => {
                       <div className="product-size lks-flex lks-aic">
                         <div className="lks-product-size">
                           <img src={height} alt="height" />
-                          {product.height} см
+                          {product.height} cm
                         </div>
                       </div>
                       <button className="lks-btn lks-btn-main favorite lks-flex lks-flex-aic lks-flex-jcc">
@@ -120,14 +123,16 @@ const ProductDetail = () => {
                   </div>
                   <div className="buttons lks-mod-text-center lks-flex">
                     <button className="lks-btn lks-btn-icon lks-btn-icon-main">
-                      <div className="lks-btn-icon-text">Быстрый заказ</div>
+                      <div className="lks-btn-icon-text">
+                        {t("Quick purchase")}
+                      </div>
                       <div className="lks-btn-icon-icon">
                         <img src={quickPurchase} alt="quickPurchase" />
                       </div>
                     </button>
                     <button className="lks-btn lks-btn-icon lks-btn-icon-main">
                       <div className="lks-btn-icon-text">
-                        Добавить в корзину
+                        {t("Add to cart")}
                       </div>
                       <div className="lks-btn-icon-icon">
                         <img src={shoppingCart} alt="shoppingCart" />
@@ -139,24 +144,26 @@ const ProductDetail = () => {
             </div>
             <div className="col-12">
               <div className="spec">
-                <div className="spec-title">Характеристики</div>
-                <div className="spec-subtitle">Общие характеристики</div>
+                <div className="spec-title">{t("Specifications")}</div>
+                <div className="spec-subtitle">
+                  {t("General specifications")}
+                </div>
                 <table>
                   <tbody>
                     <tr>
-                      <td>Вес</td>
-                      <td>{product.weight}гр</td>
+                      <td>{t("Weight")}</td>
+                      <td>{product.weight}gr</td>
                     </tr>
                     <tr>
-                      <td>Высота</td>
-                      <td>{product.height}см</td>
+                      <td>{t("Height")}</td>
+                      <td>{product.height}cm</td>
                     </tr>
                     <tr>
-                      <td>Тип</td>
+                      <td>{t("Type")}</td>
                       <td>{product.type_product}</td>
                     </tr>
                     <tr>
-                      <td> Материал</td>
+                      <td> {t("Material")}</td>
                       <td>{product.material}</td>
                     </tr>
                   </tbody>
@@ -165,7 +172,7 @@ const ProductDetail = () => {
             </div>
             <div className="col-12">
               <div className="spec popular">
-                <div className="spec-title">Популярное</div>
+                <div className="spec-title">{t("Popular")}</div>
               </div>
             </div>
           </div>
@@ -175,4 +182,4 @@ const ProductDetail = () => {
   );
 };
 
-export default ProductDetail;
+export default withTranslation()(ProductDetail);

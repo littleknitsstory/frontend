@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import useLksService from "../assests/api";
 import quickPurchase from "../assests/images/lightning.svg";
 import shoppingBag from "../assests/images/shopping-bag.svg";
@@ -8,6 +10,7 @@ import { useState } from "react";
 import img_product from "../assests/images/img_product.png";
 
 const ProductCard = ({ title, slug, price, image_preview, col }) => {
+  const { t } = useTranslation();
   const { _apiPictures } = useLksService();
 
   const [isSaved, setIsSaved] = useState(false);
@@ -56,7 +59,7 @@ const ProductCard = ({ title, slug, price, image_preview, col }) => {
           </ul>
           <div className="quick-purchase">
             <button className="lks-btn lks-btn-icon lks-btn-icon-bordered quick-purchase-btn">
-              <div className="lks-btn-icon-text">Быстрый заказ</div>
+              <div className="lks-btn-icon-text">{t("Quick purchase")}</div>
 
               <img
                 className="lks-btn-icon-icon lks-btn-icon-bordered"
@@ -71,4 +74,4 @@ const ProductCard = ({ title, slug, price, image_preview, col }) => {
   );
 };
 
-export default ProductCard;
+export default withTranslation()(ProductCard);

@@ -125,6 +125,12 @@
 .main-slider .carousel-item {
   height: 500px;
 }
+.main-slider .slider__text {
+  text-align: center;
+  font-size: 30px;
+  margin: 20px 0px 50px 0px;
+  font-family: "Pacifico", cursive;
+}
 .main-slider .carousel-indicators {
   display: none;
 }
@@ -193,7 +199,7 @@
 }
 .main-slider .circle > div h5 {
   font-family: "Pacifico", cursive;
-  font-size: 52px;
+  font-size: 62px;
 }
 .main-slider .circle > div p {
   margin: 40px 0px;

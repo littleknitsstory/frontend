@@ -9,6 +9,12 @@
   .carousel-item {
     height: 500px;
   }
+  .slider__text {
+    text-align: center;
+    font-size: 30px;
+    margin: 20px 0px 50px 0px;
+    font-family: "Pacifico", cursive;
+  }
 
   .carousel-indicators {
     display: none;
@@ -80,7 +86,7 @@
 
       h5 {
         font-family: "Pacifico", cursive;
-        font-size: 52px;
+        font-size: 62px;
       }
       p {
         margin: 40px 0px;

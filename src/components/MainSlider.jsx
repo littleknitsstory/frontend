@@ -37,8 +37,12 @@ const MainSlider = () => {
                   <Carousel.Caption>
                     <div className="circle">
                       <div>
-                        <h5>{slide.title}</h5>
-                        <p>{slide.sub_title}</p>
+                        {/* <h5>{slide.title}</h5> */}
+                        <h5>Little Knits Story</h5>
+                        {/* <p>{slide.sub_title}</p> */}
+                        <div className="slider__text">
+                          With us you will knit your own little story
+                        </div>
                         <Link to={`/shop`} className="btn-shop">
                           <button className="lks-btn lks-btn-icon">
                             <div className="lks-btn-icon-text">
