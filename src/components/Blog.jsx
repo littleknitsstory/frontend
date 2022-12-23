@@ -38,8 +38,6 @@ const Blog = () => {
     setPostEnded(ended);
   };
 
-  console.log(posts);
-
   return (
     <div className="lks-container">
       <div className="row">
@@ -63,16 +61,15 @@ const Blog = () => {
                         <div className="slider-body">
                           <div className="post-caption">{post.title}</div>
                           <div className="post-date">{post.created_at}</div>
-                          <article className="post-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Illum alias possimus dolores delectus
-                            aspernatur natus tempore vero, distinctio porro id
-                            quasi temporibus nobis molestiae provident
-                            reprehenderit autem deleniti. Ipsum, totam.
-                          </article>
-                          <div className="post-author">
+                          <article
+                            className="post-text"
+                            dangerouslySetInnerHTML={{
+                              __html: post.content,
+                            }}
+                          ></article>
+                          {/* <div className="post-author">
                             {t("Author: Kate Anaprienko")}
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                       <div className="slider-button">
