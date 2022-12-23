@@ -48,15 +48,10 @@ const PostDetail = () => {
 
               <article
                 className="post-text-detail"
-                // dangerouslySetInnerHTML={{
-                //   __html: post.content,
-                // }}
-              >
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Assumenda voluptatibus dolor laudantium quibusdam officiis totam
-                voluptatum consectetur aliquam vero nesciunt debitis facere
-                inventore commodi fugit, quas fugiat reprehenderit! Quod, et.
-              </article>
+                dangerouslySetInnerHTML={{
+                  __html: post.content,
+                }}
+              ></article>
             </div>
             <div className="post-subtitle">{t("Suggested Posts")}</div>
             <div className="posts">

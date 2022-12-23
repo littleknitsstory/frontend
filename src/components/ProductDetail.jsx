@@ -80,17 +80,12 @@ const ProductDetail = () => {
                       </div>
                     </button>
                   </div>
-                  <div className="product-detail-descr">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Architecto odit, maiores incidunt sequi tempore possimus
-                    modi, dolores aliquam facilis animi voluptatum reiciendis
-                    provident quis? Inventore suscipit vitae repellat eius
-                    veritatis. Lorem ipsum dolor, sit amet consectetur
-                    adipisicing elit. Perferendis exercitationem accusamus
-                    beatae delectus veritatis molestias optio harum modi hic
-                    deserunt asperiores officia, commodi, facilis labore. Atque
-                    ab consequatur fuga cumque?
-                  </div>
+                  <div
+                    className="product-detail-descr"
+                    dangerouslySetInnerHTML={{
+                      __html: product.description,
+                    }}
+                  ></div>
                   <div className="price lks-flex lks-flex-jcsb lks-flex-aic">
                     <div className="product-amount lks-flex lks-flex-aic">
                       <div className="subtract lks-mod-pointer lks-roundpad">

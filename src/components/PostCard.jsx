@@ -39,15 +39,10 @@ const PostCard = ({
 
                 <article
                   className="post-text"
-                  // dangerouslySetInnerHTML={{
-                  //   __html: content,
-                  // }}
-                >
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Sequi sint fugit impedit ut dicta labore, praesentium
-                  doloribus, vitae quae aut dolorum aspernatur quaerat
-                  distinctio sit sunt. Laboriosam, quae! Accusamus, minus!
-                </article>
+                  dangerouslySetInnerHTML={{
+                    __html: content,
+                  }}
+                ></article>
                 <div className={readMore}>
                   <button className="lks-btn lks-btn-main"> {t("Read")}</button>
                 </div>
