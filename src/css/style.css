@@ -1,0 +1,133 @@
+.btn {
+  border-radius: 60px;
+  width: 330px;
+  height: 66px;
+  background-color: #fefefe;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 32px;
+  font-size: 1.5rem;
+  color: #545353;
+}
+
+@media (max-width: 992px) {
+  .btn {
+    font-size: 1rem;
+    width: 250px;
+    height: 50px;
+    padding: 20px 29px;
+  }
+}
+.header__logo {
+  text-align: center;
+}
+.header__text {
+  margin-top: 21px;
+  font-size: 2rem;
+  color: #393939;
+}
+
+@media (max-width: 767px) {
+  .header__logo img {
+    width: 60%;
+  }
+  .header__text {
+    font-size: 1.5rem;
+    margin-top: 15px;
+  }
+}
+@media (max-width: 500px) {
+  .header__logo img {
+    width: 50%;
+  }
+  .header__text {
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+}
+.lks-navbar {
+  margin-top: 100px;
+}
+.lks-navbar__links {
+  font-size: 24px;
+  color: #545353;
+  text-transform: uppercase;
+  text-align: center;
+}
+.lks-navbar__links .navbar-expand-lg .navbar-nav .nav-link {
+  padding-right: 50px;
+}
+.lks-navbar__icons {
+  padding: 0 5rem;
+}
+.lks-navbar__icons a {
+  padding: 0 0.6rem;
+}
+.lks-navbar .dropdown-menu {
+  --bs-dropdown-min-width: 0rem;
+}
+.lks-navbar__lang a {
+  font-family: "Helvetica";
+  font-weight: 700;
+  font-size: 18px;
+}
+
+@media (max-width: 992px) {
+  .lks-navbar {
+    margin-top: 20px;
+  }
+  .lks-navbar .navbar-collapse {
+    margin-bottom: 2rem;
+  }
+}
+@media (max-width: 500px) {
+  .lks-navbar__links {
+    font-size: 1rem;
+  }
+  .lks-navbar__icons {
+    padding: 0 0rem;
+  }
+  .lks-navbar__icons a {
+    padding: 0 0.3rem;
+  }
+  .lks-navbar .dropdown-menu {
+    --bs-dropdown-item-padding-x: 0.5rem;
+  }
+}
+.promo {
+  margin-top: 50px;
+  min-height: 800px;
+  background: url("../images/bg-promo.png") no-repeat 50%/cover;
+}
+.promo__title {
+  margin-top: 150px;
+  text-transform: uppercase;
+  font-size: 6rem;
+  color: #fefefe;
+  padding: 0 0;
+}
+.promo__text {
+  padding: 40px 0 60px 0;
+  color: #fefefe;
+  font-size: 1.3rem;
+}
+
+@media (max-width: 1199px) {
+  .promo__title {
+    font-size: 5rem;
+  }
+}
+@media (max-width: 991px) {
+  .promo__title {
+    font-size: 4rem;
+  }
+  .promo__text {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 767px) {
+  .promo__title {
+    font-size: 3rem;
+  }
+}
