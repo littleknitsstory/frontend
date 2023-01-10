@@ -1,43 +1,20 @@
 import React from "react";
-import { useState } from "react";
-import { Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { withTranslation } from "react-i18next";
-import { useTranslation } from "react-i18next";
-
-import logo from "../assests/images/logo.png";
+import Container from "react-bootstrap/Container";
+import logo from "../images/logo.png";
 
 const Header = () => {
-  const { t, i18n } = useTranslation();
-  const [languageRu, setLanguageRu] = useState(false);
-
-  const changeLanguage = (language) => {
-    i18n.changeLanguage(language);
-    setLanguageRu(!languageRu);
-  };
-
   return (
     <section className="header">
-      <div className="lks-container">
+      <Container>
         <div className="row">
           <div className="col-12">
-            <Link to="/">
+            <div className="header__logo">
               <img src={logo} alt="logo" />
-            </Link>
+              <div className="header__text">Блог и магазин по вязанию</div>
+            </div>
           </div>
         </div>
-        <div className="lang-switch">
-          <button
-            onClick={
-              languageRu
-                ? () => changeLanguage("en")
-                : () => changeLanguage("ru")
-            }
-          >
-            {languageRu ? "EN" : "RU"}
-          </button>
-        </div>
-      </div>
+      </Container>
     </section>
   );
 };
