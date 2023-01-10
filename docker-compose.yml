@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  frontend:
+    container_name: frontend
+    image: "63phc/lks:front"
+    ports:
+      - "63000:80/tcp"
+    volumes:
+      - /app/node_modules
+      - .:/app
