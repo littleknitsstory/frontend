@@ -9,6 +9,27 @@
   padding: 20px 32px;
   font-size: 1.5rem;
   color: $text-color-dark;
+  &:hover {
+    background-color: $vinous-color;
+  }
+  &_border {
+    border: 1px solid $text-color-dark;
+    width: 267px;
+    height: 62px;
+    font-size: 1.15rem;
+  }
+  &_vinous {
+    margin-top: 60px;
+    width: 361px;
+    height: 66px;
+    background-color: $vinous-color;
+    padding: 20px 50px;
+    color: $text-color-light;
+    &:hover {
+      background-color: $text-color-dark;
+      color: $text-color-light;
+    }
+  }
 }
 
 @media (max-width: 992px) {

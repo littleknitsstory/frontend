@@ -1,0 +1,66 @@
+.schemas-card {
+  margin: 113px 0 60px 0;
+  &__img-wrapper {
+    position: relative;
+  }
+  &__img {
+    width: 100%;
+    height: 100%;
+  }
+  &__like {
+    position: absolute;
+    right: 20px;
+    top: 23px;
+  }
+  &__property {
+    color: $text-color-dark;
+    font-size: 1.125 rem;
+    padding: 10px 0;
+  }
+  &__wrapper {
+    border-bottom: 1px solid $border-color;
+  }
+  &__descr {
+    padding: 12px 0;
+    color: black;
+    font-size: 1.15rem;
+  }
+  &__wrapper-btn {
+    padding-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    a {
+      font-size: 1.2rem;
+      color: #000;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .schemas-card {
+    &__title {
+      margin-top: 20px;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .schemas-card {
+    &__wrapper-btn {
+      flex-direction: column;
+      .btn {
+        margin-bottom: 25px;
+      }
+    }
+    .btn {
+      &_vinous {
+        margin: 30px auto;
+      }
+    }
+  }
+}
