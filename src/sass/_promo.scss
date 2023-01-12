@@ -1,16 +1,16 @@
 .promo {
-  margin-top: 113px;
-  min-height: 800px;
+  margin-top: 7rem;
+  min-height: 50rem;
   background: url("../images/bg-promo.png") no-repeat 50% / cover;
   &__title {
-    margin-top: 150px;
+    margin-top: 9.375rem;
     text-transform: uppercase;
     font-size: 6rem;
     color: $text-color-light;
     padding: 0 0;
   }
   &__text {
-    padding: 40px 0 60px 0;
+    padding: 2.5rem 0 3.75rem 0;
     color: $text-color-light;
     font-size: 1.3rem;
   }
@@ -26,6 +26,7 @@
 
 @media (max-width: 991px) {
   .promo {
+    margin-top: 1.875rem;
     &__title {
       font-size: 4rem;
     }

@@ -1,5 +1,8 @@
 .schemas-card {
-  margin: 113px 0 60px 0;
+  margin-top: 7rem;
+  &__card {
+    margin: 3rem 0 3.75rem 0;
+  }
   &__img-wrapper {
     position: relative;
   }
@@ -9,24 +12,24 @@
   }
   &__like {
     position: absolute;
-    right: 20px;
-    top: 23px;
+    right: 1.25rem;
+    top: 1.43rem;
   }
   &__property {
     color: $text-color-dark;
-    font-size: 1.125 rem;
-    padding: 10px 0;
+    font-size: 1.125rem;
+    padding: 0.625rem 0;
   }
   &__wrapper {
     border-bottom: 1px solid $border-color;
   }
   &__descr {
-    padding: 12px 0;
+    padding: 0.75rem 0;
     color: black;
     font-size: 1.15rem;
   }
   &__wrapper-btn {
-    padding-top: 16px;
+    padding-top: 3.05rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -39,12 +42,19 @@
       }
     }
   }
+  &__btn {
+    padding-left: 12px;
+  }
 }
 
 @media (max-width: 992px) {
   .schemas-card {
+    margin-top: 1.875rem;
+    &__card {
+      margin: 1.56rem 0 1rem 0;
+    }
     &__title {
-      margin-top: 20px;
+      margin-top: 1.25rem;
     }
   }
 }
@@ -54,12 +64,15 @@
     &__wrapper-btn {
       flex-direction: column;
       .btn {
-        margin-bottom: 25px;
+        margin-bottom: 1.56rem;
       }
+    }
+    &__btn {
+      padding-left: 0;
     }
     .btn {
       &_vinous {
-        margin: 30px auto;
+        margin: 1.875rem auto;
       }
     }
   }

@@ -10,9 +10,9 @@ const AboutMe = () => {
   return (
     <section className="about-me">
       <Container>
+        <h3 className="title">Обо мне</h3>
         <div className="row">
-          <h3 className="title ">Обо мне</h3>
-          <div className="col-xl-6 col-lg-6 col-md-12 col-xs-12">
+          <div className="col-xl-6 col-lg-6 col-md-12 col-xs-12 about-me__card">
             <div className="about-me__wrapper-author">
               <div className="about-me__subtitle">Автор</div>
               <div className="about-me__title">Катя Анаприенко</div>
@@ -75,7 +75,7 @@ const AboutMe = () => {
               feel happy Knitting makes me feel happy Knitting makes me feel
               happy Knitting makes me feel happy Knitting makes me feel happy
               Knitting makes me feel happy Knitting makes me feel happy Knitting
-              makes me feel happy{" "}
+              makes me feel happy
             </div>
           </div>
         </div>

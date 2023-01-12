@@ -1,14 +1,14 @@
 .lks-navbar {
-  margin-top: 100px;
+  margin-top: 6.25rem;
   &__links {
-    font-size: 24px;
+    font-size: 1.5rem;
     color: $text-color-dark;
     text-transform: uppercase;
     text-align: center;
     .navbar-expand-lg {
       .navbar-nav {
         .nav-link {
-          padding-right: 50px;
+          padding-right: 3.125rem;
         }
       }
     }
@@ -28,13 +28,13 @@
     a {
       font-family: "Helvetica";
       font-weight: 700;
-      font-size: 18px;
+      font-size: 1.125rem;
     }
   }
 }
 @media (max-width: 992px) {
   .lks-navbar {
-    margin-top: 20px;
+    margin-top: 1.25rem;
     .navbar-collapse {
       margin-bottom: 2rem;
     }

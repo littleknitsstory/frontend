@@ -10,7 +10,11 @@ const SchemasCard = () => {
     <section className="schemas-card">
       <Container>
         <div className="row">
-          <h3 className="title ">Схемы вязания</h3>
+          <div className="col-12">
+            <h3 className="title ">Схемы вязания</h3>
+          </div>
+        </div>
+        <div className="row schemas-card__card">
           <div className="col-xl-6 col-lg-6 col-md-12 col-xs-12">
             <div className="schemas-card__img-wrapper">
               <img className="schemas-card__img" src={mermaid} alt="mermaid" />
@@ -89,12 +93,18 @@ const SchemasCard = () => {
             </div>
           </div>
         </div>
-        <button className="btn btn_vinous">
-          <div className="btn__text">Перейти в каталог</div>
-          <div className="btn__icon">
-            <img src={cartWhite} alt="cartWhite" />
+        <div className="row">
+          <div className="col-xl-12 col-lg-12 col-md-12 col-xs-12 ">
+            <div className="schemas-card__btn">
+              <button className="btn btn_vinous">
+                <div className="btn__text">Перейти в каталог</div>
+                <div className="btn__icon">
+                  <img src={cartWhite} alt="cartWhite" />
+                </div>
+              </button>
+            </div>
           </div>
-        </button>
+        </div>
       </Container>
     </section>
   );
