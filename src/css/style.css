@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "AlethiaNext";
+  src: url("../fonts/alethianext-light.otf") format("otf"), url("../fonts/alethianext-light.otf") format("truetype"), url("../fonts/alethianext-light-webfont.woff2") format("woff2"), url("../fonts/alethianext-light-webfont.woff") format("woff");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Coconat";
+  src: url("../fonts/Coconat-Regular.otf") format("otf"), url("../fonts/Coconat-Regular.otf") format("truetype"), url("../fonts/Coconat-Regular.woff2") format("woff2"), url("../fonts/Coconat-Regular.woff") format("woff");
+  font-style: normal;
+  font-weight: normal;
+}
 .title {
   color: #545353;
   font-size: 2rem;
@@ -21,7 +33,8 @@
   color: #545353;
 }
 .btn:hover {
-  background-color: #a86059;
+  background-color: #883d3b;
+  color: #fefefe;
 }
 .btn_center {
   margin: 0 auto;
@@ -58,6 +71,9 @@
   .btn_vinous {
     margin-top: 1.25rem;
   }
+}
+.header {
+  margin-top: 1rem;
 }
 .header__logo {
   text-align: center;
@@ -225,7 +241,7 @@
 
 @media (max-width: 992px) {
   .schemas-card {
-    margin-top: 1.875rem;
+    margin-top: 4rem;
   }
   .schemas-card__card {
     margin: 1.56rem 0 1rem 0;
@@ -315,7 +331,7 @@
 }
 @media (max-width: 992px) {
   .about-me {
-    margin-top: 1.875rem;
+    margin-top: 4rem;
   }
   .about-me__card {
     margin-top: 1.56rem;
@@ -378,7 +394,7 @@
 }
 @media (max-width: 992px) {
   .last-reviews {
-    margin-top: 1.875rem;
+    margin-top: 4rem;
   }
   .last-reviews__card {
     margin-top: 1.56rem;
@@ -415,4 +431,172 @@
 .instagram__btn {
   margin: 2rem auto 0 auto;
   width: 12rem;
+}
+
+.footer {
+  margin: 7rem 0 2rem 0;
+}
+.footer__wrapper {
+  padding: 6.5rem 0 3.625rem 0;
+  border-bottom: 1px solid #757575;
+  border-top: 1px solid #757575;
+}
+.footer__subtitle {
+  font-size: 1.5rem;
+  text-align: center;
+}
+.footer__title {
+  font-size: 2.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Coconat";
+}
+.footer__navbar {
+  margin-top: 3.5rem;
+}
+.footer__navbar ul {
+  list-style-type: none;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  padding-inline-start: 0;
+}
+.footer__navbar ul li {
+  padding-bottom: 1.5rem;
+}
+.footer__navbar ul li a {
+  color: #545353;
+  text-decoration: none;
+}
+.footer__links-account {
+  margin-top: 3.5rem;
+}
+.footer__links-account-title {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  padding-bottom: 1.2rem;
+}
+.footer__links-account ul {
+  list-style-type: none;
+  padding-inline-start: 0;
+}
+.footer__links-account ul li {
+  padding-bottom: 1rem;
+  font-size: 1rem;
+  text-transform: none;
+}
+.footer__links-account ul li a {
+  color: #545353;
+  text-decoration: none;
+}
+.footer__subscribe-text {
+  font-size: 1.2rem;
+  color: #545353;
+  text-align: center;
+}
+.footer__subscribe form input {
+  font-size: 1.2rem;
+  margin: 4.8rem 0;
+  background: #e8e8e8;
+  border-radius: 60px;
+  border: none;
+  color: #545353;
+  padding: 1.25rem 0 1.25rem 2.7rem;
+  width: 100%;
+  height: 4.25rem;
+}
+.footer__subscribe form input:focus {
+  background: #e8e8e8;
+}
+.footer__social {
+  justify-content: flex-start;
+  display: flex;
+  margin-top: 5rem;
+}
+.footer__social-circle {
+  margin: 0 0.5rem;
+  background-color: #5e6959;
+  width: 3.125rem;
+  height: 3.125rem;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+.footer__social-circle:hover {
+  background-color: #883d3b;
+}
+.footer__end {
+  padding-top: 2.5rem;
+  color: #545353;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.25rem #d3d3d3;
+}
+
+@media (max-width: 1200px) {
+  .footer__title {
+    font-size: 2.2rem;
+  }
+  .footer__navbar ul {
+    font-size: 1.2rem;
+  }
+  .footer__links-account-title {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 992px) {
+  .footer {
+    margin-top: 4rem;
+  }
+  .footer__wrapper {
+    padding: 3rem 0 0 0;
+  }
+  .footer__navbar {
+    margin-top: 2.6rem;
+  }
+  .footer__navbar ul {
+    text-align: center;
+  }
+  .footer__links-account {
+    text-align: center;
+    margin-top: 0;
+  }
+  .footer__links-account ul {
+    text-align: center;
+  }
+  .footer__social {
+    justify-content: center;
+    margin: 3rem 0;
+  }
+  .footer__subscribe-text {
+    font-size: 1rem;
+  }
+  .footer__subscribe form input {
+    margin: 2.5rem 0;
+    height: 3.25rem;
+  }
+  .footer__subscribe form button {
+    margin: 0 auto;
+  }
+  .footer__rights {
+    margin-bottom: 1rem;
+  }
+  .footer__end {
+    font-size: 0.825rem;
+  }
+}
+@media (max-width: 575px) {
+  .footer__subtitle {
+    font-size: 1.2rem;
+  }
+  .footer__title {
+    font-size: 1.55rem;
+  }
+}
+* {
+  font-family: "AlethiaNext";
 }

@@ -10,7 +10,8 @@
   font-size: 1.5rem;
   color: $text-color-dark;
   &:hover {
-    background-color: $vinous-color;
+    background-color: $burgundy-color;
+    color: $text-color-light;
   }
   &_center {
     margin: 0 auto;
