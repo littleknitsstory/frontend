@@ -13,14 +13,6 @@ code {
 }
 
 
-@font-face {
-  font-family: "AlethiaNext"; 
-  src: url('../font/alethianext-light.otf') format("otf"),
-  url('../font/alethianext-light.otf') format("truetype");
-  font-style: normal; 
-  font-weight: normal; 
-}
 
-* {
-  font-family: 'AlethiaNext';
-}
+
+

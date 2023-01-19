@@ -1,0 +1,10 @@
+.title {
+  color: $text-color-dark;
+  font-size: 2rem;
+}
+
+@media (max-width: 400px) {
+  .title {
+    font-size: 1.6rem;
+  }
+}
