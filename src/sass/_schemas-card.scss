@@ -28,20 +28,7 @@
     color: black;
     font-size: 1.15rem;
   }
-  &__wrapper-btn {
-    padding-top: 3.05rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    a {
-      font-size: 1.2rem;
-      color: #000;
-      text-decoration: none;
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
+
   &__btn {
     padding-left: 12px;
   }
@@ -61,12 +48,13 @@
 
 @media (max-width: 500px) {
   .schemas-card {
-    &__wrapper-btn {
-      flex-direction: column;
-      .btn {
-        margin-bottom: 1.56rem;
+    .btn {
+      margin-bottom: 1.56rem;
+      &__link {
+        flex-direction: column;
       }
     }
+
     &__btn {
       padding-left: 0;
     }

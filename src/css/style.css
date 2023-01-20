@@ -59,6 +59,23 @@
 .btn__text_center {
   margin: 0 auto;
 }
+.btn__link {
+  padding-top: 3.05rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btn__link a {
+  font-size: 1.2rem;
+  color: #000;
+  text-decoration: none;
+}
+.btn__link a:hover {
+  text-decoration: underline;
+}
+.btn__link_end {
+  justify-content: flex-end;
+}
 
 @media (max-width: 992px) {
   .btn {
@@ -220,20 +237,6 @@
   color: black;
   font-size: 1.15rem;
 }
-.schemas-card__wrapper-btn {
-  padding-top: 3.05rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.schemas-card__wrapper-btn a {
-  font-size: 1.2rem;
-  color: #000;
-  text-decoration: none;
-}
-.schemas-card__wrapper-btn a:hover {
-  text-decoration: underline;
-}
 .schemas-card__btn {
   padding-left: 12px;
 }
@@ -250,11 +253,11 @@
   }
 }
 @media (max-width: 500px) {
-  .schemas-card__wrapper-btn {
-    flex-direction: column;
-  }
-  .schemas-card__wrapper-btn .btn {
+  .schemas-card .btn {
     margin-bottom: 1.56rem;
+  }
+  .schemas-card .btn__link {
+    flex-direction: column;
   }
   .schemas-card__btn {
     padding-left: 0;
@@ -749,6 +752,66 @@
 @media (max-width: 992px) {
   .articles {
     margin-top: 7.8rem;
+  }
+}
+.page404__error {
+  margin-top: 5rem;
+  text-transform: uppercase;
+  font-size: 6rem;
+  color: #883d3b;
+  text-align: center;
+}
+.page404__subtitle {
+  color: #883d3b;
+  font-size: 3rem;
+  text-align: center;
+}
+.page404__text {
+  margin: 1.125rem auto;
+  color: #545353;
+  text-align: center;
+}
+.page404__text span a {
+  color: #883d3b;
+}
+
+@media (max-width: 991px) {
+  .page404__error {
+    margin-top: 1.875rem;
+  }
+}
+.article {
+  margin-top: 7rem;
+}
+.article__text {
+  padding: 2.2rem 0;
+}
+.article__img {
+  width: 100%;
+  height: 100%;
+}
+.article__wrapper-article {
+  margin-top: 3rem;
+}
+.article__wrapper-text {
+  margin-top: 7rem;
+}
+.article__wrapper-author {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  padding-bottom: 5rem;
+}
+
+@media (max-width: 992px) {
+  .article {
+    margin-top: 1.875rem;
+  }
+  .article__wrapper-article {
+    margin-top: 0;
+  }
+  .article__wrapper-text {
+    margin-top: 2rem;
   }
 }
 * {

@@ -39,6 +39,23 @@
       margin: 0 auto;
     }
   }
+  &__link {
+    padding-top: 3.05rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    a {
+      font-size: 1.2rem;
+      color: #000;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    &_end {
+      justify-content: flex-end;
+    }
+  }
 }
 
 @media (max-width: 992px) {

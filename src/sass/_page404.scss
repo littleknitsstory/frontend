@@ -1,0 +1,32 @@
+.page404 {
+  &__error {
+    margin-top: 5rem;
+    text-transform: uppercase;
+    font-size: 6rem;
+    color: $burgundy-color;
+    text-align: center;
+  }
+  &__subtitle {
+    color: $burgundy-color;
+    font-size: 3rem;
+    text-align: center;
+  }
+  &__text {
+    margin: 1.125rem auto;
+    color: $text-color-dark;
+    text-align: center;
+    span {
+      a {
+        color: $burgundy-color;
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .page404 {
+    &__error {
+      margin-top: 1.875rem;
+    }
+  }
+}

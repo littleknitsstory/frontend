@@ -13,17 +13,15 @@ const Articles = () => {
   ];
   return (
     <div className="articles">
-      <Container>
-        <Row xs={1} md={2} lg={3} xl={3} xxl={4}>
-          {array.map((item) => {
-            return (
-              <Col key={item.id}>
-                <CardArticle />
-              </Col>
-            );
-          })}
-        </Row>
-      </Container>
+      <Row xs={1} md={2} lg={3} xl={3} xxl={4}>
+        {array.map((item) => {
+          return (
+            <Col key={item.id}>
+              <CardArticle />
+            </Col>
+          );
+        })}
+      </Row>
     </div>
   );
 };

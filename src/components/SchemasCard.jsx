@@ -74,7 +74,7 @@ const SchemasCard = () => {
               </Col>
             </Row>
             <div className="row">
-              <div className="schemas-card__wrapper-btn">
+              <div className="btn__link">
                 <div className="col-xl-6 col-lg-6 col-md-6 col-xs-12">
                   <button className="btn btn_border">
                     <div className="btn__text">Добавить в корзину</div>

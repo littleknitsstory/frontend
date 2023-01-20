@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
@@ -11,6 +12,8 @@ import Instagram from "./components/Instagram";
 import Footer from "./components/Footer";
 import Slider from "./components/Slider";
 import Articles from "./components/Articles";
+import Page404 from "./components/Page404";
+import Article from "./components/Article";
 import "./css/style.css";
 
 function App() {
@@ -39,7 +42,32 @@ function App() {
               <Header />
               <NavBar />
               <Slider />
-              <Articles />
+              <Container>
+                <Articles />
+              </Container>
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/article"
+          element={
+            <>
+              <Header />
+              <NavBar />
+              <Article />
+
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <>
+              <Header />
+              <NavBar />
+              <Page404 />
               <Footer />
             </>
           }
