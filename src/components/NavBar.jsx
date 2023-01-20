@@ -1,9 +1,9 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
+import { NavLink } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { Button } from "react-bootstrap";
 
 import user from "../icons/user.svg";
 import logout from "../icons/logout.svg";
@@ -18,10 +18,18 @@ const NavBar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse>
             <Nav className="lks-navbar__links">
-              <Nav.Link href="#">Главная</Nav.Link>
-              <Nav.Link href="#">МАГАЗИН</Nav.Link>
-              <Nav.Link href="#">БЛОГ</Nav.Link>
-              <Nav.Link href="#">КОНТАКТЫ</Nav.Link>
+              <Nav.Link as={NavLink} to="/">
+                Главная
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/shop">
+                МАГАЗИН
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/blog">
+                БЛОГ
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/contacts">
+                КОНТАКТЫ
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
 

@@ -1,15 +1,15 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 const Instagram = () => {
   return (
     <section className="instagram">
       <Container>
-        <div className="row">
-          <div className="col-xl-4 col-lg-4 col-md-12 col-xs-12">
+        <Row>
+          <Col xs={12} md={12} lg={4} xl={4} xxl={4}>
             <div className="instagram__left-side"></div>
-          </div>
-          <div className="col-xl-4 col-lg-4 col-md-12 col-xs-12">
+          </Col>
+          <Col xs={12} md={12} lg={4} xl={4} xxl={4}>
             <div className="instagram__mid-side">
               <h2>@littleknitsstory</h2>
               <a
@@ -21,11 +21,11 @@ const Instagram = () => {
                 <div className="btn__text btn__text_center">Follow</div>
               </button>
             </div>
-          </div>
-          <div className="col-xl-4 col-lg-4 col-md-12 col-xs-12">
+          </Col>
+          <Col xs={12} md={12} lg={4} xl={4} xxl={4}>
             <div className="instagram__right-side"></div>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </Container>
     </section>
   );

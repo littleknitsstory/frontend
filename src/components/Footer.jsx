@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Form } from "react-bootstrap";
+import { Container, Form, Row, Col } from "react-bootstrap";
 import vk from "../icons/logo-vk_white.svg";
 import facebook from "../icons/logo-facebook_white.svg";
 import pinterest from "../icons/logo-pinterest_white.svg";
@@ -10,12 +10,12 @@ const Footer = () => {
     <section className="footer">
       <Container>
         <div className="footer__wrapper">
-          <div className="row">
-            <div className="col-xl-6 col-lg-6 col-md-12 col-xs-12">
+          <Row>
+            <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
               <div className="footer__subtitle">Блог и магазин по вязанию</div>
               <div className="footer__title">Little Knits Story</div>
-              <div className="row">
-                <div className="col-xl-6 col-lg-6 col-md-12 col-xs-12">
+              <Row>
+                <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
                   <div className="footer__navbar">
                     <ul>
                       <li>
@@ -32,8 +32,8 @@ const Footer = () => {
                       </li>
                     </ul>
                   </div>
-                </div>
-                <div className="col-xl-6 col-lg-6 col-md-12 col-xs-12">
+                </Col>
+                <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
                   <div className="footer__links-account">
                     <div className="footer__links-account footer__links-account-title">
                       личный кабинет
@@ -50,10 +50,10 @@ const Footer = () => {
                       </li>
                     </ul>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-6 col-lg-6 col-md-12 col-xs-12">
+                </Col>
+              </Row>
+            </Col>
+            <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
               <div className="footer__subscribe">
                 <div className="footer__subscribe-text">
                   Мы проводим специальные акции для наших клиентов. Оформите
@@ -111,21 +111,22 @@ const Footer = () => {
                   </a>
                 </div>
               </div>
-            </div>
-          </div>
+            </Col>
+          </Row>
         </div>
 
         <div className="footer__end">
-          <div className="row">
-            <div className="col-xl-6 col-lg-6 col-md-12 col-xs-12">
+          <Row>
+            <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
               <div className="footer__rights">
                 Little Knits Story 2017 | All Rights Reserved
               </div>
-            </div>
-            <div className="col-xl-6 col-lg-6 col-md-12 col-xs-12">
+            </Col>
+
+            <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
               <div className="footer__policy">Политика конфеденциальности</div>
-            </div>
-          </div>
+            </Col>
+          </Row>
         </div>
       </Container>
     </section>
