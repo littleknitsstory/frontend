@@ -56,6 +56,11 @@
   background-color: #883d3b;
   color: #fefefe;
 }
+.btn_white {
+  background-color: #fefefe;
+  color: #545353;
+  width: 13rem;
+}
 .btn__text_center {
   margin: 0 auto;
 }
@@ -276,17 +281,6 @@
   font-size: 1rem;
   color: #fefefe;
   margin-bottom: 1rem;
-}
-.about-me__title {
-  font-size: 1.5rem;
-  color: #fefefe;
-  margin-bottom: 1rem;
-}
-.about-me__wrapper-author {
-  background-color: #a4937f;
-  border-radius: 60px;
-  padding: 1.25rem 2.4rem 2.3rem 2.3rem;
-  min-height: 28.75rem;
 }
 .about-me__img {
   width: 100%;
@@ -812,6 +806,71 @@
   }
   .article__wrapper-text {
     margin-top: 2rem;
+  }
+}
+.coffee-card {
+  background-color: #a4937f;
+  border-radius: 60px;
+  padding: 1.25rem 2.4rem 2.3rem 2.3rem;
+  min-height: 28.75rem;
+}
+.coffee-card__title {
+  font-size: 1.5rem;
+  color: #fefefe;
+  margin-bottom: 1rem;
+}
+
+.contacts {
+  margin-top: 7rem;
+}
+.contacts__form {
+  margin: 1.5rem 0;
+}
+.contacts__form input {
+  height: 3rem;
+  margin: 0.5rem 0;
+}
+.contacts__form textarea.form-control {
+  margin: 0.5rem 0;
+  min-height: calc(6.5em + 0.75rem + 2px);
+}
+.contacts__policy {
+  color: #fefefe;
+  font-size: 0.875rem;
+  padding: 1.5rem 0;
+  text-align: center;
+}
+.contacts__info {
+  margin-top: 4rem;
+  text-align: center;
+}
+.contacts__wrapper-info {
+  display: flex;
+  margin-top: 1.5rem;
+  align-items: center;
+  justify-content: center;
+}
+.contacts__text {
+  padding: 0 0 0 1.5rem;
+  color: #545353;
+  font-size: 1.125rem;
+  text-decoration: none;
+}
+.contacts__text:hover {
+  color: #883d3b;
+}
+
+@media (max-width: 992px) {
+  .contacts {
+    margin-top: 4rem;
+  }
+}
+@media (max-width: 575px) {
+  .contacts .coffee-card {
+    padding: 1.25rem 1.3rem 2.3rem 1.3rem;
+  }
+  .contacts__btn {
+    width: 13rem;
   }
 }
 * {

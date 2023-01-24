@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Form, Row, Col } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import vk from "../icons/logo-vk_white.svg";
 import facebook from "../icons/logo-facebook_white.svg";
 import pinterest from "../icons/logo-pinterest_white.svg";
@@ -19,16 +20,16 @@ const Footer = () => {
                   <div className="footer__navbar">
                     <ul>
                       <li>
-                        <a href="">магазин</a>
+                        <NavLink to="/shop">МАГАЗИН</NavLink>
                       </li>
                       <li>
-                        <a href="">блог</a>
+                        <NavLink to="/blog">блог</NavLink>
                       </li>
                       <li>
-                        <a href="">схемы</a>
+                        <a href="#">схемы</a>
                       </li>
                       <li>
-                        <a href="">контакты</a>
+                        <NavLink to="/contacts">КОНТАКТЫ</NavLink>
                       </li>
                     </ul>
                   </div>
@@ -40,13 +41,13 @@ const Footer = () => {
                     </div>
                     <ul>
                       <li>
-                        <a href="">Войти</a>
+                        <a href="#">Войти</a>
                       </li>
                       <li>
-                        <a href="">Корзина</a>
+                        <a href="#">Корзина</a>
                       </li>
                       <li>
-                        <a href="">Сохраненные товары</a>
+                        <a href="#">Сохраненные товары</a>
                       </li>
                     </ul>
                   </div>

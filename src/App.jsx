@@ -14,6 +14,7 @@ import Slider from "./components/Slider";
 import Articles from "./components/Articles";
 import Page404 from "./components/Page404";
 import Article from "./components/Article";
+import Contacts from "./components/Contacts";
 import "./css/style.css";
 
 function App() {
@@ -57,6 +58,18 @@ function App() {
               <NavBar />
               <Article />
 
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/contacts"
+          element={
+            <>
+              <Header />
+              <NavBar />
+              <Contacts />
+              <Instagram />
               <Footer />
             </>
           }

@@ -8,8 +8,8 @@ const Slider = () => {
   return (
     <section className="slider">
       <Container>
-        <Carousel>
-          <Carousel.Item>
+        <Carousel fade interval={1600}>
+          <Carousel.Item interval={1600}>
             <Row>
               <Col xs={12} md={12} lg={4} xl={4} xxl={4}>
                 <div className="slider__wrapper-img">
@@ -27,11 +27,13 @@ const Slider = () => {
                     large-e
                   </div>
                   <div className="slider__text">
-                    Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру
-                    сгенерировать несколько абзацев более менее осмысленного
-                    текста рыбы на русском языке, а начинающему оратору отточить
-                    навык публичных выступлений в домашних условиях. Сайт рыбат
-                    навык публичных выступлений в домашних условиях.
+                    White shark monkeyface prickleback bluefish kuhli loach;
+                    large-e White shark monkeyface prickleback bluefish kuhli
+                    loach; large-e White shark monkeyface prickleback bluefish
+                    kuhli loach; large-e White shark monkeyface prickleback
+                    bluefish kuhli loach; large-e White shark monkeyface
+                    prickleback bluefish kuhli loach; large-e White shark
+                    monkeyface prickleback bluefish kuhli loach; large-e
                   </div>
                   <div className="slider__author">Автор: Катя Анаприенко</div>
                   <div className="slider__created_at">
@@ -51,7 +53,7 @@ const Slider = () => {
               </Col>
             </Row>
           </Carousel.Item>
-          <Carousel.Item>
+          <Carousel.Item interval={1600}>
             <Row>
               <Col xs={12} md={12} lg={4} xl={4} xxl={4}>
                 <div className="slider__wrapper-img">
@@ -69,11 +71,12 @@ const Slider = () => {
                     large-e
                   </div>
                   <div className="slider__text">
-                    Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру
-                    сгенерировать несколько абзацев более менее осмысленного
-                    текста рыбы на русском языке, а начинающему оратору отточить
-                    навык публичных выступлений в домашних условиях. Сайт рыбат
-                    навык публичных выступлений в домашних условиях.
+                    White shark monkeyface prickleback bluefish kuhli loach;
+                    large-e верстальщику, вебмастеру сгенерировать несколько
+                    абзацев боле White shark monkeyface prickleback bluefish
+                    kuhli loach; large-eтору отточить навык публичных
+                    выступлений в домашних условиях. Сайт рыбат навык публичных
+                    выступлений в домашних условиях.
                   </div>
                   <div className="slider__author">Автор: Катя Анаприенко</div>
                   <div className="slider__created_at">
@@ -93,7 +96,7 @@ const Slider = () => {
               </Col>
             </Row>
           </Carousel.Item>
-          <Carousel.Item>
+          <Carousel.Item interval={1600}>
             <Row>
               <Col xs={12} md={12} lg={4} xl={4} xxl={4}>
                 <div className="slider__wrapper-img">
@@ -111,11 +114,11 @@ const Slider = () => {
                     large-e
                   </div>
                   <div className="slider__text">
-                    Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру
-                    сгенерировать несколько абзацев более менее осмысленного
-                    текста рыбы на русском языке, а начинающему оратору отточить
-                    навык публичных выступлений в домашних условиях. Сайт рыбат
-                    навык публичных выступлений в домашних условиях.
+                    Са White shark monkeyface prickleback bluefish kuhli loach;
+                    large-eв более менее осмысленного текста рыбы на русском
+                    языке, а начинающему оратору отточить навык публичных выступ
+                    White shark monkeyface prickleback bluefish kuhli loach;
+                    large-eих условиях.
                   </div>
                   <div className="slider__author">Автор: Катя Анаприенко</div>
                   <div className="slider__created_at">

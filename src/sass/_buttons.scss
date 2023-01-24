@@ -34,6 +34,11 @@
       color: $text-color-light;
     }
   }
+  &_white {
+    background-color: $text-color-light;
+    color: $text-color-dark;
+    width: 13rem;
+  }
   &__text {
     &_center {
       margin: 0 auto;

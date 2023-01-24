@@ -13,9 +13,9 @@ const AboutMe = () => {
         <h3 className="title">Обо мне</h3>
         <Row>
           <Col xs={12} md={12} lg={6} xl={6} xxl={6} className="about-me__card">
-            <div className="about-me__wrapper-author">
+            <div className="coffee-card">
               <div className="about-me__subtitle">Автор</div>
-              <div className="about-me__title">Катя Анаприенко</div>
+              <div className="coffee-card__title">Катя Анаприенко</div>
               <Row>
                 <Col
                   xs={12}
