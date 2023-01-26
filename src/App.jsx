@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Container } from "react-bootstrap";
 
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
@@ -10,11 +9,13 @@ import AboutMe from "./components/AboutMe";
 import LastReviews from "./components/LastReviews";
 import Instagram from "./components/Instagram";
 import Footer from "./components/Footer";
-import Slider from "./components/Slider";
+import MainSlider from "./components/MainSlider";
 import Articles from "./components/Articles";
 import Page404 from "./components/Page404";
 import Article from "./components/Article";
 import Contacts from "./components/Contacts";
+import Products from "./components/Products";
+
 import "./css/style.css";
 
 function App() {
@@ -42,10 +43,8 @@ function App() {
             <>
               <Header />
               <NavBar />
-              <Slider />
-              <Container>
-                <Articles />
-              </Container>
+              <MainSlider />
+              <Articles />
               <Footer />
             </>
           }
@@ -57,7 +56,17 @@ function App() {
               <Header />
               <NavBar />
               <Article />
-
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/shop"
+          element={
+            <>
+              <Header />
+              <NavBar />
+              <Products />
               <Footer />
             </>
           }

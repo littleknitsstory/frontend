@@ -1,0 +1,27 @@
+.product-card {
+  .card {
+    padding: 1.25rem 3rem;
+    box-shadow: 15px 15px 50px -10px rgba(0, 0, 0, 0.08);
+    border-radius: 60px;
+
+    --bs-card-border-width: 0;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  &__btn {
+    .btn {
+      font-size: 0.875rem;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .product-card {
+    .card {
+      &:hover {
+        transform: unset;
+      }
+    }
+  }
+}

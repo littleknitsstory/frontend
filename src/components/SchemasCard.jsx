@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import arrowRight from "../icons/arrow-right.svg";
 import mermaid from "../images/mermaid.png";
 import cartWhite from "../icons/cart-white.svg";
@@ -89,14 +90,16 @@ const SchemasCard = () => {
             </div>
           </Col>
         </Row>
-        <div className="schemas-card__btn">
-          <button className="btn btn_vinous">
-            <div className="btn__text">Перейти в каталог</div>
-            <div className="btn__icon">
-              <img src={cartWhite} alt="cartWhite" />
-            </div>
-          </button>
-        </div>
+        <Link to={`/shop`}>
+          <div className="schemas-card__btn">
+            <button className="btn btn_vinous">
+              <div className="btn__text">Перейти в каталог</div>
+              <div className="btn__icon">
+                <img src={cartWhite} alt="cartWhite" />
+              </div>
+            </button>
+          </div>
+        </Link>
       </Container>
     </section>
   );

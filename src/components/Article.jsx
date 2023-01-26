@@ -71,8 +71,8 @@ const Article = () => {
         <h3 className="title">Другие блоги</h3>
         <Articles />
         <div className="btn__link btn__link_end">
-          <div className="row">
-            <div className="col-12">
+          <Row>
+            <Col>
               <Link
                 to="/blog"
                 onClick={() => {
@@ -84,8 +84,8 @@ const Article = () => {
               >
                 Смотреть все <img src={arrowRight} alt="arrowRight" />
               </Link>
-            </div>
-          </div>
+            </Col>
+          </Row>
         </div>
       </Container>
     </section>

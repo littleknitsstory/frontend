@@ -1,4 +1,4 @@
-.slider {
+.main-slider {
   margin-top: 7rem;
   margin-bottom: 3rem;
   position: relative;
@@ -59,7 +59,7 @@
 }
 
 @media (max-width: 992px) {
-  .slider {
+  .main-slider {
     margin-top: 1.875rem;
 
     &__title {
@@ -83,7 +83,7 @@
 }
 
 @media (max-width: 768px) {
-  .slider {
+  .main-slider {
     &__btn {
       position: unset;
       bottom: unset;

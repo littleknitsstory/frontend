@@ -16,10 +16,11 @@ const Instagram = () => {
                 href="https://www.instagram.com/littleknitsstory/"
                 target="_blank"
                 rel="noreferrer"
-              ></a>
-              <button className="btn btn_vinous instagram__btn">
-                <div className="btn__text btn__text_center">Follow</div>
-              </button>
+              >
+                <button className="btn btn_vinous instagram__btn">
+                  <div className="btn__text btn__text_center">Follow</div>
+                </button>
+              </a>
             </div>
           </Col>
           <Col xs={12} md={12} lg={4} xl={4} xxl={4}>

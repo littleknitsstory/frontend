@@ -12,17 +12,19 @@ const Articles = () => {
     { id: 6 },
   ];
   return (
-    <div className="articles">
-      <Row xs={1} md={2} lg={3} xl={3} xxl={4}>
-        {array.map((item) => {
-          return (
-            <Col key={item.id}>
-              <CardArticle />
-            </Col>
-          );
-        })}
-      </Row>
-    </div>
+    <Container>
+      <div className="articles">
+        <Row xs={1} md={2} lg={3} xl={3} xxl={4}>
+          {array.map((item) => {
+            return (
+              <Col key={item.id}>
+                <CardArticle />
+              </Col>
+            );
+          })}
+        </Row>
+      </div>
+    </Container>
   );
 };
 

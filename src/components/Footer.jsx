@@ -19,18 +19,21 @@ const Footer = () => {
                 <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
                   <div className="footer__navbar">
                     <ul>
-                      <li>
-                        <NavLink to="/shop">МАГАЗИН</NavLink>
-                      </li>
-                      <li>
-                        <NavLink to="/blog">блог</NavLink>
-                      </li>
+                      <NavLink to="/shop">
+                        <li>магазин</li>
+                      </NavLink>
+
+                      <NavLink to="/blog">
+                        <li>блог</li>
+                      </NavLink>
+
                       <li>
                         <a href="#">схемы</a>
                       </li>
-                      <li>
-                        <NavLink to="/contacts">КОНТАКТЫ</NavLink>
-                      </li>
+
+                      <NavLink to="/contacts">
+                        <li>КОНТАКТЫ</li>
+                      </NavLink>
                     </ul>
                   </div>
                 </Col>

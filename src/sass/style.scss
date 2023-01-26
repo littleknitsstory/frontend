@@ -10,14 +10,24 @@
 @import "./_last-reviews";
 @import "./_instagram";
 @import "./_footer";
-@import "./_slider";
-@import "./_card-article";
+@import "./_main-slider";
+@import "./_card-lks";
 @import "./_articles";
 @import "./_page404";
 @import "./_article";
 @import "./_coffee-card";
 @import "./_contacts";
+@import "./_card-product";
+@import "./_filters";
+@import "./_products";
 
 * {
   font-family: "AlethiaNext";
+  a {
+    color: unset;
+    text-decoration: none;
+    &:hover {
+      color: unset;
+    }
+  }
 }

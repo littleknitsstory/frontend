@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import cartBlack from "../icons/cart-black.svg";
 
 const Promo = () => {
@@ -15,12 +16,14 @@ const Promo = () => {
               рыбы на русском языке, а начинающему оратору отточить навык
               публичных выступлений в домашних условиях.
             </div>
-            <button className="btn">
-              <div className="btn__text ">Перейти в каталог</div>
-              <div className="btn__icon">
-                <img src={cartBlack} alt="cartBlack" />
-              </div>
-            </button>
+            <Link to={`/shop`}>
+              <button className="btn">
+                <div className="btn__text ">Перейти в каталог</div>
+                <div className="btn__icon">
+                  <img src={cartBlack} alt="cartBlack" />
+                </div>
+              </button>
+            </Link>
           </Col>
         </Row>
       </Container>
