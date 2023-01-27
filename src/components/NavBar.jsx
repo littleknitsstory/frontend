@@ -1,6 +1,6 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -40,9 +40,9 @@ const NavBar = () => {
             <a href="#">
               <img src={logout} alt="logout" />
             </a>
-            <a href="#">
+            <Link to="/saved">
               <img src={heart} alt="heart" />
-            </a>
+            </Link>
             <a href="#">
               <img src={shoppingBag} alt="shoppingBag" />
             </a>

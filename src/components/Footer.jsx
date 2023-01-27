@@ -5,6 +5,7 @@ import vk from "../icons/logo-vk_white.svg";
 import facebook from "../icons/logo-facebook_white.svg";
 import pinterest from "../icons/logo-pinterest_white.svg";
 import instagram from "../icons/logo-instagram_white.svg";
+import Social from "./Social";
 
 const Footer = () => {
   return (
@@ -76,45 +77,7 @@ const Footer = () => {
                 </Form>
               </div>
 
-              <div className="footer__social">
-                <div className="footer__social-circle">
-                  <a
-                    href="https://vk.com/littleknitsstory"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <img src={vk} alt="vk" />
-                  </a>
-                </div>
-
-                <div className="footer__social-circle">
-                  <a
-                    href="https://www.facebook.com/littleknitsstory/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <img src={facebook} alt="facebook" />
-                  </a>
-                </div>
-                <div className="footer__social-circle">
-                  <a
-                    href="https://www.instagram.com/littleknitsstory/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <img src={instagram} alt="instagram" />
-                  </a>
-                </div>
-                <div className="footer__social-circle">
-                  <a
-                    href="https://www.pinterest.ru/littleknitsstory/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <img src={pinterest} alt="pinterest" />
-                  </a>
-                </div>
-              </div>
+              <Social />
             </Col>
           </Row>
         </div>

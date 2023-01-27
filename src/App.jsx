@@ -15,8 +15,10 @@ import Page404 from "./components/Page404";
 import Article from "./components/Article";
 import Contacts from "./components/Contacts";
 import Products from "./components/Products";
+import SavedProducts from "./components/SavedProducts";
 
 import "./css/style.css";
+import Product from "./components/Product";
 
 function App() {
   return (
@@ -56,6 +58,28 @@ function App() {
               <Header />
               <NavBar />
               <Article />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/product"
+          element={
+            <>
+              <Header />
+              <NavBar />
+              <Product />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/saved"
+          element={
+            <>
+              <Header />
+              <NavBar />
+              <SavedProducts />
               <Footer />
             </>
           }
