@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CardProduct from "./CardProduct";
 import Filters from "./Filters";
+
 import arrowRight from "../icons/arrow-right.svg";
 import { Link } from "react-router-dom";
 

@@ -1141,6 +1141,55 @@
     margin-top: 4rem;
   }
 }
+.mini-card-product {
+  margin-top: 3rem;
+}
+.mini-card-product .card {
+  padding: 1rem 2rem;
+  box-shadow: -2px -2px 50px rgba(0, 0, 0, 0.05), 15px 15px 50px -10px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  border: none;
+  position: relative;
+}
+.mini-card-product .card-title {
+  text-align: center;
+  margin-top: 1rem;
+}
+.mini-card-product__circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #a86059;
+  color: #fefefe;
+  font-weight: bold;
+  border-radius: 100%;
+  font-size: 2.5rem;
+  position: absolute;
+  bottom: -1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.1rem 0.1rem 0 0;
+  cursor: pointer;
+}
+.mini-card-product__circle:hover {
+  background-color: #883d3b;
+}
+
+.popular-products {
+  margin-top: 4rem;
+}
+
+@media (max-width: 767px) {
+  .popular-products .card {
+    margin: 0 auto;
+  }
+}
+.reviews {
+  margin-top: 4rem;
+}
+
 * {
   font-family: "AlethiaNext";
 }
