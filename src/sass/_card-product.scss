@@ -14,6 +14,45 @@
       font-size: 0.875rem;
     }
   }
+
+  &__modal-quick-purchase {
+    &-body {
+      display: flex;
+      padding: 1rem 2rem 2rem 2rem;
+    }
+    &-descr {
+      padding: 1rem 0 0 1rem;
+    }
+    &-title,
+    &-color,
+    &-part-number {
+      color: $text-color-dark;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    &-policy {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: #c4c4c4;
+      text-align: center;
+    }
+    &-wrapper {
+      &-price {
+        color: $text-color-dark;
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+      }
+      &-discount {
+        background-color: $coffee-color;
+        border-radius: 60px;
+        padding: 0.3rem;
+        font-size: 1rem;
+        color: $text-color-light;
+        text-align: center;
+        width: 10rem;
+      }
+    }
+  }
 }
 
 @media (max-width: 575px) {
@@ -23,5 +62,24 @@
         transform: unset;
       }
     }
+    &__modal {
+      &-body {
+        flex-direction: column;
+      }
+    }
   }
+}
+
+.modal-title {
+  margin: 0 auto;
+  color: $text-color-dark;
+}
+.modal-header {
+  .btn-close {
+    margin: 0;
+  }
+}
+
+.modal-header-without-border {
+  border-bottom: none;
 }

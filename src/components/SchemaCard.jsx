@@ -1,12 +1,33 @@
 import { React, useState } from "react";
 import { Row, Col } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
+import { Link } from "react-router-dom";
 import arrowRight from "../icons/arrow-right.svg";
 import mermaid from "../images/mermaid.png";
+import cardImgProduct from "../images/product-img.png";
 import like from "../icons/like.svg";
 import Social from "./Social";
 import questionInfo from "../icons/question.svg";
 
 const SchemaCard = () => {
+  const [showModalQuickPurchase, setShowModalQuickPurchase] = useState(false);
+
+  const [showModalThanks, setShowModalThanks] = useState(false);
+
+  const handleShow = () => {
+    setShowModalQuickPurchase(true);
+  };
+  const handleClose = () => {
+    setShowModalQuickPurchase(false);
+    setShowModalThanks(false);
+  };
+  const onSubmitOrder = (e) => {
+    e.preventDefault();
+    setShowModalQuickPurchase(false);
+    setShowModalThanks(true);
+  };
+
   const [countProduct, setCountProduct] = useState(1);
   const increaseCountProduct = () => {
     setCountProduct((countProduct) => countProduct + 1);
@@ -138,7 +159,10 @@ const SchemaCard = () => {
                 </button>
               </Col>
               <Col>
-                <button className="btn btn_vinous schema-card__quick-purchase">
+                <button
+                  className="btn btn_vinous schema-card__quick-purchase"
+                  onClick={handleShow}
+                >
                   <div className="btn__text btn__text_center">
                     Быстрый заказ
                   </div>
@@ -148,6 +172,98 @@ const SchemaCard = () => {
           </div>
         </Col>
       </Row>
+      <div className="product-card__modal-quick-purchase">
+        <Modal show={showModalQuickPurchase} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Быстрая покупка</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="product-card__modal-quick-purchase-body">
+              <img
+                className="product-card__modal-quick-purchase-img"
+                src={cardImgProduct}
+                alt="cardImgProduct"
+              />
+              <div className="product-card__modal-quick-purchase-descr">
+                <div className="product-card__modal-quick-purchase-title">
+                  Cхема "Русалочка"
+                </div>
+
+                <div className="product-card__modal-quick-purchase-part-number">
+                  Артикул: 56356635
+                </div>
+                <div className="product-card__modal-quick-purchase-color">
+                  Цвет:{" "}
+                </div>
+                <div className="product-card__modal-quick-purchase-wrapper">
+                  <div className="product-card__modal-quick-purchase-wrapper-price">
+                    12 555
+                  </div>
+                  <div className="product-card__modal-quick-purchase-wrapper-discount">
+                    Скидка 555
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <Form onSubmit={onSubmitOrder}>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+              >
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="ФИО"
+                  autoFocus
+                />
+              </Form.Group>
+
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput2"
+              >
+                <Form.Control required type="text" placeholder="Телефон" />
+              </Form.Group>
+              <button type="submit" className="btn btn_vinous btn_center">
+                <div className="btn__text btn__text_center">Отправить</div>
+              </button>
+            </Form>
+            <div className="product-card__modal-quick-purchase-policy">
+              Нажимая «Отправить», вы даете согласие на обработку персональных
+              данных
+            </div>
+          </Modal.Body>
+        </Modal>
+
+        <Modal
+          show={showModalThanks}
+          onHide={() => setShowModalThanks(false)}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header closeButton className="modal-header-without-border">
+            <Modal.Title id="contained-modal-title-vcenter">
+              Спасибо
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="card-modal-thanks__text">
+              Ваша заявка принята.
+              <br /> В Ближайшее время с вами свяжется наш менеджер
+            </div>
+            <Link to={`/`}>
+              <button className="btn btn_vinous btn_center card-modal-thanks__btn">
+                <div className="btn__text btn__text_center">
+                  Вернуться на главную
+                </div>
+              </button>
+            </Link>
+          </Modal.Body>
+        </Modal>
+      </div>
+      <div className="card-modal-thanks"></div>
     </div>
   );
 };

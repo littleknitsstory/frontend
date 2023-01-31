@@ -778,7 +778,7 @@
   margin-top: 7rem;
 }
 .contacts__form {
-  margin: 1.5rem 0;
+  margin-top: 1.5rem;
 }
 .contacts__form input {
   height: 3rem;
@@ -813,6 +813,9 @@
 .contacts__text:hover {
   color: #883d3b;
 }
+.contacts__btn {
+  margin-top: 1.5rem;
+}
 
 @media (max-width: 992px) {
   .contacts {
@@ -839,12 +842,60 @@
 .product-card__btn .btn {
   font-size: 0.875rem;
 }
+.product-card__modal-quick-purchase-body {
+  display: flex;
+  padding: 1rem 2rem 2rem 2rem;
+}
+.product-card__modal-quick-purchase-descr {
+  padding: 1rem 0 0 1rem;
+}
+.product-card__modal-quick-purchase-title, .product-card__modal-quick-purchase-color, .product-card__modal-quick-purchase-part-number {
+  color: #545353;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+.product-card__modal-quick-purchase-policy {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: #c4c4c4;
+  text-align: center;
+}
+.product-card__modal-quick-purchase-wrapper-price {
+  color: #545353;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.product-card__modal-quick-purchase-wrapper-discount {
+  background-color: #a4937f;
+  border-radius: 60px;
+  padding: 0.3rem;
+  font-size: 1rem;
+  color: #fefefe;
+  text-align: center;
+  width: 10rem;
+}
 
 @media (max-width: 575px) {
   .product-card .card:hover {
     transform: unset;
   }
+  .product-card__modal-body {
+    flex-direction: column;
+  }
 }
+.modal-title {
+  margin: 0 auto;
+  color: #545353;
+}
+
+.modal-header .btn-close {
+  margin: 0;
+}
+
+.modal-header-without-border {
+  border-bottom: none;
+}
+
 .filters {
   border-right: 1px solid #e8e8e8;
 }
@@ -1188,6 +1239,16 @@
 }
 .reviews {
   margin-top: 4rem;
+}
+
+.card-modal-thanks__btn {
+  font-size: 1.05rem;
+}
+.card-modal-thanks__text {
+  text-align: center;
+  color: #545353;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 * {
