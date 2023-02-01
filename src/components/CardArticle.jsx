@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 
 import cardImg from "../images/card-img.png";
@@ -8,7 +8,9 @@ const Cardlks = () => {
   return (
     <div className="card-lks">
       <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={cardImg} />
+        <Link to="/article">
+          <Card.Img variant="top" src={cardImg} />
+        </Link>
         <Card.Body>
           <Card.Title>
             White shark monkeyface prickleback bluefish kuhli loach; large-e
@@ -30,9 +32,11 @@ const Cardlks = () => {
               17:56 <br /> 13 ноября 2018 г.
             </div>
             <div className="card-lks__btn">
-              <button className="btn btn_vinous btn_center ">
-                <div className="btn__text btn__text_center">Читать</div>
-              </button>
+              <Link to="/article">
+                <button className="btn btn_vinous btn_center ">
+                  <div className="btn__text btn__text_center">Читать</div>
+                </button>
+              </Link>
             </div>
           </div>
         </Card.Body>

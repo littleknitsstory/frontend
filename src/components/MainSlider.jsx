@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
+import { Link } from "react-router-dom";
 import arrowWhite from "../icons/arrow-right-white.svg";
 import kateSlider from "../images/kate-slider.png";
 
@@ -8,7 +9,7 @@ const MainSlider = () => {
   return (
     <section className="main-slider">
       <Container>
-        <Carousel fade interval={1600}>
+        <Carousel interval={1600}>
           <Carousel.Item interval={1600}>
             <Row>
               <Col xs={12} md={12} lg={4} xl={4} xxl={4}>
@@ -45,12 +46,14 @@ const MainSlider = () => {
                   </div>
                   <div className="col-12">
                     <div className="main-slider__btn">
-                      <button className="btn btn_vinous">
-                        <div className="btn__text">Читать</div>
-                        <div className="btn__icon">
-                          <img src={arrowWhite} alt="arrowWhite" />
-                        </div>
-                      </button>
+                      <Link to="/article">
+                        <button className="btn btn_vinous">
+                          <div className="btn__text">Читать</div>
+                          <div className="btn__icon">
+                            <img src={arrowWhite} alt="arrowWhite" />
+                          </div>
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -90,12 +93,14 @@ const MainSlider = () => {
                   </div>
                   <div className="col-12">
                     <div className="main-slider__btn">
-                      <button className="btn btn_vinous">
-                        <div className="btn__text">Читать</div>
-                        <div className="btn__icon">
-                          <img src={arrowWhite} alt="arrowWhite" />
-                        </div>
-                      </button>
+                      <Link to="/article">
+                        <button className="btn btn_vinous">
+                          <div className="btn__text">Читать</div>
+                          <div className="btn__icon">
+                            <img src={arrowWhite} alt="arrowWhite" />
+                          </div>
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -134,12 +139,14 @@ const MainSlider = () => {
                   </div>
 
                   <div className="main-slider__btn">
-                    <button className="btn btn_vinous">
-                      <div className="btn__text">Читать</div>
-                      <div className="btn__icon">
-                        <img src={arrowWhite} alt="arrowWhite" />
-                      </div>
-                    </button>
+                    <Link to="/article">
+                      <button className="btn btn_vinous">
+                        <div className="btn__text">Читать</div>
+                        <div className="btn__icon">
+                          <img src={arrowWhite} alt="arrowWhite" />
+                        </div>
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </Col>

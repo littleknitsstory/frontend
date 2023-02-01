@@ -16,6 +16,7 @@ import Article from "./components/Article";
 import Contacts from "./components/Contacts";
 import Products from "./components/Products";
 import SavedProducts from "./components/SavedProducts";
+import Cart from "./components/Cart";
 
 import "./css/style.css";
 import Product from "./components/Product";
@@ -80,6 +81,17 @@ function App() {
               <Header />
               <NavBar />
               <SavedProducts />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <>
+              <Header />
+              <NavBar />
+              <Cart />
               <Footer />
             </>
           }

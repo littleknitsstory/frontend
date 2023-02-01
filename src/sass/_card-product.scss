@@ -20,8 +20,13 @@
       display: flex;
       padding: 1rem 2rem 2rem 2rem;
     }
+    &-img {
+      width: 12.5rem;
+      height: 12.5rem;
+      object-fit: contain;
+    }
     &-descr {
-      padding: 1rem 0 0 1rem;
+      padding: 1rem 0 0 1.5rem;
     }
     &-title,
     &-color,
@@ -50,6 +55,91 @@
         color: $text-color-light;
         text-align: center;
         width: 10rem;
+      }
+    }
+  }
+  &__cart {
+    .card {
+      margin-bottom: 1.5rem;
+      --bs-card-border-width: 0;
+    }
+    &-active {
+      transform: scale(1.1);
+      border: 1px solid $light-grey-color;
+
+      .form-check-input {
+        &:checked[type="checkbox"] {
+          background-image: url("../icons/check.svg");
+        }
+        &:checked {
+          background-color: $light-grey-color;
+          border-color: $light-grey-color;
+        }
+
+        &:focus {
+          box-shadow: 0 0 0 0.25rem $border-color;
+          border-color: $border-color;
+        }
+      }
+    }
+    .form-check-input {
+      background-color: $light-grey-color;
+      border-color: $light-grey-color;
+      &:focus {
+        box-shadow: 0 0 0 0.25rem $border-color;
+        border-color: $border-color;
+      }
+    }
+    &-btn-deleted {
+      display: none;
+    }
+    &-btn-deleted-active {
+      display: block;
+      padding-left: 2rem;
+      border: none;
+      background-color: unset;
+    }
+    .card-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .schema-card {
+      &__counter {
+        margin: 2.5rem auto 3rem auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 7rem;
+        height: 3rem;
+        background-color: $vinous-color;
+        border-radius: 40px;
+        padding: 0.5rem 1rem;
+        color: $text-color-light;
+        font-weight: bold;
+        font-size: 1.35rem;
+        &-control-btn {
+          border: none;
+          background-color: $vinous-color;
+          color: $text-color-light;
+          font-weight: bold;
+        }
+      }
+    }
+    &-img {
+      margin-left: 1.5rem;
+      width: 10rem;
+      height: 10rem;
+      object-fit: contain;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .product-card {
+    &__cart {
+      .card-body {
+        flex-direction: column;
       }
     }
   }

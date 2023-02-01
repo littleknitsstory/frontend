@@ -5,7 +5,6 @@ import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
 import arrowRight from "../icons/arrow-right.svg";
 import mermaid from "../images/mermaid.png";
-import cardImgProduct from "../images/product-img.png";
 import like from "../icons/like.svg";
 import Social from "./Social";
 import questionInfo from "../icons/question.svg";
@@ -147,9 +146,9 @@ const SchemaCard = () => {
                 </button>
               </div>
               <div className="col-xl-4 col-lg-4 col-md-4 offset-xl-2 offset-lg-2 offset-md-2 col-xs-12 ">
-                <a href="#">
+                <Link to="/product">
                   Подробнее <img src={arrowRight} alt="arrowRight" />
-                </a>
+                </Link>
               </div>
             </div>
             <div className="schema-card__product-btn">
@@ -181,7 +180,7 @@ const SchemaCard = () => {
             <div className="product-card__modal-quick-purchase-body">
               <img
                 className="product-card__modal-quick-purchase-img"
-                src={cardImgProduct}
+                src={mermaid}
                 alt="cardImgProduct"
               />
               <div className="product-card__modal-quick-purchase-descr">

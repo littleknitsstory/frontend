@@ -1,5 +1,6 @@
 import React from "react";
 import { Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import mermaid from "../images/mermaid.png";
 
 const MiniCardProduct = () => {
@@ -8,7 +9,9 @@ const MiniCardProduct = () => {
       <Card style={{ width: "18rem" }}>
         <Card.Title>Cхема "Русалочка"</Card.Title>
         <Card.Body>
-          <Card.Img variant="top" src={mermaid} />
+          <Link to="/product">
+            <Card.Img variant="top" src={mermaid} />
+          </Link>
           <Card.Title>2 555</Card.Title>
         </Card.Body>
         <div className="mini-card-product__circle">+</div>

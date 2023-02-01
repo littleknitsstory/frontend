@@ -30,7 +30,10 @@ const CardProduct = () => {
           <span></span>
           <span></span>
         </div>
-        <Card.Img variant="top" src={cardImgProduct} />
+        <Link to="/product">
+          <Card.Img variant="top" src={cardImgProduct} />
+        </Link>
+
         <Card.Body>
           <Card.Title>Cхема "Русалочка"</Card.Title>
           <div className="card-lks__wrapper-icons">

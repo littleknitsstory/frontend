@@ -619,7 +619,6 @@
   text-align: right;
 }
 .card-lks__btn {
-  transition: 0.5s bottom;
   position: absolute;
   bottom: -1rem;
   visibility: hidden;
@@ -846,8 +845,13 @@
   display: flex;
   padding: 1rem 2rem 2rem 2rem;
 }
+.product-card__modal-quick-purchase-img {
+  width: 12.5rem;
+  height: 12.5rem;
+  object-fit: contain;
+}
 .product-card__modal-quick-purchase-descr {
-  padding: 1rem 0 0 1rem;
+  padding: 1rem 0 0 1.5rem;
 }
 .product-card__modal-quick-purchase-title, .product-card__modal-quick-purchase-color, .product-card__modal-quick-purchase-part-number {
   color: #545353;
@@ -874,7 +878,79 @@
   text-align: center;
   width: 10rem;
 }
+.product-card__cart .card {
+  margin-bottom: 1.5rem;
+  --bs-card-border-width: 0;
+}
+.product-card__cart-active {
+  transform: scale(1.1);
+  border: 1px solid #e8e8e8;
+}
+.product-card__cart-active .form-check-input:checked[type=checkbox] {
+  background-image: url("../icons/check.svg");
+}
+.product-card__cart-active .form-check-input:checked {
+  background-color: #e8e8e8;
+  border-color: #e8e8e8;
+}
+.product-card__cart-active .form-check-input:focus {
+  box-shadow: 0 0 0 0.25rem #d3d3d3;
+  border-color: #d3d3d3;
+}
+.product-card__cart .form-check-input {
+  background-color: #e8e8e8;
+  border-color: #e8e8e8;
+}
+.product-card__cart .form-check-input:focus {
+  box-shadow: 0 0 0 0.25rem #d3d3d3;
+  border-color: #d3d3d3;
+}
+.product-card__cart-btn-deleted {
+  display: none;
+}
+.product-card__cart-btn-deleted-active {
+  display: block;
+  padding-left: 2rem;
+  border: none;
+  background-color: unset;
+}
+.product-card__cart .card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.product-card__cart .schema-card__counter {
+  margin: 2.5rem auto 3rem auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 7rem;
+  height: 3rem;
+  background-color: #a86059;
+  border-radius: 40px;
+  padding: 0.5rem 1rem;
+  color: #fefefe;
+  font-weight: bold;
+  font-size: 1.35rem;
+}
+.product-card__cart .schema-card__counter-control-btn {
+  border: none;
+  background-color: #a86059;
+  color: #fefefe;
+  font-weight: bold;
+}
+.product-card__cart-img {
+  margin-left: 1.5rem;
+  width: 10rem;
+  height: 10rem;
+  object-fit: contain;
+}
 
+@media (max-width: 992px) {
+  .product-card__cart .card-body {
+    flex-direction: column;
+  }
+}
 @media (max-width: 575px) {
   .product-card .card:hover {
     transform: unset;

@@ -43,9 +43,9 @@ const NavBar = () => {
             <Link to="/saved">
               <img src={heart} alt="heart" />
             </Link>
-            <a href="#">
+            <Link to="/cart">
               <img src={shoppingBag} alt="shoppingBag" />
-            </a>
+            </Link>
           </div>
           <NavDropdown
             title="Ru"
