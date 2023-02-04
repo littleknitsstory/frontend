@@ -1,0 +1,134 @@
+.product {
+  margin-top: 7rem;
+  .schema-card {
+    .social {
+      display: flex;
+    }
+    &__counter {
+      margin: 2.5rem auto 3rem auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 7rem;
+      height: 3rem;
+      background-color: $vinous-color;
+      border-radius: 40px;
+      padding: 0.5rem 1rem;
+      color: $text-color-light;
+      font-weight: bold;
+      font-size: 1.35rem;
+      &-control-btn {
+        border: none;
+        background-color: $vinous-color;
+        color: $text-color-light;
+        font-weight: bold;
+      }
+    }
+    &__dicount {
+      display: flex;
+      color: $dark-pink-color;
+      font-size: 1.125rem;
+      padding-left: 1rem;
+    }
+    &__price {
+      display: block;
+      margin-top: 3.5rem;
+      color: $text-color-dark;
+      font-size: 2.25rem;
+    }
+
+    &__old-price {
+      display: block;
+      text-decoration: line-through;
+      color: $text-color-dark;
+      font-size: 1.125rem;
+    }
+    &__region,
+    &__delivery {
+      color: $text-color-dark;
+      font-size: 1.125rem;
+    }
+    &__region {
+      display: block;
+      margin-top: 3.5rem;
+    }
+    &__delivery {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+
+      img {
+        cursor: pointer;
+        padding-left: 0.5rem;
+      }
+    }
+    &__product-btn {
+      display: flex;
+      margin-top: 3rem;
+      flex-direction: column;
+    }
+
+    &__quick-purchase {
+      width: 16.68rem;
+      height: 3.875rem;
+      padding: 0.25rem 2.125rem;
+    }
+    .btn__link {
+      display: none;
+    }
+    .btn_vinous,
+    .btn_border {
+      margin: 0.875rem 0;
+    }
+  }
+}
+@media (min-width: 1400px) {
+  .product {
+    .schema-card {
+      &__product-btn {
+        flex-direction: row;
+      }
+    }
+  }
+}
+@media (max-width: 992px) {
+  .product {
+    margin-top: 4rem;
+    .schema-card {
+      &__dicount {
+        align-items: center;
+      }
+      &__quick-purchase {
+        width: 15.625rem;
+        height: 3.125rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .product {
+    .schema-card {
+      &__delivery {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        img {
+          padding-left: 0;
+          padding-top: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+// @media (max-width: 992px) {
+//   .product {
+//     .schema-card {
+//       .btn_border,
+//       .btn_vinous {
+//         margin: 0.875rem auto;
+//       }
+//     }
+//   }
+// }

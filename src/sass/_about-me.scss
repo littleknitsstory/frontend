@@ -8,17 +8,7 @@
     color: $text-color-light;
     margin-bottom: 1rem;
   }
-  &__title {
-    font-size: 1.5rem;
-    color: $text-color-light;
-    margin-bottom: 1rem;
-  }
-  &__wrapper-author {
-    background-color: $coffee-color;
-    border-radius: 60px;
-    padding: 1.25rem 2.4rem 2.3rem 2.3rem;
-    min-height: 28.75rem;
-  }
+
   &__img {
     width: 100%;
   }
@@ -44,7 +34,7 @@
     border-bottom: 1px solid #9a9a9a;
   }
   &__text {
-    padding: 1.875rem 0 0 0;
+    padding: 1rem 2rem;
     font-size: 1.15rem;
   }
 }
@@ -80,6 +70,7 @@
   .about-me {
     &__title-text {
       font-size: 1.6rem;
+      text-align: center;
     }
   }
 }

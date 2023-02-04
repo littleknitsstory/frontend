@@ -11,7 +11,6 @@
   color: $text-color-dark;
   &:hover {
     background-color: $burgundy-color;
-    color: $text-color-light;
   }
   &_center {
     margin: 0 auto;
@@ -23,7 +22,7 @@
     font-size: 1.15rem;
   }
   &_vinous {
-    margin-top: 3.75rem;
+    // margin-top: 3.75rem;
     width: 22.56rem;
     height: 4.125rem;
     background-color: $vinous-color;
@@ -34,9 +33,31 @@
       color: $text-color-light;
     }
   }
+  &_white {
+    background-color: $text-color-light;
+    color: $text-color-dark;
+    width: 13rem;
+  }
   &__text {
     &_center {
       margin: 0 auto;
+    }
+  }
+  &__link {
+    padding-top: 3.05rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    a {
+      font-size: 1.2rem;
+      color: #000;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    &_end {
+      justify-content: flex-end;
     }
   }
 }
@@ -47,8 +68,8 @@
     width: 15.625rem;
     height: 3.125rem;
     padding: 1.25rem 1.8rem;
-    &_vinous {
-      margin-top: 1.25rem;
-    }
+    // &_vinous {
+    //   margin-top: 1.25rem;
+    // }
   }
 }

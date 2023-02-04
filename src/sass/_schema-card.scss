@@ -1,0 +1,81 @@
+.schema-card {
+  .social {
+    display: none;
+  }
+  &__counter,
+  &__dicount,
+  &__price,
+  &__old-price,
+  &__region,
+  &__delivery,
+  &__product-btn {
+    display: none;
+  }
+  &__wrapper-title {
+    display: flex;
+    justify-content: flex-start;
+  }
+  &__card {
+    margin: 3rem 0 3.75rem 0;
+  }
+  &__img-wrapper {
+    position: relative;
+  }
+  &__img {
+    width: 100%;
+    height: 100%;
+  }
+  &__like {
+    position: absolute;
+    right: 1.25rem;
+    top: 1.43rem;
+  }
+  &__property {
+    color: $text-color-dark;
+    font-size: 1.125rem;
+    padding: 0.625rem 0;
+  }
+  &__wrapper {
+    border-bottom: 1px solid $border-color;
+  }
+  &__descr {
+    padding: 0.75rem 0;
+    color: black;
+    font-size: 1.15rem;
+  }
+
+  &__btn {
+    padding-left: 12px;
+  }
+}
+
+@media (max-width: 992px) {
+  .schema-card {
+    &__card {
+      margin: 1.56rem 0 1rem 0;
+    }
+    &__title {
+      margin-top: 1.25rem;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .schema-card {
+    .btn {
+      margin-bottom: 1.56rem;
+      &__link {
+        flex-direction: column;
+      }
+    }
+
+    &__btn {
+      padding-left: 0;
+    }
+    .btn {
+      &_vinous {
+        margin: 1.875rem auto;
+      }
+    }
+  }
+}

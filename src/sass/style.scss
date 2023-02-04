@@ -10,7 +10,33 @@
 @import "./_last-reviews";
 @import "./_instagram";
 @import "./_footer";
+@import "./_main-slider";
+@import "./_card-lks";
+@import "./_articles";
+@import "./_page404";
+@import "./_article";
+@import "./_coffee-card";
+@import "./_contacts";
+@import "./_card-product";
+@import "./_filters";
+@import "./_products";
+@import "./_schema-card";
+@import "./_social";
+@import "./_product";
+@import "./_review-card";
+@import "./_saved-products";
+@import "./_mini-card-product";
+@import "./_popular-products";
+@import "./_reviews";
+@import "./_card-modal-thanks";
 
 * {
   font-family: "AlethiaNext";
+  a {
+    color: unset;
+    text-decoration: none;
+    &:hover {
+      color: unset;
+    }
+  }
 }

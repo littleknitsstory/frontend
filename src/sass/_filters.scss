@@ -1,0 +1,29 @@
+.filters {
+  border-right: 1px solid #e8e8e8;
+  &__wrapper-price {
+    width: 17rem;
+    height: 8rem;
+    margin: 3.75rem 0;
+    box-shadow: 15px 15px 50px -10px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    padding: 1.25rem;
+  }
+  &__title {
+    font-size: 1rem;
+    color: $main-color;
+    margin-bottom: 1.25rem;
+  }
+  &__btn {
+    .btn {
+      padding: 1.25rem 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .filters {
+    border-right: unset;
+    border-bottom: 1px solid #e8e8e8;
+    padding-bottom: 4rem;
+  }
+}

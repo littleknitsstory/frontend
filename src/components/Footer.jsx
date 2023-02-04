@@ -1,59 +1,64 @@
 import React from "react";
-import { Container, Form } from "react-bootstrap";
+import { Container, Form, Row, Col } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import vk from "../icons/logo-vk_white.svg";
 import facebook from "../icons/logo-facebook_white.svg";
 import pinterest from "../icons/logo-pinterest_white.svg";
 import instagram from "../icons/logo-instagram_white.svg";
+import Social from "./Social";
 
 const Footer = () => {
   return (
     <section className="footer">
       <Container>
         <div className="footer__wrapper">
-          <div className="row">
-            <div className="col-xl-6 col-lg-6 col-md-12 col-xs-12">
+          <Row>
+            <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
               <div className="footer__subtitle">Блог и магазин по вязанию</div>
               <div className="footer__title">Little Knits Story</div>
-              <div className="row">
-                <div className="col-xl-6 col-lg-6 col-md-12 col-xs-12">
+              <Row>
+                <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
                   <div className="footer__navbar">
                     <ul>
+                      <NavLink to="/shop">
+                        <li>магазин</li>
+                      </NavLink>
+
+                      <NavLink to="/blog">
+                        <li>блог</li>
+                      </NavLink>
+
                       <li>
-                        <a href="">магазин</a>
+                        <a href="#">схемы</a>
                       </li>
-                      <li>
-                        <a href="">блог</a>
-                      </li>
-                      <li>
-                        <a href="">схемы</a>
-                      </li>
-                      <li>
-                        <a href="">контакты</a>
-                      </li>
+
+                      <NavLink to="/contacts">
+                        <li>КОНТАКТЫ</li>
+                      </NavLink>
                     </ul>
                   </div>
-                </div>
-                <div className="col-xl-6 col-lg-6 col-md-12 col-xs-12">
+                </Col>
+                <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
                   <div className="footer__links-account">
                     <div className="footer__links-account footer__links-account-title">
                       личный кабинет
                     </div>
                     <ul>
                       <li>
-                        <a href="">Войти</a>
+                        <a href="#">Войти</a>
                       </li>
                       <li>
-                        <a href="">Корзина</a>
+                        <a href="#">Корзина</a>
                       </li>
                       <li>
-                        <a href="">Сохраненные товары</a>
+                        <a href="#">Сохраненные товары</a>
                       </li>
                     </ul>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-6 col-lg-6 col-md-12 col-xs-12">
+                </Col>
+              </Row>
+            </Col>
+            <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
               <div className="footer__subscribe">
                 <div className="footer__subscribe-text">
                   Мы проводим специальные акции для наших клиентов. Оформите
@@ -72,60 +77,23 @@ const Footer = () => {
                 </Form>
               </div>
 
-              <div className="footer__social">
-                <div className="footer__social-circle">
-                  <a
-                    href="https://vk.com/littleknitsstory"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <img src={vk} alt="vk" />
-                  </a>
-                </div>
-
-                <div className="footer__social-circle">
-                  <a
-                    href="https://www.facebook.com/littleknitsstory/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <img src={facebook} alt="facebook" />
-                  </a>
-                </div>
-                <div className="footer__social-circle">
-                  <a
-                    href="https://www.instagram.com/littleknitsstory/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <img src={instagram} alt="instagram" />
-                  </a>
-                </div>
-                <div className="footer__social-circle">
-                  <a
-                    href="https://www.pinterest.ru/littleknitsstory/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <img src={pinterest} alt="pinterest" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+              <Social />
+            </Col>
+          </Row>
         </div>
 
         <div className="footer__end">
-          <div className="row">
-            <div className="col-xl-6 col-lg-6 col-md-12 col-xs-12">
+          <Row>
+            <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
               <div className="footer__rights">
                 Little Knits Story 2017 | All Rights Reserved
               </div>
-            </div>
-            <div className="col-xl-6 col-lg-6 col-md-12 col-xs-12">
+            </Col>
+
+            <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
               <div className="footer__policy">Политика конфеденциальности</div>
-            </div>
-          </div>
+            </Col>
+          </Row>
         </div>
       </Container>
     </section>

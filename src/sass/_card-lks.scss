@@ -1,0 +1,154 @@
+.card-lks {
+  position: relative;
+  .card {
+    margin-bottom: 4rem;
+    transition: all 0.4s;
+
+    &:hover {
+      transform: translateY(-10%);
+
+      box-shadow: 15px 15px 50px -10px rgba(0, 0, 0, 0.08);
+
+      .card-lks {
+        &__btn {
+          visibility: visible;
+          bottom: 0.8rem;
+          left: 50%;
+          transform: translate(-50%);
+          padding-top: 2rem;
+        }
+        &__wrapper-icons {
+          display: block;
+          right: 0.7rem;
+        }
+        &__svg-bag,
+        &__svg-like {
+          display: block;
+        }
+
+        &__created_at,
+        &__author,
+        &__price {
+          visibility: hidden;
+        }
+      }
+    }
+  }
+
+  .card-title {
+    font-size: 1rem;
+    color: $main-color;
+  }
+  &__text {
+    margin: 1.1rem 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: $text-color-dark;
+    font-size: 0.875rem;
+  }
+  &__footer {
+    padding-top: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #757575;
+    font-size: 0.8rem;
+    align-items: flex-end;
+    color: $text-color-dark;
+  }
+  &__created_at {
+    text-align: right;
+  }
+  &__btn {
+    // transition: 0.5s bottom;
+    position: absolute;
+    bottom: -1rem;
+    visibility: hidden;
+    font-size: 1.25rem;
+
+    .btn_vinous {
+      width: 9rem;
+      height: 2.625rem;
+      text-align: center;
+      padding: 0;
+    }
+  }
+  &__material,
+  &__color,
+  &__price {
+    text-align: center;
+    color: $text-color-dark;
+    font-size: 0.875rem;
+    padding: 0.3rem 0;
+  }
+  &__price {
+    font-size: 1.2rem;
+  }
+  &__wrapper-icons {
+    display: none;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    transition: 0.5s right;
+    right: -1.5rem;
+    top: 2rem;
+    cursor: pointer;
+    svg {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__svg-bag,
+  &__svg-like {
+    display: none;
+    &:hover {
+      path {
+        fill: $burgundy-color;
+      }
+      circle {
+        fill: $burgundy-color;
+      }
+    }
+  }
+
+  &__wrapper-close {
+    display: none;
+    width: 1.8rem;
+    height: 1.8rem;
+    position: absolute;
+    top: 2rem;
+    left: 1rem;
+    span {
+      display: block;
+      height: 0.1rem;
+
+      background-color: $main-color;
+      transition: 0.5s all;
+      &:nth-child(1) {
+        transform: translateY(0.2rem) rotate(-45deg);
+      }
+
+      &:nth-child(2) {
+        transform: translateY(0.1rem) rotate(45deg);
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .card-lks {
+    .card {
+      margin: 0 auto 4rem auto;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .card-lks {
+    &__wrapper-icons {
+      right: 0.7rem;
+    }
+  }
+}

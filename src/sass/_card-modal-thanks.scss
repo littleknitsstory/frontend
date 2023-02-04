@@ -1,0 +1,11 @@
+.card-modal-thanks {
+  &__btn {
+    font-size: 1.05rem;
+  }
+  &__text {
+    text-align: center;
+    color: $text-color-dark;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+}
