@@ -9,8 +9,11 @@ import user from "../icons/user.svg";
 import logout from "../icons/logout.svg";
 import heart from "../icons/heart.svg";
 import shoppingBag from "../icons/shopping-bag.svg";
+import {useAppDispatch} from "../store/hooks";
+import {setTestWindow} from "../store/apiTestSlice";
 
 const NavBar = () => {
+  const dispatch = useAppDispatch()
   return (
     <section className="lks-navbar">
       <Navbar expand="lg">
@@ -30,6 +33,7 @@ const NavBar = () => {
               <Nav.Link as={NavLink} to="/contacts">
                 КОНТАКТЫ
               </Nav.Link>
+              <Nav.Link href="#" onClick={()=>dispatch(setTestWindow(true))}>Api Test</Nav.Link>
             </Nav>
           </Navbar.Collapse>
 

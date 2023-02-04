@@ -20,8 +20,13 @@ import Cart from "./components/Cart";
 
 import "./css/style.css";
 import Product from "./components/Product";
+import {useAppSelector} from "./store/hooks";
+import {selectTestWindow} from "./store/apiTestSlice";
+import {ApiTestWindow} from "./components/ApiTest/ApiTestWindow";
 
 function App() {
+  const testWindow = useAppSelector(selectTestWindow)
+
   return (
     <Router>
       <Routes>
@@ -31,7 +36,7 @@ function App() {
             <>
               <Header />
               <NavBar />
-              <Promo />
+              {testWindow ? <ApiTestWindow/> : <Promo/>}
               <SchemasCard />
               <AboutMe />
               <LastReviews />
