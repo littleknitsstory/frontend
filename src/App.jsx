@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from "./components/Header";
@@ -24,15 +24,17 @@ import "./css/style.css";
 export const Language = React.createContext()
 
 function App() {
-  const [language, setLanguage] = useState("RU")
+  const [language, setLanguage] = useState(localStorage.getItem("lang") || "RU")
   const { i18n } = useTranslation()
 
   const selectLanguage = e => {
     setLanguage(e.target.textContent)
-    i18n.changeLanguage(e.target.textContent.toLowerCase())
-
-    console.log(e.target.textContent)
+    localStorage.setItem("lang", e.target.textContent)
   }
+
+  useEffect(() => {
+    i18n.changeLanguage(language.toLowerCase())
+  }, [language])
 
   return (
     <Router>
