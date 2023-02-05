@@ -4,32 +4,33 @@ import Card from "react-bootstrap/Card";
 
 import cardImg from "../images/card-img.png";
 
-const Cardlks = () => {
+const Cardlks = (props) => {
   return (
     <div className="card-lks">
       <Card style={{ width: "18rem" }}>
         <Link to="/article">
-          <Card.Img variant="top" src={cardImg} />
+          <Card.Img 
+            variant="top" 
+            style={{ height: "16rem", objectFit: "cover" }} 
+            src={"http://dev.backend.littleknitsstory.com" + props.image_preview}
+            alt={props.image_alt} 
+          />
         </Link>
         <Card.Body>
           <Card.Title>
-            White shark monkeyface prickleback bluefish kuhli loach; large-e
+            {props.title}
           </Card.Title>
 
           <div className="card-lks__text">
-            Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру
-            сгенерировать несколько абзацев более менее осмысленного текста рыбы
-            на русском языке, а начинающему оратору отточить навык публичных
-            выступлений в домашних условиях. Сайт рыбат навык публичных
-            выступлений в домашних условиях.
+            {props.content}
           </div>
           <div className="card-lks__footer">
             <div className="card-lks__author">
               Автор:
-              <br /> Катя Анаприенко
+              <br /> {props.author}
             </div>
             <div className="card-lks__created_at">
-              17:56 <br /> 13 ноября 2018 г.
+              <br /> {props.created_at}
             </div>
             <div className="card-lks__btn">
               <Link to="/article">

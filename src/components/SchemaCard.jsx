@@ -2,17 +2,28 @@ import { React, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import arrowRight from "../icons/arrow-right.svg";
 import mermaid from "../images/mermaid.png";
 import like from "../icons/like.svg";
 import Social from "./Social";
 import questionInfo from "../icons/question.svg";
+import { useEffect } from "react";
 
-const SchemaCard = () => {
+const SchemaCard = (props) => {
   const [showModalQuickPurchase, setShowModalQuickPurchase] = useState(false);
-
   const [showModalThanks, setShowModalThanks] = useState(false);
+  const [productDetails, setProductDetails] = useState([])
+  
+  useEffect(() => {
+    (async () => {
+      const res = await fetch("http://dev.backend.littleknitsstory.com:26363/api/v1/products/")
+      const data = await res.json()
+
+      setProductDetails(data.results.filter(item => item.id === +props.id)[0])
+    })()
+  },[])
+
 
   const handleShow = () => {
     setShowModalQuickPurchase(true);
@@ -31,8 +42,6 @@ const SchemaCard = () => {
   const increaseCountProduct = () => {
     setCountProduct((countProduct) => countProduct + 1);
   };
-  const price = 2555;
-  const oldPrice = 2950;
 
   const decreaseCountProduct = () => {
     if (countProduct == 1) {
@@ -45,7 +54,7 @@ const SchemaCard = () => {
       <Row className="schema-card__card">
         <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
           <div className="schema-card__img-wrapper">
-            <img className="schema-card__img" src={mermaid} alt="mermaid" />
+            <img className="schema-card__img" src={"http://dev.backend.littleknitsstory.com" + productDetails.image_preview} alt={productDetails.image_alt} />
             <a href="#">
               <img className="schema-card__like" src={like} alt="like" />
             </a>
@@ -69,7 +78,7 @@ const SchemaCard = () => {
         </Col>
         <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
           <div className="schema-card__wrapper-title">
-            <div className="title schema-card__title">Схема “Русалочка”</div>
+            <div className="title schema-card__title">{productDetails.title}</div>
             <div className="schema-card__dicount">-15%</div>
           </div>
 
@@ -124,10 +133,10 @@ const SchemaCard = () => {
                 Важно: не предусмотрено для тех, кто не умеет вязать
               </div>{" "}
               <div className="schema-card__price">
-                {price.toLocaleString()} ₽
+                {productDetails.price}
               </div>
               <div className="schema-card__old-price">
-                {oldPrice.toLocaleString()} ₽
+                {productDetails.sale}
               </div>
               <div className="schema-card__region">
                 Ваш регион: Екатериновка
@@ -146,7 +155,7 @@ const SchemaCard = () => {
                 </button>
               </div>
               <div className="col-xl-4 col-lg-4 col-md-4 offset-xl-2 offset-lg-2 offset-md-2 col-xs-12 ">
-                <Link to="/product">
+                <Link to={`/product/${props.id}`}>
                   Подробнее <img src={arrowRight} alt="arrowRight" />
                 </Link>
               </div>
@@ -180,26 +189,26 @@ const SchemaCard = () => {
             <div className="product-card__modal-quick-purchase-body">
               <img
                 className="product-card__modal-quick-purchase-img"
-                src={mermaid}
-                alt="cardImgProduct"
+                src={"http://dev.backend.littleknitsstory.com" + productDetails.image_preview}
+                alt={productDetails.image_alt}
               />
               <div className="product-card__modal-quick-purchase-descr">
                 <div className="product-card__modal-quick-purchase-title">
-                  Cхема "Русалочка"
+                  {productDetails.title}
                 </div>
 
                 <div className="product-card__modal-quick-purchase-part-number">
-                  Артикул: 56356635
+                  Артикул: {productDetails.code}
                 </div>
                 <div className="product-card__modal-quick-purchase-color">
-                  Цвет:{" "}
+                  Цвет: {productDetails.colors?.map(item => <div className="card-lks__color-div" style={{backgroundColor: item.color}}></div>)}
                 </div>
                 <div className="product-card__modal-quick-purchase-wrapper">
                   <div className="product-card__modal-quick-purchase-wrapper-price">
-                    12 555
+                    {productDetails.price}
                   </div>
                   <div className="product-card__modal-quick-purchase-wrapper-discount">
-                    Скидка 555
+                    Скидка {productDetails.sale}
                   </div>
                 </div>
               </div>

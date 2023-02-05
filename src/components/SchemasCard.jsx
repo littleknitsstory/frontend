@@ -12,7 +12,8 @@ const SchemasCard = () => {
     <section className="schemas-card">
       <Container>
         <h3 className="title">Схемы вязания</h3>
-        <SchemaCard />
+        {/* Какие схемы отображать на главной */}
+        <SchemaCard id={1}/>
         <Link to={`/shop`}>
           <div className="schemas-card__btn">
             <button className="btn btn_vinous">

@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import { NavLink, Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
@@ -48,11 +48,11 @@ const NavBar = () => {
             </Link>
           </div>
           <NavDropdown
-            title="Ru"
+            title="RU"
             id="basic-nav-dropdown"
             className="lks-navbar__lang"
           >
-            <NavDropdown.Item>En</NavDropdown.Item>
+            <NavDropdown.Item>EN</NavDropdown.Item>
           </NavDropdown>
         </Container>
       </Navbar>

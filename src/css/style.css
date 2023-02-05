@@ -595,6 +595,7 @@
 .card-lks .card-title {
   font-size: 1rem;
   color: #393939;
+  text-align: center;
 }
 .card-lks__text {
   margin: 1.1rem 0;
@@ -636,6 +637,19 @@
   font-size: 0.875rem;
   padding: 0.3rem 0;
 }
+
+.card-lks__color {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+}
+.card-lks__color-circle {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+
 .card-lks__price {
   font-size: 1.2rem;
 }
@@ -695,6 +709,7 @@
 .articles {
   margin-top: 11.8rem;
 }
+
 
 @media (max-width: 992px) {
   .articles {
@@ -857,6 +872,11 @@
   color: #545353;
   font-size: 1rem;
   margin-bottom: 0.5rem;
+}
+.product-card__modal-quick-purchase-color{
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 .product-card__modal-quick-purchase-policy {
   margin-top: 1rem;
@@ -1073,7 +1093,7 @@
   }
 }
 .social {
-  justify-content: flex-start;
+  justify-content: center;
   display: flex;
   margin-top: 5rem;
 }
@@ -1238,7 +1258,7 @@
     margin-top: 1.25rem;
   }
   .review__img {
-    width: unset;
+    width: 100%;
     height: 100%;
   }
 }

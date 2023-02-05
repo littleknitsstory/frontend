@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const Stars = () => {
-  const [rating, setRating] = useState(3);
+const Stars = (props) => {
+  const [rating, setRating] = useState(props.rating);
 
   return (
     <div>

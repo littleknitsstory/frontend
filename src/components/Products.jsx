@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react"
 import { Container, Row, Col } from "react-bootstrap";
 import CardProduct from "./CardProduct";
 import Filters from "./Filters";
@@ -7,14 +7,17 @@ import arrowRight from "../icons/arrow-right.svg";
 import { Link } from "react-router-dom";
 
 const Products = () => {
-  const array = [
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
-    { id: 6 },
-  ];
+  const [productsData, setProductsData] = useState([])
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch("http://dev.backend.littleknitsstory.com:26363/api/v1/products/")
+      const data = await res.json()
+
+      setProductsData(data.results)
+    })()
+  },[])
+
   return (
     <Container>
       <div className="products">
@@ -49,10 +52,10 @@ const Products = () => {
           </Col>
           <Col>
             <Row xs={1} md={1} lg={2} xl={2} xxl={3}>
-              {array.map((item) => {
+              {productsData.map(product => {
                 return (
-                  <Col key={item.id}>
-                    <CardProduct />
+                  <Col key={product.id}>
+                    <CardProduct {...product} />
                   </Col>
                 );
               })}
