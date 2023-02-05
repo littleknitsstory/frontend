@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from "./components/Header";
@@ -14,14 +14,26 @@ import Articles from "./components/Articles";
 import Page404 from "./components/Page404";
 import Article from "./components/Article";
 import Contacts from "./components/Contacts";
+import Product from "./components/Product";
 import Products from "./components/Products";
 import SavedProducts from "./components/SavedProducts";
 import Cart from "./components/Cart";
+import { useTranslation } from "react-i18next";
 
 import "./css/style.css";
-import Product from "./components/Product";
+export const Language = React.createContext()
 
 function App() {
+  const [language, setLanguage] = useState("RU")
+  const { i18n } = useTranslation()
+
+  const selectLanguage = e => {
+    setLanguage(e.target.textContent)
+    i18n.changeLanguage(e.target.textContent.toLowerCase())
+
+    console.log(e.target.textContent)
+  }
+
   return (
     <Router>
       <Routes>
@@ -29,14 +41,16 @@ function App() {
           path="/"
           element={
             <>
-              <Header />
-              <NavBar />
-              <Promo />
-              <SchemasCard />
-              <AboutMe />
-              <LastReviews />
-              <Instagram />
-              <Footer />
+              <Language.Provider value={language}>
+                <Header />
+                <NavBar selectLanguage={selectLanguage}/>
+                <Promo />
+                <SchemasCard />
+                <AboutMe />
+                <LastReviews />
+                <Instagram />
+                <Footer />
+              </Language.Provider>
             </>
           }
         />
@@ -44,11 +58,13 @@ function App() {
           path="/blog"
           element={
             <>
-              <Header />
-              <NavBar />
-              <MainSlider />
-              <Articles />
-              <Footer />
+              <Language.Provider value={language}>
+                <Header />
+                <NavBar selectLanguage={selectLanguage}/>
+                <MainSlider />
+                <Articles />
+                <Footer />
+              </Language.Provider>
             </>
           }
         />
@@ -56,10 +72,12 @@ function App() {
           path="/article"
           element={
             <>
+            <Language.Provider value={language}>
               <Header />
-              <NavBar />
+              <NavBar selectLanguage={selectLanguage}/>
               <Article />
               <Footer />
+            </Language.Provider>
             </>
           }
         />
@@ -67,10 +85,12 @@ function App() {
           path="/product/:id"
           element={
             <>
+            <Language.Provider value={language}>
               <Header />
-              <NavBar />
+              <NavBar selectLanguage={selectLanguage}/>
               <Product />
               <Footer />
+            </Language.Provider>
             </>
           }
         />
@@ -78,10 +98,12 @@ function App() {
           path="/saved"
           element={
             <>
+            <Language.Provider value={language}>
               <Header />
-              <NavBar />
+              <NavBar selectLanguage={selectLanguage}/>
               <SavedProducts />
               <Footer />
+            </Language.Provider>
             </>
           }
         />
@@ -89,10 +111,12 @@ function App() {
           path="/cart"
           element={
             <>
+            <Language.Provider value={language}>
               <Header />
-              <NavBar />
+              <NavBar selectLanguage={selectLanguage}/>
               <Cart />
               <Footer />
+            </Language.Provider>
             </>
           }
         />
@@ -100,10 +124,12 @@ function App() {
           path="/shop"
           element={
             <>
+            <Language.Provider value={language}>
               <Header />
-              <NavBar />
+              <NavBar selectLanguage={selectLanguage}/>
               <Products />
               <Footer />
+            </Language.Provider>
             </>
           }
         />
@@ -111,11 +137,13 @@ function App() {
           path="/contacts"
           element={
             <>
+            <Language.Provider value={language}>
               <Header />
-              <NavBar />
+              <NavBar selectLanguage={selectLanguage}/>
               <Contacts />
               <Instagram />
               <Footer />
+            </Language.Provider>
             </>
           }
         />
@@ -123,10 +151,12 @@ function App() {
           path="*"
           element={
             <>
+            <Language.Provider value={language}>
               <Header />
-              <NavBar />
+              <NavBar selectLanguage={selectLanguage}/>
               <Page404 />
               <Footer />
+            </Language.Provider>
             </>
           }
         />

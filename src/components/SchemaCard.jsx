@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import { Row, Col } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
@@ -8,21 +8,27 @@ import mermaid from "../images/mermaid.png";
 import like from "../icons/like.svg";
 import Social from "./Social";
 import questionInfo from "../icons/question.svg";
-import { useEffect } from "react";
+import { Language } from "../App";
 
 const SchemaCard = (props) => {
   const [showModalQuickPurchase, setShowModalQuickPurchase] = useState(false);
   const [showModalThanks, setShowModalThanks] = useState(false);
   const [productDetails, setProductDetails] = useState([])
+  const languageContext = useContext(Language)
+  
   
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://dev.backend.littleknitsstory.com:26363/api/v1/products/")
+      const res = await fetch("http://dev.backend.littleknitsstory.com:26363/api/v1/products/", {
+        headers: {
+          "Accept-Language": languageContext
+        }
+      })
       const data = await res.json()
 
       setProductDetails(data.results.filter(item => item.id === +props.id)[0])
     })()
-  },[])
+  },[languageContext])
 
 
   const handleShow = () => {
@@ -201,7 +207,7 @@ const SchemaCard = (props) => {
                   Артикул: {productDetails.code}
                 </div>
                 <div className="product-card__modal-quick-purchase-color">
-                  Цвет: {productDetails.colors?.map(item => <div className="card-lks__color-div" style={{backgroundColor: item.color}}></div>)}
+                  Цвет: {productDetails.colors?.map((item, i) => <div key={i} className="card-lks__color-circle" style={{backgroundColor: item.color}}></div>)}
                 </div>
                 <div className="product-card__modal-quick-purchase-wrapper">
                   <div className="product-card__modal-quick-purchase-wrapper-price">

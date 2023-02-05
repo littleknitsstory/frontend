@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import { NavLink, Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
@@ -9,8 +9,12 @@ import user from "../icons/user.svg";
 import logout from "../icons/logout.svg";
 import heart from "../icons/heart.svg";
 import shoppingBag from "../icons/shopping-bag.svg";
+import { Language } from "../App";
+import { Trans } from "react-i18next";
 
-const NavBar = () => {
+const NavBar = (props) => {
+  const language = useContext(Language)
+
   return (
     <section className="lks-navbar">
       <Navbar expand="lg">
@@ -19,16 +23,24 @@ const NavBar = () => {
           <Navbar.Collapse>
             <Nav className="lks-navbar__links">
               <Nav.Link as={NavLink} to="/">
-                Главная
+                <Trans i18nKey="NavBar.home">
+                  ГЛАВНАЯ
+                </Trans>
               </Nav.Link>
               <Nav.Link as={NavLink} to="/shop">
-                МАГАЗИН
+                <Trans i18nKey="NavBar.shop">
+                  МАГАЗИН
+                </Trans> 
               </Nav.Link>
               <Nav.Link as={NavLink} to="/blog">
-                БЛОГ
+                <Trans i18nKey="NavBar.blog">
+                  БЛОГ
+                </Trans>
               </Nav.Link>
               <Nav.Link as={NavLink} to="/contacts">
-                КОНТАКТЫ
+                <Trans i18nKey="NavBar.contacts">
+                  КОНТАКТЫ
+                </Trans>
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
@@ -48,11 +60,12 @@ const NavBar = () => {
             </Link>
           </div>
           <NavDropdown
-            title="RU"
+            title={language}
             id="basic-nav-dropdown"
             className="lks-navbar__lang"
           >
-            <NavDropdown.Item>EN</NavDropdown.Item>
+            <NavDropdown.Item as="button" onClick={props.selectLanguage}>EN</NavDropdown.Item>
+            <NavDropdown.Item as="button" onClick={props.selectLanguage}>RU</NavDropdown.Item>
           </NavDropdown>
         </Container>
       </Navbar>

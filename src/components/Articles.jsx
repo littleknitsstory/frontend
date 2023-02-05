@@ -1,18 +1,24 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { Container, Row, Col } from "react-bootstrap";
+import { Language } from "../App";
 import CardArticle from "./CardArticle";
 
 const Articles = () => {
   const [articles, setArticles] = useState([])
+  const languageContext = useContext(Language)
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://dev.backend.littleknitsstory.com:26363/api/v1/posts/")
+      const res = await fetch("http://dev.backend.littleknitsstory.com:26363/api/v1/posts/", {
+        headers: {
+          "Accept-Language": languageContext
+        }
+      })
       const data = await res.json()
 
       setArticles(data.results)
     })()
-  },[])
+  },[languageContext])
 
   return (
     <Container>

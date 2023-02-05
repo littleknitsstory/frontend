@@ -1,22 +1,28 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { Container, Row, Col } from "react-bootstrap";
 import CardProduct from "./CardProduct";
 import Filters from "./Filters";
 
 import arrowRight from "../icons/arrow-right.svg";
 import { Link } from "react-router-dom";
+import { Language } from "../App";
 
 const Products = () => {
   const [productsData, setProductsData] = useState([])
+  const languageContext = useContext(Language)
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://dev.backend.littleknitsstory.com:26363/api/v1/products/")
+      const res = await fetch("http://dev.backend.littleknitsstory.com:26363/api/v1/products/", {
+        headers: {
+          "Accept-Language": languageContext
+        }
+      })
       const data = await res.json()
 
       setProductsData(data.results)
     })()
-  },[])
+  },[languageContext])
 
   return (
     <Container>
