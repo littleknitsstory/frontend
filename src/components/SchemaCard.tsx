@@ -1,15 +1,16 @@
-import { React, useState } from "react";
-import { Row, Col } from "react-bootstrap";
+import React, { useState } from "react";
+import { Col, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
-import arrowRight from "../icons/arrow-right.svg";
-import mermaid from "../images/mermaid.png";
-import like from "../icons/like.svg";
-import Social from "./Social";
-import questionInfo from "../icons/question.svg";
 
-const SchemaCard = () => {
+import { IProductDetails } from "../api/models";
+import arrowRight from "../icons/arrow-right.svg";
+import like from "../icons/like.svg";
+import questionInfo from "../icons/question.svg";
+import Social from "./Social";
+
+const SchemaCard = ({ product }: { product: IProductDetails }) => {
   const [showModalQuickPurchase, setShowModalQuickPurchase] = useState(false);
 
   const [showModalThanks, setShowModalThanks] = useState(false);
@@ -21,7 +22,7 @@ const SchemaCard = () => {
     setShowModalQuickPurchase(false);
     setShowModalThanks(false);
   };
-  const onSubmitOrder = (e) => {
+  const onSubmitOrder = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setShowModalQuickPurchase(false);
     setShowModalThanks(true);
@@ -31,11 +32,9 @@ const SchemaCard = () => {
   const increaseCountProduct = () => {
     setCountProduct((countProduct) => countProduct + 1);
   };
-  const price = 2555;
-  const oldPrice = 2950;
 
   const decreaseCountProduct = () => {
-    if (countProduct == 1) {
+    if (countProduct === 1) {
       return;
     }
     setCountProduct((countProduct) => countProduct - 1);
@@ -45,7 +44,11 @@ const SchemaCard = () => {
       <Row className="schema-card__card">
         <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
           <div className="schema-card__img-wrapper">
-            <img className="schema-card__img" src={mermaid} alt="mermaid" />
+            <img
+              className="schema-card__img"
+              src={product.image_preview}
+              alt={product.image_alt}
+            />
             <a href="#">
               <img className="schema-card__like" src={like} alt="like" />
             </a>
@@ -69,7 +72,7 @@ const SchemaCard = () => {
         </Col>
         <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
           <div className="schema-card__wrapper-title">
-            <div className="title schema-card__title">Схема “Русалочка”</div>
+            <div className="title schema-card__title">{product.title}</div>
             <div className="schema-card__dicount">-15%</div>
           </div>
 
@@ -86,7 +89,7 @@ const SchemaCard = () => {
               <div className="schema-card__property">Размер</div>
             </Col>
             <Col className="schema-card__wrapper">
-              <div className="schema-card__property">25 см</div>
+              <div className="schema-card__property">{product.height} см</div>
             </Col>
           </Row>
           <Row>
@@ -94,9 +97,7 @@ const SchemaCard = () => {
               <div className="schema-card__property">Материал</div>
             </Col>
             <Col className="schema-card__wrapper">
-              <div className="schema-card__property">
-                Хлопок и мериносовая шерсть
-              </div>
+              <div className="schema-card__property">{product.material}</div>
             </Col>
           </Row>
           <Row>
@@ -123,12 +124,8 @@ const SchemaCard = () => {
               <div className="schema-card__descr">
                 Важно: не предусмотрено для тех, кто не умеет вязать
               </div>{" "}
-              <div className="schema-card__price">
-                {price.toLocaleString()} ₽
-              </div>
-              <div className="schema-card__old-price">
-                {oldPrice.toLocaleString()} ₽
-              </div>
+              <div className="schema-card__price">{product.sale}</div>
+              <div className="schema-card__old-price">{product.price}</div>
               <div className="schema-card__region">
                 Ваш регион: Екатериновка
               </div>
@@ -180,23 +177,23 @@ const SchemaCard = () => {
             <div className="product-card__modal-quick-purchase-body">
               <img
                 className="product-card__modal-quick-purchase-img"
-                src={mermaid}
-                alt="cardImgProduct"
+                src={product.image_preview}
+                alt={product.image_alt}
               />
               <div className="product-card__modal-quick-purchase-descr">
                 <div className="product-card__modal-quick-purchase-title">
-                  Cхема "Русалочка"
+                  {product.title}
                 </div>
 
                 <div className="product-card__modal-quick-purchase-part-number">
-                  Артикул: 56356635
+                  Артикул: {product.code}
                 </div>
                 <div className="product-card__modal-quick-purchase-color">
                   Цвет:{" "}
                 </div>
                 <div className="product-card__modal-quick-purchase-wrapper">
                   <div className="product-card__modal-quick-purchase-wrapper-price">
-                    12 555
+                    {product.sale}
                   </div>
                   <div className="product-card__modal-quick-purchase-wrapper-discount">
                     Скидка 555

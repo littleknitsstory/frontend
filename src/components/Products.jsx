@@ -1,20 +1,33 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React, { useCallback, useEffect, useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
+import { getProducts } from "../api";
+import arrowRight from "../icons/arrow-right.svg";
 import CardProduct from "./CardProduct";
 import Filters from "./Filters";
 
-import arrowRight from "../icons/arrow-right.svg";
-import { Link } from "react-router-dom";
-
 const Products = () => {
-  const array = [
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
-    { id: 6 },
-  ];
+  const [products, setProducts] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const [count, setCount] = useState(0);
+  const isLastPage = offset + 4 >= count;
+
+  useEffect(() => {
+    getProducts(offset, 4).then(({ results, count }) => {
+      setProducts(results);
+      setCount(count);
+    });
+  }, [offset]);
+
+  const handleSeeMore = useCallback(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    setOffset((prev) => prev + 4);
+  }, []);
+
   return (
     <Container>
       <div className="products">
@@ -49,31 +62,25 @@ const Products = () => {
           </Col>
           <Col>
             <Row xs={1} md={1} lg={2} xl={2} xxl={3}>
-              {array.map((item) => {
+              {products.map((item) => {
                 return (
                   <Col key={item.id}>
-                    <CardProduct />
+                    <CardProduct product={item} />
                   </Col>
                 );
               })}
             </Row>
           </Col>
         </Row>
-        <Row>
-          <Col>
-            <Link
-              to="/shop"
-              onClick={() => {
-                window.scrollTo({
-                  top: 0,
-                  behavior: "smooth",
-                });
-              }}
-            >
-              Смотреть еще <img src={arrowRight} alt="arrowRight" />
-            </Link>
-          </Col>
-        </Row>
+        {!isLastPage && (
+          <Row>
+            <Col>
+              <Link to="/shop" onClick={handleSeeMore}>
+                Смотреть еще <img src={arrowRight} alt="arrowRight" />
+              </Link>
+            </Col>
+          </Row>
+        )}
       </div>
     </Container>
   );
