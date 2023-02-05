@@ -1,36 +1,49 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import articleImg from "../images/article-img.png";
 import Articles from "./Articles";
 import arrowRight from "../icons/arrow-right.svg";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { Language } from "../App";
 
 const Article = () => {
+  const { id } = useParams()
+  const [article, setArticle] = useState([])
+  const languageContext = useContext(Language)
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(`http://dev.backend.littleknitsstory.com:26363/api/v1/posts/${id}`, {
+        headers: {
+          "Accept-Language": languageContext
+        }
+      })
+
+      if (!res.ok) {
+        const message = `An error occurred: ${res.statusText}`
+        throw new Error(message)
+      }
+
+      const data = await res.json()
+      setArticle(data)
+    })()
+  }, [languageContext, id])
+  
   return (
     <section className="article">
       <Container>
         <h3 className="title">
-          White shark monkeyface prickleback bluefish kuhli loach; large-e
+          {article.title}
         </h3>
         <div className="article__wrapper-article">
           <Row>
             <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
               <div className="article__text">
-                Таким образом постоянный количественный рост и сфера нашей
-                активности позволяет выполнять важные задания по разработке
-                существенных финансовых и административных условий. Значимость
-                этих проблем настолько очевидна, что начало повседневной работы
-                по формированию позиции способствует подготовки и реализации
-                направлений прогрессивного развития. Повседневная практика
-                показывает, что реализация намеченных плановых заданий позволяет
-                выполнять важные задания по разработке позиций, занимаемых
-                участниками в отношении поставленных задач. Идейные соображения
-                высшего порядка, а также начало повседневной работы по
-                формировани
+                {article.content}
               </div>
             </Col>
             <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
-              <img src={articleImg} alt="" className="article__img" />
+              <img src={"http://dev.backend.littleknitsstory.com" + article.image_preview} alt="" className="article__img" />
             </Col>
           </Row>
         </div>
@@ -38,21 +51,10 @@ const Article = () => {
           <Row>
             <Col xs={12} md={9} lg={9} xl={9} xxl={9}>
               <div className="title">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-                commodo ligula eget dolor.
+                
               </div>
               <div className="article__text">
-                Задача организации, в особенности же укрепление и развитие
-                структуры способствует подготовки и реализации направлений
-                прогрессивного развития. Товарищи! постоянное
-                информационно-пропагандистское обеспечение нашей деятельности
-                представляет собой интересный эксперимент проверки дальнейших
-                направлений развития. Идейные соображения высшего порядка, а
-                также дальнейшее развитие различных форм деятельности требуют
-                определения и уточнения системы обучения кадров, соответствует
-                насущным потребностям. Равным образом дальнейшее развитие
-                различных форм деятельности способствует подготовки и реализации
-                направлений прогрессивного развития.
+                
               </div>
             </Col>
           </Row>
@@ -60,16 +62,16 @@ const Article = () => {
             <Col>
               <div className="article__wrapper-author">
                 <div className="article__created-at">
-                  13 ноября 2018 г. 17:56
+                  {article.created_at}
                 </div>
 
-                <div className="article__author">Автор: Катя Анаприенко</div>
+                <div className="article__author">Автор: {article.author}</div>
               </div>
             </Col>
           </Row>
         </div>
         <h3 className="title">Другие блоги</h3>
-        <Articles />
+        <Articles limit={6}/>
         <div className="btn__link btn__link_end">
           <Row>
             <Col>

@@ -8,7 +8,7 @@ const Cardlks = (props) => {
   return (
     <div className="card-lks">
       <Card style={{ width: "18rem" }}>
-        <Link to="/article">
+        <Link to={`/article/${props.slug}`}>
           <Card.Img 
             variant="top" 
             style={{ height: "16rem", objectFit: "cover" }} 
@@ -33,7 +33,7 @@ const Cardlks = (props) => {
               <br /> {props.created_at}
             </div>
             <div className="card-lks__btn">
-              <Link to="/article">
+              <Link to={`/article/${props.slug}`}>
                 <button className="btn btn_vinous btn_center ">
                   <div className="btn__text btn__text_center">Читать</div>
                 </button>

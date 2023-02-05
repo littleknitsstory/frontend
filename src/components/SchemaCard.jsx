@@ -15,21 +15,24 @@ const SchemaCard = (props) => {
   const [showModalThanks, setShowModalThanks] = useState(false);
   const [productDetails, setProductDetails] = useState([])
   const languageContext = useContext(Language)
-  
-  
+
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://dev.backend.littleknitsstory.com:26363/api/v1/products/", {
+      const res = await fetch(`http://dev.backend.littleknitsstory.com:26363/api/v1/products/${props.id}`, {
         headers: {
           "Accept-Language": languageContext
         }
       })
-      const data = await res.json()
 
-      setProductDetails(data.results.filter(item => item.id === +props.id)[0])
+      if (!res.ok) {
+        const message = `An error occurred: ${res.statusText}`
+        throw new Error(message)
+      }
+
+      const data = await res.json()
+      setProductDetails(data)
     })()
   },[languageContext])
-
 
   const handleShow = () => {
     setShowModalQuickPurchase(true);
@@ -90,10 +93,10 @@ const SchemaCard = (props) => {
 
           <Row>
             <Col className="schema-card__wrapper">
-              <div className="schema-card__property">Фигура</div>
+              <div className="schema-card__property">Тип</div>
             </Col>
             <Col className="schema-card__wrapper">
-              <div className="schema-card__property">Русалка</div>
+              <div className="schema-card__property">{productDetails.type_product}</div>
             </Col>
           </Row>
           <Row>
@@ -101,7 +104,7 @@ const SchemaCard = (props) => {
               <div className="schema-card__property">Размер</div>
             </Col>
             <Col className="schema-card__wrapper">
-              <div className="schema-card__property">25 см</div>
+              <div className="schema-card__property">{productDetails.height}</div>
             </Col>
           </Row>
           <Row>
@@ -110,7 +113,7 @@ const SchemaCard = (props) => {
             </Col>
             <Col className="schema-card__wrapper">
               <div className="schema-card__property">
-                Хлопок и мериносовая шерсть
+                {productDetails.material}
               </div>
             </Col>
           </Row>
@@ -136,7 +139,7 @@ const SchemaCard = (props) => {
           <Row>
             <Col>
               <div className="schema-card__descr">
-                Важно: не предусмотрено для тех, кто не умеет вязать
+                {productDetails.description}
               </div>{" "}
               <div className="schema-card__price">
                 {productDetails.price}

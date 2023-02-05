@@ -9,11 +9,17 @@ const Articles = () => {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://dev.backend.littleknitsstory.com:26363/api/v1/posts/", {
+      const res = await fetch(`http://dev.backend.littleknitsstory.com:26363/api/v1/posts/`, {
         headers: {
           "Accept-Language": languageContext
         }
       })
+
+      if (!res.ok) {
+        const message = `An error occurred: ${res.statusText}`
+        throw new Error(message)
+      }
+
       const data = await res.json()
 
       setArticles(data.results)

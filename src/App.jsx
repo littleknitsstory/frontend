@@ -71,7 +71,7 @@ function App() {
           }
         />
         <Route
-          path="/article"
+          path="/article/:id"
           element={
             <>
             <Language.Provider value={language}>

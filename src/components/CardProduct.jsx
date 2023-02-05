@@ -31,7 +31,7 @@ const CardProduct = (props) => {
           <span></span>
           <span></span>
         </div>
-        <Link to={`/product/${props.id}`} data={props.title}>
+        <Link to={`/product/${props.slug}`} data={props.title}>
           <Card.Img 
             variant="top" 
             src={"http://dev.backend.littleknitsstory.com" + props.image_preview} 
