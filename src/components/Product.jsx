@@ -5,12 +5,10 @@ import PopularProducts from "./PopularProducts";
 import Reviews from "./Reviews";
 
 const Product = () => {
-  const productId = useParams()
-
   return (
     <section className="product">
       <Container>
-        <SchemaCard id={productId.id}/>
+        <SchemaCard />
         <PopularProducts />
         <Reviews />
       </Container>

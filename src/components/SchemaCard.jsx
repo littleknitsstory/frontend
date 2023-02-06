@@ -9,30 +9,21 @@ import like from "../icons/like.svg";
 import Social from "./Social";
 import questionInfo from "../icons/question.svg";
 import { Language } from "../App";
+import fetcher from "../utils/fetcher";
 
 const SchemaCard = (props) => {
   const [showModalQuickPurchase, setShowModalQuickPurchase] = useState(false);
   const [showModalThanks, setShowModalThanks] = useState(false);
   const [productDetails, setProductDetails] = useState([])
-  const languageContext = useContext(Language)
+  const language = useContext(Language)
+  const { id } = useParams()
 
   useEffect(() => {
-    (async () => {
-      const res = await fetch(`http://dev.backend.littleknitsstory.com:26363/api/v1/products/${props.id}`, {
-        headers: {
-          "Accept-Language": languageContext
-        }
-      })
-
-      if (!res.ok) {
-        const message = `An error occurred: ${res.statusText}`
-        throw new Error(message)
-      }
-
-      const data = await res.json()
-      setProductDetails(data)
-    })()
-  },[languageContext])
+    // Какую схему отображать на главной
+    const endPoint = id ? `/api/v1/products/${id}` : `/api/v1/products/knits`
+    fetcher(endPoint, language).then(data => setProductDetails(data))
+  
+  },[language])
 
   const handleShow = () => {
     setShowModalQuickPurchase(true);

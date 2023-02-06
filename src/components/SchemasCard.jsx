@@ -17,8 +17,7 @@ const SchemasCard = () => {
             Схемы вязания
           </Trans>
         </h3>
-        {/* Какие схемы отображать на главной */}
-        <SchemaCard id={"knits"}/>
+        <SchemaCard />
         <Link to={`/shop`}>
           <div className="schemas-card__btn">
             <button className="btn btn_vinous">

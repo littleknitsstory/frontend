@@ -5,29 +5,18 @@ import Articles from "./Articles";
 import arrowRight from "../icons/arrow-right.svg";
 import { Link, useParams } from "react-router-dom";
 import { Language } from "../App";
+import fetcher from "../utils/fetcher";
 
 const Article = () => {
   const { id } = useParams()
   const [article, setArticle] = useState([])
-  const languageContext = useContext(Language)
+  const language = useContext(Language)
 
   useEffect(() => {
-    (async () => {
-      const res = await fetch(`http://dev.backend.littleknitsstory.com:26363/api/v1/posts/${id}`, {
-        headers: {
-          "Accept-Language": languageContext
-        }
-      })
-
-      if (!res.ok) {
-        const message = `An error occurred: ${res.statusText}`
-        throw new Error(message)
-      }
-
-      const data = await res.json()
-      setArticle(data)
-    })()
-  }, [languageContext, id])
+    const endPoint = `/api/v1/posts/${id}`
+    fetcher(endPoint, language).then(data => setArticle(data))
+    
+  }, [language, id])
   
   return (
     <section className="article">

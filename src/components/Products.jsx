@@ -5,24 +5,18 @@ import Filters from "./Filters";
 
 import arrowRight from "../icons/arrow-right.svg";
 import { Link } from "react-router-dom";
-import { Language } from "../App";
+import {  Language } from "../App";
+
+import fetcher from "../utils/fetcher";
 
 const Products = () => {
   const [productsData, setProductsData] = useState([])
-  const languageContext = useContext(Language)
+  const language = useContext(Language)
 
   useEffect(() => {
-    (async () => {
-      const res = await fetch("http://dev.backend.littleknitsstory.com:26363/api/v1/products/", {
-        headers: {
-          "Accept-Language": languageContext
-        }
-      })
-      const data = await res.json()
-
-      setProductsData(data.results)
-    })()
-  },[languageContext])
+    const endPoint = "/api/v1/products/"
+    fetcher(endPoint, language).then(data => setProductsData(data.results))
+  },[language])
 
   return (
     <Container>
