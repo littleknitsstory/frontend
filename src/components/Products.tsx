@@ -3,29 +3,34 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import { getProducts } from "../api";
+import { IProduct } from "../api/models";
 import arrowRight from "../icons/arrow-right.svg";
 import CardProduct from "./CardProduct";
 import Filters from "./Filters";
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
-  const [offset, setOffset] = useState(0);
-  const [count, setCount] = useState(0);
-  const isLastPage = offset + 4 >= count;
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [limit, setLimit] = useState<number>(0);
+  const [count, setCount] = useState<number>(0);
+  const isLastPage = limit + 4 >= count;
 
   useEffect(() => {
-    getProducts(offset, 4).then(({ results, count }) => {
-      setProducts(results);
-      setCount(count);
-    });
-  }, [offset]);
+    const fetchProducts = async () => {
+      const data = await getProducts(0, limit);
+      if (data) {
+        setProducts(data.results);
+        setCount(data.count);
+      }
+    };
+    fetchProducts();
+  }, [limit]);
 
   const handleSeeMore = useCallback(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
-    setOffset((prev) => prev + 4);
+    setLimit((prev) => prev + 4);
   }, []);
 
   return (

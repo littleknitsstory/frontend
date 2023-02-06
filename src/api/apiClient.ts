@@ -9,7 +9,7 @@ const apiClient = ({ headers, baseURL }: IConfig) => {
   const _headers = { ...headers };
   const _baseURL = baseURL;
 
-  const get = (url: string, params?: RequestInit): Promise<Response> => {
+  const get = (url: string, params?: RequestInit) => {
     return fetch(`${_baseURL}/${url}`, {
       method: "GET",
       headers: _headers,

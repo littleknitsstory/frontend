@@ -13,16 +13,14 @@ export const getProducts = async (offset: number, limit: number) => {
       `${URLS.PRODCTS}?offset=${offset}&limit=${limit}`
     );
     if (response.ok) {
-      const data = await response.json().then((data: IProductsResponse) => {
-        return {
-          ...data,
-          results: data.results.map((item) => ({
-            ...item,
-            image_preview: `${PICTURE_BASE_URL}${item.image_preview}`,
-          })),
-        };
-      });
-      return data;
+      const data: IProductsResponse = await response.json();
+      return {
+        ...data,
+        results: data.results.map((item) => ({
+          ...item,
+          image_preview: `${PICTURE_BASE_URL}${item.image_preview}`,
+        })),
+      } as IProductsResponse;
     }
     throw new Error("Something went wrong");
   } catch (error) {}
@@ -32,13 +30,11 @@ export const getProductDetails = async (slug: string) => {
   try {
     const response = await apiClient.get(`${URLS.PRODCTS}/${slug}`);
     if (response.ok) {
-      const data = await response.json().then((data: IProductDetails) => {
-        return {
-          ...data,
-          image_preview: `${PICTURE_BASE_URL}${data.image_preview}`,
-        };
-      });
-      return data;
+      const data: IProductDetails = await response.json();
+      return {
+        ...data,
+        image_preview: `${PICTURE_BASE_URL}${data.image_preview}`,
+      } as IProductDetails;
     }
     throw new Error("Something went wrong");
   } catch (error) {}

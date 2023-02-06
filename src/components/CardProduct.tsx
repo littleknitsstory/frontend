@@ -7,9 +7,10 @@ import { Link } from "react-router-dom";
 import { IProduct } from "../api/models";
 
 const CardProduct = ({ product }: { product: IProduct }) => {
-  const [showModalQuickPurchase, setShowModalQuickPurchase] = useState(false);
+  const [showModalQuickPurchase, setShowModalQuickPurchase] =
+    useState<boolean>(false);
 
-  const [showModalThanks, setShowModalThanks] = useState(false);
+  const [showModalThanks, setShowModalThanks] = useState<boolean>(false);
 
   const handleShow = () => {
     setShowModalQuickPurchase(true);
@@ -18,7 +19,7 @@ const CardProduct = ({ product }: { product: IProduct }) => {
     setShowModalQuickPurchase(false);
     setShowModalThanks(false);
   };
-  const onSubmitOrder = (e: any) => {
+  const onSubmitOrder = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setShowModalQuickPurchase(false);
     setShowModalThanks(true);

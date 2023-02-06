@@ -1,18 +1,29 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import arrowRight from "../icons/arrow-right.svg";
-import mermaid from "../images/mermaid.png";
+
+import { getProductDetails } from "../api";
+import { IProductDetails } from "../api/models";
 import cartWhite from "../icons/cart-white.svg";
-import like from "../icons/like.svg";
 import SchemaCard from "./SchemaCard";
 
 const SchemasCard = () => {
+  const [product, setProduct] = useState<IProductDetails | null>(null);
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      const data = await getProductDetails("pattents_5");
+      if (data) {
+        setProduct(data);
+      }
+    };
+    fetchProductDetails();
+  }, []);
+
   return (
     <section className="schemas-card">
       <Container>
         <h3 className="title">Схемы вязания</h3>
-        <SchemaCard />
+        {product && <SchemaCard product={product} />}
         <Link to={`/shop`}>
           <div className="schemas-card__btn">
             <button className="btn btn_vinous">

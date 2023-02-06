@@ -11,9 +11,10 @@ import questionInfo from "../icons/question.svg";
 import Social from "./Social";
 
 const SchemaCard = ({ product }: { product: IProductDetails }) => {
-  const [showModalQuickPurchase, setShowModalQuickPurchase] = useState(false);
+  const [showModalQuickPurchase, setShowModalQuickPurchase] =
+    useState<boolean>(false);
 
-  const [showModalThanks, setShowModalThanks] = useState(false);
+  const [showModalThanks, setShowModalThanks] = useState<boolean>(false);
 
   const handleShow = () => {
     setShowModalQuickPurchase(true);
@@ -28,7 +29,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
     setShowModalThanks(true);
   };
 
-  const [countProduct, setCountProduct] = useState(1);
+  const [countProduct, setCountProduct] = useState<number>(1);
   const increaseCountProduct = () => {
     setCountProduct((countProduct) => countProduct + 1);
   };
@@ -39,6 +40,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
     }
     setCountProduct((countProduct) => countProduct - 1);
   };
+
   return (
     <div className="schema-card">
       <Row className="schema-card__card">
