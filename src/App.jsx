@@ -22,12 +22,10 @@ import { useTranslation } from "react-i18next";
 
 import "./css/style.css";
 export const Language = React.createContext()
-export const BaseUrl = React.createContext()
 
 function App() {
   const [language, setLanguage] = useState(localStorage.getItem("lang") || "RU")
   const { i18n } = useTranslation()
-  const baseUrl = "http://dev.backend.littleknitsstory.com:26363/"
 
   const selectLanguage = e => {
     setLanguage(e.target.textContent)
@@ -46,7 +44,6 @@ function App() {
           element={
             <>
               <Language.Provider value={language}>
-              <BaseUrl.Provider value={baseUrl}>
                 <Header />
                 <NavBar selectLanguage={selectLanguage}/>
                 <Promo />
@@ -55,7 +52,6 @@ function App() {
                 <LastReviews />
                 <Instagram />
                 <Footer />
-              </BaseUrl.Provider>
               </Language.Provider>
             </>
           }
