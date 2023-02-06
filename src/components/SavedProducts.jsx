@@ -12,7 +12,11 @@ const SavedProducts = () => {
           {array.map((item) => {
             return (
               <Col key={item.id}>
-                <CardProduct />
+                <CardProduct title={''}
+                             code={1}
+                             price={1}
+                             sale={1}
+                             imageAlt={''} />
               </Col>
             );
           })}

@@ -11,8 +11,6 @@ const LastReviews = () => {
     useEffect(() => {
         dispatch(getReviewsThunk())
     }, [])
-    console.log(reviews)
-    console.log('555')
 
     return (
     <section className="last-reviews">

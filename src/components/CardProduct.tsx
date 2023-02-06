@@ -1,11 +1,27 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, {FC, useState} from "react";
+import {Link} from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import cardImgProduct from "../images/product-img.png";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 
-const CardProduct = () => {
+type CardProductProps = {
+  title: string
+  code: number
+  price: string
+  sale: string
+  image?: string
+  imageAlt: string
+}
+
+const CardProduct: FC<CardProductProps> = ({
+                                             title,
+                                             code,
+                                             price,
+                                             sale,
+                                             image = cardImgProduct,
+                                             imageAlt
+                                           }) => {
   const [showModalQuickPurchase, setShowModalQuickPurchase] = useState(false);
 
   const [showModalThanks, setShowModalThanks] = useState(false);
@@ -17,7 +33,8 @@ const CardProduct = () => {
     setShowModalQuickPurchase(false);
     setShowModalThanks(false);
   };
-  const onSubmitOrder = (e) => {
+  // Убрать any!!!
+  const onSubmitOrder = (e:any) => {
     e.preventDefault();
     setShowModalQuickPurchase(false);
     setShowModalThanks(true);
@@ -25,17 +42,17 @@ const CardProduct = () => {
 
   return (
     <div className="card-lks product-card">
-      <Card style={{ width: "18rem" }}>
+      <Card style={{width: "18rem"}}>
         <div className="card-lks__wrapper-close">
           <span></span>
           <span></span>
         </div>
         <Link to="/product">
-          <Card.Img variant="top" src={cardImgProduct} />
+          <Card.Img variant="top" src={image} alt={imageAlt}/>
         </Link>
 
         <Card.Body>
-          <Card.Title>Cхема "Русалочка"</Card.Title>
+          <Card.Title>{title}</Card.Title>
           <div className="card-lks__wrapper-icons">
             <svg
               width="32"
@@ -92,7 +109,7 @@ const CardProduct = () => {
                   fill="#C7B8A7"
                 />
               </g>
-              <circle cx="28.3077" cy="3.69231" r="3.69231" fill="#C7B8A7" />
+              <circle cx="28.3077" cy="3.69231" r="3.69231" fill="#C7B8A7"/>
               <defs>
                 <rect
                   width="29.5385"
@@ -104,8 +121,8 @@ const CardProduct = () => {
             </svg>
           </div>
           <div className="card-lks__material">Материал: шерсть</div>
-          <div className="card-lks__color">Цвет: </div>
-          <div className="card-lks__price">12 555 </div>
+          <div className="card-lks__color">Цвет:</div>
+          <div className="card-lks__price">{price}</div>
           <div className="card-lks__btn product-card__btn">
             <button className="btn btn_vinous btn_center " onClick={handleShow}>
               <div className="btn__text btn__text_center">Быстрый заказ</div>
@@ -122,26 +139,26 @@ const CardProduct = () => {
             <div className="product-card__modal-quick-purchase-body">
               <img
                 className="product-card__modal-quick-purchase-img"
-                src={cardImgProduct}
-                alt="cardImgProduct"
+                src={image}
+                alt={imageAlt}
               />
               <div className="product-card__modal-quick-purchase-descr">
                 <div className="product-card__modal-quick-purchase-title">
-                  Cхема "Русалочка"
+                  {title}
                 </div>
 
                 <div className="product-card__modal-quick-purchase-part-number">
-                  Артикул: 56356635
+                  Артикул: {code}
                 </div>
                 <div className="product-card__modal-quick-purchase-color">
                   Цвет:{" "}
                 </div>
                 <div className="product-card__modal-quick-purchase-wrapper">
                   <div className="product-card__modal-quick-purchase-wrapper-price">
-                    12 555
+                    {price}
                   </div>
                   <div className="product-card__modal-quick-purchase-wrapper-discount">
-                    Скидка 555
+                    Скидка {sale}
                   </div>
                 </div>
               </div>
@@ -164,7 +181,7 @@ const CardProduct = () => {
                 className="mb-3"
                 controlId="exampleForm.ControlInput2"
               >
-                <Form.Control required type="text" placeholder="Телефон" />
+                <Form.Control required type="text" placeholder="Телефон"/>
               </Form.Group>
               <button type="submit" className="btn btn_vinous btn_center">
                 <div className="btn__text btn__text_center">Отправить</div>
@@ -192,7 +209,7 @@ const CardProduct = () => {
           <Modal.Body>
             <div className="card-modal-thanks__text">
               Ваша заявка принята.
-              <br /> В Ближайшее время с вами свяжется наш менеджер
+              <br/> В Ближайшее время с вами свяжется наш менеджер
             </div>
             <Link to={`/`}>
               <button className="btn btn_vinous btn_center card-modal-thanks__btn">
