@@ -12,14 +12,14 @@ const CardProduct = ({ product }: { product: IProduct }) => {
 
   const [showModalThanks, setShowModalThanks] = useState<boolean>(false);
 
-  const handleShow = () => {
+  const handleShow = (): void => {
     setShowModalQuickPurchase(true);
   };
-  const handleClose = () => {
+  const handleClose = (): void => {
     setShowModalQuickPurchase(false);
     setShowModalThanks(false);
   };
-  const onSubmitOrder = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitOrder = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     setShowModalQuickPurchase(false);
     setShowModalThanks(true);

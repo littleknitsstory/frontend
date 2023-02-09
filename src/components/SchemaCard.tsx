@@ -16,25 +16,25 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
 
   const [showModalThanks, setShowModalThanks] = useState<boolean>(false);
 
-  const handleShow = () => {
+  const handleShow = (): void => {
     setShowModalQuickPurchase(true);
   };
-  const handleClose = () => {
+  const handleClose = (): void => {
     setShowModalQuickPurchase(false);
     setShowModalThanks(false);
   };
-  const onSubmitOrder = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitOrder = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     setShowModalQuickPurchase(false);
     setShowModalThanks(true);
   };
 
   const [countProduct, setCountProduct] = useState<number>(1);
-  const increaseCountProduct = () => {
+  const increaseCountProduct = (): void => {
     setCountProduct((countProduct) => countProduct + 1);
   };
 
-  const decreaseCountProduct = () => {
+  const decreaseCountProduct = (): void => {
     if (countProduct === 1) {
       return;
     }

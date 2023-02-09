@@ -12,7 +12,7 @@ const Product = () => {
   const { slug } = useParams();
   const [product, setProduct] = useState<IProductDetails | null>(null);
   useEffect(() => {
-    const fetchProductDetails = async () => {
+    const fetchProductDetails = async (): Promise<void> => {
       if (!slug) return;
       const data = await getProductDetails(slug);
       if (data) {

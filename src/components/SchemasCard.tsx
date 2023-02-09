@@ -10,7 +10,7 @@ import SchemaCard from "./SchemaCard";
 const SchemasCard = () => {
   const [product, setProduct] = useState<IProductDetails | null>(null);
   useEffect(() => {
-    const fetchProductDetails = async () => {
+    const fetchProductDetails = async (): Promise<void> => {
       const data = await getProductDetails("pattents_5");
       if (data) {
         setProduct(data);

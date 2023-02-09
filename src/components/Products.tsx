@@ -15,7 +15,7 @@ const Products = () => {
   const isLastPage = limit + 4 >= count;
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchProducts = async (): Promise<void> => {
       const data = await getProducts(0, limit);
       if (data) {
         setProducts(data.results);
@@ -25,7 +25,7 @@ const Products = () => {
     fetchProducts();
   }, [limit]);
 
-  const handleSeeMore = useCallback(() => {
+  const handleSeeMore = useCallback((): void => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
