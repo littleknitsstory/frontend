@@ -1,4 +1,4 @@
-import React, {FC, useState} from "react";
+import React, {FC, FormEvent, useState} from "react";
 import {Link} from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import cardImgProduct from "../images/product-img.png";
@@ -33,8 +33,8 @@ const CardProduct: FC<CardProductProps> = ({
     setShowModalQuickPurchase(false);
     setShowModalThanks(false);
   };
-  // Убрать any!!!
-  const onSubmitOrder = (e:any) => {
+
+  const onSubmitOrder = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setShowModalQuickPurchase(false);
     setShowModalThanks(true);
