@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {FC, useEffect} from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import CardProduct from "./CardProduct";
 import Filters from "./Filters";
@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../store/hooks";
 import {getCategoriesThunk, getProductsThunk, selectCategories, selectProducts} from "../store/apiTestSlice";
 
-const Products = () => {
+const Products:FC = () => {
   const dispatch = useAppDispatch()
   const products = useAppSelector(selectProducts)
   const categories = useAppSelector(selectCategories)
@@ -16,7 +16,7 @@ const Products = () => {
   useEffect(() => {
     dispatch(getProductsThunk())
     dispatch(getCategoriesThunk())
-  }, [])
+  }, [dispatch])
   console.log(categories)
   return (
     <Container>
