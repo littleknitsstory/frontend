@@ -56,3 +56,11 @@ export interface IProductDetails {
   created_at: string;
   updated_at: string;
 }
+
+export interface IContactRequest {
+  name?: string;
+  email: string;
+  message: string;
+  phone_number?: string;
+  company?: string;
+}

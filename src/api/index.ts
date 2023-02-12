@@ -1,8 +1,9 @@
 import apiClient from "./apiClient";
-import { IProductDetails, IProductsResponse } from "./models";
+import { IContactRequest, IProductDetails, IProductsResponse } from "./models";
 
 enum URLS {
   PRODCTS = "api/v1/products/",
+  CONTACTS = "api/v1/contacts/",
 }
 
 export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";
@@ -38,4 +39,28 @@ export const getProductDetails = async (slug: string) => {
     }
     throw new Error("Something went wrong");
   } catch (error) {}
+};
+
+export const postContactRequest = async ({
+  email,
+  message,
+  company,
+  name,
+  phone_number,
+}: IContactRequest): Promise<boolean> => {
+  try {
+    const response = await apiClient.post(`${URLS.CONTACTS}`, {
+      email,
+      message,
+      company,
+      name,
+      phone_number,
+    });
+    if (response.ok) {
+      return true;
+    }
+    throw new Error("Something went wrong");
+  } catch (error) {
+    return false;
+  }
 };
