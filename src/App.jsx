@@ -1,25 +1,25 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
-import Header from "./components/Header";
-import NavBar from "./components/NavBar";
-import Promo from "./components/Promo";
-import SchemasCard from "./components/SchemasCard";
-import AboutMe from "./components/AboutMe";
-import LastReviews from "./components/LastReviews";
-import Instagram from "./components/Instagram";
-import Footer from "./components/Footer";
-import MainSlider from "./components/MainSlider";
-import Articles from "./components/Articles";
-import Page404 from "./components/Page404";
-import Article from "./components/Article";
-import Contacts from "./components/Contacts";
-import Products from "./components/Products";
-import SavedProducts from "./components/SavedProducts";
-import Cart from "./components/Cart";
-
 import "./css/style.css";
+
+import React from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+
+import AboutMe from "./components/AboutMe";
+import Article from "./components/Article";
+import Articles from "./components/Articles";
+import Cart from "./components/Cart";
+import Contacts from "./components/Contacts";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Instagram from "./components/Instagram";
+import LastReviews from "./components/LastReviews";
+import MainSlider from "./components/MainSlider";
+import NavBar from "./components/NavBar";
+import Page404 from "./components/Page404";
 import Product from "./components/Product";
+import Products from "./components/Products";
+import Promo from "./components/Promo";
+import SavedProducts from "./components/SavedProducts";
+import SchemasCard from "./components/SchemasCard";
 
 function App() {
   return (
@@ -64,7 +64,7 @@ function App() {
           }
         />
         <Route
-          path="/product"
+          path="/product/:slug"
           element={
             <>
               <Header />

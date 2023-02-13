@@ -1,18 +1,58 @@
-import React, { useState } from "react";
-import { Container, Row, Col, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useCallback, useState } from "react";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
-import map from "../icons/map-point.svg";
+import { Link } from "react-router-dom";
+
+import { postContactRequest } from "../api";
 import envelope from "../icons/envelope.svg";
+import map from "../icons/map-point.svg";
 import phone from "../icons/phone.svg";
 
 const Contacts = () => {
-  const [showModalThanks, setShowModalThanks] = useState(false);
+  const [showModalThanks, setShowModalThanks] = useState<boolean>(false);
+  const [name, setName] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [company, setCompany] = useState<string>("");
+  const [phone_number, setPhone_number] = useState<string>("");
 
-  const onSubmitOrder = (e) => {
-    e.preventDefault();
-    setShowModalThanks(true);
-  };
+  const clearForm = useCallback((): void => {
+    setName("");
+    setMessage("");
+    setEmail("");
+    setCompany("");
+    setPhone_number("");
+  }, []);
+
+  const handleChange = useCallback(
+    (
+      handler: (value: string) => void
+    ): ((e: React.ChangeEvent<HTMLInputElement>) => void) => {
+      return (e) => {
+        handler(e.target.value);
+      };
+    },
+    []
+  );
+
+  const onSubmitOrder = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+      e.preventDefault();
+      const result = await postContactRequest({
+        name,
+        message,
+        email,
+        company,
+        phone_number,
+      });
+      if (result) {
+        setShowModalThanks(true);
+        clearForm();
+      }
+    },
+    [clearForm, company, email, message, name, phone_number]
+  );
+
   return (
     <section className="contacts">
       <Container>
@@ -29,19 +69,42 @@ const Contacts = () => {
               <Form className="contacts__form" onSubmit={onSubmitOrder}>
                 <Row>
                   <Form.Group as={Col} md="6" controlId="name">
-                    <Form.Control required type="text" placeholder="Ваше имя" />
+                    <Form.Control
+                      required
+                      type="text"
+                      placeholder="Ваше имя"
+                      value={name}
+                      onChange={handleChange(setName)}
+                    />
                   </Form.Group>
                   <Form.Group as={Col} md="6" controlId="theme">
-                    <Form.Control type="text" placeholder="Тема сообщения" />
+                    <Form.Control
+                      type="text"
+                      placeholder="Тема сообщения"
+                      value={company}
+                      onChange={handleChange(setCompany)}
+                    />
                   </Form.Group>
                 </Row>
 
                 <Row>
                   <Form.Group as={Col} md="12" controlId="phone">
-                    <Form.Control required type="text" placeholder="Телефон" />
+                    <Form.Control
+                      required
+                      type="text"
+                      placeholder="Телефон"
+                      value={phone_number}
+                      onChange={handleChange(setPhone_number)}
+                    />
                   </Form.Group>
                   <Form.Group as={Col} md="12" controlId="email">
-                    <Form.Control required type="email" placeholder="Е-mail" />
+                    <Form.Control
+                      required
+                      type="email"
+                      placeholder="Е-mail"
+                      value={email}
+                      onChange={handleChange(setEmail)}
+                    />
                   </Form.Group>
                 </Row>
                 <Row>
@@ -50,6 +113,8 @@ const Contacts = () => {
                       required
                       as="textarea"
                       placeholder="Сообщение"
+                      value={message}
+                      onChange={handleChange(setMessage)}
                     />
                   </Form.Group>
                 </Row>

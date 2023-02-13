@@ -1,23 +1,25 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
-import cardImgProduct from "../images/product-img.png";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
+import { Link } from "react-router-dom";
 
-const CardProduct = () => {
-  const [showModalQuickPurchase, setShowModalQuickPurchase] = useState(false);
+import { IProduct } from "../api/models";
 
-  const [showModalThanks, setShowModalThanks] = useState(false);
+const CardProduct = ({ product }: { product: IProduct }) => {
+  const [showModalQuickPurchase, setShowModalQuickPurchase] =
+    useState<boolean>(false);
 
-  const handleShow = () => {
+  const [showModalThanks, setShowModalThanks] = useState<boolean>(false);
+
+  const handleShow = (): void => {
     setShowModalQuickPurchase(true);
   };
-  const handleClose = () => {
+  const handleClose = (): void => {
     setShowModalQuickPurchase(false);
     setShowModalThanks(false);
   };
-  const onSubmitOrder = (e) => {
+  const onSubmitOrder = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     setShowModalQuickPurchase(false);
     setShowModalThanks(true);
@@ -30,12 +32,16 @@ const CardProduct = () => {
           <span></span>
           <span></span>
         </div>
-        <Link to="/product">
-          <Card.Img variant="top" src={cardImgProduct} />
+        <Link to={`/product/${product.slug}`}>
+          <Card.Img
+            variant="top"
+            alt={product.image_alt}
+            src={`${product.image_preview}`}
+          />
         </Link>
 
         <Card.Body>
-          <Card.Title>Cхема "Русалочка"</Card.Title>
+          <Card.Title>{product.title}</Card.Title>
           <div className="card-lks__wrapper-icons">
             <svg
               width="32"
@@ -105,7 +111,7 @@ const CardProduct = () => {
           </div>
           <div className="card-lks__material">Материал: шерсть</div>
           <div className="card-lks__color">Цвет: </div>
-          <div className="card-lks__price">12 555 </div>
+          <div className="card-lks__price">{product.price}</div>
           <div className="card-lks__btn product-card__btn">
             <button className="btn btn_vinous btn_center " onClick={handleShow}>
               <div className="btn__text btn__text_center">Быстрый заказ</div>
@@ -122,23 +128,23 @@ const CardProduct = () => {
             <div className="product-card__modal-quick-purchase-body">
               <img
                 className="product-card__modal-quick-purchase-img"
-                src={cardImgProduct}
-                alt="cardImgProduct"
+                alt={product.image_alt}
+                src={`${product.image_preview}`}
               />
               <div className="product-card__modal-quick-purchase-descr">
                 <div className="product-card__modal-quick-purchase-title">
-                  Cхема "Русалочка"
+                  {product.title}
                 </div>
 
                 <div className="product-card__modal-quick-purchase-part-number">
-                  Артикул: 56356635
+                  Артикул: {product.code}
                 </div>
                 <div className="product-card__modal-quick-purchase-color">
                   Цвет:{" "}
                 </div>
                 <div className="product-card__modal-quick-purchase-wrapper">
                   <div className="product-card__modal-quick-purchase-wrapper-price">
-                    12 555
+                    {product.sale ?? product.price}
                   </div>
                   <div className="product-card__modal-quick-purchase-wrapper-discount">
                     Скидка 555
