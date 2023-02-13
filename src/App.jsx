@@ -1,4 +1,4 @@
-import "./css/style.css";
+import "./sass/style.scss";
 
 import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
@@ -20,6 +20,7 @@ import Products from "./components/Products";
 import Promo from "./components/Promo";
 import SavedProducts from "./components/SavedProducts";
 import SchemasCard from "./components/SchemasCard";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 
 function App() {
   return (
@@ -119,6 +120,18 @@ function App() {
             </>
           }
         />
+        <Route
+          path="privacyPolicy"
+          element={
+            <>
+              <Header />
+              <NavBar />
+              <PrivacyPolicy />
+              <Footer />
+            </>
+          }
+        />
+        
         <Route
           path="*"
           element={

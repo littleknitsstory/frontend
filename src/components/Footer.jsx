@@ -1,11 +1,8 @@
 import React from "react";
 import { Container, Form, Row, Col } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
-import vk from "../icons/logo-vk_white.svg";
-import facebook from "../icons/logo-facebook_white.svg";
-import pinterest from "../icons/logo-pinterest_white.svg";
-import instagram from "../icons/logo-instagram_white.svg";
+import { Link } from "react-router-dom";
 import Social from "./Social";
+import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
 
 const Footer = () => {
   return (
@@ -19,26 +16,10 @@ const Footer = () => {
               <Row>
                 <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
                   <div className="footer__navbar">
-                    <ul>
-                      <NavLink to="/shop">
-                        <li>магазин</li>
-                      </NavLink>
-
-                      <NavLink to="/blog">
-                        <li>блог</li>
-                      </NavLink>
-
-                      <li>
-                        <a href="#">схемы</a>
-                      </li>
-
-                      <NavLink to="/contacts">
-                        <li>КОНТАКТЫ</li>
-                      </NavLink>
-                    </ul>
+                    <PrimaryNav />
                   </div>
                 </Col>
-                <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
+                {/* <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
                   <div className="footer__links-account">
                     <div className="footer__links-account footer__links-account-title">
                       личный кабинет
@@ -55,7 +36,7 @@ const Footer = () => {
                       </li>
                     </ul>
                   </div>
-                </Col>
+                </Col> */}
               </Row>
             </Col>
             <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
@@ -91,7 +72,7 @@ const Footer = () => {
             </Col>
 
             <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
-              <div className="footer__policy">Политика конфеденциальности</div>
+              <Link to="/privacyPolicy" className="footer__policy">Политика конфиденциальности</Link>
             </Col>
           </Row>
         </div>
