@@ -1,8 +1,7 @@
 .primary-nav-links {
   text-transform: uppercase;
-}
-
-.active {
-  color: black;
-  font-weight: bold;
+  &.active {
+    font-weight: bold;
+    color: black;
+  }
 }
