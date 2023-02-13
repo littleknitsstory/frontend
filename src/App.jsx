@@ -21,10 +21,12 @@ import Promo from "./components/Promo";
 import SavedProducts from "./components/SavedProducts";
 import SchemasCard from "./components/SchemasCard";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import ScrollToTop from "./components/ScrollToTop"
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route
           path="/"
