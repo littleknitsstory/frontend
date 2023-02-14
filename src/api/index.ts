@@ -1,9 +1,16 @@
 import apiClient from "./apiClient";
-import { IContactRequest, IProductDetails, IProductsResponse } from "./models";
+import {
+  IContactRequest,
+  IProductDetails,
+  IProductsResponse,
+  IArticlesResponse,
+  IArticle,
+} from "./models";
 
 enum URLS {
   PRODCTS = "api/v1/products/",
   CONTACTS = "api/v1/contacts/",
+  ARTICLES = "/api/v1/posts/",
 }
 
 export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";
@@ -63,4 +70,37 @@ export const postContactRequest = async ({
   } catch (error) {
     return false;
   }
+};
+
+export const getArticles = async (offset: number, limit: number) => {
+  try {
+    const response = await apiClient.get(
+      `${URLS.ARTICLES}?offset=${offset}&limit=${limit}`
+    );
+    if (response.ok) {
+      const data: IArticlesResponse = await response.json();
+      return {
+        ...data,
+        results: data.results.map((item) => ({
+          ...item,
+          image_preview: `${PICTURE_BASE_URL}${item.image_preview}`,
+        })),
+      } as IArticlesResponse;
+    }
+    throw new Error("Something went wrong");
+  } catch (error) {}
+};
+
+export const getArticleDetails = async (slug: string) => {
+  try {
+    const response = await apiClient.get(`${URLS.ARTICLES}/${slug}`);
+    if (response.ok) {
+      const data: IArticle = await response.json();
+      return {
+        ...data,
+        image_preview: `${PICTURE_BASE_URL}${data.image_preview}`,
+      } as IArticle;
+    }
+    throw new Error("Something went wrong");
+  } catch (error) {}
 };

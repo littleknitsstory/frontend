@@ -571,6 +571,10 @@
   margin-bottom: 4rem;
   transition: all 0.4s;
 }
+.card-lks .card .card-img-top {
+  height: 12.5rem;
+  object-fit: cover;
+}
 .card-lks .card:hover {
   transform: translateY(-10%);
   box-shadow: 15px 15px 50px -10px rgba(0, 0, 0, 0.08);
@@ -595,6 +599,11 @@
 .card-lks .card-title {
   font-size: 1rem;
   color: #393939;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .card-lks__text {
   margin: 1.1rem 0;
