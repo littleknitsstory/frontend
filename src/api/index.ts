@@ -47,9 +47,9 @@ export const getProductDetails = async (slug: string) => {
   } catch (error) {}
 };
 
-export const getMenu = async () => {
+export const getMenu = async (headers: RequestInit) => {
   try {
-    const response = await apiClient.get(`${URLS.MENU}`)
+    const response = await apiClient.get(`${URLS.MENU}`, headers)
     if (response.ok) {
       const data: IMenuResponse = await response.json();
       return data

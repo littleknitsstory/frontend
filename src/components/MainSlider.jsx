@@ -4,6 +4,7 @@ import Carousel from "react-bootstrap/Carousel";
 import { Link } from "react-router-dom";
 import arrowWhite from "../icons/arrow-right-white.svg";
 import kateSlider from "../images/kate-slider.png";
+import { Trans } from "react-i18next";
 
 const MainSlider = () => {
   return (
@@ -48,7 +49,11 @@ const MainSlider = () => {
                     <div className="main-slider__btn">
                       <Link to="/article">
                         <button className="btn btn_vinous">
-                          <div className="btn__text">Читать</div>
+                          <div className="btn__text">
+                            <Trans i18nKey="read">
+                              Читать
+                            </Trans>
+                          </div>
                           <div className="btn__icon">
                             <img src={arrowWhite} alt="arrowWhite" />
                           </div>
@@ -95,7 +100,11 @@ const MainSlider = () => {
                     <div className="main-slider__btn">
                       <Link to="/article">
                         <button className="btn btn_vinous">
-                          <div className="btn__text">Читать</div>
+                          <div className="btn__text">
+                            <Trans i18nKey="read">
+                              Читать
+                            </Trans>
+                          </div>
                           <div className="btn__icon">
                             <img src={arrowWhite} alt="arrowWhite" />
                           </div>
@@ -141,7 +150,11 @@ const MainSlider = () => {
                   <div className="main-slider__btn">
                     <Link to="/article">
                       <button className="btn btn_vinous">
-                        <div className="btn__text">Читать</div>
+                        <div className="btn__text">
+                          <Trans i18nKey="read">
+                            Читать
+                          </Trans>
+                        </div>
                         <div className="btn__icon">
                           <img src={arrowWhite} alt="arrowWhite" />
                         </div>

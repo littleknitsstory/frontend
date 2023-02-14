@@ -4,6 +4,7 @@ import articleImg from "../images/article-img.png";
 import Articles from "./Articles";
 import arrowRight from "../icons/arrow-right.svg";
 import { Link } from "react-router-dom";
+import { Trans } from "react-i18next";
 
 const Article = () => {
   return (
@@ -68,7 +69,11 @@ const Article = () => {
             </Col>
           </Row>
         </div>
-        <h3 className="title">Другие блоги</h3>
+        <h3 className="title">
+          <Trans i18nKey="otherPosts">
+            Другие блоги
+          </Trans>
+        </h3>
         <Articles />
         <div className="btn__link btn__link_end">
           <Row>
@@ -82,7 +87,10 @@ const Article = () => {
                   });
                 }}
               >
-                Смотреть все <img src={arrowRight} alt="arrowRight" />
+                <Trans i18nKey="seeMore">
+                  Смотреть все 
+                </Trans>
+                <img src={arrowRight} alt="arrowRight" />
               </Link>
             </Col>
           </Row>

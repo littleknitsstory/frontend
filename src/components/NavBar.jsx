@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
@@ -10,8 +10,11 @@ import logout from "../icons/logout.svg";
 import heart from "../icons/heart.svg";
 import shoppingBag from "../icons/shopping-bag.svg";
 import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
+import { LanguageContext } from "../App";
 
 const NavBar = () => {
+  const [language, selectLanguage] = useContext(LanguageContext)
+
   return (
     <section className="lks-navbar">
       <Navbar expand="lg">
@@ -34,12 +37,22 @@ const NavBar = () => {
                 </Link>
               </div>
               
-              <NavDropdown
-                title="Ru"
+              <NavDropdown 
+                title={language.toUpperCase()}
                 id="basic-nav-dropdown"
                 className="lks-navbar__lang"
-                >
-                <NavDropdown.Item>En</NavDropdown.Item>
+              >
+                <NavDropdown.Item 
+                  onClick={(e) => selectLanguage(e.target.dataset.lang)} 
+                  data-lang="en"
+                >EN
+                </NavDropdown.Item>
+
+                <NavDropdown.Item 
+                  onClick={(e) => selectLanguage(e.target.dataset.lang)} 
+                  data-lang="ru"
+                >RU
+                </NavDropdown.Item>
               </NavDropdown>
             </div>
 

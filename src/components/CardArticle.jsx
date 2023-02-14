@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 
 import cardImg from "../images/card-img.png";
+import { Trans } from "react-i18next";
 
 const Cardlks = () => {
   return (
@@ -34,7 +35,11 @@ const Cardlks = () => {
             <div className="card-lks__btn">
               <Link to="/article">
                 <button className="btn btn_vinous btn_center ">
-                  <div className="btn__text btn__text_center">Читать</div>
+                  <div className="btn__text btn__text_center">
+                    <Trans i18nKey="read">
+                      Читать
+                    </Trans>
+                  </div>
                 </button>
               </Link>
             </div>

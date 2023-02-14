@@ -5,17 +5,30 @@ import vk from "../icons/logo-vk_white.svg";
 import facebook from "../icons/logo-facebook_white.svg";
 import instagram from "../icons/logo-instagram_white.svg";
 import telegram from "../icons/telegram.svg";
+import { Trans } from "react-i18next";
 
 const AboutMe = () => {
   return (
     <section className="about-me">
       <Container>
-        <h3 className="title">Обо мне</h3>
+        <h3 className="title">
+          <Trans i18nKey="AboutMe.title">
+            Обо мне
+          </Trans>
+        </h3>
         <Row>
           <Col xs={12} md={12} lg={6} xl={6} xxl={6} className="about-me__card">
             <div className="coffee-card">
-              <div className="about-me__subtitle">Автор</div>
-              <div className="coffee-card__title">Катя Анаприенко</div>
+              <div className="about-me__subtitle">
+                <Trans i18nKey="AboutMe.author">
+                  Автор
+                </Trans>
+              </div>
+              <div className="coffee-card__title">
+                <Trans i18nKey="AboutMe.authorName">
+                  Катя Анаприенко
+                </Trans>
+              </div>
               <Row>
                 <Col
                   xs={12}
@@ -29,10 +42,12 @@ const AboutMe = () => {
                 </Col>
                 <Col xs={12} md={12} lg={12} xl={6} xxl={6}>
                   <div className=" about-me__descr">
-                    Привет! Меня зовут Катя. Я дизайнер вязаных игрушек. Мое
-                    увлечение вязанием началось в 2016 году, и за это время я
-                    воплотила уже 47 игрушек. В интернет-магазине Little Knits
-                    Story вы можете приобрести готовые схемы для вязания.
+                    <Trans i18nKey="AboutMe.descr">
+                      Привет! Меня зовут Катя. Я дизайнер вязаных игрушек. Мое
+                      увлечение вязанием началось в 2016 году, и за это время я
+                      воплотила уже 47 игрушек. В интернет-магазине Little Knits
+                      Story вы можете приобрести готовые схемы для вязания.
+                    </Trans>
                   </div>
                 </Col>
 

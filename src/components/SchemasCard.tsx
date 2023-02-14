@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { Trans } from "react-i18next";
 
 import { getProductDetails } from "../api";
 import { IProductDetails } from "../api/models";
@@ -22,12 +23,20 @@ const SchemasCard = () => {
   return (
     <section className="schemas-card">
       <Container>
-        <h3 className="title">Схемы вязания</h3>
+        <h3 className="title">
+          <Trans i18nKey="SchemasCard.title">
+            Схемы вязания
+          </Trans>
+        </h3>
         {product && <SchemaCard product={product} />}
         <Link to={`/shop`}>
           <div className="schemas-card__btn">
             <button className="btn btn_vinous">
-              <div className="btn__text">Перейти в каталог</div>
+              <div className="btn__text_center">
+                <Trans i18nKey="SchemasCard.button">
+                  Перейти в каталог
+                </Trans>
+              </div>
               <div className="btn__icon">
                 <img src={cartWhite} alt="cartWhite" />
               </div>

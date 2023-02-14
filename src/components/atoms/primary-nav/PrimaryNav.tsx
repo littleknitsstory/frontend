@@ -1,23 +1,25 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { IMenu } from "../../../api/models"
 import { getMenu } from "../../../api";
-
 import { NavLink } from "react-router-dom";
+
+import { LanguageContext } from "../../../App"
 
 import "./primary-nav.scss"
 
 const PrimaryNav = () => {
   const [menu, setMenu] = useState<IMenu[] | []>([]);
+  const [language] = useContext(LanguageContext)
 
   useEffect(() => {
     const fetchMenu = async (): Promise<void> => {
-      const data = await getMenu();
+      const data = await getMenu({headers: {"Accept-Language": language}});
       if (data) {
         setMenu(data.results)
       }
     };
     fetchMenu()
-  },[])
+  },[language])
 
   return (
     menu.map(item => (

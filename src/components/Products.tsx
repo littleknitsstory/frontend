@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { Trans } from "react-i18next";
 
 import { getProducts } from "../api";
 import { IProduct } from "../api/models";
@@ -81,7 +82,10 @@ const Products = () => {
           <Row>
             <Col>
               <Link to="/shop" onClick={handleSeeMore}>
-                Смотреть еще <img src={arrowRight} alt="arrowRight" />
+                <Trans i18nKey="seeMore">
+                  Смотреть еще 
+                </Trans>
+                <img src={arrowRight} alt="arrowRight" />
               </Link>
             </Col>
           </Row>
