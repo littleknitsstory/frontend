@@ -1,7 +1,7 @@
-import i18n from "i18next";
+import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
-import translationsEn from "./locale/translationEn";
-import translationsRu from "./locale/translationRu"
+import LanguageDetector from "i18next-browser-languagedetector"
+import Backend from "i18next-http-backend"
 
 declare module 'i18next' {
   interface CustomTypeOptions {
@@ -9,16 +9,12 @@ declare module 'i18next' {
   }
 }
 
-i18n
+i18next
   .use(initReactI18next)
+  .use(LanguageDetector)
+  .use(Backend)
   .init({
-    resources: {
-      en: { translation: translationsEn },
-      ru: { translation: translationsRu }
-    },
-    lng: "ru",
-    fallbackLng: "ru",
-    interpolation: { escapeValue: false }
+    debug: true,
+    fallbackLng: 'en'
   })
-
-export default i18n
+  

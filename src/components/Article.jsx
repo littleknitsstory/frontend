@@ -4,9 +4,11 @@ import articleImg from "../images/article-img.png";
 import Articles from "./Articles";
 import arrowRight from "../icons/arrow-right.svg";
 import { Link } from "react-router-dom";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 const Article = () => {
+  const { t } = useTranslation()
+
   return (
     <section className="article">
       <Container>
@@ -70,9 +72,7 @@ const Article = () => {
           </Row>
         </div>
         <h3 className="title">
-          <Trans i18nKey="otherPosts">
-            Другие блоги
-          </Trans>
+          {t("otherPosts")}
         </h3>
         <Articles />
         <div className="btn__link btn__link_end">
@@ -87,9 +87,7 @@ const Article = () => {
                   });
                 }}
               >
-                <Trans i18nKey="seeMore">
-                  Смотреть все 
-                </Trans>
+                {t("seeMore")}
                 <img src={arrowRight} alt="arrowRight" />
               </Link>
             </Col>

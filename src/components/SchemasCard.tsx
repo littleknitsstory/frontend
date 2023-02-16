@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import { getProductDetails } from "../api";
 import { IProductDetails } from "../api/models";
@@ -9,6 +9,7 @@ import cartWhite from "../icons/cart-white.svg";
 import SchemaCard from "./SchemaCard";
 
 const SchemasCard = () => {
+  const { t } = useTranslation()
   const [product, setProduct] = useState<IProductDetails | null>(null);
   useEffect(() => {
     const fetchProductDetails = async (): Promise<void> => {
@@ -24,18 +25,14 @@ const SchemasCard = () => {
     <section className="schemas-card">
       <Container>
         <h3 className="title">
-          <Trans i18nKey="SchemasCard.title">
-            Схемы вязания
-          </Trans>
+          {t("SchemasCard.title")}
         </h3>
         {product && <SchemaCard product={product} />}
         <Link to={`/shop`}>
           <div className="schemas-card__btn">
             <button className="btn btn_vinous">
               <div className="btn__text_center">
-                <Trans i18nKey="SchemasCard.button">
-                  Перейти в каталог
-                </Trans>
+                {t("SchemasCard.button")}
               </div>
               <div className="btn__icon">
                 <img src={cartWhite} alt="cartWhite" />

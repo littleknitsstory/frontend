@@ -1,6 +1,6 @@
 import "./sass/style.scss";
 
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -24,24 +24,24 @@ import SchemasCard from "./components/SchemasCard";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import ScrollToTop from "./components/ScrollToTop"
 
-import i18n from "./i18n";
+interface ILangContext {
+  language: string;
+  selectLanguage?: (arg: string) => void;
+}
 
-export const LanguageContext = createContext()
+export const LanguageContext = createContext<ILangContext>({language: "en"})
 
 function App() {
-  const [language, setLanguage] = useState(localStorage.getItem("lang") || "en")
+  const [ language, setLanguage ] = useState(localStorage.getItem("i18nextLng") || "en")
   const { i18n } = useTranslation()
-
-  useEffect(() => {
-    i18n.changeLanguage(language.toLowerCase())
-  }, [language])
-
-  function selectLanguage(lang) {
+  
+  const selectLanguage = (lang: string)  => {
     setLanguage(lang)
-    localStorage.setItem("lang", lang)
+    i18n.changeLanguage(lang.toLowerCase())
   }
+
   return (
-    <LanguageContext.Provider value={[language, selectLanguage]}>
+    <LanguageContext.Provider value={{language, selectLanguage}}>
       <Router>
         <ScrollToTop />
         <Routes>
@@ -73,7 +73,7 @@ function App() {
             }
           />
           <Route
-            path="/article"
+            path="/posts/:slug"
             element={
               <>
                 <Header />

@@ -13,7 +13,7 @@ import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
 import { LanguageContext } from "../App";
 
 const NavBar = () => {
-  const [language, selectLanguage] = useContext(LanguageContext)
+  const {language, selectLanguage} = useContext(LanguageContext)
 
   return (
     <section className="lks-navbar">

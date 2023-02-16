@@ -1,16 +1,16 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import CardReview from "./CardReview";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 const LastReviews = () => {
+  const { t } = useTranslation()
+
   return (
     <section className="last-reviews">
       <Container>
         <h3 className="title">
-          <Trans i18nKey="lastReviews">
-            Последние отзывы
-          </Trans>
+          {t("lastReviews")}
         </h3>
         <CardReview />
       </Container>

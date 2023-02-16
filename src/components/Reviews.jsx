@@ -1,14 +1,14 @@
 import React from "react";
 import CardReview from "./CardReview";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 const Reviews = () => {
+  const { t } = useTranslation()
+
   return (
     <section className="reviews">
       <h3 className="title">
-        <Trans i18nKey="reviews">
-          Отзывы
-        </Trans>
+        {t("reviews")}
       </h3>
       <CardReview />
     </section>

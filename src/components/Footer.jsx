@@ -3,9 +3,11 @@ import { Container, Form, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Social from "./Social";
 import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation()
+
   return (
     <section className="footer">
       <Container>
@@ -13,9 +15,7 @@ const Footer = () => {
           <Row>
             <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
               <div className="footer__subtitle">
-                <Trans i18nKey="Footer.subtitle">
-                  Блог и магазин по вязанию
-                </Trans>
+                {t("Footer.subtitle")}
               </div>
               <div className="footer__title">Little Knits Story</div>
               <Row>
@@ -47,10 +47,7 @@ const Footer = () => {
             <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
               <div className="footer__subscribe">
                 <div className="footer__subscribe-text">
-                  <Trans i18nKey="Footer.subscribe.text">
-                    Мы проводим специальные акции для наших клиентов. Оформите
-                    подписку и мы будем держать вас в курсе
-                  </Trans>
+                  {t("Footer.subscribe.text")}
                 </div>
                 <Form>
                   <Form.Group className="mb-3" controlId="formGroupEmail">
@@ -58,9 +55,7 @@ const Footer = () => {
 
                     <button className="btn btn_border">
                       <div className="btn__text btn__text_center">
-                        <Trans i18nKey="Footer.subscribe.buttonText">
-                          Подписаться
-                        </Trans>
+                        {t("Footer.subscribe.buttonText")}
                       </div>
                     </button>
                   </Form.Group>
@@ -82,9 +77,7 @@ const Footer = () => {
 
             <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
               <Link to="/privacyPolicy" className="footer__policy">
-                <Trans i18nKey="Footer.policy">
-                  Политика конфиденциальности
-                </Trans>
+                {t("Footer.policy")}
               </Link>
             </Col>
           </Row>

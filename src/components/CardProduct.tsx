@@ -3,11 +3,13 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import { IProduct } from "../api/models";
 
 const CardProduct = ({ product }: { product: IProduct }) => {
+  const { t } = useTranslation()
+
   const [showModalQuickPurchase, setShowModalQuickPurchase] =
     useState<boolean>(false);
 
@@ -26,7 +28,6 @@ const CardProduct = ({ product }: { product: IProduct }) => {
     setShowModalThanks(true);
   };
 
-  const { t } = useTranslation()
   
   return (
     <div className="card-lks product-card">
@@ -113,22 +114,16 @@ const CardProduct = ({ product }: { product: IProduct }) => {
             </svg>
           </div>
           <div className="card-lks__material">
-            <Trans i18nKey="CardProduct.material">
-              Материал: шерсть
-            </Trans>
+            {t("CardProduct.material")}: шерсть
           </div>
           <div className="card-lks__color">
-            <Trans i18nKey="CardProduct.color">
-              Цвет: 
-            </Trans>
+            {t("CardProduct.color")}: 
           </div>
           <div className="card-lks__price">{product.price}</div>
           <div className="card-lks__btn product-card__btn">
             <button className="btn btn_vinous btn_center " onClick={handleShow}>
               <div className="btn__text btn__text_center">
-                <Trans i18nKey="CardProduct.buttonQuickOrderText">
-                  Быстрый заказ
-                </Trans>
+                {t("CardProduct.buttonQuickOrderText")}
               </div>
             </button>
           </div>
@@ -138,9 +133,7 @@ const CardProduct = ({ product }: { product: IProduct }) => {
         <Modal show={showModalQuickPurchase} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>
-              <Trans i18nKey="CardProduct.modalTitle">
-                Быстрая покупка
-              </Trans>
+              {t("CardProduct.modalTitle")}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -156,25 +149,17 @@ const CardProduct = ({ product }: { product: IProduct }) => {
                 </div>
 
                 <div className="product-card__modal-quick-purchase-part-number">
-                  <Trans i18nKey="CardProduct.partNumber">
-                    Артикул:
-                  </Trans> {product.code}
+                  {t("CardProduct.partNumber")}:
                 </div>
                 <div className="product-card__modal-quick-purchase-color">
-                  <Trans i18nKey="CardProduct.color">
-                    Цвет:
-                  </Trans> {" "}
-                  
+                  {t("CardProduct.color")}:
                 </div>
                 <div className="product-card__modal-quick-purchase-wrapper">
                   <div className="product-card__modal-quick-purchase-wrapper-price">
                     {product.sale ?? product.price}
                   </div>
                   <div className="product-card__modal-quick-purchase-wrapper-discount">
-                    <Trans i18nKey="CardProduct.sale">
-                      Скидка
-                    </Trans> 555
-                    
+                    {t("CardProduct.sale")}
                   </div>
                 </div>
               </div>
@@ -201,17 +186,12 @@ const CardProduct = ({ product }: { product: IProduct }) => {
               </Form.Group>
               <button type="submit" className="btn btn_vinous btn_center">
                 <div className="btn__text btn__text_center">
-                  <Trans i18nKey="CardProduct.buttonSendText">
-                    Отправить
-                  </Trans>
+                  {t("CardProduct.buttonSendText")}
                 </div>
               </button>
             </Form>
             <div className="product-card__modal-quick-purchase-policy">
-              <Trans i18nKey="CardProduct.purchasePolice">
-                Нажимая «Отправить», вы даете согласие на обработку персональных
-                данных
-              </Trans>
+              {t("CardProduct.purchasePolice")}
             </div>
           </Modal.Body>
         </Modal>
@@ -225,30 +205,22 @@ const CardProduct = ({ product }: { product: IProduct }) => {
         >
           <Modal.Header closeButton className="modal-header-without-border">
             <Modal.Title id="contained-modal-title-vcenter">
-              <Trans i18nKey="CardProduct.thanks">
-                Спасибо
-              </Trans>
+              {t("CardProduct.thanks")}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="card-modal-thanks__text">
               <p>
-                <Trans i18nKey="CardProduct.thanksText1">
-                  Ваша заявка принята.
-                </Trans>
+                {t("CardProduct.thanksText1")}
               </p>
               <p>
-                <Trans i18nKey="CardProduct.thanksText2">
-                  В Ближайшее время с вами свяжется наш менеджер
-                </Trans>
+                {t("CardProduct.thanksText2")}
               </p>
             </div>
             <Link to={`/`}>
               <button className="btn btn_vinous btn_center card-modal-thanks__btn">
                 <div className="btn__text btn__text_center">
-                  <Trans i18nKey="CardProduct.backHome">
-                    Вернуться на главную
-                  </Trans>
+                  {t("CardProduct.backHome")}
                 </div>
               </button>
             </Link>

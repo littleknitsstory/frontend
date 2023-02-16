@@ -1,15 +1,14 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import MiniCardProduct from "./MiniCardProduct";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 const PopularProducts = () => {
+  const { t } = useTranslation()
   return (
     <section className="popular-products">
       <h3 className="title">
-        <Trans i18nKey="popular">
-          Популярное
-        </Trans>
+        {t("popular")}
       </h3>
       <Row xs={1} md={2} lg={3} xl={3} xxl={4}>
         {[1, 2, 3, 4].map((item) => {

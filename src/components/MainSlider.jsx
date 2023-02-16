@@ -4,9 +4,11 @@ import Carousel from "react-bootstrap/Carousel";
 import { Link } from "react-router-dom";
 import arrowWhite from "../icons/arrow-right-white.svg";
 import kateSlider from "../images/kate-slider.png";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 const MainSlider = () => {
+  const { t } = useTranslation()
+
   return (
     <section className="main-slider">
       <Container>
@@ -50,9 +52,7 @@ const MainSlider = () => {
                       <Link to="/article">
                         <button className="btn btn_vinous">
                           <div className="btn__text">
-                            <Trans i18nKey="read">
-                              Читать
-                            </Trans>
+                            {t("read")}
                           </div>
                           <div className="btn__icon">
                             <img src={arrowWhite} alt="arrowWhite" />
@@ -101,9 +101,7 @@ const MainSlider = () => {
                       <Link to="/article">
                         <button className="btn btn_vinous">
                           <div className="btn__text">
-                            <Trans i18nKey="read">
-                              Читать
-                            </Trans>
+                            {t("read")}
                           </div>
                           <div className="btn__icon">
                             <img src={arrowWhite} alt="arrowWhite" />
@@ -151,9 +149,7 @@ const MainSlider = () => {
                     <Link to="/article">
                       <button className="btn btn_vinous">
                         <div className="btn__text">
-                          <Trans i18nKey="read">
-                            Читать
-                          </Trans>
+                          {t("read")}
                         </div>
                         <div className="btn__icon">
                           <img src={arrowWhite} alt="arrowWhite" />

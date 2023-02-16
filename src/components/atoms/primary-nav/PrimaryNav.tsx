@@ -9,7 +9,7 @@ import "./primary-nav.scss"
 
 const PrimaryNav = () => {
   const [menu, setMenu] = useState<IMenu[] | []>([]);
-  const [language] = useContext(LanguageContext)
+  const {language} = useContext(LanguageContext)
 
   useEffect(() => {
     const fetchMenu = async (): Promise<void> => {

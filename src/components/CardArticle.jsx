@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 
 import cardImg from "../images/card-img.png";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 const Cardlks = () => {
+  const { t } = useTranslation()
   return (
     <div className="card-lks">
       <Card style={{ width: "18rem" }}>
@@ -36,9 +37,7 @@ const Cardlks = () => {
               <Link to="/article">
                 <button className="btn btn_vinous btn_center ">
                   <div className="btn__text btn__text_center">
-                    <Trans i18nKey="read">
-                      Читать
-                    </Trans>
+                    {t("read")}
                   </div>
                 </button>
               </Link>

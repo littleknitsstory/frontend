@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import { getProducts } from "../api";
 import { IProduct } from "../api/models";
@@ -10,6 +10,8 @@ import CardProduct from "./CardProduct";
 import Filters from "./Filters";
 
 const Products = () => {
+  const { t } = useTranslation()
+
   const [products, setProducts] = useState<IProduct[]>([]);
   const [limit, setLimit] = useState<number>(0);
   const [count, setCount] = useState<number>(0);
@@ -82,9 +84,7 @@ const Products = () => {
           <Row>
             <Col>
               <Link to="/shop" onClick={handleSeeMore}>
-                <Trans i18nKey="seeMore">
-                  Смотреть еще 
-                </Trans>
+                {t("seeMore")}
                 <img src={arrowRight} alt="arrowRight" />
               </Link>
             </Col>

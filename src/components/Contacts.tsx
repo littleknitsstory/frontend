@@ -10,6 +10,8 @@ import map from "../icons/map-point.svg";
 import phone from "../icons/phone.svg";
 
 const Contacts = () => {
+  const { t } = useTranslation()
+
   const [showModalThanks, setShowModalThanks] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
   const [message, setMessage] = useState<string>("");
@@ -54,7 +56,6 @@ const Contacts = () => {
     [clearForm, company, email, message, name, phone_number]
   );
 
-  const { t } = useTranslation()
 
   return (
     <section className="contacts">
@@ -69,9 +70,7 @@ const Contacts = () => {
           >
             <div className="coffee-card">
               <div className="coffee-card__title">
-                <Trans i18nKey="Contacts.title">
-                  Оставьте нам сообщение
-                </Trans>
+                {t("Contacts.title")}
               </div>
               <Form className="contacts__form" onSubmit={onSubmitOrder}>
                 <Row>
@@ -130,18 +129,13 @@ const Contacts = () => {
                   type="submit"
                 >
                   <div className="btn__text btn__text_center">
-                    <Trans i18nKey="Contacts.send">
-                      Отправить
-                    </Trans>
+                    {t("Contacts.send")}
                   </div>
                 </button>
               </Form>
 
               <div className="contacts__policy">
-                <Trans i18nKey="Contacts.policy">
-                  Нажимая «Отправить», вы даете согласие на обработку персональных
-                  данных
-                </Trans>
+                {t("Contacts.policy")}
               </div>
             </div>
           </Col>
@@ -156,9 +150,7 @@ const Contacts = () => {
               xxl={{ span: 6, offset: 3 }}
             >
               <div className="title">
-                <Trans i18nKey="Contacts.contactInfo">
-                  Контактная информация
-                </Trans>
+                {t("Contacts.contactInfo")}
               </div>
               <div className="contacts__wrapper-info">
                 <img src={map} alt="map" />
@@ -192,30 +184,22 @@ const Contacts = () => {
           >
             <Modal.Header closeButton className="modal-header-without-border">
               <Modal.Title id="contained-modal-title-vcenter">
-                <Trans i18nKey="Modal.thanks">
-                  Спасибо
-                </Trans>
+                {t("Modal.thanks")}
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <div className="card-modal-thanks__text">
                 <p>
-                  <Trans i18nKey="Modal.thanksText1">
-                    Ваша заявка принята.
-                  </Trans>
+                  {t("Modal.thanksText1")}
                 </p> 
                 <p>
-                  <Trans i18nKey="Modal.thanksText2">
-                    В Ближайшее время с вами свяжется наш менеджер
-                  </Trans>
+                  {t("Modal.thanksText2")}
                 </p> 
               </div>
               <Link to={`/`}>
                 <button className="btn btn_vinous btn_center card-modal-thanks__btn">
                   <div className="btn__text btn__text_center">
-                    <Trans i18nKey="Modal.backHome">
-                      Вернуться на главную
-                    </Trans>
+                    {t("Modal.backHome")}
                   </div>
                 </button>
               </Link>
