@@ -1,7 +1,4 @@
-import React from "react";
-
 import { Row, Col } from "react-bootstrap";
-
 import Stars from "./Stars";
 import rabbit from "../images/rabbit.png";
 

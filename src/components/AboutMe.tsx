@@ -9,11 +9,11 @@ import { useTranslation } from "react-i18next";
 
 const AboutMe = () => {
   const { t } = useTranslation()
-
+  
   return (
     <section className="about-me">
       <Container>
-        <h3 className="title">{t("AboutMe.title")}</h3>
+        <h3 className="title">{t("AboutMe.title", "Обо мне")}</h3>
         <Row>
           <Col xs={12} md={12} lg={6} xl={6} xxl={6} className="about-me__card">
             <div className="coffee-card">
@@ -31,7 +31,7 @@ const AboutMe = () => {
                   <img className="about-me__img" src={kate} alt="kate-author" />
                 </Col>
                 <Col xs={12} md={12} lg={12} xl={6} xxl={6}>
-                  <div className=" about-me__descr">
+                  <div className="about-me__descr">
                     {t("AboutMe.descr")}
                   </div>
                 </Col>

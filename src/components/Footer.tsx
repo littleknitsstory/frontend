@@ -1,9 +1,9 @@
-import React from "react";
+import React from "react"
 import { Container, Form, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Social from "./Social";
 import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
-import { useTranslation } from "react-i18next";
 
 const Footer = () => {
   const { t } = useTranslation()

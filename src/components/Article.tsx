@@ -1,10 +1,9 @@
-import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import articleImg from "../images/article-img.png";
 import Articles from "./Articles";
 import arrowRight from "../icons/arrow-right.svg";
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 
 const Article = () => {
   const { t } = useTranslation()

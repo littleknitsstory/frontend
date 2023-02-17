@@ -4,7 +4,6 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
 import { IProduct } from "../api/models";
 
 const CardProduct = ({ product }: { product: IProduct }) => {
@@ -28,7 +27,6 @@ const CardProduct = ({ product }: { product: IProduct }) => {
     setShowModalThanks(true);
   };
 
-  
   return (
     <div className="card-lks product-card">
       <Card style={{ width: "18rem" }}>

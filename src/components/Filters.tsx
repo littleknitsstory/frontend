@@ -1,4 +1,3 @@
-import React from "react";
 import MultiRangeslider from "./multi-range-slider/MultiRangeSlider";
 import arrowRight from "../icons/arrow-right.svg";
 import { useTranslation } from "react-i18next";

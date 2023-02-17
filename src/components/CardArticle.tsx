@@ -1,12 +1,11 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import Card from "react-bootstrap/Card";
-
-import cardImg from "../images/card-img.png";
 import { useTranslation } from "react-i18next";
+import Card from "react-bootstrap/Card";
+import cardImg from "../images/card-img.png";
 
 const Cardlks = () => {
   const { t } = useTranslation()
+
   return (
     <div className="card-lks">
       <Card style={{ width: "18rem" }}>

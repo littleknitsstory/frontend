@@ -7,7 +7,7 @@ import {
 } from "./models";
 
 enum URLS {
-  PRODCTS = "api/v1/products/",
+  PRODUCTS = "api/v1/products/",
   CONTACTS = "api/v1/contacts/",
   MENU = "api/v1/menu/"
 }
@@ -17,7 +17,7 @@ export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";
 export const getProducts = async (offset: number, limit: number) => {
   try {
     const response = await apiClient.get(
-      `${URLS.PRODCTS}?offset=${offset}&limit=${limit}`
+      `${URLS.PRODUCTS}?offset=${offset}&limit=${limit}`
     );
     if (response.ok) {
       const data: IProductsResponse = await response.json();
@@ -35,7 +35,7 @@ export const getProducts = async (offset: number, limit: number) => {
 
 export const getProductDetails = async (slug: string) => {
   try {
-    const response = await apiClient.get(`${URLS.PRODCTS}/${slug}`);
+    const response = await apiClient.get(`${URLS.PRODUCTS}/${slug}`);
     if (response.ok) {
       const data: IProductDetails = await response.json();
       return {
@@ -47,9 +47,9 @@ export const getProductDetails = async (slug: string) => {
   } catch (error) {}
 };
 
-export const getMenu = async (headers: RequestInit) => {
+export const getMenu = async (headers: RequestInit): Promise<IMenuResponse | void>  => {
   try {
-    const response = await apiClient.get(`${URLS.MENU}`, headers)
+    const response: Response = await apiClient.get(`${URLS.MENU}`, headers)
     if (response.ok) {
       const data: IMenuResponse = await response.json();
       return data

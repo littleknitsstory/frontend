@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react"
-import { IMenu } from "../../../api/models"
+import { IMenu, IMenuResponse } from "../../../api/models"
 import { getMenu } from "../../../api";
 import { NavLink } from "react-router-dom";
 
@@ -13,7 +13,7 @@ const PrimaryNav = () => {
 
   useEffect(() => {
     const fetchMenu = async (): Promise<void> => {
-      const data = await getMenu({headers: {"Accept-Language": language}});
+      const data: IMenuResponse | void = await getMenu({headers: {"Accept-Language": language}});
       if (data) {
         setMenu(data.results)
       }
@@ -22,24 +22,26 @@ const PrimaryNav = () => {
   },[language])
 
   return (
-    menu.map(item => (
-      item.target ? 
-        <a 
-          key={item.id} 
-          className="primary-nav-links" 
-          href={item.url} 
-          target={item.target}
-        >
-            {item.name}
-        </a> :
-        <NavLink 
-          key={item.id} 
-          className="primary-nav-links" 
-          to={item.url}
-        >
+    <>
+    {menu.map(item => (
+    item.target ? 
+      <a 
+        key={item.id} 
+        className="primary-nav-links" 
+        href={item.url} 
+        target={item.target}
+      >
           {item.name}
-        </NavLink>
-    ))
+      </a> :
+      <NavLink 
+        key={item.id} 
+        className="primary-nav-links" 
+        to={item.url}
+      >
+        {item.name}
+      </NavLink>
+    ))}
+    </>
   )
 
 }

@@ -1,9 +1,8 @@
-import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CardArticle from "./CardArticle";
 
 const Articles = () => {
-  const array = [
+  const array: {id: number}[] = [
     { id: 1 },
     { id: 2 },
     { id: 3 },
