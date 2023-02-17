@@ -7,10 +7,13 @@ import { getArticles } from "../api";
 import { IArticle } from "../api/models";
 import arrowWhite from "../icons/arrow-right-white.svg";
 import kateSlider from "../images/kate-slider.png";
+import { useTranslation } from "react-i18next";
 
 const MainSlider = () => {
   const [articles, setArticles] = useState<IArticle[]>([]);
   const [limit, setLimit] = useState<number>(0);
+
+  const { t } = useTranslation()
 
   useEffect(() => {
     const fetchArticles = async (): Promise<void> => {
@@ -60,7 +63,7 @@ const MainSlider = () => {
                           <div className="main-slider__btn">
                             <Link to={`/posts/${item.slug}`}>
                               <button className="btn btn_vinous">
-                                <div className="btn__text">Читать</div>
+                                <div className="btn__text">{t("read")}</div>
                                 <div className="btn__icon">
                                   <img src={arrowWhite} alt="arrowWhite" />
                                 </div>

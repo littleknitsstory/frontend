@@ -8,10 +8,13 @@ import { getArticleDetails, getArticles } from "../api";
 import { IArticle } from "../api/models";
 import Spinner from "./Spinner";
 import Articles from "./Articles";
+import { useTranslation } from "react-i18next";
 
 const Article = () => {
   const { slug } = useParams();
   const [article, setArticle] = useState<IArticle | null>(null);
+
+  const { t } = useTranslation()
 
   useEffect(() => {
     const fetchArticleDetails = async (): Promise<void> => {
@@ -43,7 +46,7 @@ const Article = () => {
           </div>
         )}
 
-        <h3 className="title">Другие блоги</h3>
+        <h3 className="title">{t("otherPosts")}</h3>
         <Articles />
       </Container>
     </section>

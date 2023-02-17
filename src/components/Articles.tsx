@@ -4,6 +4,7 @@ import CardArticle from "./CardArticle";
 import { getArticles } from "../api";
 import { IArticle, IArticlesResponse } from "../api/models";
 import arrowRight from "../icons/arrow-right.svg";
+import { useTranslation } from "react-i18next";
 
 const Articles = () => {
   const [articles, setArticles] = useState<IArticle[]>([]);
@@ -11,6 +12,8 @@ const Articles = () => {
   const [limit, setLimit] = useState<number>(4);
   const [count, setCount] = useState<number>(0);
   const [isLastPage, setIsLastPage] = useState<boolean>(false);
+
+  const { t } = useTranslation()
 
   useEffect(() => {
     const fetchArticles = async (): Promise<void> => {
@@ -20,7 +23,7 @@ const Articles = () => {
         setCount(data.count);
       }
     };
-    if (limit != 4 && limit >= count) {
+    if (limit !== 4 && limit >= count) {
       setIsLastPage(true);
     }
     fetchArticles();
@@ -44,7 +47,7 @@ const Articles = () => {
         </Row>
         {!isLastPage && (
           <button className="btn btn_border" onClick={handleSeeMore}>
-            <div className="btn__text">Смотреть еще</div>
+            <div className="btn__text">{t("seeMore")}</div>
             <div className="btn__icon">
               <img src={arrowRight} alt="arrowWhite" />
             </div>

@@ -3,10 +3,11 @@ import sanitizeHtml from "sanitize-html";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import { IArticle } from "../api/models";
+import { useTranslation } from "react-i18next"
 
-import cardImg from "../images/card-img.png";
 
 const CardArticle = ({ article }: { article: IArticle }) => {
+  const { t } = useTranslation()
   return (
     <div className="card-lks">
       <Card style={{ width: "18rem" }}>
@@ -31,7 +32,7 @@ const CardArticle = ({ article }: { article: IArticle }) => {
           </div>
           <div className="card-lks__footer">
             <div className="card-lks__author">
-              Автор:
+              {t("AboutMe.author")}:
               <br /> Катя Анаприенко
             </div>
             <div className="card-lks__created_at">
@@ -50,7 +51,7 @@ const CardArticle = ({ article }: { article: IArticle }) => {
                     });
                   }}
                 >
-                  <div className="btn__text btn__text_center">Читать</div>
+                  <div className="btn__text btn__text_center">{t("read")}</div>
                 </button>
               </Link>
             </div>

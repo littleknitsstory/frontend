@@ -3,6 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { IProductDetails } from "../api/models";
 import arrowRight from "../icons/arrow-right.svg";
@@ -11,6 +12,7 @@ import questionInfo from "../icons/question.svg";
 import Social from "./Social";
 
 const SchemaCard = ({ product }: { product: IProductDetails }) => {
+  const { t } = useTranslation()
   const [showModalQuickPurchase, setShowModalQuickPurchase] =
     useState<boolean>(false);
 
@@ -80,7 +82,9 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
 
           <Row>
             <Col className="schema-card__wrapper">
-              <div className="schema-card__property">Фигура</div>
+              <div className="schema-card__property">
+                {t("SchemaCard.figure")}
+              </div>
             </Col>
             <Col className="schema-card__wrapper">
               <div className="schema-card__property">Русалка</div>
@@ -88,7 +92,9 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
           </Row>
           <Row>
             <Col className="schema-card__wrapper">
-              <div className="schema-card__property">Размер</div>
+              <div className="schema-card__property">
+                {t("SchemaCard.size")}
+              </div>
             </Col>
             <Col className="schema-card__wrapper">
               <div className="schema-card__property">{product.height} см</div>
@@ -96,7 +102,9 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
           </Row>
           <Row>
             <Col className="schema-card__wrapper">
-              <div className="schema-card__property">Материал</div>
+              <div className="schema-card__property">
+                {t("SchemaCard.material")}
+              </div>
             </Col>
             <Col className="schema-card__wrapper">
               <div className="schema-card__property">{product.material}</div>
@@ -104,7 +112,9 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
           </Row>
           <Row>
             <Col className="schema-card__wrapper">
-              <div className="schema-card__property">Сложность</div>
+              <div className="schema-card__property">
+                {t("SchemaCard.difficulty")}
+              </div>
             </Col>
             <Col className="schema-card__wrapper">
               <div className="schema-card__property">Базовая</div>
@@ -112,7 +122,9 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
           </Row>
           <Row>
             <Col className="schema-card__wrapper">
-              <div className="schema-card__property">Инструменты</div>
+              <div className="schema-card__property">
+                {t("SchemaCard.instruments")}
+              </div>
             </Col>
             <Col className="schema-card__wrapper">
               <div className="schema-card__property">
@@ -124,7 +136,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
           <Row>
             <Col>
               <div className="schema-card__descr">
-                Важно: не предусмотрено для тех, кто не умеет вязать
+                {t("SchemaCard.description")}
               </div>{" "}
               <div className="schema-card__price">{product.sale}</div>
               <div className="schema-card__old-price">{product.price}</div>
@@ -141,19 +153,24 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
             <div className="btn__link">
               <div className="col-xl-6 col-lg-6 col-md-6 col-xs-12">
                 <button className="btn btn_border">
-                  <div className="btn__text">Добавить в корзину</div>
+                  <div className="btn__text_center">
+                    {t("SchemaCard.buttonAddCart")}
+                  </div>
                 </button>
               </div>
               <div className="col-xl-4 col-lg-4 col-md-4 offset-xl-2 offset-lg-2 offset-md-2 col-xs-12 ">
                 <Link to="/product">
-                  Подробнее <img src={arrowRight} alt="arrowRight" />
+                  {t("SchemaCard.details")}
+                  <img src={arrowRight} alt="arrowRight" />
                 </Link>
               </div>
             </div>
             <div className="schema-card__product-btn">
               <Col>
                 <button className="btn btn_border">
-                  <div className="btn__text">Добавить в корзину</div>
+                  <div className="btn__text_center">
+                    {t("SchemaCard.buttonAddCart")}
+                  </div>
                 </button>
               </Col>
               <Col>
@@ -162,7 +179,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
                   onClick={handleShow}
                 >
                   <div className="btn__text btn__text_center">
-                    Быстрый заказ
+                    {t("quickOrder")}
                   </div>
                 </button>
               </Col>

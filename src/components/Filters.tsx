@@ -1,16 +1,21 @@
-import React from "react";
-import { Row, Col } from "react-bootstrap";
 import MultiRangeslider from "./multi-range-slider/MultiRangeSlider";
 import arrowRight from "../icons/arrow-right.svg";
+import { useTranslation } from "react-i18next";
 
 const Filters = () => {
+  const { t } = useTranslation()
+
   return (
     <>
       <div className="filters">
-        <div className="title">Фильтры</div>
+        <div className="title">
+          {t("Filter.title")}
+        </div>
 
         <div className="filters__wrapper-price">
-          <div className="filters__title">Цена</div>
+          <div className="filters__title">
+            {t("Filter.price")}
+          </div>
 
           <MultiRangeslider
             min={0}
@@ -22,7 +27,9 @@ const Filters = () => {
         </div>
         <div className="filters__btn">
           <button className="btn btn_border">
-            <div className="btn__text">Очистить фильтры</div>
+            <div className="btn__text">
+              {t("Filter.buttonText")}
+            </div>
             <div className="btn__icon">
               <img src={arrowRight} alt="arrowWhite" />
             </div>

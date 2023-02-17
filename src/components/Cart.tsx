@@ -1,9 +1,8 @@
-import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CardProductCart from "./CardProductCart";
 
 const Cart = () => {
-  const array = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
+  const array: {id: number}[] = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
   return (
     <section className="saved-products">
       <Container>

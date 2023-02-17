@@ -57,6 +57,28 @@ export interface IProductDetails {
   updated_at: string;
 }
 
+export interface IMenuResponse {
+  count: number;
+  next: string;
+  previous: string;
+  results: IMenu[];
+}
+
+export interface IMenu {
+  id: number;
+  name: string;
+  url: string;
+  menu: {
+    id: number;
+    slug: string;
+    hint: string;
+  };
+  target: string;
+  parent: string;
+  ordering: number;
+  is_active: boolean;
+}
+
 export interface IContactRequest {
   name?: string;
   email: string;

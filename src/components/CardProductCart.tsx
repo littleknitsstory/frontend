@@ -5,20 +5,20 @@ import { Form } from "react-bootstrap";
 import cardImgProduct from "../images/product-img.png";
 
 const CardProductCart = () => {
-  const [countProduct, setCountProduct] = useState(1);
-  const [isChecked, setIsChecked] = useState(false);
-  const increaseCountProduct = () => {
+  const [countProduct, setCountProduct] = useState<number>(1);
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const increaseCountProduct = (): void => {
     setCountProduct((countProduct) => countProduct + 1);
   };
 
-  const decreaseCountProduct = () => {
-    if (countProduct == 1) {
+  const decreaseCountProduct = (): void => {
+    if (countProduct === 1) {
       return;
     }
     setCountProduct((countProduct) => countProduct - 1);
   };
 
-  const handler = useCallback(() => {
+  const handler = useCallback((): void => {
     setIsChecked(!isChecked);
   }, [isChecked]);
 

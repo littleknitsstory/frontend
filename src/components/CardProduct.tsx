@@ -3,10 +3,12 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 import { IProduct } from "../api/models";
 
 const CardProduct = ({ product }: { product: IProduct }) => {
+  const { t } = useTranslation()
+
   const [showModalQuickPurchase, setShowModalQuickPurchase] =
     useState<boolean>(false);
 
@@ -109,12 +111,18 @@ const CardProduct = ({ product }: { product: IProduct }) => {
               </defs>
             </svg>
           </div>
-          <div className="card-lks__material">Материал: шерсть</div>
-          <div className="card-lks__color">Цвет: </div>
+          <div className="card-lks__material">
+            {t("CardProduct.material")}: шерсть
+          </div>
+          <div className="card-lks__color">
+            {t("CardProduct.color")}: 
+          </div>
           <div className="card-lks__price">{product.price}</div>
           <div className="card-lks__btn product-card__btn">
             <button className="btn btn_vinous btn_center " onClick={handleShow}>
-              <div className="btn__text btn__text_center">Быстрый заказ</div>
+              <div className="btn__text btn__text_center">
+                {t("CardProduct.buttonQuickOrderText")}
+              </div>
             </button>
           </div>
         </Card.Body>
@@ -122,7 +130,9 @@ const CardProduct = ({ product }: { product: IProduct }) => {
       <div className="product-card__modal-quick-purchase">
         <Modal show={showModalQuickPurchase} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Быстрая покупка</Modal.Title>
+            <Modal.Title>
+              {t("CardProduct.modalTitle")}
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="product-card__modal-quick-purchase-body">
@@ -137,17 +147,17 @@ const CardProduct = ({ product }: { product: IProduct }) => {
                 </div>
 
                 <div className="product-card__modal-quick-purchase-part-number">
-                  Артикул: {product.code}
+                  {t("CardProduct.partNumber")}:
                 </div>
                 <div className="product-card__modal-quick-purchase-color">
-                  Цвет:{" "}
+                  {t("CardProduct.color")}:
                 </div>
                 <div className="product-card__modal-quick-purchase-wrapper">
                   <div className="product-card__modal-quick-purchase-wrapper-price">
                     {product.sale ?? product.price}
                   </div>
                   <div className="product-card__modal-quick-purchase-wrapper-discount">
-                    Скидка 555
+                    {t("CardProduct.sale")}
                   </div>
                 </div>
               </div>
@@ -161,7 +171,7 @@ const CardProduct = ({ product }: { product: IProduct }) => {
                 <Form.Control
                   required
                   type="text"
-                  placeholder="ФИО"
+                  placeholder={t('CardProduct.fullName')}
                   autoFocus
                 />
               </Form.Group>
@@ -170,15 +180,16 @@ const CardProduct = ({ product }: { product: IProduct }) => {
                 className="mb-3"
                 controlId="exampleForm.ControlInput2"
               >
-                <Form.Control required type="text" placeholder="Телефон" />
+                <Form.Control required type="text" placeholder={t('CardProduct.phone')} />
               </Form.Group>
               <button type="submit" className="btn btn_vinous btn_center">
-                <div className="btn__text btn__text_center">Отправить</div>
+                <div className="btn__text btn__text_center">
+                  {t("CardProduct.buttonSendText")}
+                </div>
               </button>
             </Form>
             <div className="product-card__modal-quick-purchase-policy">
-              Нажимая «Отправить», вы даете согласие на обработку персональных
-              данных
+              {t("CardProduct.purchasePolice")}
             </div>
           </Modal.Body>
         </Modal>
@@ -192,18 +203,22 @@ const CardProduct = ({ product }: { product: IProduct }) => {
         >
           <Modal.Header closeButton className="modal-header-without-border">
             <Modal.Title id="contained-modal-title-vcenter">
-              Спасибо
+              {t("CardProduct.thanks")}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="card-modal-thanks__text">
-              Ваша заявка принята.
-              <br /> В Ближайшее время с вами свяжется наш менеджер
+              <p>
+                {t("CardProduct.thanksText1")}
+              </p>
+              <p>
+                {t("CardProduct.thanksText2")}
+              </p>
             </div>
             <Link to={`/`}>
               <button className="btn btn_vinous btn_center card-modal-thanks__btn">
                 <div className="btn__text btn__text_center">
-                  Вернуться на главную
+                  {t("CardProduct.backHome")}
                 </div>
               </button>
             </Link>

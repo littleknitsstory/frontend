@@ -5,17 +5,20 @@ import vk from "../icons/logo-vk_white.svg";
 import facebook from "../icons/logo-facebook_white.svg";
 import instagram from "../icons/logo-instagram_white.svg";
 import telegram from "../icons/telegram.svg";
+import { useTranslation } from "react-i18next";
 
 const AboutMe = () => {
+  const { t } = useTranslation()
+  
   return (
     <section className="about-me">
       <Container>
-        <h3 className="title">Обо мне</h3>
+        <h3 className="title">{t("AboutMe.title", "Обо мне")}</h3>
         <Row>
           <Col xs={12} md={12} lg={6} xl={6} xxl={6} className="about-me__card">
             <div className="coffee-card">
-              <div className="about-me__subtitle">Автор</div>
-              <div className="coffee-card__title">Катя Анаприенко</div>
+              <div className="about-me__subtitle">{t("AboutMe.author")}</div>
+              <div className="coffee-card__title">{t("AboutMe.authorName")}</div>
               <Row>
                 <Col
                   xs={12}
@@ -28,11 +31,8 @@ const AboutMe = () => {
                   <img className="about-me__img" src={kate} alt="kate-author" />
                 </Col>
                 <Col xs={12} md={12} lg={12} xl={6} xxl={6}>
-                  <div className=" about-me__descr">
-                    Привет! Меня зовут Катя. Я дизайнер вязаных игрушек. Мое
-                    увлечение вязанием началось в 2016 году, и за это время я
-                    воплотила уже 47 игрушек. В интернет-магазине Little Knits
-                    Story вы можете приобрести готовые схемы для вязания.
+                  <div className="about-me__descr">
+                    {t("AboutMe.descr")}
                   </div>
                 </Col>
 

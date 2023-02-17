@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
+import { useTranslation, Trans } from "react-i18next";
 
 import { postContactRequest } from "../api";
 import envelope from "../icons/envelope.svg";
@@ -9,6 +10,8 @@ import map from "../icons/map-point.svg";
 import phone from "../icons/phone.svg";
 
 const Contacts = () => {
+  const { t } = useTranslation()
+
   const [showModalThanks, setShowModalThanks] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
   const [message, setMessage] = useState<string>("");
@@ -53,6 +56,7 @@ const Contacts = () => {
     [clearForm, company, email, message, name, phone_number]
   );
 
+
   return (
     <section className="contacts">
       <Container>
@@ -65,14 +69,16 @@ const Contacts = () => {
             xxl={{ span: 6, offset: 3 }}
           >
             <div className="coffee-card">
-              <div className="coffee-card__title">Оставьте нам сообщение</div>
+              <div className="coffee-card__title">
+                {t("Contacts.title")}
+              </div>
               <Form className="contacts__form" onSubmit={onSubmitOrder}>
                 <Row>
                   <Form.Group as={Col} md="6" controlId="name">
                     <Form.Control
                       required
                       type="text"
-                      placeholder="Ваше имя"
+                      placeholder={t('Contacts.name')}
                       value={name}
                       onChange={handleChange(setName)}
                     />
@@ -80,7 +86,7 @@ const Contacts = () => {
                   <Form.Group as={Col} md="6" controlId="theme">
                     <Form.Control
                       type="text"
-                      placeholder="Тема сообщения"
+                      placeholder={t('Contacts.subject')}
                       value={company}
                       onChange={handleChange(setCompany)}
                     />
@@ -92,7 +98,7 @@ const Contacts = () => {
                     <Form.Control
                       required
                       type="text"
-                      placeholder="Телефон"
+                      placeholder={t('Contacts.phone')}
                       value={phone_number}
                       onChange={handleChange(setPhone_number)}
                     />
@@ -112,7 +118,7 @@ const Contacts = () => {
                     <Form.Control
                       required
                       as="textarea"
-                      placeholder="Сообщение"
+                      placeholder={t("Contacts.message")}
                       value={message}
                       onChange={handleChange(setMessage)}
                     />
@@ -122,13 +128,14 @@ const Contacts = () => {
                   className="btn btn_white btn_center contacts__btn"
                   type="submit"
                 >
-                  <div className="btn__text btn__text_center">Отправить</div>
+                  <div className="btn__text btn__text_center">
+                    {t("Contacts.send")}
+                  </div>
                 </button>
               </Form>
 
               <div className="contacts__policy">
-                Нажимая «Отправить», вы даете согласие на обработку персональных
-                данных
+                {t("Contacts.policy")}
               </div>
             </div>
           </Col>
@@ -142,7 +149,9 @@ const Contacts = () => {
               xl={{ span: 6, offset: 3 }}
               xxl={{ span: 6, offset: 3 }}
             >
-              <div className="title">Контактная информация</div>
+              <div className="title">
+                {t("Contacts.contactInfo")}
+              </div>
               <div className="contacts__wrapper-info">
                 <img src={map} alt="map" />
                 <div className="contacts__text">Montenegro, Budva</div>
@@ -175,18 +184,22 @@ const Contacts = () => {
           >
             <Modal.Header closeButton className="modal-header-without-border">
               <Modal.Title id="contained-modal-title-vcenter">
-                Спасибо
+                {t("Modal.thanks")}
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <div className="card-modal-thanks__text">
-                Ваша заявка принята.
-                <br /> В Ближайшее время с вами свяжется наш менеджер
+                <p>
+                  {t("Modal.thanksText1")}
+                </p> 
+                <p>
+                  {t("Modal.thanksText2")}
+                </p> 
               </div>
               <Link to={`/`}>
                 <button className="btn btn_vinous btn_center card-modal-thanks__btn">
                   <div className="btn__text btn__text_center">
-                    Вернуться на главную
+                    {t("Modal.backHome")}
                   </div>
                 </button>
               </Link>
