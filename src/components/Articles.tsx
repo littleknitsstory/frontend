@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CardArticle from "./CardArticle";
 import { getArticles } from "../api";
-import { IArticle } from "../api/models";
+import { IArticle, IArticlesResponse } from "../api/models";
 import arrowRight from "../icons/arrow-right.svg";
 
 const Articles = () => {
@@ -14,7 +14,7 @@ const Articles = () => {
 
   useEffect(() => {
     const fetchArticles = async (): Promise<void> => {
-      const data = await getArticles(0, limit);
+      const data: IArticlesResponse | void = await getArticles(0, limit);
       if (data) {
         setArticles(data.results);
         setCount(data.count);

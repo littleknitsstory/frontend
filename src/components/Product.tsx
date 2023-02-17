@@ -14,7 +14,7 @@ const Product = () => {
   useEffect(() => {
     const fetchProductDetails = async (): Promise<void> => {
       if (!slug) return;
-      const data = await getProductDetails(slug);
+      const data: IProductDetails | void = await getProductDetails(slug);
       if (data) {
         setProduct(data);
       }

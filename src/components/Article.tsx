@@ -16,7 +16,7 @@ const Article = () => {
   useEffect(() => {
     const fetchArticleDetails = async (): Promise<void> => {
       if (!slug) return;
-      const data = await getArticleDetails(slug);
+      const data: IArticle | void = await getArticleDetails(slug);
       if (data) {
         setArticle(data);
       }
