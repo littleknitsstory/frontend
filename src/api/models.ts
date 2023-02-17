@@ -86,3 +86,20 @@ export interface IContactRequest {
   phone_number?: string;
   company?: string;
 }
+
+export interface IArticle {
+  title: string;
+  slug: string;
+  content: string;
+  author: number;
+  image_preview: string;
+  image_alt: string;
+  created_at: string;
+}
+
+export interface IArticlesResponse {
+  count: number;
+  next: string;
+  previous: string;
+  results: IArticle[];
+}
