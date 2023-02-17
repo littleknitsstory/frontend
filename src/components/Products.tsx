@@ -3,7 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import { getProducts } from "../api";
-import { IProduct } from "../api/models";
+import { IProduct, IProductsResponse } from "../api/models";
 import arrowRight from "../icons/arrow-right.svg";
 import CardProduct from "./CardProduct";
 import Filters from "./Filters";
@@ -16,7 +16,7 @@ const Products = () => {
 
   useEffect(() => {
     const fetchProducts = async (): Promise<void> => {
-      const data = await getProducts(0, limit);
+      const data: IProductsResponse | void = await getProducts(0, limit);
       if (data) {
         setProducts(data.results);
         setCount(data.count);
