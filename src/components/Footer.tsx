@@ -1,13 +1,30 @@
-import React from "react";
-import { Container, Form, Row, Col } from "react-bootstrap";
+import React, { useCallback } from "react";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import vk from "../icons/logo-vk_white.svg";
-import facebook from "../icons/logo-facebook_white.svg";
-import pinterest from "../icons/logo-pinterest_white.svg";
-import instagram from "../icons/logo-instagram_white.svg";
+
+import { postSubscribeRequest } from "../api";
 import Social from "./Social";
 
 const Footer = () => {
+  const [email, setEmail] = React.useState<string>("");
+  const handleEmailChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setEmail(event.target.value);
+    },
+    []
+  );
+
+  const handleSubscribe = useCallback(
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      await postSubscribeRequest({
+        email,
+      });
+      setEmail("");
+    },
+    [email]
+  );
+
   return (
     <section className="footer">
       <Container>
@@ -64,11 +81,16 @@ const Footer = () => {
                   Мы проводим специальные акции для наших клиентов. Оформите
                   подписку и мы будем держать вас в курсе
                 </div>
-                <Form>
+                <Form onSubmit={handleSubscribe}>
                   <Form.Group className="mb-3" controlId="formGroupEmail">
-                    <Form.Control type="email" placeholder="Ваш e-mail" />
+                    <Form.Control
+                      type="email"
+                      placeholder="Ваш e-mail"
+                      value={email}
+                      onChange={handleEmailChange}
+                    />
 
-                    <button className="btn btn_border">
+                    <button className="btn btn_border" type="submit">
                       <div className="btn__text btn__text_center">
                         Подписаться
                       </div>
