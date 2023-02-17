@@ -1,13 +1,32 @@
-import React from "react"
+import React, { useCallback } from "react";
 import { Container, Form, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import Social from "./Social";
 import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
+import { postSubscribeRequest } from "../api";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const { t } = useTranslation()
 
+  const [email, setEmail] = React.useState<string>("");
+  const handleEmailChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setEmail(event.target.value);
+    },
+    []
+  );
+
+  const handleSubscribe = useCallback(
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      await postSubscribeRequest({
+        email,
+      });
+      setEmail("");
+    },
+    [email]
+  );
   return (
     <section className="footer">
       <Container>
@@ -49,11 +68,16 @@ const Footer = () => {
                 <div className="footer__subscribe-text">
                   {t("Footer.subscribe.text")}
                 </div>
-                <Form>
+                <Form onSubmit={handleSubscribe}>
                   <Form.Group className="mb-3" controlId="formGroupEmail">
-                    <Form.Control type="email" placeholder="E-mail" />
+                    <Form.Control
+                      type="email"
+                      placeholder="Ваш e-mail"
+                      value={email}
+                      onChange={handleEmailChange}
+                    />
 
-                    <button className="btn btn_border">
+                    <button className="btn btn_border" type="submit">
                       <div className="btn__text btn__text_center">
                         {t("Footer.subscribe.buttonText")}
                       </div>
