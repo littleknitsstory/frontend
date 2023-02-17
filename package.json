@@ -14,7 +14,11 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.6.2",
     "react-scripts": "5.0.1",
+<<<<<<< HEAD
     "sanitize-html": "^2.9.0",
+=======
+    "sass": "^1.58.0",
+>>>>>>> dacbfad46eec6b8e3b521a1122862614210ed9e6
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },

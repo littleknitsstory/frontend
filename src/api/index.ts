@@ -11,6 +11,7 @@ enum URLS {
   PRODUCTS = "api/v1/products/",
   CONTACTS = "api/v1/contacts/",
   ARTICLES = "/api/v1/posts/",
+  SUBSCRIBE = "api/v1/subscribe/",
 }
 
 export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";
@@ -112,4 +113,21 @@ export const getArticleDetails = async (
     }
     throw new Error("Something went wrong");
   } catch (error) {}
+};
+export const postSubscribeRequest = async ({
+  email,
+}: {
+  email: string;
+}): Promise<boolean> => {
+  try {
+    const response = await apiClient.post(`${URLS.SUBSCRIBE}`, {
+      email,
+    });
+    if (response.ok) {
+      return true;
+    }
+    throw new Error("Something went wrong");
+  } catch (error) {
+    return false;
+  }
 };

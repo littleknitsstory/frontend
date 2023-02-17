@@ -1,3 +1,8 @@
+<<<<<<< HEAD:src/App.tsx
+=======
+import "./sass/style.scss";
+
+>>>>>>> dacbfad46eec6b8e3b521a1122862614210ed9e6:src/App.jsx
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
