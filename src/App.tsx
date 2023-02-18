@@ -1,7 +1,7 @@
 import "./sass/style.scss";
 
 import { createContext, useState } from "react";
-import { BrowserRouter as Router, Routes, Route  } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import Article from "./components/Article";
@@ -15,7 +15,7 @@ import ScrollToTop from "./components/ScrollToTop"
 
 // routes
 import Root from "./routes/Root";
-// import Home from "./routes/Home";
+import Home from "./routes/Home";
 import Blog from "./routes/Blog";
 import ContactPage from "./routes/ContactPage";
 
@@ -40,8 +40,8 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Root />}>
-            <Route index element={<Blog />} /> {/* Change homepage to "Blog" */}
-            <Route path="blog" element={<Blog />} />
+            <Route index element={<Navigate to="blog" />} /> 
+            <Route path="blog" index element={<Blog />} />
             <Route path="posts/:slug" element={<Article />} />
             <Route path="shop" element={<Products />} />
             <Route path="product/:slug" element={<Product />} />
