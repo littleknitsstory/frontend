@@ -1,19 +1,14 @@
 import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
-import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { LanguageContext, ILangContext } from "../App";
 
-import user from "../icons/user.svg";
-import logout from "../icons/logout.svg";
-import heart from "../icons/heart.svg";
-import shoppingBag from "../icons/shopping-bag.svg";
 import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
-import { LanguageContext } from "../App";
 
 const NavBar = () => {
-  const {language, selectLanguage} = useContext(LanguageContext)
+  const {language, selectLanguage} = useContext<ILangContext>(LanguageContext)
 
   return (
     <section className="lks-navbar">
@@ -22,7 +17,8 @@ const NavBar = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
             <div className="lks-navbar__right">
-              <div className="lks-navbar__icons">
+              {/* Hiding accounts links */}
+              {/* <div className="lks-navbar__icons">
                 <a href="#">
                   <img src={user} alt="user" />
                 </a>
@@ -35,21 +31,20 @@ const NavBar = () => {
                 <Link to="/cart">
                   <img src={shoppingBag} alt="shoppingBag" />
                 </Link>
-              </div>
-              
+              </div> */}
               <NavDropdown 
                 title={language.toUpperCase()}
                 id="basic-nav-dropdown"
                 className="lks-navbar__lang"
               >
                 <NavDropdown.Item 
-                  onClick={(e) => selectLanguage(e.target.dataset.lang)} 
+                  onClick={(e) => selectLanguage?.(e.currentTarget.textContent!)} 
                   data-lang="en"
                 >EN
                 </NavDropdown.Item>
 
                 <NavDropdown.Item 
-                  onClick={(e) => selectLanguage(e.target.dataset.lang)} 
+                  onClick={(e) => selectLanguage?.(e.currentTarget.textContent!)} 
                   data-lang="ru"
                 >RU
                 </NavDropdown.Item>
@@ -58,12 +53,9 @@ const NavBar = () => {
 
             <Navbar.Collapse>
               <Nav className="lks-navbar__links">
-                <PrimaryNav />
+                <PrimaryNav type={"header"}/>
               </Nav>
             </Navbar.Collapse>
-
-            
-         
         </Container>
       </Navbar>
     </section>

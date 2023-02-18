@@ -40,7 +40,7 @@ const Footer = () => {
               <Row>
                 <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
                   <div className="footer__navbar">
-                    <PrimaryNav />
+                    <PrimaryNav type={"footer"} />
                   </div>
                 </Col>
                 {/* <Col xs={12} md={12} lg={6} xl={6} xxl={6}>

@@ -15,7 +15,7 @@ import ScrollToTop from "./components/ScrollToTop"
 
 // routes
 import Root from "./routes/Root";
-import Home from "./routes/Home";
+// import Home from "./routes/Home";
 import Blog from "./routes/Blog";
 import ContactPage from "./routes/ContactPage";
 
@@ -40,7 +40,7 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Root />}>
-            <Route index element={<Home />} />
+            <Route index element={<Blog />} /> {/* Change homepage to "Blog" */}
             <Route path="blog" element={<Blog />} />
             <Route path="posts/:slug" element={<Article />} />
             <Route path="shop" element={<Products />} />

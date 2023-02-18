@@ -190,7 +190,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
       <div className="product-card__modal-quick-purchase">
         <Modal show={showModalQuickPurchase} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Быстрая покупка</Modal.Title>
+            <Modal.Title>{t("Modal.title", "Быстрая покупка")}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="product-card__modal-quick-purchase-body">
@@ -205,17 +205,17 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
                 </div>
 
                 <div className="product-card__modal-quick-purchase-part-number">
-                  Артикул: {product.code}
+                  {t("Modal.code")}: {product.code}
                 </div>
                 <div className="product-card__modal-quick-purchase-color">
-                  Цвет:{" "}
+                  {t("Modal.color")}:{" "}
                 </div>
                 <div className="product-card__modal-quick-purchase-wrapper">
                   <div className="product-card__modal-quick-purchase-wrapper-price">
                     {product.sale}
                   </div>
                   <div className="product-card__modal-quick-purchase-wrapper-discount">
-                    Скидка 555
+                    {t("Modal.discount")} 555
                   </div>
                 </div>
               </div>
@@ -229,7 +229,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
                 <Form.Control
                   required
                   type="text"
-                  placeholder="ФИО"
+                  placeholder={t("Modal.name")}
                   autoFocus
                 />
               </Form.Group>
@@ -238,15 +238,17 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
                 className="mb-3"
                 controlId="exampleForm.ControlInput2"
               >
-                <Form.Control required type="text" placeholder="Телефон" />
+                <Form.Control 
+                  required type="text" 
+                  placeholder={t("Modal.phone")} 
+                />
               </Form.Group>
               <button type="submit" className="btn btn_vinous btn_center">
-                <div className="btn__text btn__text_center">Отправить</div>
+                <div className="btn__text btn__text_center">{t("Modal.send")}</div>
               </button>
             </Form>
             <div className="product-card__modal-quick-purchase-policy">
-              Нажимая «Отправить», вы даете согласие на обработку персональных
-              данных
+              {t("Modal.policy")}
             </div>
           </Modal.Body>
         </Modal>
@@ -260,18 +262,18 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
         >
           <Modal.Header closeButton className="modal-header-without-border">
             <Modal.Title id="contained-modal-title-vcenter">
-              Спасибо
+              {t("Modal.thanks")}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="card-modal-thanks__text">
-              Ваша заявка принята.
-              <br /> В Ближайшее время с вами свяжется наш менеджер
+              {t("Modal.thanksText1")}
+              <br /> {t("Modal.thanksText2")}
             </div>
             <Link to={`/`}>
               <button className="btn btn_vinous btn_center card-modal-thanks__btn">
                 <div className="btn__text btn__text_center">
-                  Вернуться на главную
+                  {t("Modal.backHome")}
                 </div>
               </button>
             </Link>
