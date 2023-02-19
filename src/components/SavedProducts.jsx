@@ -1,11 +1,10 @@
-import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CardProduct from "./CardProduct";
 import arrowRight from "../icons/arrow-right.svg";
 import { useTranslation } from "react-i18next";
 
 const SavedProducts = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   const array = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
   return (
@@ -21,9 +20,7 @@ const SavedProducts = () => {
           })}
         </Row>
         <button className="btn btn_border">
-          <div className="btn__text">
-            {t("Cart")}
-          </div>
+          <div className="btn__text">{t("Cart")}</div>
           <div className="btn__icon">
             <img src={arrowRight} alt="arrowWhite" />
           </div>

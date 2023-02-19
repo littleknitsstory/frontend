@@ -1,10 +1,7 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import articleImg from "../images/article-img.png";
-import CardArticle from "./CardArticle";
-import arrowRight from "../icons/arrow-right.svg";
-import { Link, useParams } from "react-router-dom";
-import { getArticleDetails, getArticles } from "../api";
+import { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { getArticleDetails } from "../api";
 import { IArticle } from "../api/models";
 import Spinner from "./Spinner";
 import Articles from "./Articles";
@@ -14,7 +11,7 @@ const Article = () => {
   const { slug } = useParams();
   const [article, setArticle] = useState<IArticle | null>(null);
 
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchArticleDetails = async (): Promise<void> => {
