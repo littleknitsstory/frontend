@@ -2,15 +2,20 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
+import { ErrorType } from "./Hooks/useFetch";
 
-const Page404 = () => {
+type Props = {
+  error?: ErrorType
+}
+
+const Page404 = ({error}: Props) => {
   return (
     <section className="page404">
       <Container>
         <Row>
           <Col>
-            <div className="page404__error">404</div>
-            <div className="page404__subtitle">Not found</div>
+            <div className="page404__error">{error?.status}</div>
+            <div className="page404__subtitle">{error?.text}</div>
             <div className="page404__text">
               The page you are trying to reach does not exist or has been
               deleted. <br />

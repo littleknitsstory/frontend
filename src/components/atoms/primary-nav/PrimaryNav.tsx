@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from "react"
-import { IMenu, IMenuResponse } from "../../../api/models"
-import { getMenu } from "../../../api";
+import React, { useContext } from "react"
+import { Container, Row, Col } from "react-bootstrap";
+import { IMenuResponse } from "../../../api/models"
 import { NavLink } from "react-router-dom";
-
 import { LanguageContext } from "../../../App"
+import { useGet } from "../../Hooks/useFetch";
 
 import "./primary-nav.scss"
 
@@ -12,26 +12,42 @@ interface propTypes {
   }
 
 const PrimaryNav = (props: propTypes) => {
-  const [menu, setMenu] = useState<IMenu[] | []>([]);
-  const {language} = useContext(LanguageContext)
+  const { language } = useContext(LanguageContext)
+  const { data, loading, error } = useGet<IMenuResponse>(
+    { 
+      url: "MENU", 
+      method: "GET", 
+      lang: language, 
+    })
+  // const navigate = useNavigate()
 
-  useEffect(() => {
-    const fetchMenu = async (): Promise<void> => {
-      const data: IMenuResponse | void = await getMenu({headers: {"Accept-Language": language}});
-      if (data) {
-        console.log(data)
-        // Filtering and ordering menu items
-        const filteredMenu: IMenu[] = data.results.filter(item => item.menu.hint === props.type)
-          .sort((a, b) => a.ordering - b.ordering)
-        setMenu(filteredMenu)
-      }
-    };
-    fetchMenu()
-  },[language])
+  // useEffect(() => {
+  //   if (error) {
+  //     navigate("/error")
+  //   }
+  // }, [data, error])
+  
+  const filteredMenu = data?.results.filter(item => item.menu.hint === props.type)
+  .sort((a, b) => a.ordering - b.ordering)
+  
+  if (error) {
+    return (
+      <Container>
+        <Row>
+          <Col>
+            
+            <div className="page404__subtitle-menu">Can't load menu. Please refresh page</div>
+            
+              
+          </Col>
+        </Row>
+      </Container>
+    )
+  }
 
   return (
     <>
-    {menu.map(item => (
+    {!error && filteredMenu?.map(item => (
     item.target ? 
       <a 
         key={item.id} 

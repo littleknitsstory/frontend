@@ -18,6 +18,7 @@ enum URLS {
 
 export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";
 
+
 export const getProducts = async (
   offset: number,
   limit: number
@@ -124,6 +125,7 @@ export const getArticleDetails = async (
         image_preview: `${PICTURE_BASE_URL}${data.image_preview}`,
       } as IArticle;
     }
+
     throw new Error("Something went wrong");
   } catch (error) {}
 };

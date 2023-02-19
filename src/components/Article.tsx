@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import articleImg from "../images/article-img.png";
 import CardArticle from "./CardArticle";
@@ -9,43 +9,46 @@ import { IArticle } from "../api/models";
 import Spinner from "./Spinner";
 import Articles from "./Articles";
 import { useTranslation } from "react-i18next";
+import { useGet } from "./Hooks/useFetch";
+import { LanguageContext } from "../App";
+import Page404 from "./Page404";
 
 const Article = () => {
-  const { slug } = useParams();
-  const [article, setArticle] = useState<IArticle | null>(null);
-
+  const { language } = useContext(LanguageContext)
   const { t } = useTranslation()
+  const { slug } = useParams();
+  // const [article, setArticle] = useState<IArticle>();
 
-  useEffect(() => {
-    const fetchArticleDetails = async (): Promise<void> => {
-      if (!slug) return;
-      const data: IArticle | void = await getArticleDetails(slug);
-      if (data) {
-        setArticle(data);
-      }
-    };
-    fetchArticleDetails();
-  }, [slug]);
+  const { data, loading, error } = useGet<IArticle>({
+    url: "ARTICLES",
+    method: "GET",
+    lang: language,
+    slug: slug,
+  })
+
+  if (error) {
+    return (
+      <Page404 error={error}/>
+    )
+  }
 
   return (
     <section className="article">
       <Container>
-        {article === null ? (
-          <Spinner />
-        ) : (
+        {loading && <Spinner />}
+        {!loading && 
           <div>
-            <h3 className="title">{article.title}</h3>
+            <h3 className="title">{data?.title}</h3>
             <div className="article__wrapper-article">
               <div
                 className="article__text"
                 dangerouslySetInnerHTML={{
-                  __html: article.content,
+                  __html: data!.content,
                 }}
               ></div>
             </div>
           </div>
-        )}
-
+        } 
         <h3 className="title">{t("otherPosts")}</h3>
         <Articles />
       </Container>

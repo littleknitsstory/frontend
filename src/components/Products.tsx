@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -8,25 +8,44 @@ import { IProduct, IProductsResponse } from "../api/models";
 import arrowRight from "../icons/arrow-right.svg";
 import CardProduct from "./CardProduct";
 import Filters from "./Filters";
+import { useGet } from "./Hooks/useFetch";
+import { LanguageContext } from "../App";
+import {baseURL} from "./Hooks/useFetch"
+import Page404 from "./Page404";
+import Spinner from "./Spinner";
 
 const Products = () => {
   const { t } = useTranslation()
+  const { language } = useContext(LanguageContext)  
 
-  const [products, setProducts] = useState<IProduct[]>([]);
-  const [limit, setLimit] = useState<number>(0);
+  const [products, setProducts] = useState<IProduct[]>();
+  const [limit, setLimit] = useState<number>(4);
   const [count, setCount] = useState<number>(0);
-  const isLastPage = limit + 4 >= count;
+  const isLastPage = limit >= count;
 
+  const { data, loading, error } = useGet<IProductsResponse>({
+    url: "PRODUCTS",
+    method: "GET",
+    lang: language,
+    query: {
+      limit: limit,
+      offset: 0
+    }
+  })
   useEffect(() => {
-    const fetchProducts = async (): Promise<void> => {
-      const data: IProductsResponse | void = await getProducts(0, limit);
-      if (data) {
-        setProducts(data.results);
-        setCount(data.count);
+    if (data) {
+      const updatedData = {
+        ...data,
+        results: data?.results.map((item) => ({
+          ...item,
+          image_preview: `${baseURL}${item.image_preview}`,
+        })),
       }
-    };
-    fetchProducts();
-  }, [limit]);
+      setProducts(updatedData.results)
+      setCount(data.count)
+
+    }
+  }, [data]);
 
   const handleSeeMore = useCallback((): void => {
     window.scrollTo({
@@ -36,8 +55,16 @@ const Products = () => {
     setLimit((prev) => prev + 4);
   }, []);
 
+  if (error) {
+    console.log(error)
+    return (
+      <Page404 error={error}/>
+    )
+  }
+
   return (
     <Container>
+      {loading && <Spinner />}
       <div className="products">
         <Row>
           <Col
@@ -70,7 +97,7 @@ const Products = () => {
           </Col>
           <Col>
             <Row xs={1} md={1} lg={2} xl={2} xxl={3}>
-              {products.map((item) => {
+              {products?.map((item) => {
                 return (
                   <Col key={item.id}>
                     <CardProduct product={item} />
@@ -81,14 +108,20 @@ const Products = () => {
           </Col>
         </Row>
         {!isLastPage && (
-          <Row>
-            <Col>
-              <Link to="/shop" onClick={handleSeeMore}>
-                {t("seeMore")}
-                <img src={arrowRight} alt="arrowRight" />
-              </Link>
-            </Col>
-          </Row>
+          // <Row>
+          //   <Col>
+          //     <Link to="/shop" onClick={handleSeeMore}>
+          //       {t("seeMore")}
+          //       <img src={arrowRight} alt="arrowRight" />
+          //     </Link>
+          //   </Col>
+          // </Row>
+          <button className="btn btn_border" onClick={handleSeeMore}>
+          <div className="btn__text">{t("seeMore")}</div>
+          <div className="btn__icon">
+            <img src={arrowRight} alt="arrowWhite" />
+          </div>
+        </button>
         )}
       </div>
     </Container>

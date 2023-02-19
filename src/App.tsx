@@ -49,6 +49,7 @@ function App() {
             <Route path="saved" element={<SavedProducts />} />
             <Route path="cart" element={<Cart />} />
             <Route path="privacyPolicy" element={<PrivacyPolicy />} />
+            <Route path="error" element={<Page404 />} />
             <Route path="*" element={<Page404 />} />
           </Route>
         </Routes>
