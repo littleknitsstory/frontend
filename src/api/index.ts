@@ -1,11 +1,11 @@
 import apiClient from "./apiClient";
-import { 
-  IContactRequest, 
-  IProductDetails, 
-  IProductsResponse,
-  IMenuResponse,
-  IArticlesResponse,
+import {
   IArticle,
+  IArticlesResponse,
+  IContactRequest,
+  IMenuResponse,
+  IProductDetails,
+  IProductsResponse,
 } from "./models";
 
 enum URLS {
@@ -21,7 +21,7 @@ export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";
 export const getProducts = async (
   offset: number,
   limit: number
-): Promise<IProductsResponse | void> => {
+): Promise<IProductsResponse> => {
   try {
     const response: Response = await apiClient.get(
       `${URLS.PRODUCTS}?offset=${offset}&limit=${limit}`
@@ -37,7 +37,9 @@ export const getProducts = async (
       } as IProductsResponse;
     }
     throw new Error("Something went wrong");
-  } catch (error) {}
+  } catch (error: unknown) {
+    throw new Error("Something went wrong");
+  }
 };
 
 export const getProductDetails = async (
@@ -56,16 +58,18 @@ export const getProductDetails = async (
   } catch (error) {}
 };
 
-export const getMenu = async (headers: RequestInit): Promise<IMenuResponse | void>  => {
+export const getMenu = async (
+  headers: RequestInit
+): Promise<IMenuResponse | void> => {
   try {
-    const response: Response = await apiClient.get(`${URLS.MENU}`, headers)
+    const response: Response = await apiClient.get(`${URLS.MENU}`, headers);
     if (response.ok) {
       const data: IMenuResponse = await response.json();
-      return data
+      return data;
     }
-    throw new Error("Something went wrong")
+    throw new Error("Something went wrong");
   } catch (error) {}
-}
+};
 
 export const postContactRequest = async ({
   email,
