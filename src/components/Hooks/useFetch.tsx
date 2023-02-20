@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { IContactRequest } from "../../api/models";
 
 interface BaseProps {
   url: "MENU" | "PRODUCTS" | "ARTICLES" | "SUBSCRIBE" | "CONTACTS";
@@ -9,6 +10,7 @@ interface GetProps {
   body?: never;
   lang: string;
   slug?: string;
+  isFormReady?: never;
   query?: {
     limit: number;
     offset: number;
@@ -17,9 +19,12 @@ interface GetProps {
 
 interface PostProps {
   method: "POST";
-  body: {};
+  body: {
+    [key: string]: string
+  };
   lang?: string;
   slug?: string;
+  isFormReady: boolean;
   query?: {
     limit: number;
     offset: number;
@@ -50,7 +55,7 @@ enum URLS {
   ARTICLES = "/api/v1/posts/",
 }
 
-export const useFetch = <T = unknown>({ url, method, lang, body, slug, query }: Props): FetchReturn<T> => {
+export const useFetch = <T = unknown>({ url, method, lang, body, slug, query, isFormReady }: Props): FetchReturn<T> => {
   const [data, setData] = useState<T>()
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<ErrorType | undefined>()
@@ -71,7 +76,6 @@ export const useFetch = <T = unknown>({ url, method, lang, body, slug, query }: 
         },
         body: JSON.stringify(body)        
       }
-      break
   }
 
   const fetchData = async () => {
@@ -83,26 +87,27 @@ export const useFetch = <T = unknown>({ url, method, lang, body, slug, query }: 
       endPoint = `?offset=${query.offset}&limit=${query.limit}`
     }
     try {
-      const response: Response = await fetch(`${fullURL}${endPoint}`, {...params})
+      if (method === "POST" && !isFormReady) return /* stop if form isn't submitted */
+      const response: Response = await fetch(`${fullURL}${endPoint}`, {
+        method: method,
+        ...params
+      })
       if (!response.ok) {
         setError({status: response.status, text: response.statusText})
-        // throw new Error("Something went wrong")
+        setData(undefined)
       } else {
         const data: T = await response.json()
-        if (data) {
-          setData(data)
-          setError(undefined)
+        setError(undefined)
+        setData(data)
         }
-      }
     } catch (error) {
-      
-    }
+      }
     setLoading(false)
   }
 
   useEffect(() => {
     fetchData()
-  }, [url, lang, query?.limit, slug])
+  }, [url, lang, query?.limit, slug, isFormReady])
 
   return {data, loading, error}
 }
@@ -111,6 +116,8 @@ export function useGet<T>({ url, method, lang, query, slug }: BaseProps & GetPro
     return useFetch({ url, method, lang, query, slug});
 }
 
-export function usePost<T>({ url, method, body}: BaseProps & PostProps): FetchReturn<T> {
-    return useFetch({ url, method, body });
+export function usePost<T>({ url, method, body, isFormReady}: BaseProps & PostProps): FetchReturn<T> {
+    return useFetch({ url, method, body, isFormReady });
 }
+
+

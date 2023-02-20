@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
@@ -8,54 +8,63 @@ import { postContactRequest } from "../api";
 import envelope from "../icons/envelope.svg";
 import map from "../icons/map-point.svg";
 import phone from "../icons/phone.svg";
+import { usePost } from "./Hooks/useFetch";
+import { IContactRequest } from "../api/models";
 
 const Contacts = () => {
   const { t } = useTranslation()
-
   const [showModalThanks, setShowModalThanks] = useState<boolean>(false);
-  const [name, setName] = useState<string>("");
-  const [message, setMessage] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [company, setCompany] = useState<string>("");
-  const [phone_number, setPhone_number] = useState<string>("");
+  const [isFormReady, setIsFormReady] = useState(false)
+
+  const [formData, setFormData] = useState<IContactRequest>({
+    name: "",
+    message: "",
+    email: "",
+    company: "",
+    phone_number: ""
+  })
+
+  const { data, error } = usePost<boolean>({
+    url: "CONTACTS",
+    method: "POST",
+    body: {...formData},
+    isFormReady: isFormReady
+  })
+
+  const onSubmitOrder = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsFormReady(true)
+  }
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>):void => {
+    const { name, value } = e.target
+    setFormData(prevData => {
+      return {
+        ...prevData,
+        [name]: value
+      }
+    })
+  }
 
   const clearForm = useCallback((): void => {
-    setName("");
-    setMessage("");
-    setEmail("");
-    setCompany("");
-    setPhone_number("");
+    setFormData({
+      name: "",
+      message: "",
+      email: "",
+      company: "",
+      phone_number: ""
+    })
   }, []);
 
-  const handleChange = useCallback(
-    (
-      handler: (value: string) => void
-    ): ((e: React.ChangeEvent<HTMLInputElement>) => void) => {
-      return (e) => {
-        handler(e.target.value);
-      };
-    },
-    []
-  );
-
-  const onSubmitOrder = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-      e.preventDefault();
-      const result = await postContactRequest({
-        name,
-        message,
-        email,
-        company,
-        phone_number,
-      });
-      if (result) {
-        setShowModalThanks(true);
-        clearForm();
-      }
-    },
-    [clearForm, company, email, message, name, phone_number]
-  );
-
+  useEffect(() => {
+    if (data) {
+      clearForm()
+      setShowModalThanks(true)
+      setIsFormReady(false)
+    } else {
+      console.log(error?.status, error?.text)
+      setIsFormReady(false)
+    }
+  }, [data, error])
 
   return (
     <section className="contacts">
@@ -79,16 +88,18 @@ const Contacts = () => {
                       required
                       type="text"
                       placeholder={t('Contacts.name')}
-                      value={name}
-                      onChange={handleChange(setName)}
+                      name="name"
+                      value={formData.name}
+                      onChange={handleFormChange}
                     />
                   </Form.Group>
                   <Form.Group as={Col} md="6" controlId="theme">
                     <Form.Control
                       type="text"
                       placeholder={t('Contacts.subject')}
-                      value={company}
-                      onChange={handleChange(setCompany)}
+                      name="company"
+                      value={formData.company}
+                      onChange={handleFormChange}
                     />
                   </Form.Group>
                 </Row>
@@ -99,8 +110,9 @@ const Contacts = () => {
                       required
                       type="text"
                       placeholder={t('Contacts.phone')}
-                      value={phone_number}
-                      onChange={handleChange(setPhone_number)}
+                      name="phone_number"
+                      value={formData.phone_number}
+                      onChange={handleFormChange}
                     />
                   </Form.Group>
                   <Form.Group as={Col} md="12" controlId="email">
@@ -108,8 +120,9 @@ const Contacts = () => {
                       required
                       type="email"
                       placeholder="Е-mail"
-                      value={email}
-                      onChange={handleChange(setEmail)}
+                      value={formData.email}
+                      name="email"
+                      onChange={handleFormChange}
                     />
                   </Form.Group>
                 </Row>
@@ -119,8 +132,9 @@ const Contacts = () => {
                       required
                       as="textarea"
                       placeholder={t("Contacts.message")}
-                      value={message}
-                      onChange={handleChange(setMessage)}
+                      value={formData.message}
+                      name="message"
+                      onChange={handleFormChange}
                     />
                   </Form.Group>
                 </Row>
@@ -210,5 +224,6 @@ const Contacts = () => {
     </section>
   );
 };
+
 
 export default Contacts;

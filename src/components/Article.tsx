@@ -1,10 +1,6 @@
-import React, { useEffect, useState, useCallback, useContext } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import articleImg from "../images/article-img.png";
-import CardArticle from "./CardArticle";
-import arrowRight from "../icons/arrow-right.svg";
-import { Link, useParams } from "react-router-dom";
-import { getArticleDetails, getArticles } from "../api";
+import React, { useContext } from "react";
+import { Container } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import { IArticle } from "../api/models";
 import Spinner from "./Spinner";
 import Articles from "./Articles";
@@ -17,7 +13,6 @@ const Article = () => {
   const { language } = useContext(LanguageContext)
   const { t } = useTranslation()
   const { slug } = useParams();
-  // const [article, setArticle] = useState<IArticle>();
 
   const { data, loading, error } = useGet<IArticle>({
     url: "ARTICLES",

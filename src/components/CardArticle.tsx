@@ -40,19 +40,17 @@ const CardArticle = ({ article }: { article: IArticle }) => {
                 <br /> {article.created_at.slice(0, 8)}
               </div>
               <div className="card-lks__btn">
-                <Link to={`/posts/${article.slug}`}>
-                  <button
-                    className="btn btn_vinous btn_center"
-                    onClick={() => {
-                      window.scrollTo({
-                        top: 0,
-                        behavior: "smooth",
-                      });
-                    }}
-                  >
-                    <div className="btn__text btn__text_center">{t("read")}</div>
-                  </button>
-                </Link>
+                <button
+                  className="btn btn_vinous btn_center"
+                  onClick={() => {
+                    window.scrollTo({
+                      top: 0,
+                      behavior: "smooth",
+                    });
+                  }}
+                >
+                  <div className="btn__text btn__text_center">{t("read")}</div>
+                </button>
               </div>
             </div>
           </Card.Body>

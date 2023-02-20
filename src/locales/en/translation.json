@@ -32,6 +32,7 @@
     "policy": "Privacy policy",
     "subscribe": {
       "text": "We run special promotions for our clients. Checkout subscribe and we will keep you updated",
+      "email": "Email",
       "buttonText": "Subscribe"
     }
   },

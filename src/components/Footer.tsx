@@ -1,15 +1,24 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { Container, Form, Row, Col } from "react-bootstrap";
 import Social from "./Social";
 import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
-import { postSubscribeRequest } from "../api";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { usePost } from "./Hooks/useFetch";
 
 const Footer = () => {
   const { t } = useTranslation()
-
   const [email, setEmail] = React.useState<string>("");
+  const [isFormReady, setIsFormReady] = useState(false)
+
+
+  const {data, error} = usePost({
+    url: "SUBSCRIBE",
+    method: "POST",
+    body: {"email": email},
+    isFormReady: isFormReady
+  })
+
   const handleEmailChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setEmail(event.target.value);
@@ -17,16 +26,22 @@ const Footer = () => {
     []
   );
 
-  const handleSubscribe = useCallback(
-    async (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      await postSubscribeRequest({
-        email,
-      });
-      setEmail("");
-    },
-    [email]
-  );
+  useEffect(() => {
+    if (data) {
+      setEmail("")
+      setIsFormReady(false)
+    } else {
+      console.log(error?.status, error?.text)
+      setIsFormReady(false)
+    }
+  }, [data, error])
+
+  const handleSumbit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault()
+    setIsFormReady(true)
+  }
+
+  
   return (
     <section className="footer">
       <Container>
@@ -68,11 +83,12 @@ const Footer = () => {
                 <div className="footer__subscribe-text">
                   {t("Footer.subscribe.text")}
                 </div>
-                <Form onSubmit={handleSubscribe}>
+                <Form onSubmit={(e) => handleSumbit(e)}>
                   <Form.Group className="mb-3" controlId="formGroupEmail">
                     <Form.Control
                       type="email"
-                      placeholder="Ваш e-mail"
+                      placeholder={t("Footer.subscribe.email")}
+                      required
                       value={email}
                       onChange={handleEmailChange}
                     />
