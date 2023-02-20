@@ -9,7 +9,7 @@ const apiClient = ({ headers, baseURL }: IConfig) => {
   let _headers = { ...headers };
   const _baseURL = baseURL;
 
-  const setHeaders = (headers: { [key: string]: string }) => {
+  const updateHeaders = (headers: { [key: string]: string }) => {
     _headers = { ..._headers, ...headers };
   };
 
@@ -29,7 +29,7 @@ const apiClient = ({ headers, baseURL }: IConfig) => {
     });
   };
 
-  return { get, post, setHeaders };
+  return { get, post, updateHeaders };
 };
 
 export default apiClient({

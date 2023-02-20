@@ -19,7 +19,7 @@ const NavBar = () => {
   const handleLanguageSelect = useCallback(
     (value: string) => () => {
       selectLanguage(value);
-      apiClient.setHeaders({ "Accept-Language": value });
+      apiClient.updateHeaders({ "Accept-Language": value });
     },
     [selectLanguage]
   );

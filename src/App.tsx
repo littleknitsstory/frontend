@@ -28,12 +28,12 @@ export const LanguageContext = createContext<ILangContext>({
 });
 
 function App() {
-  const [language, setLanguage] = useState(
+  const [language, setLanguage] = useState<string>(
     localStorage.getItem("i18nextLng") || "en"
   );
   const { i18n } = useTranslation();
 
-  const selectLanguage = (lang: string) => {
+  const selectLanguage = (lang: string): void => {
     setLanguage(lang);
     i18n.changeLanguage(lang.toLowerCase());
   };
