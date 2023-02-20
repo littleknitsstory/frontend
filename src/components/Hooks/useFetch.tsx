@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { IContactRequest } from "../../api/models";
 
 interface BaseProps {
   url: "MENU" | "PRODUCTS" | "ARTICLES" | "SUBSCRIBE" | "CONTACTS";
@@ -40,7 +39,8 @@ export interface ErrorType {
 }
 
 interface FetchReturn<T> {
-  data?: T 
+  data?: T
+  postData?: {[key: string]: string[]} 
   error?: ErrorType;
   loading?: boolean;
 }
@@ -59,7 +59,9 @@ export const useFetch = <T = unknown>({ url, method, lang, body, slug, query, is
   const [data, setData] = useState<T>()
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<ErrorType | undefined>()
+  const [postData, setPostData] = useState<{[key: string]: string[]}>()
 
+  // settings params for each method
   let params: RequestInit  
   switch(method) {
     case "GET":
@@ -86,21 +88,28 @@ export const useFetch = <T = unknown>({ url, method, lang, body, slug, query, is
     if (query) {
       endPoint = `?offset=${query.offset}&limit=${query.limit}`
     }
+
     try {
       if (method === "POST" && !isFormReady) return /* stop if form isn't submitted */
+
       const response: Response = await fetch(`${fullURL}${endPoint}`, {
         method: method,
         ...params
       })
+
       if (!response.ok) {
         setError({status: response.status, text: response.statusText})
         setData(undefined)
+        const data = await response.json()
+        setPostData(data)
       } else {
         const data: T = await response.json()
         setError(undefined)
         setData(data)
+        setPostData(data as {[key: string]: string[]})
         }
     } catch (error) {
+        setError({text: "Something went wrong"})
       }
     setLoading(false)
   }
@@ -108,8 +117,7 @@ export const useFetch = <T = unknown>({ url, method, lang, body, slug, query, is
   useEffect(() => {
     fetchData()
   }, [url, lang, query?.limit, slug, isFormReady])
-
-  return {data, loading, error}
+  return {data, loading, error, postData}
 }
 
 export function useGet<T>({ url, method, lang, query, slug }: BaseProps & GetProps): FetchReturn<T> {

@@ -5,14 +5,17 @@ import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { usePost } from "./Hooks/useFetch";
+import ModalThanks from "./atoms/modal/ModalThanks";
+import useModalState from "./Hooks/useModalState";
 
 const Footer = () => {
   const { t } = useTranslation()
   const [email, setEmail] = React.useState<string>("");
   const [isFormReady, setIsFormReady] = useState(false)
+  const {showModalThanks, setShowModalThanks, handleCloseThanks} = useModalState()
 
 
-  const {data, error} = usePost({
+  const {data, error, postData} = usePost({
     url: "SUBSCRIBE",
     method: "POST",
     body: {"email": email},
@@ -30,15 +33,19 @@ const Footer = () => {
     if (data) {
       setEmail("")
       setIsFormReady(false)
+      setShowModalThanks(true)
     } else {
-      console.log(error?.status, error?.text)
       setIsFormReady(false)
+      console.log(error?.status, error?.text)
+      console.log(postData)
     }
-  }, [data, error])
+  }, [data, error, postData])
 
-  const handleSumbit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
+    
     setIsFormReady(true)
+    
   }
 
   
@@ -83,7 +90,7 @@ const Footer = () => {
                 <div className="footer__subscribe-text">
                   {t("Footer.subscribe.text")}
                 </div>
-                <Form onSubmit={(e) => handleSumbit(e)}>
+                <Form onSubmit={(e) => handleSubmit(e)}>
                   <Form.Group className="mb-3" controlId="formGroupEmail">
                     <Form.Control
                       type="email"
@@ -106,6 +113,10 @@ const Footer = () => {
             </Col>
           </Row>
         </div>
+        <ModalThanks 
+          showModal={showModalThanks}
+          handleClose={handleCloseThanks}
+        />
 
         <div className="footer__end">
           <Row>

@@ -82,8 +82,11 @@
     "send": "Send",
     "policy": "By submitting your personal data, you agree to its processing.",
     "thanks": "Thanks",
-    "thanksText1": "Your application is accepted.",
-    "thanksText2": "Our manager will contact you shortly",
+    "thanksText": {
+      "quickOrder1": "Your application is accepted.",
+      "quickOrder2": "Our manager will contact you shortly",
+      "subscription": "You're successfully subscribe. Thank you!"
+    },
     "backHome": "Back to home"
   },
   "lastReviews": "Last Reviews",

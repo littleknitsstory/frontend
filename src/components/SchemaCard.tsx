@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import Form from "react-bootstrap/Form";
-import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -10,26 +8,20 @@ import arrowRight from "../icons/arrow-right.svg";
 import like from "../icons/like.svg";
 import questionInfo from "../icons/question.svg";
 import Social from "./Social";
+import useModalState from "./Hooks/useModalState";
+import ModalMain from "./atoms/modal/ModalMain";
+import ModalThanks from "./atoms/modal/ModalThanks";
 
 const SchemaCard = ({ product }: { product: IProductDetails }) => {
   const { t } = useTranslation()
-  const [showModalQuickPurchase, setShowModalQuickPurchase] =
-    useState<boolean>(false);
-
-  const [showModalThanks, setShowModalThanks] = useState<boolean>(false);
-
-  const handleShow = (): void => {
-    setShowModalQuickPurchase(true);
-  };
-  const handleClose = (): void => {
-    setShowModalQuickPurchase(false);
-    setShowModalThanks(false);
-  };
-  const onSubmitOrder = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    setShowModalQuickPurchase(false);
-    setShowModalThanks(true);
-  };
+  const {
+    showModal, 
+    showModalThanks, 
+    handleShow, 
+    handleClose, 
+    handleCloseThanks,
+    onSubmitOrder
+  } = useModalState()
 
   const [countProduct, setCountProduct] = useState<number>(1);
   const increaseCountProduct = (): void => {
@@ -188,7 +180,23 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
         </Col>
       </Row>
       <div className="product-card__modal-quick-purchase">
-        <Modal show={showModalQuickPurchase} onHide={handleClose}>
+        <ModalMain 
+          product={product}
+          showModal={showModal}
+          handleClose={handleClose}
+          onSubmitOrder={onSubmitOrder}
+        />
+        <ModalThanks 
+          showModal={showModalThanks}
+          handleClose={handleCloseThanks}
+          message={
+            <>
+              <p>{t("Modal.thanksText.quickOrder1")}</p>
+              <p>{t("Modal.thanksText.quickOrder2")}</p>
+            </>
+          } 
+        />
+        {/* <Modal show={showModalQuickPurchase} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>{t("Modal.title", "Быстрая покупка")}</Modal.Title>
           </Modal.Header>
@@ -278,7 +286,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
               </button>
             </Link>
           </Modal.Body>
-        </Modal>
+        </Modal> */}
       </div>
       <div className="card-modal-thanks"></div>
     </div>

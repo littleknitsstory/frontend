@@ -1,19 +1,22 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
-import Modal from "react-bootstrap/Modal";
-import { Link } from "react-router-dom";
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
-import { postContactRequest } from "../api";
 import envelope from "../icons/envelope.svg";
 import map from "../icons/map-point.svg";
 import phone from "../icons/phone.svg";
 import { usePost } from "./Hooks/useFetch";
 import { IContactRequest } from "../api/models";
+import useModalState from "./Hooks/useModalState";
+import ModalThanks from "./atoms/modal/ModalThanks";
 
 const Contacts = () => {
   const { t } = useTranslation()
-  const [showModalThanks, setShowModalThanks] = useState<boolean>(false);
+  const {
+    showModalThanks, 
+    setShowModalThanks, 
+    handleCloseThanks
+  } = useModalState()
   const [isFormReady, setIsFormReady] = useState(false)
 
   const [formData, setFormData] = useState<IContactRequest>({
@@ -24,7 +27,7 @@ const Contacts = () => {
     phone_number: ""
   })
 
-  const { data, error } = usePost<boolean>({
+  const { data, error, postData } = usePost<boolean>({
     url: "CONTACTS",
     method: "POST",
     body: {...formData},
@@ -35,6 +38,7 @@ const Contacts = () => {
     e.preventDefault()
     setIsFormReady(true)
   }
+  
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>):void => {
     const { name, value } = e.target
     setFormData(prevData => {
@@ -62,9 +66,10 @@ const Contacts = () => {
       setIsFormReady(false)
     } else {
       console.log(error?.status, error?.text)
+      console.log(postData)
       setIsFormReady(false)
     }
-  }, [data, error])
+  }, [data, error, postData])
 
   return (
     <section className="contacts">
@@ -189,7 +194,11 @@ const Contacts = () => {
           </Row>
         </div>
         <div className="card-modal-thanks">
-          <Modal
+        <ModalThanks 
+          showModal={showModalThanks}
+          handleClose={handleCloseThanks}
+        />
+          {/* <Modal
             show={showModalThanks}
             onHide={() => setShowModalThanks(false)}
             size="lg"
@@ -204,10 +213,10 @@ const Contacts = () => {
             <Modal.Body>
               <div className="card-modal-thanks__text">
                 <p>
-                  {t("Modal.thanksText1")}
+                  {t("Modal.thanksText.quickOrder1")}
                 </p> 
                 <p>
-                  {t("Modal.thanksText2")}
+                  {t("Modal.thanksText.quickOrder2")}
                 </p> 
               </div>
               <Link to={`/`}>
@@ -218,7 +227,7 @@ const Contacts = () => {
                 </button>
               </Link>
             </Modal.Body>
-          </Modal>
+          </Modal> */}
         </div>
       </Container>
     </section>

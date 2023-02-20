@@ -1,7 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CardArticle from "./CardArticle";
-import { getArticles } from "../api";
 import { IArticle, IArticlesResponse } from "../api/models";
 import arrowRight from "../icons/arrow-right.svg";
 import { useTranslation } from "react-i18next";
@@ -40,18 +39,11 @@ const Articles = () => {
       setArticles(updatedData.results)
       setCount(data.count)
     }
-    // const fetchArticles = async (): Promise<void> => {
-    //   const data: IArticlesResponse | void = await getArticles(0, limit);
-    //   if (data) {
-    //     setArticles(data.results);
-    //     setCount(data.count);
-    //   }
-    // };
+
     if (limit !== 4 && limit >= count) {
       setIsLastPage(true);
     }
-    // fetchArticles();
-  }, [data]);
+  }, [data, error]);
 
   const handleSeeMore = useCallback((): void => {
     setLimit((prev) => prev + 4);
