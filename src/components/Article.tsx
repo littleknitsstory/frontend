@@ -8,16 +8,16 @@ import { useTranslation } from "react-i18next";
 import { useGet } from "./Hooks/useFetch";
 import { LanguageContext } from "../App";
 import Page404 from "./Page404";
+import { Namespace } from "i18next";
 
 const Article = () => {
   const { language } = useContext(LanguageContext)
-  const { t } = useTranslation()
+  const { t } = useTranslation<Namespace<"translation">>()
   const { slug } = useParams();
 
   const { data, loading, error } = useGet<IArticle>({
     url: "ARTICLES",
     method: "GET",
-    lang: language,
     slug: slug,
   })
 

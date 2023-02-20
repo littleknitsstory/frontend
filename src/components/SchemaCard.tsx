@@ -11,9 +11,10 @@ import Social from "./Social";
 import useModalState from "./Hooks/useModalState";
 import ModalMain from "./atoms/modal/ModalMain";
 import ModalThanks from "./atoms/modal/ModalThanks";
+import { Namespace } from "i18next";
 
 const SchemaCard = ({ product }: { product: IProductDetails }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation<Namespace>()
   const {
     showModal, 
     showModalThanks, 
@@ -189,6 +190,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
         <ModalThanks 
           showModal={showModalThanks}
           handleClose={handleCloseThanks}
+          title={t("Modal.titleThanks.thanks")}
           message={
             <>
               <p>{t("Modal.thanksText.quickOrder1")}</p>

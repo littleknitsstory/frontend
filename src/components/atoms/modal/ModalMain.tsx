@@ -1,3 +1,4 @@
+import { Namespace } from "i18next";
 import { Modal, Form } from "react-bootstrap"
 import { useTranslation } from "react-i18next"
 import { IProduct } from "../../../api/models"
@@ -10,7 +11,7 @@ interface ModalProps {
 }
 
 const ModalMain = ({ product, showModal, handleClose, onSubmitOrder }: ModalProps) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation<Namespace<"translation">>()
 
   return (
     <Modal show={showModal} onHide={handleClose} centered>
@@ -36,6 +37,11 @@ const ModalMain = ({ product, showModal, handleClose, onSubmitOrder }: ModalProp
             </div>
             <div className="product-card__modal-quick-purchase-color">
               {t("CardProduct.color")}:
+              <div className="product-card__modal-quick-purchase-color-circle-wrapper">
+              {product.colors.map(({color}) => (
+                <div key={color} style={{backgroundColor: color}} className="product-card__modal-quick-purchase-color-circle"></div>
+              ))}
+              </div>
             </div>
             <div className="product-card__modal-quick-purchase-wrapper">
               <div className="product-card__modal-quick-purchase-wrapper-price">

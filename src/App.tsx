@@ -26,10 +26,10 @@ export interface ILangContext {
 export const LanguageContext = createContext<ILangContext>({language: "en"})
 
 function App() {
-  const [ language, setLanguage ] = useState(localStorage.getItem("i18nextLng") || "en")
+  const [ language, setLanguage ] = useState<string>(localStorage.getItem("i18nextLng") || "en")
   const { i18n } = useTranslation()
   
-  const selectLanguage = (lang: string)  => {
+  const selectLanguage = (lang: string): void => {
     setLanguage(lang)
     i18n.changeLanguage(lang.toLowerCase())
   }

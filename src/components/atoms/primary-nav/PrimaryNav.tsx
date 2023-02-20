@@ -1,7 +1,7 @@
-import React, { useContext } from "react"
+import React, { useContext,useEffect } from "react"
 import { Container, Row, Col } from "react-bootstrap";
 import { IMenuResponse } from "../../../api/models"
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { LanguageContext } from "../../../App"
 import { useGet } from "../../Hooks/useFetch";
 
@@ -17,9 +17,8 @@ const PrimaryNav = (props: propTypes) => {
     { 
       url: "MENU", 
       method: "GET", 
-      lang: language, 
     })
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   // useEffect(() => {
   //   if (error) {
@@ -35,10 +34,7 @@ const PrimaryNav = (props: propTypes) => {
       <Container>
         <Row>
           <Col>
-            
             <div className="page404__subtitle-menu">Can't load menu. Please refresh page</div>
-            
-              
           </Col>
         </Row>
       </Container>

@@ -17,8 +17,8 @@ import Spinner from "./Spinner";
 const Products = () => {
   const { t } = useTranslation()
   const { language } = useContext(LanguageContext)  
-
-  const [products, setProducts] = useState<IProduct[]>();
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [updateProducts, setUpdateProducts] = useState<boolean>(false)
   const [limit, setLimit] = useState<number>(4);
   const [count, setCount] = useState<number>(0);
   const isLastPage = limit >= count;
@@ -26,12 +26,12 @@ const Products = () => {
   const { data, loading, error } = useGet<IProductsResponse>({
     url: "PRODUCTS",
     method: "GET",
-    lang: language,
     query: {
       limit: limit,
       offset: 0
     }
   })
+
   useEffect(() => {
     if (data) {
       const updatedData = {
@@ -45,7 +45,7 @@ const Products = () => {
       setCount(data.count)
 
     }
-  }, [data]);
+  }, [data, updateProducts]);
 
   const handleSeeMore = useCallback((): void => {
     window.scrollTo({
@@ -56,7 +56,6 @@ const Products = () => {
   }, []);
 
   if (error) {
-    console.log(error)
     return (
       <Page404 error={error}/>
     )
@@ -93,7 +92,7 @@ const Products = () => {
               offset: 0,
             }}
           >
-            <Filters />
+            <Filters setProducts={setProducts} setUpdateProducts={setUpdateProducts}/>
           </Col>
           <Col>
             <Row xs={1} md={1} lg={2} xl={2} xxl={3}>
@@ -108,14 +107,6 @@ const Products = () => {
           </Col>
         </Row>
         {!isLastPage && (
-          // <Row>
-          //   <Col>
-          //     <Link to="/shop" onClick={handleSeeMore}>
-          //       {t("seeMore")}
-          //       <img src={arrowRight} alt="arrowRight" />
-          //     </Link>
-          //   </Col>
-          // </Row>
           <button className="btn btn_border" onClick={handleSeeMore}>
           <div className="btn__text">{t("seeMore")}</div>
           <div className="btn__icon">

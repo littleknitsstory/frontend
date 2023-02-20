@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { LanguageContext } from "../../App";
 
 interface BaseProps {
   url: "MENU" | "PRODUCTS" | "ARTICLES" | "SUBSCRIBE" | "CONTACTS";
@@ -7,7 +8,6 @@ interface BaseProps {
 interface GetProps {
   method: "GET";
   body?: never;
-  lang: string;
   slug?: string;
   isFormReady?: never;
   query?: {
@@ -21,7 +21,6 @@ interface PostProps {
   body: {
     [key: string]: string
   };
-  lang?: string;
   slug?: string;
   isFormReady: boolean;
   query?: {
@@ -55,7 +54,8 @@ enum URLS {
   ARTICLES = "/api/v1/posts/",
 }
 
-export const useFetch = <T = unknown>({ url, method, lang, body, slug, query, isFormReady }: Props): FetchReturn<T> => {
+export const useFetch = <T = unknown>({ url, method, body, slug, query, isFormReady }: Props): FetchReturn<T> => {
+  const {language} = useContext(LanguageContext)
   const [data, setData] = useState<T>()
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<ErrorType | undefined>()
@@ -67,7 +67,7 @@ export const useFetch = <T = unknown>({ url, method, lang, body, slug, query, is
     case "GET":
       params = {
         headers: {
-          "Accept-Language": lang
+          "Accept-Language": language
         }
       }
       break
@@ -106,7 +106,6 @@ export const useFetch = <T = unknown>({ url, method, lang, body, slug, query, is
         const data: T = await response.json()
         setError(undefined)
         setData(data)
-        setPostData(data as {[key: string]: string[]})
         }
     } catch (error) {
         setError({text: "Something went wrong"})
@@ -116,12 +115,12 @@ export const useFetch = <T = unknown>({ url, method, lang, body, slug, query, is
 
   useEffect(() => {
     fetchData()
-  }, [url, lang, query?.limit, slug, isFormReady])
+  }, [url, language, query?.limit, slug, isFormReady])
   return {data, loading, error, postData}
 }
 
-export function useGet<T>({ url, method, lang, query, slug }: BaseProps & GetProps): FetchReturn<T> {
-    return useFetch({ url, method, lang, query, slug});
+export function useGet<T>({ url, method, query, slug }: BaseProps & GetProps): FetchReturn<T> {
+    return useFetch({ url, method, query, slug});
 }
 
 export function usePost<T>({ url, method, body, isFormReady}: BaseProps & PostProps): FetchReturn<T> {

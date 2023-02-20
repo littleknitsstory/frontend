@@ -81,7 +81,9 @@
     "phone": "Phone",
     "send": "Send",
     "policy": "By submitting your personal data, you agree to its processing.",
-    "thanks": "Thanks",
+    "titleThanks": {
+      "thanks": "Thank you!"
+    },
     "thanksText": {
       "quickOrder1": "Your application is accepted.",
       "quickOrder2": "Our manager will contact you shortly",

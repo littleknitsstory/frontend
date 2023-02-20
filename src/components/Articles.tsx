@@ -8,9 +8,10 @@ import { baseURL, useGet } from "./Hooks/useFetch";
 import { LanguageContext } from "../App";
 import Page404 from "./Page404";
 import Spinner from "./Spinner";
+import { Namespace } from "i18next";
 
 const Articles = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation<Namespace<"translation">>()
   const { language } = useContext(LanguageContext)
   const [articles, setArticles] = useState<IArticle[]>([]);
   const [limit, setLimit] = useState<number>(4);
@@ -20,7 +21,6 @@ const Articles = () => {
   const { data, loading, error } = useGet<IArticlesResponse>({
     url: "ARTICLES",
     method: "GET",
-    lang: language,
     query: {
       limit: limit,
       offset: 0

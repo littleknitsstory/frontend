@@ -9,9 +9,10 @@ import { usePost } from "./Hooks/useFetch";
 import { IContactRequest } from "../api/models";
 import useModalState from "./Hooks/useModalState";
 import ModalThanks from "./atoms/modal/ModalThanks";
+import { Namespace } from "i18next";
 
 const Contacts = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation<Namespace<"translation">>()
   const {
     showModalThanks, 
     setShowModalThanks, 
@@ -65,8 +66,6 @@ const Contacts = () => {
       setShowModalThanks(true)
       setIsFormReady(false)
     } else {
-      console.log(error?.status, error?.text)
-      console.log(postData)
       setIsFormReady(false)
     }
   }, [data, error, postData])

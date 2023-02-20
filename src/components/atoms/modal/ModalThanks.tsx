@@ -1,4 +1,5 @@
-import { Modal, Form } from "react-bootstrap"
+import { Namespace } from "i18next";
+import { Modal } from "react-bootstrap"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 
@@ -6,11 +7,11 @@ interface ModalThanksProps {
   showModal: boolean,
   handleClose: () => void;
   message?: JSX.Element
-
+  title?: string
 }
 
-const ModalThanks = ({showModal, handleClose, message}: ModalThanksProps) => {
-  const {t} = useTranslation()
+const ModalThanks = ({showModal, handleClose, message, title}: ModalThanksProps) => {
+  const {t} = useTranslation<Namespace<"translation">>()
 
   return (
     <Modal
@@ -22,20 +23,11 @@ const ModalThanks = ({showModal, handleClose, message}: ModalThanksProps) => {
     >
       <Modal.Header closeButton className="modal-header-without-border">
         <Modal.Title id="contained-modal-title-vcenter">
-          {t("CardProduct.thanks")}
+          {title}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="card-modal-thanks__text">
-          {!message && 
-          <>
-            <p>
-              {t("CardProduct.thanksText1")}
-            </p>
-            <p>
-              {t("CardProduct.thanksText2")}
-            </p>
-          </>}
           {message}
         </div>
         <Link to={`/`}>

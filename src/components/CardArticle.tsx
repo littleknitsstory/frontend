@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import { IArticle } from "../api/models";
 import { useTranslation } from "react-i18next"
+import { Namespace } from "i18next";
 
 
 const CardArticle = ({ article }: { article: IArticle }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation<Namespace<"translation">>()
   return (
     <div className="card-lks">
       <Link to={`/posts/${article.slug}`}>

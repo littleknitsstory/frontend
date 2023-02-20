@@ -7,9 +7,10 @@ import { Link } from "react-router-dom";
 import { usePost } from "./Hooks/useFetch";
 import ModalThanks from "./atoms/modal/ModalThanks";
 import useModalState from "./Hooks/useModalState";
+import { Namespace } from "i18next";
 
 const Footer = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation<Namespace<"translation">>()
   const [email, setEmail] = React.useState<string>("");
   const [isFormReady, setIsFormReady] = useState(false)
   const {showModalThanks, setShowModalThanks, handleCloseThanks} = useModalState()
@@ -36,18 +37,13 @@ const Footer = () => {
       setShowModalThanks(true)
     } else {
       setIsFormReady(false)
-      console.log(error?.status, error?.text)
-      console.log(postData)
     }
   }, [data, error, postData])
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
-    
     setIsFormReady(true)
-    
   }
-
   
   return (
     <section className="footer">
@@ -116,6 +112,12 @@ const Footer = () => {
         <ModalThanks 
           showModal={showModalThanks}
           handleClose={handleCloseThanks}
+          title={t("Modal.titleThanks.thanks")}
+          message={
+            <>
+              <p>{t("Modal.thanksText.subscription")}</p>
+            </>
+          }
         />
 
         <div className="footer__end">

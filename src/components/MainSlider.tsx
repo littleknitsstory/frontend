@@ -8,12 +8,13 @@ import { IArticle } from "../api/models";
 import arrowWhite from "../icons/arrow-right-white.svg";
 import kateSlider from "../images/kate-slider.png";
 import { useTranslation } from "react-i18next";
+import { Namespace } from "i18next";
 
 const MainSlider = () => {
   const [articles, setArticles] = useState<IArticle[]>([]);
   const [limit, setLimit] = useState<number>(0);
 
-  const { t } = useTranslation()
+  const { t } = useTranslation<Namespace<"translation">>()
 
   useEffect(() => {
     const fetchArticles = async (): Promise<void> => {

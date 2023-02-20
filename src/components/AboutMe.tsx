@@ -6,9 +6,10 @@ import facebook from "../icons/logo-facebook_white.svg";
 import instagram from "../icons/logo-instagram_white.svg";
 import telegram from "../icons/telegram.svg";
 import { useTranslation } from "react-i18next";
+import { Namespace } from "i18next";
 
 const AboutMe = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation<Namespace<"translation">>()
   
   return (
     <section className="about-me">

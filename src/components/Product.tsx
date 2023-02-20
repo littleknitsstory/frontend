@@ -19,7 +19,6 @@ const Product = () => {
   const { data, loading, error } = useGet<IProductDetails>({
     url: "PRODUCTS",
     method: "GET",
-    lang: language,
     slug: slug
   })
   useEffect(() => {
