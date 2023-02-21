@@ -1,5 +1,3 @@
-import React from "react";
-
 import vk from "../icons/logo-vk_white.svg";
 import facebook from "../icons/logo-facebook_white.svg";
 import pinterest from "../icons/logo-pinterest_white.svg";

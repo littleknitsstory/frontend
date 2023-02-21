@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
@@ -9,7 +9,7 @@ import Reviews from "./Reviews";
 import SchemaCard from "./SchemaCard";
 
 const Product = () => {
-  const { slug } = useParams();
+  const { slug } = useParams<string>();
   const [product, setProduct] = useState<IProductDetails | null>(null);
   useEffect(() => {
     const fetchProductDetails = async (): Promise<void> => {

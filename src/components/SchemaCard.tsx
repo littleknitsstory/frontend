@@ -12,7 +12,7 @@ import questionInfo from "../icons/question.svg";
 import Social from "./Social";
 
 const SchemaCard = ({ product }: { product: IProductDetails }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const [showModalQuickPurchase, setShowModalQuickPurchase] =
     useState<boolean>(false);
 
@@ -238,13 +238,16 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
                 className="mb-3"
                 controlId="exampleForm.ControlInput2"
               >
-                <Form.Control 
-                  required type="text" 
-                  placeholder={t("Modal.phone")} 
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder={t("Modal.phone")}
                 />
               </Form.Group>
               <button type="submit" className="btn btn_vinous btn_center">
-                <div className="btn__text btn__text_center">{t("Modal.send")}</div>
+                <div className="btn__text btn__text_center">
+                  {t("Modal.send")}
+                </div>
               </button>
             </Form>
             <div className="product-card__modal-quick-purchase-policy">

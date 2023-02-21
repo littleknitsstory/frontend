@@ -7,18 +7,18 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   const [email, setEmail] = React.useState<string>("");
   const handleEmailChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
+    (event: React.ChangeEvent<HTMLInputElement>): void => {
       setEmail(event.target.value);
     },
     []
   );
 
   const handleSubscribe = useCallback(
-    async (event: React.FormEvent<HTMLFormElement>) => {
+    async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
       event.preventDefault();
       await postSubscribeRequest({
         email,
@@ -33,9 +33,7 @@ const Footer = () => {
         <div className="footer__wrapper">
           <Row>
             <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
-              <div className="footer__subtitle">
-                {t("Footer.subtitle")}
-              </div>
+              <div className="footer__subtitle">{t("Footer.subtitle")}</div>
               <div className="footer__title">Little Knits Story</div>
               <Row>
                 <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
@@ -95,7 +93,8 @@ const Footer = () => {
           <Row>
             <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
               <div className="footer__rights">
-                Little Knits Story {new Date().getFullYear()} | All Rights Reserved
+                Little Knits Story {new Date().getFullYear()} | All Rights
+                Reserved
               </div>
             </Col>
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -10,7 +10,7 @@ import CardProduct from "./CardProduct";
 import Filters from "./Filters";
 
 const Products = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   const [products, setProducts] = useState<IProduct[]>([]);
   const [limit, setLimit] = useState<number>(0);
