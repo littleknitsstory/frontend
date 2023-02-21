@@ -1,14 +1,15 @@
 import React, { useCallback } from "react";
-import { Container, Form, Row, Col } from "react-bootstrap";
-import Social from "./Social";
-import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
-import { postSubscribeRequest } from "../api";
+import { Col, Container, Form, Modal, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-const Footer = () => {
-  const { t } = useTranslation()
+import { postSubscribeRequest } from "../api";
+import Social from "./Social";
+import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
 
+const Footer = () => {
+  const { t } = useTranslation();
+  const [isModalShown, setIsModalShown] = React.useState<boolean>(false);
   const [email, setEmail] = React.useState<string>("");
   const handleEmailChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,6 +25,7 @@ const Footer = () => {
         email,
       });
       setEmail("");
+      setIsModalShown(true);
     },
     [email]
   );
@@ -33,9 +35,7 @@ const Footer = () => {
         <div className="footer__wrapper">
           <Row>
             <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
-              <div className="footer__subtitle">
-                {t("Footer.subtitle")}
-              </div>
+              <div className="footer__subtitle">{t("Footer.subtitle")}</div>
               <div className="footer__title">Little Knits Story</div>
               <Row>
                 <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
@@ -95,7 +95,8 @@ const Footer = () => {
           <Row>
             <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
               <div className="footer__rights">
-                Little Knits Story {new Date().getFullYear()} | All Rights Reserved
+                Little Knits Story {new Date().getFullYear()} | All Rights
+                Reserved
               </div>
             </Col>
 
@@ -107,6 +108,25 @@ const Footer = () => {
           </Row>
         </div>
       </Container>
+
+      <Modal
+        show={isModalShown}
+        onHide={() => setIsModalShown(false)}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton className="modal-header-without-border">
+          <Modal.Title id="contained-modal-title-vcenter">
+            {t("Modal.thanks")}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="card-modal-thanks__text">
+            <p>{t("Modal.subscription")}</p>
+          </div>
+        </Modal.Body>
+      </Modal>
     </section>
   );
 };
