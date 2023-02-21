@@ -8,27 +8,38 @@ import {
   Navigate,
 } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
 import Article from "./components/Article";
 import Cart from "./components/Cart";
 import Page404 from "./components/Page404";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 import Product from "./components/Product";
 import Products from "./components/Products";
 import SavedProducts from "./components/SavedProducts";
+<<<<<<< HEAD
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import ScrollToTop from "./components/ScrollToTop";
+=======
+import ScrollToTop from "./components/ScrollToTop";
+import ContactPage from "./routes/ContactPage";
+import Home from "./routes/Home";
+>>>>>>> 293eb9aa71f01e44ae5e3b052fa3ed1bac87e15f
 
 // routes
 import Root from "./routes/Root";
-import Home from "./routes/Home";
 import Blog from "./routes/Blog";
-import ContactPage from "./routes/ContactPage";
 
 export interface ILangContext {
   language: string;
-  selectLanguage?: (arg: string) => void;
+  selectLanguage: (arg: string) => void;
 }
+<<<<<<< HEAD
 export const LanguageContext = createContext<ILangContext>({ language: "en" });
+=======
+export const LanguageContext = createContext<ILangContext>({
+  language: "en",
+  selectLanguage: () => {},
+});
+>>>>>>> 293eb9aa71f01e44ae5e3b052fa3ed1bac87e15f
 
 function App() {
   const [language, setLanguage] = useState<string>(

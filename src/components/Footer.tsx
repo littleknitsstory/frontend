@@ -1,14 +1,20 @@
 import React, { useCallback } from "react";
-import { Container, Form, Row, Col } from "react-bootstrap";
-import Social from "./Social";
-import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
-import { postSubscribeRequest } from "../api";
+import { Col, Container, Form, Modal, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
+<<<<<<< HEAD
 const Footer = () => {
   const { t } = useTranslation();
+=======
+import { postSubscribeRequest } from "../api";
+import Social from "./Social";
+import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
+>>>>>>> 293eb9aa71f01e44ae5e3b052fa3ed1bac87e15f
 
+const Footer = () => {
+  const { t } = useTranslation();
+  const [isModalShown, setIsModalShown] = React.useState<boolean>(false);
   const [email, setEmail] = React.useState<string>("");
   const handleEmailChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -24,6 +30,7 @@ const Footer = () => {
         email,
       });
       setEmail("");
+      setIsModalShown(true);
     },
     [email]
   );
@@ -106,6 +113,25 @@ const Footer = () => {
           </Row>
         </div>
       </Container>
+
+      <Modal
+        show={isModalShown}
+        onHide={() => setIsModalShown(false)}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton className="modal-header-without-border">
+          <Modal.Title id="contained-modal-title-vcenter">
+            {t("Modal.thanks")}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="card-modal-thanks__text">
+            <p>{t("Modal.subscription")}</p>
+          </div>
+        </Modal.Body>
+      </Modal>
     </section>
   );
 };

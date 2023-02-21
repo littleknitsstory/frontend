@@ -6,8 +6,12 @@ interface IConfig {
 }
 
 const apiClient = ({ headers, baseURL }: IConfig) => {
-  const _headers = { ...headers };
+  let _headers = { ...headers };
   const _baseURL = baseURL;
+
+  const updateHeaders = (headers: { [key: string]: string }) => {
+    _headers = { ..._headers, ...headers };
+  };
 
   const get = (url: string, params?: RequestInit) => {
     return fetch(`${_baseURL}/${url}`, {
@@ -25,12 +29,13 @@ const apiClient = ({ headers, baseURL }: IConfig) => {
     });
   };
 
-  return { get, post };
+  return { get, post, updateHeaders };
 };
 
 export default apiClient({
   headers: {
     "Content-Type": "application/json",
+    "Accept-Language": "en",
   },
   baseURL: "http://dev.backend.littleknitsstory.com:26363",
 });

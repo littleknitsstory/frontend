@@ -1,15 +1,37 @@
+<<<<<<< HEAD
 import { useContext } from "react";
+=======
+import React, { useCallback, useContext } from "react";
+>>>>>>> 293eb9aa71f01e44ae5e3b052fa3ed1bac87e15f
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { LanguageContext, ILangContext } from "../App";
+import Navbar from "react-bootstrap/Navbar";
+import { Link } from "react-router-dom";
 
+import { LanguageContext } from "../App";
+import apiClient from "../api/apiClient";
+import heart from "../icons/heart.svg";
+import logout from "../icons/logout.svg";
+import shoppingBag from "../icons/shopping-bag.svg";
+import user from "../icons/user.svg";
 import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
 
 const NavBar = () => {
+<<<<<<< HEAD
   const { language, selectLanguage } =
     useContext<ILangContext>(LanguageContext);
+=======
+  const { language, selectLanguage } = useContext(LanguageContext);
+
+  const handleLanguageSelect = useCallback(
+    (value: string) => () => {
+      selectLanguage(value);
+      apiClient.updateHeaders({ "Accept-Language": value });
+    },
+    [selectLanguage]
+  );
+>>>>>>> 293eb9aa71f01e44ae5e3b052fa3ed1bac87e15f
 
   return (
     <section className="lks-navbar">
@@ -62,7 +84,7 @@ const NavBar = () => {
         </Container>
       </Navbar>
     </section>
-  );
-};
+  )
+}
 
 export default NavBar;
