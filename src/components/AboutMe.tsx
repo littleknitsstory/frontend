@@ -1,4 +1,3 @@
-import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import kate from "../images/kate.png";
 import vk from "../icons/logo-vk_white.svg";
@@ -8,8 +7,8 @@ import telegram from "../icons/telegram.svg";
 import { useTranslation } from "react-i18next";
 
 const AboutMe = () => {
-  const { t } = useTranslation()
-  
+  const { t } = useTranslation();
+
   return (
     <section className="about-me">
       <Container>
@@ -18,7 +17,9 @@ const AboutMe = () => {
           <Col xs={12} md={12} lg={6} xl={6} xxl={6} className="about-me__card">
             <div className="coffee-card">
               <div className="about-me__subtitle">{t("AboutMe.author")}</div>
-              <div className="coffee-card__title">{t("AboutMe.authorName")}</div>
+              <div className="coffee-card__title">
+                {t("AboutMe.authorName")}
+              </div>
               <Row>
                 <Col
                   xs={12}
@@ -31,9 +32,7 @@ const AboutMe = () => {
                   <img className="about-me__img" src={kate} alt="kate-author" />
                 </Col>
                 <Col xs={12} md={12} lg={12} xl={6} xxl={6}>
-                  <div className="about-me__descr">
-                    {t("AboutMe.descr")}
-                  </div>
+                  <div className="about-me__descr">{t("AboutMe.descr")}</div>
                 </Col>
 
                 <Row>

@@ -19,11 +19,7 @@ const PrimaryNav = (props: propTypes) => {
         headers: { "Accept-Language": language },
       });
       if (data) {
-        // Filtering and ordering menu items
-        const filteredMenu: IMenu[] = data.results
-          .filter((item) => item.menu.hint === props.type)
-          .sort((a, b) => a.ordering - b.ordering);
-        setMenu(filteredMenu);
+        setMenu(data.results);
       }
     };
     fetchMenu();
@@ -50,5 +46,4 @@ const PrimaryNav = (props: propTypes) => {
     </>
   );
 };
-
 export default PrimaryNav;

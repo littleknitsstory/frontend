@@ -1,7 +1,7 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { getArticleDetails, getArticles } from "../api";
+import { getArticleDetails } from "../api";
 import { IArticle } from "../api/models";
 import Spinner from "./Spinner";
 import Articles from "./Articles";
