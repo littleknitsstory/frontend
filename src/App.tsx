@@ -1,41 +1,45 @@
 import "./sass/style.scss";
 
 import { createContext, useState } from "react";
-import { BrowserRouter as Router, Routes, Route  } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import Article from "./components/Article";
 import Cart from "./components/Cart";
 import Page404 from "./components/Page404";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 import Product from "./components/Product";
 import Products from "./components/Products";
 import SavedProducts from "./components/SavedProducts";
-import PrivacyPolicy from "./components/PrivacyPolicy";
-import ScrollToTop from "./components/ScrollToTop"
-
-// routes
-import Root from "./routes/Root";
-import Home from "./routes/Home";
+import ScrollToTop from "./components/ScrollToTop";
 import Blog from "./routes/Blog";
 import ContactPage from "./routes/ContactPage";
+import Home from "./routes/Home";
+// routes
+import Root from "./routes/Root";
 
 export interface ILangContext {
   language: string;
-  selectLanguage?: (arg: string) => void;
+  selectLanguage: (arg: string) => void;
 }
-export const LanguageContext = createContext<ILangContext>({language: "en"})
+export const LanguageContext = createContext<ILangContext>({
+  language: "en",
+  selectLanguage: () => {},
+});
 
 function App() {
-  const [ language, setLanguage ] = useState(localStorage.getItem("i18nextLng") || "en")
-  const { i18n } = useTranslation()
-  
-  const selectLanguage = (lang: string)  => {
-    setLanguage(lang)
-    i18n.changeLanguage(lang.toLowerCase())
-  }
-  
+  const [language, setLanguage] = useState<string>(
+    localStorage.getItem("i18nextLng") || "en"
+  );
+  const { i18n } = useTranslation();
+
+  const selectLanguage = (lang: string): void => {
+    setLanguage(lang);
+    i18n.changeLanguage(lang.toLowerCase());
+  };
+
   return (
-    <LanguageContext.Provider value={{language, selectLanguage}}>
+    <LanguageContext.Provider value={{ language, selectLanguage }}>
       <Router>
         <ScrollToTop />
         <Routes>
