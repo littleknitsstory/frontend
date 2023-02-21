@@ -1,14 +1,15 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CardArticle from "./CardArticle";
 import { getArticles } from "../api";
 import { IArticle, IArticlesResponse } from "../api/models";
 import arrowRight from "../icons/arrow-right.svg";
 import { useTranslation } from "react-i18next";
+import { LanguageContext } from "../App";
 
 const Articles = () => {
   const [articles, setArticles] = useState<IArticle[]>([]);
-
+  const { language } = useContext(LanguageContext)
   const [limit, setLimit] = useState<number>(4);
   const [count, setCount] = useState<number>(0);
   const [isLastPage, setIsLastPage] = useState<boolean>(false);
@@ -27,7 +28,7 @@ const Articles = () => {
       setIsLastPage(true);
     }
     fetchArticles();
-  }, [limit]);
+  }, [limit, language]);
 
   const handleSeeMore = useCallback((): void => {
     setLimit((prev) => prev + 4);

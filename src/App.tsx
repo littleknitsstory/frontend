@@ -15,14 +15,9 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import Product from "./components/Product";
 import Products from "./components/Products";
 import SavedProducts from "./components/SavedProducts";
-<<<<<<< HEAD
-import PrivacyPolicy from "./components/PrivacyPolicy";
-import ScrollToTop from "./components/ScrollToTop";
-=======
 import ScrollToTop from "./components/ScrollToTop";
 import ContactPage from "./routes/ContactPage";
 import Home from "./routes/Home";
->>>>>>> 293eb9aa71f01e44ae5e3b052fa3ed1bac87e15f
 
 // routes
 import Root from "./routes/Root";
@@ -32,14 +27,10 @@ export interface ILangContext {
   language: string;
   selectLanguage: (arg: string) => void;
 }
-<<<<<<< HEAD
-export const LanguageContext = createContext<ILangContext>({ language: "en" });
-=======
 export const LanguageContext = createContext<ILangContext>({
   language: "en",
   selectLanguage: () => {},
 });
->>>>>>> 293eb9aa71f01e44ae5e3b052fa3ed1bac87e15f
 
 function App() {
   const [language, setLanguage] = useState<string>(
@@ -58,8 +49,8 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Root />}>
-            <Route index element={<Navigate to="blog" />} />
-            <Route path="blog" index element={<Blog />} />
+            <Route path="/" element={<Blog />} />
+            <Route path="blog" element={<Blog />} />
             <Route path="posts/:slug" element={<Article />} />
             <Route path="shop" element={<Products />} />
             <Route path="product/:slug" element={<Product />} />

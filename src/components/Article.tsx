@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { getArticleDetails } from "../api";
@@ -6,10 +6,12 @@ import { IArticle } from "../api/models";
 import Spinner from "./Spinner";
 import Articles from "./Articles";
 import { useTranslation } from "react-i18next";
+import { LanguageContext } from "../App";
 
 const Article = () => {
   const { slug } = useParams<string>();
   const [article, setArticle] = useState<IArticle | null>(null);
+  const { language } = useContext(LanguageContext)
 
   const { t } = useTranslation();
 
@@ -22,7 +24,7 @@ const Article = () => {
       }
     };
     fetchArticleDetails();
-  }, [slug]);
+  }, [slug, language]);
 
   return (
     <section className="article">

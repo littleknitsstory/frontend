@@ -11,6 +11,7 @@ const apiClient = ({ headers, baseURL }: IConfig) => {
 
   const updateHeaders = (headers: { [key: string]: string }) => {
     _headers = { ..._headers, ...headers };
+    console.log(_headers)
   };
 
   const get = (url: string, params?: RequestInit) => {

@@ -2,15 +2,9 @@ import React, { useCallback } from "react";
 import { Col, Container, Form, Modal, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-
-<<<<<<< HEAD
-const Footer = () => {
-  const { t } = useTranslation();
-=======
 import { postSubscribeRequest } from "../api";
 import Social from "./Social";
 import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
->>>>>>> 293eb9aa71f01e44ae5e3b052fa3ed1bac87e15f
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -77,7 +71,7 @@ const Footer = () => {
                   <Form.Group className="mb-3" controlId="formGroupEmail">
                     <Form.Control
                       type="email"
-                      placeholder="Ваш e-mail"
+                      placeholder="E-mail"
                       value={email}
                       onChange={handleEmailChange}
                     />

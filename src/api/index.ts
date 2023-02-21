@@ -58,11 +58,9 @@ export const getProductDetails = async (
   } catch (error) {}
 };
 
-export const getMenu = async (
-  headers: RequestInit
-): Promise<IMenuResponse | void> => {
+export const getMenu = async (): Promise<IMenuResponse | void> => {
   try {
-    const response: Response = await apiClient.get(`${URLS.MENU}`, headers);
+    const response: Response = await apiClient.get(`${URLS.MENU}`);
     if (response.ok) {
       const data: IMenuResponse = await response.json();
       return data;

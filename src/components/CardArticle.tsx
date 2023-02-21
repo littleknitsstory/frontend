@@ -20,10 +20,7 @@ const CardArticle = ({ article }: { article: IArticle }) => {
               });
             }}
           />
-<<<<<<< HEAD
 
-=======
->>>>>>> 7f55a4dd9bac5f68b9e17f109c1f9badbae2b459
           <Card.Body>
             <Card.Title>{article.title}</Card.Title>
             <div className="card-lks__text">

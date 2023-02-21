@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { useState } from "react";
-=======
 import React, { useState } from "react";
->>>>>>> 7f55a4dd9bac5f68b9e17f109c1f9badbae2b459
 import { Container, Row, Col } from "react-bootstrap";
 import CardProduct from "./CardProduct";
 import arrowRight from "../icons/arrow-right.svg";
