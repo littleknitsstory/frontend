@@ -1,9 +1,8 @@
 import "./sass/style.scss";
 
 import { createContext, useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-
 import Article from "./components/Article";
 import Cart from "./components/Cart";
 import Page404 from "./components/Page404";
@@ -12,11 +11,12 @@ import Product from "./components/Product";
 import Products from "./components/Products";
 import SavedProducts from "./components/SavedProducts";
 import ScrollToTop from "./components/ScrollToTop";
-import Blog from "./routes/Blog";
 import ContactPage from "./routes/ContactPage";
 import Home from "./routes/Home";
+
 // routes
 import Root from "./routes/Root";
+import Blog from "./routes/Blog";
 
 export interface ILangContext {
   language: string;
@@ -44,8 +44,8 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Root />}>
-            <Route index element={<Home />} />
-            <Route path="blog" element={<Blog />} />
+            <Route index element={<Navigate to="blog" />} /> 
+            <Route path="blog" index element={<Blog />} />
             <Route path="posts/:slug" element={<Article />} />
             <Route path="shop" element={<Products />} />
             <Route path="product/:slug" element={<Product />} />

@@ -72,6 +72,14 @@
     "contactInfo": "Contacts"
   },
   "Modal": {
+    "title": "Quick Order",
+    "code": "Code",
+    "color": "Color",
+    "discount": "Discount",
+    "name": "Full name",
+    "phone": "Phone",
+    "send": "Send",
+    "policy": "By submitting your personal data, you agree to its processing.",
     "thanks": "Thanks",
     "thanksText1": "Your application is accepted.",
     "thanksText2": "Our manager will contact you shortly",

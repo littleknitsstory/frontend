@@ -7,7 +7,11 @@ import { LanguageContext } from "../../../App"
 
 import "./primary-nav.scss"
 
-const PrimaryNav = () => {
+interface propTypes {
+    type: "footer" | "header";
+  }
+
+const PrimaryNav = (props: propTypes) => {
   const [menu, setMenu] = useState<IMenu[] | []>([]);
   const {language} = useContext(LanguageContext)
 
@@ -15,7 +19,11 @@ const PrimaryNav = () => {
     const fetchMenu = async (): Promise<void> => {
       const data: IMenuResponse | void = await getMenu({headers: {"Accept-Language": language}});
       if (data) {
-        setMenu(data.results)
+        console.log(data)
+        // Filtering and ordering menu items
+        const filteredMenu: IMenu[] = data.results.filter(item => item.menu.hint === props.type)
+          .sort((a, b) => a.ordering - b.ordering)
+        setMenu(filteredMenu)
       }
     };
     fetchMenu()
@@ -43,6 +51,6 @@ const PrimaryNav = () => {
     ))}
     </>
   )
-
 }
+
 export default PrimaryNav
