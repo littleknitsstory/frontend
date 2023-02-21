@@ -1,29 +1,32 @@
-import React from "react";
+<<<<<<< HEAD
+import { useState } from "react";
+=======
+import React, { useState } from "react";
+>>>>>>> 7f55a4dd9bac5f68b9e17f109c1f9badbae2b459
 import { Container, Row, Col } from "react-bootstrap";
 import CardProduct from "./CardProduct";
 import arrowRight from "../icons/arrow-right.svg";
+import { IProduct } from "../api/models";
 import { useTranslation } from "react-i18next";
 
 const SavedProducts = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
+  const [products, setProducts] = useState<IProduct[]>([]);
 
-  const array = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
   return (
     <section className="saved-products">
       <Container>
         <Row xs={1} md={2} lg={3} xl={3} xxl={4}>
-          {array.map((item) => {
+          {products.map((item) => {
             return (
               <Col key={item.id}>
-                <CardProduct />
+                <CardProduct product={item} />
               </Col>
             );
           })}
         </Row>
         <button className="btn btn_border">
-          <div className="btn__text">
-            {t("Cart")}
-          </div>
+          <div className="btn__text">{t("Footer.cart")}</div>
           <div className="btn__icon">
             <img src={arrowRight} alt="arrowWhite" />
           </div>

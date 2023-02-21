@@ -10,7 +10,7 @@ import map from "../icons/map-point.svg";
 import phone from "../icons/phone.svg";
 
 const Contacts = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   const [showModalThanks, setShowModalThanks] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
@@ -56,7 +56,6 @@ const Contacts = () => {
     [clearForm, company, email, message, name, phone_number]
   );
 
-
   return (
     <section className="contacts">
       <Container>
@@ -69,16 +68,14 @@ const Contacts = () => {
             xxl={{ span: 6, offset: 3 }}
           >
             <div className="coffee-card">
-              <div className="coffee-card__title">
-                {t("Contacts.title")}
-              </div>
+              <div className="coffee-card__title">{t("Contacts.title")}</div>
               <Form className="contacts__form" onSubmit={onSubmitOrder}>
                 <Row>
                   <Form.Group as={Col} md="6" controlId="name">
                     <Form.Control
                       required
                       type="text"
-                      placeholder={t('Contacts.name')}
+                      placeholder={t("Contacts.name")}
                       value={name}
                       onChange={handleChange(setName)}
                     />
@@ -86,7 +83,7 @@ const Contacts = () => {
                   <Form.Group as={Col} md="6" controlId="theme">
                     <Form.Control
                       type="text"
-                      placeholder={t('Contacts.subject')}
+                      placeholder={t("Contacts.subject")}
                       value={company}
                       onChange={handleChange(setCompany)}
                     />
@@ -98,7 +95,7 @@ const Contacts = () => {
                     <Form.Control
                       required
                       type="text"
-                      placeholder={t('Contacts.phone')}
+                      placeholder={t("Contacts.phone")}
                       value={phone_number}
                       onChange={handleChange(setPhone_number)}
                     />
@@ -134,9 +131,7 @@ const Contacts = () => {
                 </button>
               </Form>
 
-              <div className="contacts__policy">
-                {t("Contacts.policy")}
-              </div>
+              <div className="contacts__policy">{t("Contacts.policy")}</div>
             </div>
           </Col>
         </Row>
@@ -149,9 +144,7 @@ const Contacts = () => {
               xl={{ span: 6, offset: 3 }}
               xxl={{ span: 6, offset: 3 }}
             >
-              <div className="title">
-                {t("Contacts.contactInfo")}
-              </div>
+              <div className="title">{t("Contacts.contactInfo")}</div>
               <div className="contacts__wrapper-info">
                 <img src={map} alt="map" />
                 <div className="contacts__text">Montenegro, Budva</div>
@@ -189,12 +182,8 @@ const Contacts = () => {
             </Modal.Header>
             <Modal.Body>
               <div className="card-modal-thanks__text">
-                <p>
-                  {t("Modal.thanksText1")}
-                </p> 
-                <p>
-                  {t("Modal.thanksText2")}
-                </p> 
+                <p>{t("Modal.thanksText1")}</p>
+                <p>{t("Modal.thanksText2")}</p>
               </div>
               <Link to={`/`}>
                 <button className="btn btn_vinous btn_center card-modal-thanks__btn">

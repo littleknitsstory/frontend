@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CardArticle from "./CardArticle";
 import { getArticles } from "../api";
@@ -13,7 +13,7 @@ const Articles = () => {
   const [count, setCount] = useState<number>(0);
   const [isLastPage, setIsLastPage] = useState<boolean>(false);
 
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchArticles = async (): Promise<void> => {

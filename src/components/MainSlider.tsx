@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import sanitizeHtml from "sanitize-html";
 import { Container, Row, Col } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
@@ -13,7 +13,7 @@ const MainSlider = () => {
   const [articles, setArticles] = useState<IArticle[]>([]);
   const [limit, setLimit] = useState<number>(0);
 
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchArticles = async (): Promise<void> => {
