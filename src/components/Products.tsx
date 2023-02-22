@@ -1,18 +1,19 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
+import { LanguageContext } from "../App";
 import { getProducts } from "../api";
-import { IProduct, IProductsResponse } from "../api/models";
+import { IProductsResponse } from "../api/models";
 import arrowRight from "../icons/arrow-right.svg";
+import { IProduct } from "../store/productSlice";
 import CardProduct from "./CardProduct";
 import Filters from "./Filters";
-import { LanguageContext } from "../App";
 
 const Products = () => {
   const { t } = useTranslation();
-  const {language} = useContext(LanguageContext)
+  const { language } = useContext(LanguageContext);
 
   const [products, setProducts] = useState<IProduct[]>([]);
   const [limit, setLimit] = useState<number>(0);

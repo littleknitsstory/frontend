@@ -1,17 +1,4 @@
-export interface IProduct {
-  id: number;
-  code: number;
-  title: string;
-  slug: string;
-  description: string;
-  price: string;
-  sale: string;
-  colors: { color: string }[];
-  categories: { title: string; slug: string }[];
-  author: number;
-  image_preview: string;
-  image_alt: string;
-}
+import { IProduct } from "../store/productSlice";
 
 export interface IProductsResponse {
   count: number;

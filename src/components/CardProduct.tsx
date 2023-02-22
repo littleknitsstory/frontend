@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { IProduct } from "../api/models";
+import { Link } from "react-router-dom";
+
+import { IProduct } from "../store/productSlice";
 
 const CardProduct = ({ product }: { product: IProduct }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   const [showModalQuickPurchase, setShowModalQuickPurchase] =
     useState<boolean>(false);
@@ -114,9 +115,7 @@ const CardProduct = ({ product }: { product: IProduct }) => {
           <div className="card-lks__material">
             {t("CardProduct.material")}: шерсть
           </div>
-          <div className="card-lks__color">
-            {t("CardProduct.color")}: 
-          </div>
+          <div className="card-lks__color">{t("CardProduct.color")}:</div>
           <div className="card-lks__price">{product.price}</div>
           <div className="card-lks__btn product-card__btn">
             <button className="btn btn_vinous btn_center " onClick={handleShow}>
@@ -130,9 +129,7 @@ const CardProduct = ({ product }: { product: IProduct }) => {
       <div className="product-card__modal-quick-purchase">
         <Modal show={showModalQuickPurchase} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>
-              {t("CardProduct.modalTitle")}
-            </Modal.Title>
+            <Modal.Title>{t("CardProduct.modalTitle")}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="product-card__modal-quick-purchase-body">
@@ -171,7 +168,7 @@ const CardProduct = ({ product }: { product: IProduct }) => {
                 <Form.Control
                   required
                   type="text"
-                  placeholder={t('CardProduct.fullName')}
+                  placeholder={t("CardProduct.fullName")}
                   autoFocus
                 />
               </Form.Group>
@@ -180,7 +177,11 @@ const CardProduct = ({ product }: { product: IProduct }) => {
                 className="mb-3"
                 controlId="exampleForm.ControlInput2"
               >
-                <Form.Control required type="text" placeholder={t('CardProduct.phone')} />
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder={t("CardProduct.phone")}
+                />
               </Form.Group>
               <button type="submit" className="btn btn_vinous btn_center">
                 <div className="btn__text btn__text_center">
@@ -208,12 +209,8 @@ const CardProduct = ({ product }: { product: IProduct }) => {
           </Modal.Header>
           <Modal.Body>
             <div className="card-modal-thanks__text">
-              <p>
-                {t("CardProduct.thanksText1")}
-              </p>
-              <p>
-                {t("CardProduct.thanksText2")}
-              </p>
+              <p>{t("CardProduct.thanksText1")}</p>
+              <p>{t("CardProduct.thanksText2")}</p>
             </div>
             <Link to={`/`}>
               <button className="btn btn_vinous btn_center card-modal-thanks__btn">

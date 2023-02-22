@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import CardProduct from "./CardProduct";
-import arrowRight from "../icons/arrow-right.svg";
-import { IProduct } from "../api/models";
+import { Col, Container, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+
+import arrowRight from "../icons/arrow-right.svg";
+import { IProduct } from "../store/productSlice";
+import CardProduct from "./CardProduct";
 
 const SavedProducts = () => {
   const { t } = useTranslation();
