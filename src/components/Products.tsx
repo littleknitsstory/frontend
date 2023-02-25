@@ -7,12 +7,12 @@ import Filters from "./Filters";
 import { useGetProductsQuery } from "../features/api/apiSlice";
 import i18next from "../i18n"
 import Spinner from "./Spinner";
+import Page404 from "./Page404";
 
 const Products = () => {
   const {
     data: products,
     isLoading,
-    isFetching,
     isSuccess,
     isError,
     error
@@ -31,6 +31,10 @@ const Products = () => {
   
   if (isLoading) {
     return <Spinner />
+  }
+
+  if (isError) {
+    return <Page404 />
   }
 
   return (
