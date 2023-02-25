@@ -1,38 +1,32 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import sanitizeHtml from "sanitize-html";
 import { Container, Row, Col } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
 import { Link } from "react-router-dom";
-import { getArticles } from "../api";
-import { IArticle } from "../api/models";
 import arrowWhite from "../icons/arrow-right-white.svg";
 import kateSlider from "../images/kate-slider.png";
 import { useTranslation } from "react-i18next";
-import { LanguageContext } from "../App";
+import i18next from "../i18n"
+import { useGetArticlesQuery } from "../features/api/apiSlice";
 
 const MainSlider = () => {
-  const [articles, setArticles] = useState<IArticle[]>([]);
-  const [limit, setLimit] = useState<number>(0);
-  const { language } = useContext(LanguageContext)
-
   const { t } = useTranslation();
+  const {
+    data: articles,
+    isFetching,
+    isSuccess,
+    isError,
+    error
+  } = useGetArticlesQuery({lang: i18next.language})
+  // const [articles, setArticles] = useState<IArticle[]>([]);
+  const [limit, setLimit] = useState<number>(0);
 
-  useEffect(() => {
-    const fetchArticles = async (): Promise<void> => {
-      const data = await getArticles(0, limit);
-      if (data) {
-        setArticles(data.results);
-      }
-    };
-    fetchArticles();
-  }, [limit, language]);
 
   return (
     <section className="main-slider">
       <Container>
         <Carousel fade={true}>
-          {articles
-            .map((item) => {
+          {articles?.results.map((item) => {
               return (
                 <Carousel.Item interval={1800} key={item.slug}>
                   <Row>

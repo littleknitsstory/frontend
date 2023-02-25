@@ -4,7 +4,8 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { IProduct } from "../api/models";
+import { IProduct } from "../app/models";
+import { PICTURE_BASE_URL } from "../features/api/apiSlice";
 
 const CardProduct = ({ product }: { product: IProduct }) => {
   const { t } = useTranslation()
@@ -38,7 +39,7 @@ const CardProduct = ({ product }: { product: IProduct }) => {
           <Card.Img
             variant="top"
             alt={product.image_alt}
-            src={`${product.image_preview}`}
+            src={`${PICTURE_BASE_URL}${product.image_preview}`}
           />
         </Link>
 
@@ -139,7 +140,7 @@ const CardProduct = ({ product }: { product: IProduct }) => {
               <img
                 className="product-card__modal-quick-purchase-img"
                 alt={product.image_alt}
-                src={`${product.image_preview}`}
+                src={`${PICTURE_BASE_URL + product.image_preview}`}
               />
               <div className="product-card__modal-quick-purchase-descr">
                 <div className="product-card__modal-quick-purchase-title">

@@ -1,33 +1,28 @@
-import React, { useCallback } from "react";
+import React, { useState } from "react";
 import { Col, Container, Form, Modal, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { postSubscribeRequest } from "../api";
 import Social from "./Social";
 import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
+import { useAddSubscriptionMutation } from "../features/api/apiSlice";
 
 const Footer = () => {
   const { t } = useTranslation();
-  const [isModalShown, setIsModalShown] = React.useState<boolean>(false);
-  const [email, setEmail] = React.useState<string>("");
-  const handleEmailChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>): void => {
-      setEmail(event.target.value);
-    },
-    []
-  );
+  const [isModalShown, setIsModalShown] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
+  const [addSubscribe, { isLoading }] = useAddSubscriptionMutation()
 
-  const handleSubscribe = useCallback(
-    async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
-      event.preventDefault();
-      await postSubscribeRequest({
-        email,
-      });
-      setEmail("");
-      setIsModalShown(true);
-    },
-    [email]
-  );
+  const handleSubscribe = async (): Promise<void> => {
+    if (!isLoading) {
+      try {
+        await addSubscribe(email).unwrap()
+        setEmail("")
+      } catch (err) {
+        console.error("Failed to subscribe: ", err);
+      }
+    }
+  }
+
   return (
     <section className="footer">
       <Container>
@@ -67,16 +62,20 @@ const Footer = () => {
                 <div className="footer__subscribe-text">
                   {t("Footer.subscribe.text")}
                 </div>
-                <Form onSubmit={handleSubscribe}>
+                <Form>
                   <Form.Group className="mb-3" controlId="formGroupEmail">
                     <Form.Control
                       type="email"
                       placeholder="E-mail"
                       value={email}
-                      onChange={handleEmailChange}
+                      onChange={(e) => setEmail(e.currentTarget.value)}
                     />
 
-                    <button className="btn btn_border" type="submit">
+                    <button 
+                      className="btn btn_border" 
+                      type="button"
+                      onClick={handleSubscribe}
+                    >
                       <div className="btn__text btn__text_center">
                         {t("Footer.subscribe.buttonText")}
                       </div>

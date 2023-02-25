@@ -1,30 +1,17 @@
-import React, { useCallback, useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Navbar from "react-bootstrap/Navbar";
-import { Link } from "react-router-dom";
 
-import { LanguageContext } from "../App";
-import apiClient from "../api/apiClient";
-import heart from "../icons/heart.svg";
-import logout from "../icons/logout.svg";
-import shoppingBag from "../icons/shopping-bag.svg";
-import user from "../icons/user.svg";
+// import heart from "../icons/heart.svg";
+// import logout from "../icons/logout.svg";
+// import shoppingBag from "../icons/shopping-bag.svg";
+// import user from "../icons/user.svg";
 import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
-import { ILangContext } from "../App";
+import { useTranslation } from "react-i18next";
 
 const NavBar = () => {
-  const { language, selectLanguage } =
-    useContext<ILangContext>(LanguageContext);
-
-  const handleLanguageSelect = useCallback(
-    (value: string) => () => {
-      selectLanguage(value);
-      apiClient.updateHeaders({ "Accept-Language": value });
-    },
-    [selectLanguage]
-  );
+  const { i18n } = useTranslation()
 
   return (
     <section className="lks-navbar">
@@ -49,15 +36,15 @@ const NavBar = () => {
             </div> */}
 
             <NavDropdown
-              title={language.toUpperCase()}
+              title={i18n.language.toUpperCase()}
               id="basic-nav-dropdown"
               className="lks-navbar__lang"
             >
-              <NavDropdown.Item onClick={handleLanguageSelect("en")}>
+              <NavDropdown.Item onClick={() => i18n.changeLanguage("en")}>
                 EN
               </NavDropdown.Item>
 
-              <NavDropdown.Item onClick={handleLanguageSelect("ru")}>
+              <NavDropdown.Item onClick={() => i18n.changeLanguage("ru")}>
                 RU
               </NavDropdown.Item>
             </NavDropdown>

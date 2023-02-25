@@ -1,42 +1,37 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
-import { getProducts } from "../api";
-import { IProduct, IProductsResponse } from "../api/models";
 import arrowRight from "../icons/arrow-right.svg";
 import CardProduct from "./CardProduct";
 import Filters from "./Filters";
-import { LanguageContext } from "../App";
+import { useGetProductsQuery } from "../features/api/apiSlice";
+import i18next from "../i18n"
+import Spinner from "./Spinner";
 
 const Products = () => {
-  const { t } = useTranslation();
-  const {language} = useContext(LanguageContext)
+  const {
+    data: products,
+    isLoading,
+    isFetching,
+    isSuccess,
+    isError,
+    error
+  } = useGetProductsQuery({lang: i18next.language}) /* optional args: {limit: num, offset: num} */
 
-  const [products, setProducts] = useState<IProduct[]>([]);
-  const [limit, setLimit] = useState<number>(0);
-  const [count, setCount] = useState<number>(0);
-  const isLastPage = limit + 4 >= count;
+  const { t } = useTranslation();
+  const [limit, setLimit] = useState<number>(4);
+  const [isAllShown, setAllShown] = useState<boolean>(false)
+  // const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
-    const fetchProducts = async (): Promise<void> => {
-      const data: IProductsResponse | void = await getProducts(0, limit);
-      if (data) {
-        setProducts(data.results);
-        setCount(data.count);
-      }
-    };
-    fetchProducts();
-  }, [limit, language]);
-
-  const handleSeeMore = useCallback((): void => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-    setLimit((prev) => prev + 4);
-  }, []);
+    if (products) {
+      setAllShown(limit > products.results.length)
+    }
+  },[limit, products])
+  
+  if (isLoading) {
+    return <Spinner />
+  }
 
   return (
     <Container>
@@ -72,7 +67,7 @@ const Products = () => {
           </Col>
           <Col>
             <Row xs={1} md={1} lg={2} xl={2} xxl={3}>
-              {products.map((item) => {
+              {products?.results.slice(0, limit).map((item) => {
                 return (
                   <Col key={item.id}>
                     <CardProduct product={item} />
@@ -82,15 +77,14 @@ const Products = () => {
             </Row>
           </Col>
         </Row>
-        {!isLastPage && (
-          <Row>
-            <Col>
-              <Link to="/shop" onClick={handleSeeMore}>
-                {t("seeMore")}
-                <img src={arrowRight} alt="arrowRight" />
-              </Link>
-            </Col>
-          </Row>
+        {!isAllShown && (
+          <button 
+            className="btn btn_border btn__text" 
+            onClick={() => setLimit(prev => prev + 4)}
+          >
+            {t("seeMore")}
+            <img src={arrowRight} alt="arrowWhite" />
+          </button>
         )}
       </div>
     </Container>

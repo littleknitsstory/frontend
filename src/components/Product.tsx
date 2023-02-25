@@ -1,26 +1,29 @@
-import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
+import { useGetProductQuery } from "../features/api/apiSlice";
 
-import { getProductDetails } from "../api";
-import { IProductDetails } from "../api/models";
+import Page404 from "./Page404";
 import PopularProducts from "./PopularProducts";
 import Reviews from "./Reviews";
 import SchemaCard from "./SchemaCard";
+import Spinner from "./Spinner";
 
 const Product = () => {
   const { slug } = useParams<string>();
-  const [product, setProduct] = useState<IProductDetails | null>(null);
-  useEffect(() => {
-    const fetchProductDetails = async (): Promise<void> => {
-      if (!slug) return;
-      const data: IProductDetails | void = await getProductDetails(slug);
-      if (data) {
-        setProduct(data);
-      }
-    };
-    fetchProductDetails();
-  }, [slug]);
+  const { i18n } = useTranslation()
+  const {
+    data: product,
+    isLoading,
+    isError
+  } = useGetProductQuery({ slug: slug, lang: i18n.language })
+  
+  if (isLoading) {
+    return <Spinner />
+  }
+  if (isError) {
+    return <Page404 />
+  }
 
   return (
     <section className="product">

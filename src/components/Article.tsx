@@ -1,50 +1,44 @@
-import { useEffect, useState, useContext } from "react";
 import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { getArticleDetails } from "../api";
-import { IArticle } from "../api/models";
 import Spinner from "./Spinner";
 import Articles from "./Articles";
 import { useTranslation } from "react-i18next";
-import { LanguageContext } from "../App";
+import { useGetArticleQuery } from "../features/api/apiSlice";
+import Page404 from "./Page404";
 
 const Article = () => {
   const { slug } = useParams<string>();
-  const [article, setArticle] = useState<IArticle | null>(null);
-  const { language } = useContext(LanguageContext)
+  const { t, i18n } = useTranslation();
+  const {
+    data: article,
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  } = useGetArticleQuery({ slug: slug, lang: i18n.language })
 
-  const { t } = useTranslation();
+  if (isLoading) {
+    return <Spinner />
+  }
 
-  useEffect(() => {
-    const fetchArticleDetails = async (): Promise<void> => {
-      if (!slug) return;
-      const data: IArticle | void = await getArticleDetails(slug);
-      if (data) {
-        setArticle(data);
-      }
-    };
-    fetchArticleDetails();
-  }, [slug, language]);
+  if (isError) {
+    return <Page404 />
+  }
 
   return (
     <section className="article">
       <Container>
-        {article === null ? (
-          <Spinner />
-        ) : (
-          <div>
-            <h3 className="title">{article.title}</h3>
-            <div className="article__wrapper-article">
-              <div
-                className="article__text"
-                dangerouslySetInnerHTML={{
-                  __html: article.content,
-                }}
-              ></div>
-            </div>
+        <div>
+          <h3 className="title">{article?.title}</h3>
+          <div className="article__wrapper-article">
+            <div
+              className="article__text"
+              dangerouslySetInnerHTML={{
+                __html: article?.content!,
+              }}
+            ></div>
           </div>
-        )}
-
+        </div>
         <h3 className="title">{t("otherPosts")}</h3>
         <Articles />
       </Container>

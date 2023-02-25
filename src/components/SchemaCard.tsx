@@ -5,11 +5,12 @@ import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { IProductDetails } from "../api/models";
+import { IProductDetails } from "../app/models";
 import arrowRight from "../icons/arrow-right.svg";
 import like from "../icons/like.svg";
 import questionInfo from "../icons/question.svg";
 import Social from "./Social";
+import { PICTURE_BASE_URL } from "../features/api/apiSlice";
 
 const SchemaCard = ({ product }: { product: IProductDetails }) => {
   const { t } = useTranslation();
@@ -50,7 +51,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
           <div className="schema-card__img-wrapper">
             <img
               className="schema-card__img"
-              src={product.image_preview}
+              src={PICTURE_BASE_URL + product.image_preview}
               alt={product.image_alt}
             />
             <a href="#">
@@ -77,7 +78,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
         <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
           <div className="schema-card__wrapper-title">
             <div className="title schema-card__title">{product.title}</div>
-            <div className="schema-card__dicount">-15%</div>
+            <div className="schema-card__discount">-15%</div>
           </div>
 
           <Row>
@@ -196,7 +197,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
             <div className="product-card__modal-quick-purchase-body">
               <img
                 className="product-card__modal-quick-purchase-img"
-                src={product.image_preview}
+                src={PICTURE_BASE_URL + product.image_preview}
                 alt={product.image_alt}
               />
               <div className="product-card__modal-quick-purchase-descr">

@@ -103,3 +103,11 @@ export interface IArticlesResponse {
   previous: string;
   results: IArticle[];
 }
+
+export interface IReviewsResponse {
+  title: string;
+  author: string;
+  comment: string;
+  rating: number;
+  image_preview: string;
+}

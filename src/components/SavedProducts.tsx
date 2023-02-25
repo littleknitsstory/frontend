@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CardProduct from "./CardProduct";
 import arrowRight from "../icons/arrow-right.svg";
-import { IProduct } from "../api/models";
+import { IProduct } from "../app/models";
 import { useTranslation } from "react-i18next";
 
 const SavedProducts = () => {
