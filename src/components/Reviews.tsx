@@ -1,19 +1,16 @@
 import CardReview from "./CardReview";
 import { useTranslation } from "react-i18next";
 import { useGetReviewsQuery } from "../features/api/apiSlice";
-// Temporary for generating reviewID
-import { nanoid } from '@reduxjs/toolkit'
+
+import { nanoid } from '@reduxjs/toolkit' /* Temporary for generating reviewID */
 import Page404 from "./Page404";
 
 const Reviews = () => {
   const { t } = useTranslation();
   const {
     data: reviews,
-    isLoading,
     isError,
-    error
   } = useGetReviewsQuery()
-  // console.log(error)
 
   return (
     <section className="reviews">

@@ -2,7 +2,7 @@ import { Container } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { useGetProductQuery } from "../features/api/apiSlice";
-
+// components
 import Page404 from "./Page404";
 import PopularProducts from "./PopularProducts";
 import Reviews from "./Reviews";

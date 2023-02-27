@@ -13,12 +13,12 @@ import Product from "./components/Product";
 import Products from "./components/Products";
 import SavedProducts from "./components/SavedProducts";
 import ScrollToTop from "./components/ScrollToTop";
-import ContactPage from "./routes/ContactPage";
-// import Home from "./routes/Home";
 
 // routes
 import Root from "./routes/Root";
 import Blog from "./routes/Blog";
+import ContactPage from "./routes/ContactPage";
+// import Home from "./routes/Home"; /* Temporary unused route */
 
 function App() {
   return (

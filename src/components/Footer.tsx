@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Col, Container, Form, Modal, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { useAddSubscriptionMutation } from "../features/api/apiSlice";
+// components
 import Social from "./Social";
 import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
-import { useAddSubscriptionMutation } from "../features/api/apiSlice";
 
 const Footer = () => {
   const { t } = useTranslation();

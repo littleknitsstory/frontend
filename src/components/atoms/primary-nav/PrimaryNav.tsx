@@ -15,7 +15,6 @@ const PrimaryNav = (props: propTypes) => {
   const {
     data: menu,
     isError,
-    error
   } = useGetMenuQuery({lang: i18next.language})
   const [sortedMenuItem, setSortedMenuItem] = useState<IMenu[] | []>([]);
   

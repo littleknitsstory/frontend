@@ -1,10 +1,11 @@
 import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import Spinner from "./Spinner";
-import Articles from "./Articles";
 import { useTranslation } from "react-i18next";
 import { useGetArticleQuery } from "../features/api/apiSlice";
+
+import Articles from "./Articles";
 import Page404 from "./Page404";
+import Spinner from "./Spinner";
 
 const Article = () => {
   const { slug } = useParams<string>();
@@ -12,10 +13,8 @@ const Article = () => {
   const {
     data: article,
     isLoading,
-    isSuccess,
     isError,
-    error
-  } = useGetArticleQuery({ slug: slug, lang: i18n.language })
+  } = useGetArticleQuery({ slug, lang: i18n.language })
 
   if (isLoading) {
     return <Spinner />

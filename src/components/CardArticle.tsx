@@ -1,9 +1,10 @@
 import sanitizeHtml from "sanitize-html";
-import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
-import { IArticle } from "../app/models";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+
 import { PICTURE_BASE_URL } from "../features/api/apiSlice";
+import { IArticle } from "../app/models";
 
 const CardArticle = ({ article }: { article: IArticle }) => {
   const { t } = useTranslation();

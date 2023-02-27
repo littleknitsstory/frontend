@@ -1,15 +1,14 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Navbar from "react-bootstrap/Navbar";
+import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
-import heart from "../icons/heart.svg";
-// import logout from "../icons/logout.svg";
-import shoppingBag from "../icons/shopping-bag.svg";
-// import user from "../icons/user.svg";
-import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
 import { useTranslation } from "react-i18next";
+// components
+import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
+// assets
+import heart from "../assets/icons/heart.svg";
+import shoppingBag from "../assets/icons/shopping-bag.svg";
+//? Temporary unused assets
+// import logout from "../icons/logout.svg";
+// import user from "../icons/user.svg";
 
 const NavBar = () => {
   const { i18n } = useTranslation()

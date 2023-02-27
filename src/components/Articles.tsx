@@ -2,21 +2,22 @@ import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useGetArticlesQuery } from "../features/api/apiSlice";
-import i18next from "../i18n"
 
+// components
 import CardArticle from "./CardArticle";
-import arrowRight from "../icons/arrow-right.svg";
 import Spinner from "./Spinner";
 import Page404 from "./Page404";
 
+// assets
+import arrowRight from "../assets/icons/arrow-right.svg";
+
 const Articles = () => {
+  const { i18n } = useTranslation()
   const {
     data: articles,
     isFetching,
-    isSuccess,
     isError,
-    error
-  } = useGetArticlesQuery({lang: i18next.language})
+  } = useGetArticlesQuery({lang: i18n.language})
   const { t } = useTranslation();
 
   const [limit, setLimit] = useState<number>(4);

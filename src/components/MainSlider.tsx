@@ -1,26 +1,18 @@
-import { useState } from "react";
 import sanitizeHtml from "sanitize-html";
-import { Container, Row, Col } from "react-bootstrap";
-import Carousel from "react-bootstrap/Carousel";
+import { Container, Row, Col, Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import arrowWhite from "../icons/arrow-right-white.svg";
-import kateSlider from "../images/kate-slider.png";
+
 import { useTranslation } from "react-i18next";
-import i18next from "../i18n"
 import { useGetArticlesQuery } from "../features/api/apiSlice";
+// assets
+import arrowWhite from "../assets/icons/arrow-right-white.svg";
+import kateSlider from "../assets/images/kate-slider.png";
 
 const MainSlider = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const {
     data: articles,
-    isFetching,
-    isSuccess,
-    isError,
-    error
-  } = useGetArticlesQuery({lang: i18next.language})
-  // const [articles, setArticles] = useState<IArticle[]>([]);
-  const [limit, setLimit] = useState<number>(0);
-
+  } = useGetArticlesQuery({lang: i18n.language})
 
   return (
     <section className="main-slider">

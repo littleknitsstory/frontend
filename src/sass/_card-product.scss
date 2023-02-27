@@ -69,7 +69,7 @@
 
       .form-check-input {
         &:checked[type="checkbox"] {
-          background-image: url("../icons/check.svg");
+          background-image: url("../assets/icons/check.svg");
         }
         &:checked {
           background-color: $light-grey-color;

@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import Card from "react-bootstrap/Card";
-import Form from "react-bootstrap/Form";
-import Modal from "react-bootstrap/Modal";
+import { Card, Form, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { IProduct } from "../app/models";
-import { PICTURE_BASE_URL } from "../features/api/apiSlice";
 
 import { useAppDispatch } from "../app/hooks"
 import { addFavorite, removeFavorite, addToCart } from "../features/products/productsSlice"
+
+import { PICTURE_BASE_URL } from "../features/api/apiSlice";
+import { IProduct } from "../app/models";
 
 const CardProduct = ({ product }: { product: IProduct }) => {
   const { t } = useTranslation()

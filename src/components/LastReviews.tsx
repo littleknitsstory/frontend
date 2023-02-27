@@ -1,16 +1,14 @@
 import { Container } from "react-bootstrap";
-import CardReview from "./CardReview";
 import { useTranslation } from "react-i18next";
 import { useGetReviewsQuery } from "../features/api/apiSlice";
 import { nanoid } from "@reduxjs/toolkit";
+// components
+import CardReview from "./CardReview";
 
 const LastReviews = () => {
   const { t } = useTranslation();
   const {
     data: reviews,
-    isLoading,
-    isError,
-    error
   } = useGetReviewsQuery()
 
   return (

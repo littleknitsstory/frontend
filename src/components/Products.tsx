@@ -1,24 +1,23 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import arrowRight from "../icons/arrow-right.svg";
-import CardProduct from "./CardProduct";
-import Filters from "./Filters";
 import { useGetProductsQuery } from "../features/api/apiSlice";
-import i18next from "../i18n"
+// components
+import Filters from "./Filters";
+import CardProduct from "./CardProduct";
 import Spinner from "./Spinner";
 import Page404 from "./Page404";
+// assets
+import arrowRight from "../assets/icons/arrow-right.svg";
 
 const Products = () => {
+  const { t, i18n } = useTranslation();
   const {
     data: products,
     isLoading,
-    isSuccess,
     isError,
-    error
-  } = useGetProductsQuery({lang: i18next.language}) /* optional args: {limit: num, offset: num} */
+  } = useGetProductsQuery({lang: i18n.language}) /* optional args: {limit: num, offset: num} */
 
-  const { t } = useTranslation();
   const [limit, setLimit] = useState<number>(4);
   const [isAllShown, setAllShown] = useState<boolean>(false)
   // const [count, setCount] = useState<number>(0);

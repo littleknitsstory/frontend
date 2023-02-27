@@ -1,9 +1,11 @@
 import { Container, Row, Col } from "react-bootstrap";
-import CardProduct from "./CardProduct";
-import arrowRight from "../icons/arrow-right.svg";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../app/hooks";
-import { Link } from "react-router-dom";
+// components
+import CardProduct from "./CardProduct";
+// assets
+import arrowRight from "../assets/icons/arrow-right.svg";
 
 const SavedProducts = () => {
   const { t } = useTranslation();

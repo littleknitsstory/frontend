@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import logo from "../images/logo.png";
+import logo from "../assets/images/logo.png";
 
 const Header = () => {
   const { t } = useTranslation()

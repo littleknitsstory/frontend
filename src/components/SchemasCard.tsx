@@ -1,11 +1,13 @@
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import cartWhite from "../icons/cart-white.svg";
+import { useGetProductQuery } from "../features/api/apiSlice";
+// components
 import SchemaCard from "./SchemaCard";
 import Spinner from "./Spinner";
 import Page404 from "./Page404";
-import { useGetProductQuery } from "../features/api/apiSlice";
+// assets
+import cartWhite from "../assets/icons/cart-white.svg";
 
 const SchemasCard = () => {
   const { t, i18n } = useTranslation();
@@ -22,16 +24,6 @@ const SchemasCard = () => {
   if (isError) {
     return <Page404 />
   }
-  // const [product, setProduct] = useState<IProductDetails | null>(null);
-  // useEffect(() => {
-  //   const fetchProductDetails = async (): Promise<void> => {
-  //     const data = await getProductDetails("pattents_5");
-  //     if (data) {
-  //       setProduct(data);
-  //     }
-  //   };
-  //   fetchProductDetails();
-  // }, []);
 
   return (
     <section className="schemas-card">

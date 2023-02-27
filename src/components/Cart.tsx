@@ -1,10 +1,9 @@
 import { Container, Row, Col } from "react-bootstrap";
-import CardProductCart from "./CardProductCart";
 import { useAppSelector } from "../app/hooks";
+import CardProductCart from "./CardProductCart";
 
 const Cart = () => {
   const cartProducts = useAppSelector(state => state.products.cart)
-  const array: {id: number}[] = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
   return (
     <section className="saved-products">
       <Container>

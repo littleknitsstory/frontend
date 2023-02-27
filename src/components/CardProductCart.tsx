@@ -1,14 +1,11 @@
 import { useState, useCallback } from "react";
-import Card from "react-bootstrap/Card";
-import { Form } from "react-bootstrap";
+import { Card, Form } from "react-bootstrap";
+
 import { useAppDispatch } from "../app/hooks";
 import { removeFromCart } from "../features/products/productsSlice";
 
-import cardImgProduct from "../images/product-img.png";
 import { IProduct } from "../app/models";
 import { PICTURE_BASE_URL } from "../features/api/apiSlice";
-
-
 
 const CardProductCart = ({product}: {product: IProduct}) => {
   const [countProduct, setCountProduct] = useState<number>(1);

@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import { Col, Row } from "react-bootstrap";
-import Form from "react-bootstrap/Form";
-import Modal from "react-bootstrap/Modal";
+import { Col, Row, Form, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { IProductDetails } from "../app/models";
-import arrowRight from "../icons/arrow-right.svg";
-import like from "../icons/like.svg";
-import questionInfo from "../icons/question.svg";
-import Social from "./Social";
 import { PICTURE_BASE_URL } from "../features/api/apiSlice";
 import { useAppDispatch } from "../app/hooks";
 import { addFavorite } from "../features/products/productsSlice";
+// components
+import Social from "./Social";
+// assets
+import arrowRight from "../assets/icons/arrow-right.svg";
+import like from "../assets/icons/like.svg";
+import questionInfo from "../assets/icons/question.svg";
 
 const SchemaCard = ({ product }: { product: IProductDetails }) => {
   const { t } = useTranslation();

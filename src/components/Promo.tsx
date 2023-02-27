@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import cartBlack from "../icons/cart-black.svg";
 import { useTranslation } from "react-i18next";
+import cartBlack from "../assets/icons/cart-black.svg";
 
 const Promo = () => {
   const { t } = useTranslation();

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
-import Modal from "react-bootstrap/Modal";
+import { Col, Container, Form, Row, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import envelope from "../icons/envelope.svg";
-import map from "../icons/map-point.svg";
-import phone from "../icons/phone.svg";
 import { useAddContactsMutation } from "../features/api/apiSlice";
+// assets
+import envelope from "../assets/icons/envelope.svg";
+import map from "../assets/icons/map-point.svg";
+import phone from "../assets/icons/phone.svg";
 
 const Contacts = () => {
   const { t } = useTranslation();

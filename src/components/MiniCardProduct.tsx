@@ -1,6 +1,6 @@
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import mermaid from "../images/mermaid.png";
+import mermaid from "../assets/images/mermaid.png";
 
 const MiniCardProduct = () => {
   return (
