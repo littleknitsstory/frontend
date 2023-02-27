@@ -41,7 +41,7 @@ interface QueryArgs {
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ 
-    baseUrl: "http://dev.backend.littleknitsstory.com:26363/api/v1",
+    baseUrl: process.env.REACT_APP_BASE_API_URL,
   }),
   endpoints: builder => ({
     getMenu: builder.query<IMenuResponse, {lang: string}>({
@@ -50,7 +50,6 @@ export const apiSlice = createApi({
         headers: { "Accept-Language": lang }
       })
     }),
-    // Нужен ли нам Query для Products? 
     getProducts: builder.query<IProductsResponse, QueryArgs>({
       query: ({limit, offset, lang}) => ({
         url: URLS.PRODUCTS + getQueryString(limit, offset),

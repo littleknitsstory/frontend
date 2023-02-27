@@ -7,7 +7,7 @@ interface Products {
 }
 
 const initialState: Products = {
-  favorite: [],
+  favorite: [], 
   cart: []
 }
 
@@ -32,7 +32,7 @@ const productsSlice = createSlice({
       } 
       if (state.cart.every(product => product.id !== action.payload.id)) {
         state.cart.push(action.payload)
-      } 
+      }
     },
     removeFromCart(state, action: PayloadAction<IProduct>) {
       state.cart = [...state.cart.filter(product => product.id !== action.payload.id)]

@@ -11,9 +11,12 @@ import like from "../icons/like.svg";
 import questionInfo from "../icons/question.svg";
 import Social from "./Social";
 import { PICTURE_BASE_URL } from "../features/api/apiSlice";
+import { useAppDispatch } from "../app/hooks";
+import { addFavorite } from "../features/products/productsSlice";
 
 const SchemaCard = ({ product }: { product: IProductDetails }) => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch()
   const [showModalQuickPurchase, setShowModalQuickPurchase] =
     useState<boolean>(false);
 
@@ -55,7 +58,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
               alt={product.image_alt}
             />
             <a href="#">
-              <img className="schema-card__like" src={like} alt="like" />
+              <img className="schema-card__like" src={like} alt="like" onClick={() => dispatch(addFavorite(product))}/>
             </a>
           </div>
           <div className="schema-card__counter">

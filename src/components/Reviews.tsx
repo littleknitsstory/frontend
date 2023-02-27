@@ -5,7 +5,6 @@ import { useGetReviewsQuery } from "../features/api/apiSlice";
 import { nanoid } from '@reduxjs/toolkit'
 import Page404 from "./Page404";
 
-
 const Reviews = () => {
   const { t } = useTranslation();
   const {
@@ -14,7 +13,7 @@ const Reviews = () => {
     isError,
     error
   } = useGetReviewsQuery()
-  console.log(error)
+  // console.log(error)
 
   return (
     <section className="reviews">
