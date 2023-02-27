@@ -38,7 +38,11 @@
   "Filter": {
     "title": "Filters",
     "price": "Price",
-    "buttonText": "Clear filter"
+    "buttonText": "Clear filters",
+    "selectCategory": "Select Category",
+    "categories": "Categories",
+    "colors": "Colors",
+    "clear": "Clear"
   },
   "CardProduct": {
     "material": "Material",

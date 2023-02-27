@@ -8,6 +8,7 @@ import { useGetProductsQuery } from "../features/api/apiSlice";
 import i18next from "../i18n"
 import Spinner from "./Spinner";
 import Page404 from "./Page404";
+import { IProduct } from "../app/models";
 
 const Products = () => {
   const {
@@ -21,13 +22,94 @@ const Products = () => {
   const { t } = useTranslation();
   const [limit, setLimit] = useState<number>(4);
   const [isAllShown, setAllShown] = useState<boolean>(false)
+  const [renderProducts, setRenderProducts] = useState<IProduct[]>([])
+  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([])
+  const [filteredColors, setFilteredColors] = useState<IProduct[]>([])
+  const [filteredCategories, setFilteredCategories] = useState<IProduct[]>([])
+  const [hasOverlap, setHasOverlap] = useState<boolean>(false)
   // const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
     if (products) {
-      setAllShown(limit > products.results.length)
+      setRenderProducts(products.results)
+      setFilteredColors(products.results)
+      setFilteredCategories(products.results)
     }
-  },[limit, products])
+  }, [products])
+  
+  // Filtering products by category
+  const filterCategories = (selectedCategory: string): void => {
+    if (products && selectedCategory) {
+      if (selectedCategory === "clear") {
+        setFilteredCategories(products.results)
+      } else {
+        const filtered = products?.results.filter(product => 
+          product.categories.some(category => category.title === selectedCategory)
+        )
+        setFilteredCategories(filtered)
+        setLimit(4)
+      }
+    } 
+  }
+
+  // Filtering products by color
+  const filterColors = (selectedColor: string): void => {
+    if (products && selectedColor) {
+      if (selectedColor === "clear") {
+        setFilteredColors(products.results)
+      } else {
+        const filtered = products.results.filter(product => 
+          product.colors.some(color => color.color === selectedColor)
+          )
+          setFilteredColors(filtered)
+          setLimit(4)
+      }
+    } 
+  }
+
+  // Compare two filtered arrays
+  useEffect(() => {
+    const isSameProduct = (a: IProduct, b: IProduct): boolean => a.id === b.id
+    
+    const compareProducts = (a: IProduct[], b: IProduct[]) => 
+      a.filter(firstArray =>
+        b.some(secondArray => 
+          isSameProduct(firstArray, secondArray)));
+
+    const filteredProducts = compareProducts(filteredCategories, filteredColors)
+    setFilteredProducts(filteredProducts)
+  }, [filteredCategories, filteredColors])
+
+  // Select which array of products render
+  useEffect(() => {
+    if(filteredProducts.length > 0) {
+      setRenderProducts(filteredProducts)
+    } else if (products) {
+      setRenderProducts(products.results)
+    } 
+  }, [filteredProducts, products])
+
+  useEffect(() => {
+    setAllShown(limit >= renderProducts.length)
+  }, [renderProducts, limit])
+
+  const clearFilters = () => {
+    if (products) {
+      setFilteredCategories(products?.results)
+      setFilteredColors(products?.results)
+      setFilteredProducts(products?.results)
+      setRenderProducts(products?.results)
+      setLimit(4)
+    }
+  }
+  
+  // If any products with selected filters
+  useEffect(() => {
+    const noOverlap = 
+      filteredProducts.length === 0 && 
+        (filteredCategories.length > 0 || filteredColors.length > 0)
+    setHasOverlap(!noOverlap)
+  }, [filteredProducts, filteredCategories, filteredColors])
   
   if (isLoading) {
     return <Spinner />
@@ -67,17 +149,24 @@ const Products = () => {
               offset: 0,
             }}
           >
-            <Filters />
+            <Filters 
+              filterCategories={filterCategories} 
+              filterColors={filterColors}
+              clearFilters={clearFilters} 
+            />
           </Col>
           <Col>
             <Row xs={1} md={1} lg={2} xl={2} xxl={3}>
-              {products?.results.slice(0, limit).map((item) => {
+              {hasOverlap && renderProducts.slice(0, limit).map((item) => {
                 return (
                   <Col key={item.id}>
                     <CardProduct product={item} />
                   </Col>
                 );
               })}
+              {!hasOverlap &&
+                <div>Не найдено товаров по выбранным фильтрам.</div>
+              }
             </Row>
           </Col>
         </Row>

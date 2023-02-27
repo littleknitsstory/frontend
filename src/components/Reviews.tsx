@@ -14,7 +14,6 @@ const Reviews = () => {
     isError,
     error
   } = useGetReviewsQuery()
-  console.log(error)
 
   return (
     <section className="reviews">

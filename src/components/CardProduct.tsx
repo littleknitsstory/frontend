@@ -117,6 +117,14 @@ const CardProduct = ({ product }: { product: IProduct }) => {
           </div>
           <div className="card-lks__color">
             {t("CardProduct.color")}: 
+            {product.colors.map(color => 
+              <div 
+                key={color.color}
+                style={{backgroundColor: color.color}}
+                className="card-lks__color__circle"
+              >
+                
+              </div>)}
           </div>
           <div className="card-lks__price">{product.price}</div>
           <div className="card-lks__btn product-card__btn">
@@ -152,6 +160,15 @@ const CardProduct = ({ product }: { product: IProduct }) => {
                 </div>
                 <div className="product-card__modal-quick-purchase-color">
                   {t("CardProduct.color")}:
+                  {product.colors.map(color => 
+                    <div 
+                      key={color.color}
+                      style={{backgroundColor: color.color}}
+                      className="card-lks__color__circle"
+                    >
+                      
+                    </div>)
+                  }
                 </div>
                 <div className="product-card__modal-quick-purchase-wrapper">
                   <div className="product-card__modal-quick-purchase-wrapper-price">

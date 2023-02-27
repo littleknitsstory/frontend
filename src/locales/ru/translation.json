@@ -38,7 +38,11 @@
   "Filter": {
     "title": "Фильтры",
     "price": "Цена",
-    "buttonText": "Очистить фильтр"
+    "buttonText": "Очистить фильтры",
+    "selectCategory": "Выберите категорию",
+    "categories": "Категории",
+    "colors": "Цвета",
+    "clear": "Очистить"
   },
   "CardProduct": {
     "material": "Материал",
