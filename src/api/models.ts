@@ -1,4 +1,17 @@
-import { IProduct } from "../store/productSlice";
+export interface IProduct {
+  id: number;
+  code: number;
+  title: string;
+  slug: string;
+  description: string;
+  price: string;
+  sale: string;
+  colors: { color: string }[];
+  categories: { title: string; slug: string }[];
+  author: number;
+  image_preview: string;
+  image_alt: string;
+}
 
 export interface IProductsResponse {
   count: number;
@@ -89,4 +102,8 @@ export interface IArticlesResponse {
   next: string;
   previous: string;
   results: IArticle[];
+}
+
+export interface ISavedProducts {
+  savedProducts: IProduct[];
 }

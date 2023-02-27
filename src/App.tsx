@@ -7,7 +7,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import Article from "./components/Article";
 import Cart from "./components/Cart";
-import Page404 from "./components/Page404";
+import PageError from "./components/PageError";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import Product from "./components/Product";
 import Products from "./components/Products";
@@ -55,7 +55,7 @@ function App() {
               <Route path="saved" element={<SavedProducts />} />
               <Route path="cart" element={<Cart />} />
               <Route path="privacyPolicy" element={<PrivacyPolicy />} />
-              <Route path="*" element={<Page404 />} />
+              <Route path="*" element={<PageError errorStatus={404} />} />
             </Route>
           </Routes>
         </Router>

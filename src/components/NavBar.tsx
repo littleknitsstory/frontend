@@ -33,20 +33,20 @@ const NavBar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
           <div className="lks-navbar__right">
-            {/* <div className="lks-navbar__icons">
-              <a href="#">
+            <div className="lks-navbar__icons">
+              {/* <a href="#">
                 <img src={user} alt="user" />
               </a>
               <a href="#">
                 <img src={logout} alt="logout" />
-              </a>
+              </a> */}
               <Link to="/saved">
                 <img src={heart} alt="heart" />
               </Link>
-              <Link to="/cart">
+              {/* <Link to="/cart">
                 <img src={shoppingBag} alt="shoppingBag" />
-              </Link>
-            </div> */}
+              </Link> */}
+            </div>
 
             <NavDropdown
               title={language.toUpperCase()}
@@ -65,7 +65,7 @@ const NavBar = () => {
 
           <Navbar.Collapse>
             <Nav className="lks-navbar__links">
-              <PrimaryNav type={"header"}/>
+              <PrimaryNav type={"header"} />
             </Nav>
           </Navbar.Collapse>
         </Container>

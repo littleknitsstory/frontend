@@ -1,3 +1,4 @@
+@use "./_variables" as *;
 .schema-card {
   .social {
     display: none;
@@ -25,10 +26,11 @@
     width: 100%;
     height: 100%;
   }
-  &__like {
+  &__svg-like {
     position: absolute;
     right: 1.25rem;
     top: 1.43rem;
+    cursor: pointer;
   }
   &__property {
     color: $text-color-dark;

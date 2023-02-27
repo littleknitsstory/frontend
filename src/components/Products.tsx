@@ -1,25 +1,46 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-
 import arrowRight from "../icons/arrow-right.svg";
-import { useGetProductsQuery } from "../services";
+import { useGetProductsQuery } from "../store/apiSlice";
+
 import CardProduct from "./CardProduct";
 import Filters from "./Filters";
+import PageError from "./PageError";
 import Spinner from "./Spinner";
 
 const Products = () => {
   const { t } = useTranslation();
+  const [limit, setLimit] = useState<number>(3);
+  const [isLastPage, setIsLastPage] = useState<boolean>(false);
 
-  const [limit, setLimit] = useState<number>(4);
+  const {
+    data: products,
+    isLoading,
+    isError,
+    isFetching,
+    error,
+  } = useGetProductsQuery({ limit });
 
-  const { data, isLoading } = useGetProductsQuery({ limit, offset: 0 });
-  const isLastPage = data?.count ? limit >= data.count : true;
+  useEffect(() => {
+    if (products) {
+      if (limit !== 3 && limit >= products?.count) {
+        setIsLastPage(true);
+      }
+    }
+  }, [limit]);
 
   const handleSeeMore = useCallback((): void => {
-    setLimit((prev) => prev + 4);
+    setLimit((prev) => prev + 3);
   }, []);
+
+  if (isLoading) {
+    return <Spinner />;
+  } else if (isError) {
+    if ("originalStatus" in error) {
+      return <PageError errorStatus={error.originalStatus} />;
+    }
+  }
 
   return (
     <Container>
@@ -55,27 +76,27 @@ const Products = () => {
           </Col>
           <Col>
             <Row xs={1} md={1} lg={2} xl={2} xxl={3}>
-              {isLoading && <Spinner />}
-              {data &&
-                data.results.map((item) => {
-                  return (
-                    <Col key={item.id}>
-                      <CardProduct product={item} />
-                    </Col>
-                  );
-                })}
+              {products?.results.map((item: any) => {
+                return (
+                  <Col key={item.id}>
+                    <CardProduct product={item} />
+                  </Col>
+                );
+              })}
             </Row>
           </Col>
         </Row>
-        {!isLastPage && (
-          <Row>
-            <Col className="text-end">
-              <Link to="/shop" onClick={handleSeeMore}>
-                {t("seeMore")}
-                <img src={arrowRight} alt="arrowRight" />
-              </Link>
-            </Col>
-          </Row>
+        {isFetching ? (
+          <Spinner />
+        ) : (
+          !isLastPage && (
+            <button className="btn btn_border" onClick={handleSeeMore}>
+              <div className="btn__text">{t("seeMore")}</div>
+              <div className="btn__icon">
+                <img src={arrowRight} alt="arrowWhite" />
+              </div>
+            </button>
+          )
         )}
       </div>
     </Container>
