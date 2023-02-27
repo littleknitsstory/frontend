@@ -1,12 +1,20 @@
 import { useState, useCallback } from "react";
 import Card from "react-bootstrap/Card";
 import { Form } from "react-bootstrap";
+import { useAppDispatch } from "../app/hooks";
+import { removeFromCart } from "../features/products/productsSlice";
 
 import cardImgProduct from "../images/product-img.png";
+import { IProduct } from "../app/models";
+import { PICTURE_BASE_URL } from "../features/api/apiSlice";
 
-const CardProductCart = () => {
+
+
+const CardProductCart = ({product}: {product: IProduct}) => {
   const [countProduct, setCountProduct] = useState<number>(1);
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  const dispatch = useAppDispatch()
+
   const increaseCountProduct = (): void => {
     setCountProduct((countProduct) => countProduct + 1);
   };
@@ -30,17 +38,17 @@ const CardProductCart = () => {
 
           <img
             className="product-card__cart-img"
-            src={cardImgProduct}
+            src={PICTURE_BASE_URL + product.image_preview}
             alt="cardImgProduct"
           />
           <div className="product-card__cart-wrapper">
             <div className="product-card__modal-quick-purchase-descr">
               <div className="product-card__modal-quick-purchase-title">
-                Cхема "Русалочка"
+                {product.title}
               </div>
 
               <div className="product-card__modal-quick-purchase-part-number">
-                Артикул: 56356635
+                Артикул: {product.code}
               </div>
               <div className="product-card__modal-quick-purchase-color">
                 Цвет:{" "}
@@ -64,7 +72,7 @@ const CardProductCart = () => {
           </div>
 
           <div className="product-card__modal-quick-purchase-wrapper-price">
-            Стоимость: 12 555
+            Стоимость: {product.price}
           </div>
           <button
             className={
@@ -72,6 +80,7 @@ const CardProductCart = () => {
                 ? "product-card__cart-btn-deleted-active"
                 : "product-card__cart-btn-deleted"
             }
+            onClick={() => dispatch(removeFromCart(product))}
           >
             Ｘ
           </button>
