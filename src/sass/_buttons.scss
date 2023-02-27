@@ -37,6 +37,16 @@
     background-color: $text-color-light;
     color: $text-color-dark;
     width: 13rem;
+
+  }
+  &_clear-filter {
+    font-size: 1rem;
+    text-align: center;
+    border: 1px solid black;
+    padding: 0.5rem 1.5rem;
+    margin-top: 1rem;
+    width: auto;
+    height: auto;
   }
   &__text {
     &_center {

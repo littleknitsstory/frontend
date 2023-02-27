@@ -1,21 +1,69 @@
 .filters {
   border-right: 1px solid #e8e8e8;
-  &__wrapper-price {
-    width: 17rem;
-    height: 8rem;
-    margin: 3.75rem 0;
+  &__wrapper-price,
+  &__wrapper-category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    margin: 3.75rem 0 2rem 0;
     box-shadow: 15px 15px 50px -10px rgba(0, 0, 0, 0.08);
     border-radius: 10px;
-    padding: 1.25rem;
+    padding: 0.75rem 0.5rem 1.5rem;
+  }
+  &__wrapper-price {
+    padding-bottom: 3.5rem;
   }
   &__title {
     font-size: 1rem;
+    text-align: center;
     color: $main-color;
     margin-bottom: 1.25rem;
   }
   &__btn {
     .btn {
       padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__select {
+    padding: 0.5rem 0.75rem;
+    border-radius: 10px;
+    width: 90%;
+    margin: 0 auto;
+    font-size: 0.875rem;
+  }
+  &__color-palette {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .75rem;
+
+    .color-circle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 25px;
+      height: 25px;
+      font-size: 0.4rem;
+      border-radius: 50%;
+      border: 0.5px solid $main-color;
+      cursor: pointer;
+
+      &.active {
+        box-shadow: 0 0 7px 1px grey;
+        border: 1.5px solid $main-color
+      }
+    }
+    .clear-filter {
+      font-size: 1rem;
+      text-align: center;
+      border: 1px solid black;
+      padding: 0.5rem 1.5rem;
+      margin-top: 1rem;
+      width: auto;
+      height: auto;
     }
   }
 }

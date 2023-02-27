@@ -35,6 +35,11 @@
       font-size: 1rem;
       margin-bottom: 0.5rem;
     }
+    &-color {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
     &-policy {
       margin-top: 1rem;
       font-size: 0.8rem;

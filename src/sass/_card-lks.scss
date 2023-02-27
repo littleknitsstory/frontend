@@ -85,12 +85,23 @@
     }
   }
   &__material,
-  &__color,
   &__price {
     text-align: center;
     color: $text-color-dark;
     font-size: 0.875rem;
     padding: 0.3rem 0;
+  }
+  &__color {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.35rem;
+
+    &__circle {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+    }
   }
   &__price {
     font-size: 1.2rem;
