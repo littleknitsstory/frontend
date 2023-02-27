@@ -11,6 +11,15 @@ const SavedProducts = () => {
   const { t } = useTranslation();
   const favoriteProducts = useAppSelector(state => state.products.favorite)
 
+  if (favoriteProducts.length === 0) {
+    return (
+      <Container>
+        <div className="empty-favorites">Нет сохраненных товаров.</div>
+        <Link to="/shop" className="empty-cart-link">Перейти в каталог 🛒</Link>
+      </Container>
+    )
+  }
+
   return (
     <section className="saved-products">
       <Container>

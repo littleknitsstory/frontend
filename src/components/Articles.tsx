@@ -2,29 +2,27 @@ import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useGetArticlesQuery } from "../features/api/apiSlice";
-
 // components
 import CardArticle from "./CardArticle";
 import Spinner from "./Spinner";
 import Page404 from "./Page404";
-
 // assets
 import arrowRight from "../assets/icons/arrow-right.svg";
 
 const Articles = () => {
   const { i18n } = useTranslation()
+  const [limit, setLimit] = useState<number>(4);
   const {
     data: articles,
     isFetching,
     isError,
-  } = useGetArticlesQuery({lang: i18n.language})
+  } = useGetArticlesQuery({lang: i18n.language, limit})
   const { t } = useTranslation();
 
-  const [limit, setLimit] = useState<number>(4);
   const [isAllShown, setAllShown] = useState<boolean>(false);
 
   useEffect(() => {
-    if (articles) setAllShown(limit > articles?.results.length)
+    if (articles) setAllShown(limit > articles?.count)
   }, [articles, limit]);
 
   if (isFetching) {

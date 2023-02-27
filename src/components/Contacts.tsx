@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Col, Container, Form, Row, Modal } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useAddContactsMutation } from "../features/api/apiSlice";
+import useModalState from "./Hooks/useModalState";
+import ModalThanks from "./atoms/modal/ModalThanks";
 // assets
 import envelope from "../assets/icons/envelope.svg";
 import map from "../assets/icons/map-point.svg";
@@ -11,8 +12,6 @@ import phone from "../assets/icons/phone.svg";
 const Contacts = () => {
   const { t } = useTranslation();
   const [addContacts, { isLoading }]  = useAddContactsMutation()
-  const [showModalThanks, setShowModalThanks] = useState<boolean>(false);
-
   const initialFormDataState = {
     name: "",
     message: "",
@@ -21,6 +20,11 @@ const Contacts = () => {
     phone_number: ""
   }
   const [formData, setFormData] = useState(initialFormDataState)
+  const {
+    showModalThanks, 
+    handleShowThanks,
+    handleClose
+  } = useModalState()
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.currentTarget
@@ -37,6 +41,7 @@ const Contacts = () => {
       try {
         await addContacts(formData).unwrap()
         setFormData(initialFormDataState)
+        handleShowThanks()
       } catch (err) {
         console.error("Failed to save the post: ", err);
       }
@@ -161,32 +166,13 @@ const Contacts = () => {
           </Row>
         </div>
         <div className="card-modal-thanks">
-          <Modal
-            show={showModalThanks}
-            onHide={() => setShowModalThanks(false)}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-          >
-            <Modal.Header closeButton className="modal-header-without-border">
-              <Modal.Title id="contained-modal-title-vcenter">
-                {t("Modal.thanks")}
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <div className="card-modal-thanks__text">
-                <p>{t("Modal.thanksText1")}</p>
-                <p>{t("Modal.thanksText2")}</p>
-              </div>
-              <Link to={`/`}>
-                <button className="btn btn_vinous btn_center card-modal-thanks__btn">
-                  <div className="btn__text btn__text_center">
-                    {t("Modal.backHome")}
-                  </div>
-                </button>
-              </Link>
-            </Modal.Body>
-          </Modal>
+        <ModalThanks 
+          showModal={showModalThanks}
+          handleClose={handleClose}
+          button={true}
+          title={t("Modal.titleThanks.thanks")}
+          message={<p>{t("Modal.thanksText.contacts")}</p>}
+        />
         </div>
       </Container>
     </section>

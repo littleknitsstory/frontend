@@ -7,8 +7,8 @@ const Page404 = () => {
       <Container>
         <Row>
           <Col>
-            <div className="page404__error">404</div>
-            <div className="page404__subtitle">Not found</div>
+            <div className="page404__error"></div>
+            <div className="page404__subtitle"></div>
             <div className="page404__text">
               The page you are trying to reach does not exist or has been
               deleted. <br />

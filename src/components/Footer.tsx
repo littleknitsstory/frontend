@@ -1,23 +1,30 @@
 import React, { useState } from "react";
-import { Col, Container, Form, Modal, Row } from "react-bootstrap";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useAddSubscriptionMutation } from "../features/api/apiSlice";
 // components
 import Social from "./Social";
 import PrimaryNav from "./atoms/primary-nav/PrimaryNav";
+import useModalState from "./Hooks/useModalState";
+import ModalThanks from "./atoms/modal/ModalThanks";
 
 const Footer = () => {
   const { t } = useTranslation();
-  const [isModalShown, setIsModalShown] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [addSubscribe, { isLoading }] = useAddSubscriptionMutation()
+  const {
+    showModalThanks, 
+    handleShowThanks,
+    handleClose, 
+  } = useModalState()
 
   const handleSubscribe = async (): Promise<void> => {
     if (!isLoading) {
       try {
         await addSubscribe(email).unwrap()
         setEmail("")
+        handleShowThanks()
       } catch (err) {
         console.error("Failed to subscribe: ", err);
       }
@@ -38,6 +45,7 @@ const Footer = () => {
                     <PrimaryNav type={"footer"} />
                   </div>
                 </Col>
+                {/* Temporary comment out */}
                 {/* <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
                   <div className="footer__links-account">
                     <div className="footer__links-account footer__links-account-title">
@@ -89,6 +97,18 @@ const Footer = () => {
             </Col>
           </Row>
         </div>
+        <ModalThanks 
+          showModal={showModalThanks}
+          handleClose={handleClose}
+          title={t("Modal.titleThanks.thanks")}
+          button={false}
+          message={
+            
+            <>
+              <p>{t("Modal.thanksText.subscription")}</p>
+            </>
+          }
+        />
 
         <div className="footer__end">
           <Row>
@@ -107,25 +127,6 @@ const Footer = () => {
           </Row>
         </div>
       </Container>
-
-      <Modal
-        show={isModalShown}
-        onHide={() => setIsModalShown(false)}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton className="modal-header-without-border">
-          <Modal.Title id="contained-modal-title-vcenter">
-            {t("Modal.thanks")}
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="card-modal-thanks__text">
-            <p>{t("Modal.subscription")}</p>
-          </div>
-        </Modal.Body>
-      </Modal>
     </section>
   );
 };

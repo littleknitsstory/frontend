@@ -10,7 +10,13 @@
     color: $burgundy-color;
     font-size: 3rem;
     text-align: center;
+    &-menu {
+      font-size: 1.5rem;
+      color: $burgundy-color;
+      text-transform: none;
+    }
   }
+
   &__text {
     margin: 1.125rem auto;
     color: $text-color-dark;

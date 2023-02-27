@@ -13,13 +13,13 @@ import { IProduct } from "../app/models";
 
 const Products = () => {
   const { t, i18n } = useTranslation();
+  const [limit, setLimit] = useState<number>(4);
   const {
     data: products,
     isLoading,
     isError,
-  } = useGetProductsQuery({lang: i18n.language}) /* optional args: {limit: num, offset: num} */
+  } = useGetProductsQuery({lang: i18n.language, limit}) /* optional args: {limit: num, offset: num} */
 
-  const [limit, setLimit] = useState<number>(4);
   const [isAllShown, setAllShown] = useState<boolean>(false)
   const [renderProducts, setRenderProducts] = useState<IProduct[]>([])
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([])
@@ -46,7 +46,7 @@ const Products = () => {
           product.categories.some(category => category.title === selectedCategory)
         )
         setFilteredCategories(filtered)
-        setLimit(4)
+        setAllShown(true)
       }
     } 
   }
@@ -61,7 +61,7 @@ const Products = () => {
           product.colors.some(color => color.color === selectedColor)
           )
           setFilteredColors(filtered)
-          setLimit(4)
+          setAllShown(true)
       }
     } 
   }
@@ -89,8 +89,11 @@ const Products = () => {
   }, [filteredProducts, products])
 
   useEffect(() => {
-    setAllShown(limit >= renderProducts.length)
-  }, [renderProducts, limit])
+    if (products) {
+      setAllShown(limit >= products?.count)
+    }
+    
+  }, [products, limit])
 
   const clearFilters = () => {
     if (products) {
@@ -98,7 +101,7 @@ const Products = () => {
       setFilteredColors(products?.results)
       setFilteredProducts(products?.results)
       setRenderProducts(products?.results)
-      setLimit(4)
+      setAllShown(limit >= products?.count)
     }
   }
   
