@@ -21,7 +21,7 @@ const Cart = () => {
           {cartProducts.map((item) => {
             return (
               <Col key={item.id}>
-                <CardProductCart product={item}/>
+                <CardProductCart productSlug={item.slug}/>
               </Col>
             );
           })}

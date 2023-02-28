@@ -26,7 +26,8 @@ enum URLS {
   MENU = "/menu/",
   SUBSCRIBE = "/subscribe/",
   ARTICLES = "/posts/",
-  REVIEWS = "/reviews/"
+  REVIEWS = "/reviews/",
+  CATEGORIES = "/categories/"
 }
 
 export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363"
@@ -36,6 +37,11 @@ interface QueryArgs {
   limit?: number, 
   offset?: number, 
   lang: string
+}
+
+interface CategoriesResponse {
+  title: string;
+  slug: string
 }
 
 export const apiSlice = createApi({
@@ -76,6 +82,9 @@ export const apiSlice = createApi({
     }),
     getReviews: builder.query<IReviewsResponse[], void>({
       query: () => URLS.REVIEWS
+    }),
+    getCategories: builder.query<CategoriesResponse[], void>({
+      query: () => URLS.CATEGORIES
     }),
     addContacts: builder.mutation({
       query: contactForm => ({

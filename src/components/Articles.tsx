@@ -37,7 +37,7 @@ const Articles = () => {
     <Container>
       <div className="articles">
         <Row xs={1} md={2} lg={3} xl={3} xxl={4}>
-          {articles?.results.slice(0, limit).map((item) => {
+          {articles?.results.map((item) => {
             return (
               <Col key={item.slug}>
                 <CardArticle article={item} />

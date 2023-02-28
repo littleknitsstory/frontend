@@ -3,6 +3,7 @@ import MultiRangeslider from "./multi-range-slider/MultiRangeSlider";
 import arrowRight from "../assets/icons/arrow-right.svg";
 import { useGetProductsQuery } from "../features/api/apiSlice";
 import { useEffect, useState } from "react";
+import { IProduct } from "../app/models";
 
 interface Category {
   title: string;
@@ -11,19 +12,15 @@ interface Category {
 
 interface FilterProps {
   clearFilters: () => void;
-  filterCategories: (selectedCategory: string) => void;
-  filterColors: (selectedColor: string) => void;
+  setFilteredCategories: (arg: IProduct[]) => void;
+  setFilteredColors: (arg: IProduct[]) => void;
 }
 
 const Filters = (props: FilterProps) => {
   const { t, i18n } = useTranslation();
   const {
-  data: products,
-  isLoading,
-  isSuccess,
-  isError,
-  error
-} = useGetProductsQuery({lang: i18n.language})
+    data: products,
+  } = useGetProductsQuery({lang: i18n.language})
 
   const [categories, setCategories] = useState<Category[]>([])
   const [selectedCategory, setSelectedCategory] = useState<string>("")
@@ -55,25 +52,47 @@ const Filters = (props: FilterProps) => {
     }
   }, [products])
 
-  const selectCategoryHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    props.filterCategories(e.currentTarget.value)
-    setSelectedCategory(e.currentTarget.value)
+  // filtering by category
+  const selectCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedCategory = e.currentTarget.value
+    setSelectedCategory(selectedCategory)
+    if (products) {
+      if (selectedCategory === "clear") {
+        props.setFilteredCategories([])
+      } else {
+        const filtered: IProduct[] = products?.results.filter(product => 
+          product.categories.some(category => category.slug === selectedCategory)
+          )
+        props.setFilteredCategories(filtered)
+      }
+    }
   }
 
+  // filtering by color
   const selectColor = (e: React.MouseEvent<HTMLElement>) => {
-    props.filterColors(e.currentTarget.dataset.color!)
-    setSelectedColor(e.currentTarget.dataset.color!)
+    const selectedColor = e.currentTarget.dataset.color!
+    setSelectedColor(selectedColor)
+    if (products) {
+      if (selectedColor === "clear") {
+        props.setFilteredColors([])
+      } else {
+        const filtered: IProduct[] = products?.results.filter(product => 
+          product.colors.some(color => color.color === selectedColor)
+          )
+        props.setFilteredColors(filtered)
+      }
+    }
   }
 
   const clearFilters = (): void => {
     props.clearFilters()
-    setSelectedColor("clear")
     setSelectedCategory("clear")
+    setSelectedColor("clear")
   }
 
   const clearColorFilter = (): void => {
-    props.filterColors("clear")
     setSelectedColor("clear")
+    props.setFilteredColors([])
   }
 
   return (
@@ -99,13 +118,13 @@ const Filters = (props: FilterProps) => {
             name="categories" 
             id="categories" 
             value={selectedCategory}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => selectCategoryHandler(e)}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => selectCategory(e)}
           >
             <option value="clear">{t("Filter.selectCategory")}</option>
             {categories.map(category => 
               <option 
                 key={category.slug}
-                value={category.title}
+                value={category.slug}
               >
                 {category.title}
               </option>

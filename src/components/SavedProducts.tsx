@@ -27,7 +27,7 @@ const SavedProducts = () => {
           {favoriteProducts.map((item) => {
             return (
               <Col key={item.id}>
-                <CardProduct product={item} />
+                <CardProduct productSlug={item.slug} />
               </Col>
             );
           })}

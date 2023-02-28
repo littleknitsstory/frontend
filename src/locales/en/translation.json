@@ -103,5 +103,7 @@
   "popular": "Popular",
   "goCart": "Cart",
   "reviews": "Reviews",
-  "quickOrder": "Quick Order"
+  "quickOrder": "Quick Order",
+  "price": "Price",
+  "color": "Color"
 }

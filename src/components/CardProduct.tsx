@@ -9,11 +9,12 @@ import { addFavorite, removeFavorite, addToCart } from "../features/products/pro
 import ModalMain from "./atoms/modal/ModalMain";
 import useModalState from "./Hooks/useModalState";
 import ModalThanks from "./atoms/modal/ModalThanks";
-import { PICTURE_BASE_URL } from "../features/api/apiSlice";
-import { IProduct } from "../app/models";
+import { PICTURE_BASE_URL, useGetProductQuery } from "../features/api/apiSlice";
+import Spinner from "./Spinner";
+import Page404 from "./Page404";
 
-const CardProduct = ({ product }: { product: IProduct }) => {
-  const { t } = useTranslation()
+const CardProduct = ({ productSlug }: { productSlug: string }) => {
+  const { t, i18n } = useTranslation()
   const dispatch = useAppDispatch()
   const {
     showModal, 
@@ -23,23 +24,39 @@ const CardProduct = ({ product }: { product: IProduct }) => {
     onSubmitOrder
   } = useModalState()
 
+  const {
+    data: product,
+    isLoading,
+    isError
+  } = useGetProductQuery({ lang: i18n.language, slug: productSlug })
+
+  if (isLoading) {
+    return <Spinner />
+  }
+
+  if (isError) {
+    return <Page404 />
+  }
+
   return (
+    
     <div className="card-lks product-card">
+      {product && 
       <Card style={{ width: "18rem" }}>
         <div className="card-lks__wrapper-close" onClick={() => dispatch(removeFavorite(product))}>
           <span></span>
           <span></span>
         </div>
-        <Link to={`/product/${product.slug}`}>
+        <Link to={`/product/${product?.slug}`}>
           <Card.Img
             variant="top"
-            alt={product.image_alt}
-            src={`${PICTURE_BASE_URL}${product.image_preview}`}
+            alt={product?.image_alt}
+            src={PICTURE_BASE_URL + product?.image_preview}
           />
         </Link>
         
         <Card.Body>
-          <Card.Title>{product.title}</Card.Title>
+          <Card.Title>{product?.title}</Card.Title>
           <div className="card-lks__wrapper-icons">
             <svg
               width="32"
@@ -110,11 +127,11 @@ const CardProduct = ({ product }: { product: IProduct }) => {
             </svg>
           </div>
           <div className="card-lks__material">
-            {t("CardProduct.material")}: шерсть
+            {t("CardProduct.material")}: {product.material}
           </div>
           <div className="card-lks__color">
             {t("CardProduct.color")}: 
-            {product.colors.map(color => 
+            {product?.colors.map(color => 
               <div 
                 key={color.color}
                 style={{backgroundColor: color.color}}
@@ -123,7 +140,7 @@ const CardProduct = ({ product }: { product: IProduct }) => {
                 
               </div>)}
           </div>
-          <div className="card-lks__price">{product.price}</div>
+          <div className="card-lks__price">{product?.price}</div>
           <div className="card-lks__btn product-card__btn">
             <button className="btn btn_vinous btn_center " onClick={handleShow}>
               <div className="btn__text btn__text_center">
@@ -133,10 +150,11 @@ const CardProduct = ({ product }: { product: IProduct }) => {
           </div>
         </Card.Body>
       </Card>
+      }
 
       <div className="product-card__modal-quick-purchase">
         <ModalMain 
-          product={product} 
+          product={product!} 
           showModal={showModal} 
           handleClose={handleClose} 
           onSubmitOrder={onSubmitOrder}

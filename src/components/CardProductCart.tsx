@@ -5,9 +5,13 @@ import { useAppDispatch } from "../app/hooks";
 import { removeFromCart } from "../features/products/productsSlice";
 
 import { IProduct } from "../app/models";
-import { PICTURE_BASE_URL } from "../features/api/apiSlice";
+import { PICTURE_BASE_URL, useGetProductQuery } from "../features/api/apiSlice";
+import { useTranslation } from "react-i18next";
+import Spinner from "./Spinner";
+import Page404 from "./Page404";
 
-const CardProductCart = ({product}: {product: IProduct}) => {
+const CardProductCart = ({ productSlug }: { productSlug: string }) => {
+  const { t, i18n } = useTranslation()
   const [countProduct, setCountProduct] = useState<number>(1);
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const dispatch = useAppDispatch()
@@ -27,6 +31,20 @@ const CardProductCart = ({product}: {product: IProduct}) => {
     setIsChecked(!isChecked);
   }, [isChecked]);
 
+  const {
+    data: product,
+    isLoading,
+    isError
+  } = useGetProductQuery({ slug: productSlug, lang: i18n.language })
+
+  if (isLoading) {
+    return <Spinner />
+  }
+
+  if (isError) {
+    return <Page404 />
+  }
+
   return (
     <div className="product-card__cart">
       <Card className={isChecked ? "product-card__cart-active" : "card"}>
@@ -35,20 +53,30 @@ const CardProductCart = ({product}: {product: IProduct}) => {
 
           <img
             className="product-card__cart-img"
-            src={PICTURE_BASE_URL + product.image_preview}
+            src={PICTURE_BASE_URL + product?.image_preview}
             alt="cardImgProduct"
           />
           <div className="product-card__cart-wrapper">
             <div className="product-card__modal-quick-purchase-descr">
               <div className="product-card__modal-quick-purchase-title">
-                {product.title}
+                {product?.title}
               </div>
 
               <div className="product-card__modal-quick-purchase-part-number">
-                Артикул: {product.code}
+                {t("Modal.code")}: {product?.code}
               </div>
               <div className="product-card__modal-quick-purchase-color">
-                Цвет:{" "}
+                <>
+                  {t("color")} 
+                  {product?.colors.map(color => 
+                    <div 
+                      key={color.color}
+                      style={{backgroundColor: color.color}}
+                      className="card-lks__color__circle"
+                    >
+                    </div>)
+                  }
+                </>
               </div>
             </div>
           </div>
@@ -69,18 +97,20 @@ const CardProductCart = ({product}: {product: IProduct}) => {
           </div>
 
           <div className="product-card__modal-quick-purchase-wrapper-price">
-            Стоимость: {product.price}
+            {t("price")}: {product?.price}
           </div>
-          <button
-            className={
-              isChecked
-                ? "product-card__cart-btn-deleted-active"
-                : "product-card__cart-btn-deleted"
-            }
-            onClick={() => dispatch(removeFromCart(product))}
-          >
-            Ｘ
-          </button>
+          {product &&
+            <button
+              className={
+                isChecked
+                  ? "product-card__cart-btn-deleted-active"
+                  : "product-card__cart-btn-deleted"
+              }
+              onClick={() => dispatch(removeFromCart(product))}
+            >
+              Ｘ
+            </button>
+          }
         </Card.Body>
       </Card>
     </div>

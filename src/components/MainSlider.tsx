@@ -12,7 +12,7 @@ const MainSlider = () => {
   const { t, i18n } = useTranslation();
   const {
     data: articles,
-  } = useGetArticlesQuery({lang: i18n.language})
+  } = useGetArticlesQuery({lang: i18n.language, limit: 3})
 
   return (
     <section className="main-slider">
@@ -65,7 +65,7 @@ const MainSlider = () => {
                 </Carousel.Item>
               );
             })
-            .slice(0, 3)}
+          }
         </Carousel>
       </Container>
     </section>

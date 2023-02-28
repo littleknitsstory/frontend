@@ -8,7 +8,7 @@ interface Products {
 
 const initialState: Products = {
   favorite: localStorage.getItem("favoriteProducts") ? JSON.parse(localStorage.getItem("favoriteProducts") || "") : [],
-  cart: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("favoriteProducts") || "") : [],
+  cart: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart") || "") : [],
 }
 
 const productsSlice = createSlice({
