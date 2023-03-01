@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useGetArticleQuery } from "../features/api/apiSlice";
 
 import Articles from "./Articles";
-import Page404 from "./Page404";
+import PageError from "./PageError";
 import Spinner from "./Spinner";
 
 const Article = () => {
@@ -14,6 +14,7 @@ const Article = () => {
     data: article,
     isLoading,
     isError,
+    error
   } = useGetArticleQuery({ slug, lang: i18n.language })
 
   if (isLoading) {
@@ -21,23 +22,27 @@ const Article = () => {
   }
 
   if (isError) {
-    return <Page404 />
+    if ("originalStatus" in error) {
+      return <PageError errorStatus={error.originalStatus} />;
+    }
   }
 
   return (
     <section className="article">
       <Container>
-        <div>
-          <h3 className="title">{article?.title}</h3>
-          <div className="article__wrapper-article">
-            <div
-              className="article__text"
-              dangerouslySetInnerHTML={{
-                __html: article?.content!,
-              }}
-            ></div>
+        {article && (
+          <div>
+            <h3 className="title">{article.title}</h3>
+            <div className="article__wrapper-article">
+              <div
+                className="article__text"
+                dangerouslySetInnerHTML={{
+                  __html: article.content,
+                }}
+              ></div>
+            </div>
           </div>
-        </div>
+        )}
         <h3 className="title">{t("otherPosts")}</h3>
         <Articles />
       </Container>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { PICTURE_BASE_URL } from "../features/api/apiSlice";
-import { IArticle } from "../app/models";
+import { IArticle } from "../app/types";
 
 const CardArticle = ({ article }: { article: IArticle }) => {
   const { t } = useTranslation();

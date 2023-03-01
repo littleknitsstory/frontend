@@ -1,6 +1,6 @@
 import { Row, Col } from "react-bootstrap";
 import Stars from "./Stars";
-import { IReviewsResponse } from "../app/models";
+import { IReviewsResponse } from "../app/types";
 import { PICTURE_BASE_URL } from "../features/api/apiSlice";
 
 const CardReview = (props: IReviewsResponse) => {

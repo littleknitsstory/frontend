@@ -52,7 +52,7 @@ const NavBar = () => {
 
           <Navbar.Collapse>
             <Nav className="lks-navbar__links">
-              <PrimaryNav type={"header"}/>
+              <PrimaryNav type={"header"} />
             </Nav>
           </Navbar.Collapse>
         </Container>

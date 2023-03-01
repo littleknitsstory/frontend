@@ -1,3 +1,4 @@
+@use "./_variables" as *;
 .mini-card-product {
   margin-top: 3rem;
   .card {
@@ -11,6 +12,11 @@
   .card-title {
     text-align: center;
     margin-top: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   &__circle {
     display: flex;

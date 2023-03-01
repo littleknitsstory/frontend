@@ -3,7 +3,7 @@ import MultiRangeslider from "./multi-range-slider/MultiRangeSlider";
 import arrowRight from "../assets/icons/arrow-right.svg";
 import { useGetProductsQuery } from "../features/api/apiSlice";
 import { useEffect, useState } from "react";
-import { IProduct } from "../app/models";
+import { IProduct } from "../app/types";
 
 interface Category {
   title: string;
@@ -100,7 +100,7 @@ const Filters = (props: FilterProps) => {
       <div className="filters">
         <div className="title">{t("Filter.title")}</div>
 
-        <div className="filters__wrapper-price">
+        {/* <div className="filters__wrapper-price">
           <div className="filters__title">{t("Filter.price")}</div>
           <MultiRangeslider
             min={0}
@@ -109,7 +109,7 @@ const Filters = (props: FilterProps) => {
               console.log(`min = ${min}, max = ${max}`)
             }
           />
-        </div>
+        </div> */}
         
         <div className="filters__wrapper-category">
           <div className="filters__title">{t("Filter.categories")}</div>

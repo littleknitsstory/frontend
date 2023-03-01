@@ -19,7 +19,8 @@ const Footer = () => {
     handleClose, 
   } = useModalState()
 
-  const handleSubscribe = async (): Promise<void> => {
+  const handleSubscribe = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault()
     if (!isLoading) {
       try {
         await addSubscribe(email).unwrap()
@@ -71,7 +72,7 @@ const Footer = () => {
                 <div className="footer__subscribe-text">
                   {t("Footer.subscribe.text")}
                 </div>
-                <Form>
+                <Form onSubmit={handleSubscribe}>
                   <Form.Group className="mb-3" controlId="formGroupEmail">
                     <Form.Control
                       type="email"
@@ -82,8 +83,8 @@ const Footer = () => {
 
                     <button 
                       className="btn btn_border" 
-                      type="button"
-                      onClick={handleSubscribe}
+                      type="submit"
+                      
                     >
                       <div className="btn__text btn__text_center">
                         {t("Footer.subscribe.buttonText")}

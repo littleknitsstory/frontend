@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { IProductDetails } from "../app/models";
+import { IProductDetails } from "../app/types";
 import { PICTURE_BASE_URL } from "../features/api/apiSlice";
 import { useAppDispatch } from "../app/hooks";
 import { addFavorite } from "../features/products/productsSlice";
@@ -51,9 +51,12 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
               src={PICTURE_BASE_URL + product.image_preview}
               alt={product.image_alt}
             />
-            <a href="#">
-              <img className="schema-card__like" src={like} alt="like" onClick={() => dispatch(addFavorite(product))}/>
-            </a>
+            <img 
+              className="schema-card__like" 
+              src={like} 
+              alt="like" 
+              onClick={() => dispatch(addFavorite(product))}
+            />
           </div>
           <div className="schema-card__counter">
             <button

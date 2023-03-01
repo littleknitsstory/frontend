@@ -1,9 +1,11 @@
 import sanitizeHtml from "sanitize-html";
 import { Container, Row, Col, Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
 import { useTranslation } from "react-i18next";
 import { useGetArticlesQuery } from "../features/api/apiSlice";
+
+import Spinner from "./Spinner";
+import PageError from "./PageError";
 // assets
 import arrowWhite from "../assets/icons/arrow-right-white.svg";
 import kateSlider from "../assets/images/kate-slider.png";
@@ -12,7 +14,18 @@ const MainSlider = () => {
   const { t, i18n } = useTranslation();
   const {
     data: articles,
+    isLoading,
+    isError,
+    error
   } = useGetArticlesQuery({lang: i18n.language, limit: 3})
+
+  if (isLoading) {
+    return <Spinner />;
+  } else if (isError) {
+    if ("originalStatus" in error) {
+      return <PageError errorStatus={error.originalStatus} />;
+    }
+  }
 
   return (
     <section className="main-slider">

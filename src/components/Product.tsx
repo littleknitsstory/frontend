@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { useGetProductQuery } from "../features/api/apiSlice";
 // components
-import Page404 from "./Page404";
+import PageError from "./PageError";
 import PopularProducts from "./PopularProducts";
 import Reviews from "./Reviews";
 import SchemaCard from "./SchemaCard";
@@ -15,14 +15,18 @@ const Product = () => {
   const {
     data: product,
     isLoading,
-    isError
+    isError,
+    error
   } = useGetProductQuery({ slug: slug, lang: i18n.language })
   
   if (isLoading) {
     return <Spinner />
   }
+  
   if (isError) {
-    return <Page404 />
+    if ("originalStatus" in error) {
+      return <PageError errorStatus={error.originalStatus} />;
+    }
   }
 
   return (

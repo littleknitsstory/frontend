@@ -1,13 +1,13 @@
 import { Modal, Form } from "react-bootstrap"
 import { useTranslation } from "react-i18next"
-import { IProduct } from "../../../app/models"
+import { IProduct } from "../../../app/types"
 import { PICTURE_BASE_URL } from "../../../features/api/apiSlice";
 
 interface ModalProps {
   product: IProduct;
   showModal: boolean;
   handleClose: () => void;
-  onSubmitOrder: () => void;
+  onSubmitOrder: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const ModalMain = ({ product, showModal, handleClose, onSubmitOrder }: ModalProps) => {
@@ -54,7 +54,7 @@ const ModalMain = ({ product, showModal, handleClose, onSubmitOrder }: ModalProp
           </div>
         </div>
 
-        <Form>
+        <Form onSubmit={onSubmitOrder}>
           <Form.Group
             className="mb-3"
             controlId="exampleForm.ControlInput1"
@@ -74,8 +74,7 @@ const ModalMain = ({ product, showModal, handleClose, onSubmitOrder }: ModalProp
             <Form.Control required type="text" placeholder={t('CardProduct.phone')} />
           </Form.Group>
           <button 
-            type="button"
-            onClick={onSubmitOrder}
+            type="submit"
             className="btn btn_vinous btn_center">
             <div className="btn__text btn__text_center">
               {t("CardProduct.buttonSendText")}

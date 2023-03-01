@@ -8,10 +8,12 @@ import ModalThanks from "./atoms/modal/ModalThanks";
 import envelope from "../assets/icons/envelope.svg";
 import map from "../assets/icons/map-point.svg";
 import phone from "../assets/icons/phone.svg";
+// import PageError from "./PageError";
 
 const Contacts = () => {
   const { t } = useTranslation();
-  const [addContacts, { isLoading }]  = useAddContactsMutation()
+  const [addContacts, { isLoading, isError, error }]  = useAddContactsMutation()
+  
   const initialFormDataState = {
     name: "",
     message: "",
@@ -36,15 +38,15 @@ const Contacts = () => {
     })
   }
 
-  const handleFormSubmit = async (): Promise<void> => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault()
     if (!isLoading) {
       try {
         await addContacts(formData).unwrap()
         setFormData(initialFormDataState)
         handleShowThanks()
-      } catch (err) {
-        console.error("Failed to save the post: ", err);
       }
+      catch (error) {}
     }
   }
 
@@ -61,7 +63,7 @@ const Contacts = () => {
           >
             <div className="coffee-card">
               <div className="coffee-card__title">{t("Contacts.title")}</div>
-              <Form className="contacts__form">
+              <Form className="contacts__form" onSubmit={handleFormSubmit}>
                 <Row>
                   <Form.Group as={Col} md="6" controlId="name">
                     <Form.Control
@@ -88,7 +90,7 @@ const Contacts = () => {
                   <Form.Group as={Col} md="12" controlId="phone">
                     <Form.Control
                       required
-                      type="text"
+                      type="tel"
                       placeholder={t("Contacts.phone")}
                       name="phone_number"
                       value={formData.phone_number}
@@ -120,8 +122,7 @@ const Contacts = () => {
                 </Row>
                 <button
                   className="btn btn_white btn_center contacts__btn"
-                  type="button"
-                  onClick={handleFormSubmit}
+                  type="submit"
                 >
                   <div className="btn__text btn__text_center">
                     {t("Contacts.send")}

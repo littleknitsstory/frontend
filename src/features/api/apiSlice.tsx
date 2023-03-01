@@ -8,7 +8,7 @@ import {
   IArticle,
   IProductDetails, 
   IReviewsResponse
-} from "../../app/models"
+} from "../../app/types"
 
 // creating "offset / limit" query string
 const getQueryString = (limit?: number, offset?: number): string => {

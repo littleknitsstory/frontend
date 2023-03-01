@@ -24,10 +24,10 @@ const SavedProducts = () => {
     <section className="saved-products">
       <Container>
         <Row xs={1} md={2} lg={3} xl={3} xxl={4}>
-          {favoriteProducts.map((item) => {
+          {favoriteProducts.map((product) => {
             return (
-              <Col key={item.id}>
-                <CardProduct productSlug={item.slug} />
+              <Col key={product.id}>
+                <CardProduct productSlug={product.slug} />
               </Col>
             );
           })}

@@ -11,11 +11,13 @@ import useModalState from "./Hooks/useModalState";
 import ModalThanks from "./atoms/modal/ModalThanks";
 import { PICTURE_BASE_URL, useGetProductQuery } from "../features/api/apiSlice";
 import Spinner from "./Spinner";
-import Page404 from "./Page404";
+import PageError from "./PageError";
+import { IProduct, IProductDetails } from "../app/types";
 
 const CardProduct = ({ productSlug }: { productSlug: string }) => {
   const { t, i18n } = useTranslation()
   const dispatch = useAppDispatch()
+  
   const {
     showModal, 
     showModalThanks, 
@@ -27,19 +29,21 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
   const {
     data: product,
     isLoading,
-    isError
+    isError,
+    error
   } = useGetProductQuery({ lang: i18n.language, slug: productSlug })
 
-  if (isLoading) {
-    return <Spinner />
-  }
+  // if (isLoading) {
+  //   return <Spinner />
+  // }
 
   if (isError) {
-    return <Page404 />
+    if ("originalStatus" in error) {
+      return <PageError errorStatus={error.originalStatus} />;
+    }
   }
 
   return (
-    
     <div className="card-lks product-card">
       {product && 
       <Card style={{ width: "18rem" }}>
@@ -127,7 +131,7 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
             </svg>
           </div>
           <div className="card-lks__material">
-            {t("CardProduct.material")}: {product.material}
+            {t("CardProduct.material")}:
           </div>
           <div className="card-lks__color">
             {t("CardProduct.color")}: 
@@ -153,12 +157,14 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
       }
 
       <div className="product-card__modal-quick-purchase">
-        <ModalMain 
-          product={product!} 
-          showModal={showModal} 
-          handleClose={handleClose} 
-          onSubmitOrder={onSubmitOrder}
-        />
+        {product && 
+          <ModalMain 
+            product={product} 
+            showModal={showModal} 
+            handleClose={handleClose} 
+            onSubmitOrder={(e: React.FormEvent<HTMLFormElement>) => onSubmitOrder(e)}
+          />
+        }
         <ModalThanks 
           showModal={showModalThanks}
           handleClose={handleClose}

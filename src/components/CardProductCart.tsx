@@ -4,11 +4,10 @@ import { Card, Form } from "react-bootstrap";
 import { useAppDispatch } from "../app/hooks";
 import { removeFromCart } from "../features/products/productsSlice";
 
-import { IProduct } from "../app/models";
 import { PICTURE_BASE_URL, useGetProductQuery } from "../features/api/apiSlice";
 import { useTranslation } from "react-i18next";
 import Spinner from "./Spinner";
-import Page404 from "./Page404";
+import PageError from "./PageError";
 
 const CardProductCart = ({ productSlug }: { productSlug: string }) => {
   const { t, i18n } = useTranslation()
@@ -34,7 +33,8 @@ const CardProductCart = ({ productSlug }: { productSlug: string }) => {
   const {
     data: product,
     isLoading,
-    isError
+    isError,
+    error
   } = useGetProductQuery({ slug: productSlug, lang: i18n.language })
 
   if (isLoading) {
@@ -42,7 +42,9 @@ const CardProductCart = ({ productSlug }: { productSlug: string }) => {
   }
 
   if (isError) {
-    return <Page404 />
+    if ("originalStatus" in error) {
+      return <PageError errorStatus={error.originalStatus} />;
+    }
   }
 
   return (

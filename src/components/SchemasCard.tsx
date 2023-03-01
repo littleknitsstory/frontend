@@ -5,7 +5,7 @@ import { useGetProductQuery } from "../features/api/apiSlice";
 // components
 import SchemaCard from "./SchemaCard";
 import Spinner from "./Spinner";
-import Page404 from "./Page404";
+import PageError from "./PageError";
 // assets
 import cartWhite from "../assets/icons/cart-white.svg";
 
@@ -15,14 +15,18 @@ const SchemasCard = () => {
   const {
     data: product,
     isLoading,
-    isError
+    isError,
+    error
   } = useGetProductQuery({ slug: "pattents_5", lang: i18n.language })
   
   if (isLoading) {
     return <Spinner />
   }
+
   if (isError) {
-    return <Page404 />
+    if ("originalStatus" in error) {
+      return <PageError errorStatus={error.originalStatus} />;
+    }
   }
 
   return (

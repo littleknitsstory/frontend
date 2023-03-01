@@ -1,5 +1,6 @@
-.page404 {
-  &__error {
+@use "./_variables" as *;
+.page-error {
+  &__status {
     margin-top: 5rem;
     text-transform: uppercase;
     font-size: 6rem;
@@ -30,8 +31,8 @@
 }
 
 @media (max-width: 991px) {
-  .page404 {
-    &__error {
+  .page-error {
+    &__status {
       margin-top: 1.875rem;
     }
   }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { IMenu } from "../../../app/models"
+import { IMenu } from "../../../app/types"
 import { NavLink } from "react-router-dom";
 
 import i18next from "../../../i18n"

@@ -111,3 +111,6 @@ export interface IReviewsResponse {
   rating: number;
   image_preview: string;
 }
+export interface ISavedProducts {
+  savedProducts: IProduct[];
+}

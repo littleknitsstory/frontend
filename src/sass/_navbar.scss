@@ -1,10 +1,11 @@
+@use "./_variables" as *;
 .lks-navbar {
   margin-top: 6.25rem;
 
   .container {
     flex-direction: row-reverse;
   }
-  
+
   &__right {
     display: flex;
     gap: 2.5rem;

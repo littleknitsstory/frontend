@@ -6,10 +6,10 @@ import { useGetProductsQuery } from "../features/api/apiSlice";
 import Filters from "./Filters";
 import CardProduct from "./CardProduct";
 import Spinner from "./Spinner";
-import Page404 from "./Page404";
+import PageError from "./PageError";
 // assets
 import arrowRight from "../assets/icons/arrow-right.svg";
-import { IProduct } from "../app/models";
+import { IProduct } from "../app/types"; 
 
 const Products = () => {
   const { t, i18n } = useTranslation();
@@ -17,10 +17,12 @@ const Products = () => {
   const {
     data: products,
     isLoading,
+    isFetching,
     isError,
+    error
   } = useGetProductsQuery({lang: i18n.language, limit})
 
-  const [isAllShown, setAllShown] = useState<boolean>(false)
+  const [isLastPage, setIsLastPage] = useState<boolean>(false)
   const [renderProducts, setRenderProducts] = useState<IProduct[]>([]) /* Which array of products render */
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([])
   const [filteredColors, setFilteredColors] = useState<IProduct[]>([])
@@ -39,12 +41,12 @@ const Products = () => {
     if (colorLength > 0 && categoryLength === 0) {
       setFilteredProducts(filteredColors)
       setHasOverlap(true)
-      setAllShown(true)
+      setIsLastPage(true)
     } 
     if (categoryLength > 0 && colorLength === 0) {
       setFilteredProducts(filteredCategories)
       setHasOverlap(true)
-      setAllShown(true)
+      setIsLastPage(true)
     } 
 
     // if both filters are active (find overlap)
@@ -62,7 +64,7 @@ const Products = () => {
           setHasOverlap(false)
         } else {
           setHasOverlap(true)
-          setAllShown(true)
+          setIsLastPage(true)
           setRenderProducts(filteredProducts)
         }
     } 
@@ -71,7 +73,7 @@ const Products = () => {
     if (categoryLength === 0 && colorLength === 0) {
       if (products) {
         setRenderProducts(products?.results)
-        setAllShown(limit >= products?.count)
+        setIsLastPage(limit >= products?.count)
       }
     }
   }, [filteredCategories, filteredColors])
@@ -86,8 +88,12 @@ const Products = () => {
   }, [filteredProducts, products])
 
   useEffect(() => {
-    if (products) setAllShown(limit >= products?.count)
-  }, [products, limit])
+    if (products) {
+      if (limit !== 3 && limit >= products?.count) {
+        setIsLastPage(true);
+      }
+    }
+  }, [limit]);
 
   const clearFilters = () => {
     if (products) {
@@ -95,7 +101,7 @@ const Products = () => {
       setFilteredColors([])
       setFilteredProducts([])
       setRenderProducts(products?.results)
-      setAllShown(limit >= products?.count)
+      setIsLastPage(limit >= products?.count)
     }
   }
   
@@ -104,7 +110,9 @@ const Products = () => {
   }
 
   if (isError) {
-    return <Page404 />
+    if ("originalStatus" in error) {
+      return <PageError errorStatus={error.originalStatus} />;
+    }
   }
 
   return (
@@ -138,8 +146,6 @@ const Products = () => {
             }}
           >
             <Filters 
-              // filterCategories={filterCategories} 
-              // filterColors={filterColors}
               clearFilters={clearFilters}
               setFilteredCategories={setFilteredCategories} 
               setFilteredColors={setFilteredColors}
@@ -147,10 +153,10 @@ const Products = () => {
           </Col>
           <Col>
             <Row xs={1} md={1} lg={2} xl={2} xxl={3}>
-              {hasOverlap && renderProducts.map((item) => {
+              {hasOverlap && renderProducts.map((product) => {
                 return (
-                  <Col key={item.id}>
-                    <CardProduct productSlug={item.slug} />
+                  <Col key={product.id}>
+                    <CardProduct productSlug={product.slug} />
                   </Col>
                 );
               })}
@@ -160,14 +166,17 @@ const Products = () => {
             </Row>
           </Col>
         </Row>
-        {!isAllShown && (
-          <button 
-            className="btn btn_border btn__text" 
-            onClick={() => setLimit(prev => prev + 4)}
-          >
-            {t("seeMore")}
-            <img src={arrowRight} alt="arrowWhite" />
-          </button>
+        {isFetching ? (
+          <Spinner />
+        ) : (
+          !isLastPage && (
+            <button className="btn btn_border" onClick={() => setLimit(prev => prev + 4)}>
+              <div className="btn__text">{t("seeMore")}</div>
+              <div className="btn__icon">
+                <img src={arrowRight} alt="arrowWhite" />
+              </div>
+            </button>
+          )
         )}
       </div>
     </Container>

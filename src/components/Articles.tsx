@@ -1,36 +1,41 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { useGetArticlesQuery } from "../features/api/apiSlice";
-// components
+import { useGetArticlesQuery } from "../features/api/apiSlice"; 
 import CardArticle from "./CardArticle";
+import PageError from "./PageError";
+
 import Spinner from "./Spinner";
-import Page404 from "./Page404";
-// assets
 import arrowRight from "../assets/icons/arrow-right.svg";
 
 const Articles = () => {
-  const { i18n } = useTranslation()
   const [limit, setLimit] = useState<number>(4);
+  const [isLastPage, setIsLastPage] = useState<boolean>(false);
+  const { t, i18n } = useTranslation();
+
   const {
     data: articles,
+    isLoading,
     isFetching,
     isError,
-  } = useGetArticlesQuery({lang: i18n.language, limit})
-  const { t } = useTranslation();
-
-  const [isAllShown, setIsAllShown] = useState<boolean>(false);
+    error,
+  } = useGetArticlesQuery({ limit, lang: i18n.language });
 
   useEffect(() => {
-    if (articles) setIsAllShown(limit > articles?.count)
-  }, [articles, limit]);
+    if (articles) {
+      if (limit !== 4 && limit >= articles?.count) {
+        setIsLastPage(true);
+      }
+    }
+  }, [limit]);
 
-  if (isFetching) {
-    return <Spinner />
-  }
-
+  if (isLoading) {
+    return <Spinner />;
+  } 
   if (isError) {
-    return <Page404 />
+    if ("originalStatus" in error) {
+      return <PageError errorStatus={error.originalStatus} />;
+    }
   }
 
   return (
@@ -45,14 +50,17 @@ const Articles = () => {
             );
           })}
         </Row>
-        {!isAllShown && (
-          <button 
-            className="btn btn_border btn__text" 
-            onClick={() => setLimit(prev => prev + 4)}
-          >
-            {t("seeMore")}
-            <img src={arrowRight} alt="arrowWhite" />
-          </button>
+        {isFetching ? (
+          <Spinner />
+        ) : (
+          !isLastPage && (
+            <button className="btn btn_border" onClick={() => setLimit(prev => prev + 4)}>
+              <div className="btn__text">{t("seeMore")}</div>
+              <div className="btn__icon">
+                <img src={arrowRight} alt="arrowWhite" />
+              </div>
+            </button>
+          )
         )}
       </div>
     </Container>
