@@ -100,6 +100,7 @@ const Products = () => {
       setFilteredCategories([])
       setFilteredColors([])
       setFilteredProducts([])
+      setHasOverlap(true)
       setRenderProducts(products?.results)
       setIsLastPage(limit >= products?.count)
     }
