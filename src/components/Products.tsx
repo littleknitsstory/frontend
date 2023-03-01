@@ -1,42 +1,46 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
-import { getProducts } from "../api";
-import { IProduct, IProductsResponse } from "../api/models";
 import arrowRight from "../icons/arrow-right.svg";
+import { useGetProductsQuery } from "../store/apiSlice";
+
 import CardProduct from "./CardProduct";
 import Filters from "./Filters";
-import { LanguageContext } from "../App";
+import PageError from "./PageError";
+import Spinner from "./Spinner";
 
 const Products = () => {
   const { t } = useTranslation();
-  const {language} = useContext(LanguageContext)
+  const [limit, setLimit] = useState<number>(3);
+  const [isLastPage, setIsLastPage] = useState<boolean>(false);
 
-  const [products, setProducts] = useState<IProduct[]>([]);
-  const [limit, setLimit] = useState<number>(0);
-  const [count, setCount] = useState<number>(0);
-  const isLastPage = limit + 4 >= count;
+  const {
+    data: products,
+    isLoading,
+    isError,
+    isFetching,
+    error,
+  } = useGetProductsQuery({ limit });
 
   useEffect(() => {
-    const fetchProducts = async (): Promise<void> => {
-      const data: IProductsResponse | void = await getProducts(0, limit);
-      if (data) {
-        setProducts(data.results);
-        setCount(data.count);
+    if (products) {
+      if (limit !== 3 && limit >= products?.count) {
+        setIsLastPage(true);
       }
-    };
-    fetchProducts();
-  }, [limit, language]);
+    }
+  }, [limit]);
 
   const handleSeeMore = useCallback((): void => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-    setLimit((prev) => prev + 4);
+    setLimit((prev) => prev + 3);
   }, []);
+
+  if (isLoading) {
+    return <Spinner />;
+  } else if (isError) {
+    if ("originalStatus" in error) {
+      return <PageError errorStatus={error.originalStatus} />;
+    }
+  }
 
   return (
     <Container>
@@ -72,7 +76,7 @@ const Products = () => {
           </Col>
           <Col>
             <Row xs={1} md={1} lg={2} xl={2} xxl={3}>
-              {products.map((item) => {
+              {products?.results.map((item: any) => {
                 return (
                   <Col key={item.id}>
                     <CardProduct product={item} />
@@ -82,15 +86,17 @@ const Products = () => {
             </Row>
           </Col>
         </Row>
-        {!isLastPage && (
-          <Row>
-            <Col>
-              <Link to="/shop" onClick={handleSeeMore}>
-                {t("seeMore")}
-                <img src={arrowRight} alt="arrowRight" />
-              </Link>
-            </Col>
-          </Row>
+        {isFetching ? (
+          <Spinner />
+        ) : (
+          !isLastPage && (
+            <button className="btn btn_border" onClick={handleSeeMore}>
+              <div className="btn__text">{t("seeMore")}</div>
+              <div className="btn__icon">
+                <img src={arrowRight} alt="arrowWhite" />
+              </div>
+            </button>
+          )
         )}
       </div>
     </Container>

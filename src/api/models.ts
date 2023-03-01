@@ -103,3 +103,7 @@ export interface IArticlesResponse {
   previous: string;
   results: IArticle[];
 }
+
+export interface ISavedProducts {
+  savedProducts: IProduct[];
+}

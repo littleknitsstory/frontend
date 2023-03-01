@@ -1,15 +1,15 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const Page404 = () => {
+const PageError = ({ errorStatus }: { errorStatus: number }) => {
   return (
-    <section className="page404">
+    <section className="page-error">
       <Container>
         <Row>
           <Col>
-            <div className="page404__error">404</div>
-            <div className="page404__subtitle">Not found</div>
-            <div className="page404__text">
+            <div className="page-error__status">{errorStatus}</div>
+            <div className="page-error__subtitle">Not found</div>
+            <div className="page-error__text">
               The page you are trying to reach does not exist or has been
               deleted. <br />
               Click to
@@ -24,4 +24,4 @@ const Page404 = () => {
   );
 };
 
-export default Page404;
+export default PageError;
