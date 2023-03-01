@@ -75,6 +75,7 @@ const Footer = () => {
                 <Form onSubmit={handleSubscribe}>
                   <Form.Group className="mb-3" controlId="formGroupEmail">
                     <Form.Control
+                      required
                       type="email"
                       placeholder="E-mail"
                       value={email}
