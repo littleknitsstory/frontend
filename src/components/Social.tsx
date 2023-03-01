@@ -6,43 +6,42 @@ import instagram from "../assets/icons/logo-instagram_white.svg";
 const Social = () => {
   return (
     <div className="social">
-      <div className="social-circle">
-        <a
-          href="https://vk.com/littleknitsstory"
-          target="_blank"
-          rel="noreferrer"
-        >
+      <a
+        href="https://vk.com/littleknitsstory"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <div className="social-circle">
           <img src={vk} alt="vk" />
-        </a>
-      </div>
-
-      <div className="social-circle">
-        <a
-          href="https://www.facebook.com/littleknitsstory/"
-          target="_blank"
-          rel="noreferrer"
-        >
+        </div>
+      </a>
+      <a
+        href="https://www.facebook.com/littleknitsstory/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <div className="social-circle">
           <img src={facebook} alt="facebook" />
-        </a>
-      </div>
-      <div className="social-circle">
-        <a
-          href="https://www.instagram.com/littleknitsstory/"
-          target="_blank"
-          rel="noreferrer"
-        >
+        </div>
+      </a>
+      <a
+        href="https://www.instagram.com/littleknitsstory/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <div className="social-circle">
           <img src={instagram} alt="instagram" />
-        </a>
-      </div>
-      <div className="social-circle">
-        <a
-          href="https://www.pinterest.ru/littleknitsstory/"
-          target="_blank"
-          rel="noreferrer"
-        >
+        </div>
+      </a>
+      <a
+        href="https://www.pinterest.ru/littleknitsstory/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <div className="social-circle">
           <img src={pinterest} alt="pinterest" />
-        </a>
-      </div>
+        </div>
+      </a>
     </div>
   );
 };
