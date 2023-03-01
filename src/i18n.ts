@@ -36,3 +36,5 @@ i18next
     debug: false,
     // fallbackLng: 'en'
   });
+
+export default i18next

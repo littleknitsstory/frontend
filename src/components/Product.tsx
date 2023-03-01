@@ -1,27 +1,29 @@
 import { Container } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
-
+import { useGetProductQuery } from "../features/api/apiSlice";
+// components
+import PageError from "./PageError";
 import PopularProducts from "./PopularProducts";
 import Reviews from "./Reviews";
 import SchemaCard from "./SchemaCard";
 import Spinner from "./Spinner";
 
-import { useGetProductDetailsQuery } from "../store/apiSlice";
-import PageError from "./PageError";
-
 const Product = () => {
   const { slug } = useParams<string>();
-
+  const { i18n } = useTranslation()
   const {
     data: product,
-    isError,
     isLoading,
-    error,
-  } = useGetProductDetailsQuery({ slug });
-
+    isError,
+    error
+  } = useGetProductQuery({ slug: slug, lang: i18n.language })
+  
   if (isLoading) {
-    return <Spinner />;
-  } else if (isError) {
+    return <Spinner />
+  }
+  
+  if (isError) {
     if ("originalStatus" in error) {
       return <PageError errorStatus={error.originalStatus} />;
     }

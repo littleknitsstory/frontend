@@ -1,16 +1,17 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import CardArticle from "./CardArticle";
-import Spinner from "./Spinner";
-import arrowRight from "../icons/arrow-right.svg";
 import { useTranslation } from "react-i18next";
-import { useGetArticlesQuery } from "../store/apiSlice";
+import { useGetArticlesQuery } from "../features/api/apiSlice"; 
+import CardArticle from "./CardArticle";
 import PageError from "./PageError";
+
+import Spinner from "./Spinner";
+import arrowRight from "../assets/icons/arrow-right.svg";
 
 const Articles = () => {
   const [limit, setLimit] = useState<number>(4);
   const [isLastPage, setIsLastPage] = useState<boolean>(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const {
     data: articles,
@@ -18,7 +19,7 @@ const Articles = () => {
     isFetching,
     isError,
     error,
-  } = useGetArticlesQuery({ limit });
+  } = useGetArticlesQuery({ limit, lang: i18n.language });
 
   useEffect(() => {
     if (articles) {
@@ -28,13 +29,10 @@ const Articles = () => {
     }
   }, [limit]);
 
-  const handleSeeMore = useCallback((): void => {
-    setLimit((prev) => prev + 4);
-  }, []);
-
   if (isLoading) {
     return <Spinner />;
-  } else if (isError) {
+  } 
+  if (isError) {
     if ("originalStatus" in error) {
       return <PageError errorStatus={error.originalStatus} />;
     }
@@ -56,7 +54,7 @@ const Articles = () => {
           <Spinner />
         ) : (
           !isLastPage && (
-            <button className="btn btn_border" onClick={handleSeeMore}>
+            <button className="btn btn_border" onClick={() => setLimit(prev => prev + 4)}>
               <div className="btn__text">{t("seeMore")}</div>
               <div className="btn__icon">
                 <img src={arrowRight} alt="arrowWhite" />

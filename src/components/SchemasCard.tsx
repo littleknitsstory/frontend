@@ -1,25 +1,33 @@
-import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
-import { getProductDetails } from "../api";
-import { IProductDetails } from "../api/models";
-import cartWhite from "../icons/cart-white.svg";
+import { useGetProductQuery } from "../features/api/apiSlice";
+// components
 import SchemaCard from "./SchemaCard";
+import Spinner from "./Spinner";
+import PageError from "./PageError";
+// assets
+import cartWhite from "../assets/icons/cart-white.svg";
 
 const SchemasCard = () => {
-  const { t } = useTranslation();
-  const [product, setProduct] = useState<IProductDetails | null>(null);
-  useEffect(() => {
-    const fetchProductDetails = async (): Promise<void> => {
-      const data = await getProductDetails("pattents_5");
-      if (data) {
-        setProduct(data);
-      }
-    };
-    fetchProductDetails();
-  }, []);
+  const { t, i18n } = useTranslation();
+
+  const {
+    data: product,
+    isLoading,
+    isError,
+    error
+  } = useGetProductQuery({ slug: "pattents_5", lang: i18n.language })
+  
+  if (isLoading) {
+    return <Spinner />
+  }
+
+  if (isError) {
+    if ("originalStatus" in error) {
+      return <PageError errorStatus={error.originalStatus} />;
+    }
+  }
 
   return (
     <section className="schemas-card">

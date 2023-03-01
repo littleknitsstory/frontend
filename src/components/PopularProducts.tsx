@@ -1,18 +1,18 @@
 import { Row, Col } from "react-bootstrap";
 import MiniCardProduct from "./MiniCardProduct";
 import { useTranslation } from "react-i18next";
-import { useGetProductsQuery } from "../store/apiSlice";
+import { useGetProductsQuery } from "../features/api/apiSlice"; 
 import Spinner from "./Spinner";
 import PageError from "./PageError";
 
 const PopularProducts = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const {
     data: products,
     isLoading,
     isError,
     error,
-  } = useGetProductsQuery({ limit: 0 });
+  } = useGetProductsQuery({ lang: i18n.language, limit: 4});
 
   if (isLoading) {
     return <Spinner />;
@@ -34,7 +34,7 @@ const PopularProducts = () => {
               </Col>
             );
           })
-          .slice(-4)}
+        }
       </Row>
     </section>
   );

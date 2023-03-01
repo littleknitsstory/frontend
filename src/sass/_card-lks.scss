@@ -43,6 +43,7 @@
   .card-title {
     font-size: 1rem;
     color: $main-color;
+    text-align: center;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
@@ -85,16 +86,40 @@
       padding: 0;
     }
   }
+  &__color-circle-wrapper {
+    margin-left: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    gap: 0.35rem;
+  }
+  &__color-circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+  }
   &__material,
-  &__color,
   &__price {
     text-align: center;
     color: $text-color-dark;
     font-size: 0.875rem;
     padding: 0.3rem 0;
   }
+  &__color {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.35rem;
+
+    
+  }
   &__price {
     font-size: 1.2rem;
+  }
+  &__color {
+    display: flex;
+    justify-content: center;
   }
   &__wrapper-icons {
     display: none;

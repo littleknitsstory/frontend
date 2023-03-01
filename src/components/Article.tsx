@@ -1,24 +1,27 @@
 import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import Spinner from "./Spinner";
-import Articles from "./Articles";
 import { useTranslation } from "react-i18next";
-import { useGetArticleDetailsQuery } from "../store/apiSlice";
+import { useGetArticleQuery } from "../features/api/apiSlice";
+
+import Articles from "./Articles";
 import PageError from "./PageError";
+import Spinner from "./Spinner";
 
 const Article = () => {
-  const { t } = useTranslation();
   const { slug } = useParams<string>();
+  const { t, i18n } = useTranslation();
   const {
     data: article,
-    isError,
     isLoading,
-    error,
-  } = useGetArticleDetailsQuery({ slug });
+    isError,
+    error
+  } = useGetArticleQuery({ slug, lang: i18n.language })
 
   if (isLoading) {
-    return <Spinner />;
-  } else if (isError) {
+    return <Spinner />
+  }
+
+  if (isError) {
     if ("originalStatus" in error) {
       return <PageError errorStatus={error.originalStatus} />;
     }
@@ -40,7 +43,6 @@ const Article = () => {
             </div>
           </div>
         )}
-
         <h3 className="title">{t("otherPosts")}</h3>
         <Articles />
       </Container>

@@ -1,22 +1,23 @@
 import sanitizeHtml from "sanitize-html";
-import { Container, Row, Col } from "react-bootstrap";
-import Carousel from "react-bootstrap/Carousel";
+import { Container, Row, Col, Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import arrowWhite from "../icons/arrow-right-white.svg";
-import kateSlider from "../images/kate-slider.png";
 import { useTranslation } from "react-i18next";
-import { useGetArticlesQuery } from "../store/apiSlice";
+import { useGetArticlesQuery } from "../features/api/apiSlice";
+
 import Spinner from "./Spinner";
 import PageError from "./PageError";
+// assets
+import arrowWhite from "../assets/icons/arrow-right-white.svg";
+import kateSlider from "../assets/images/kate-slider.png";
 
 const MainSlider = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const {
     data: articles,
     isLoading,
     isError,
-    error,
-  } = useGetArticlesQuery({ limit: 0 });
+    error
+  } = useGetArticlesQuery({lang: i18n.language, limit: 3})
 
   if (isLoading) {
     return <Spinner />;
@@ -30,8 +31,7 @@ const MainSlider = () => {
     <section className="main-slider">
       <Container>
         <Carousel fade={true}>
-          {articles?.results
-            .map((item) => {
+          {articles?.results.map((item) => {
               return (
                 <Carousel.Item interval={1800} key={item.slug}>
                   <Row>
@@ -78,7 +78,7 @@ const MainSlider = () => {
                 </Carousel.Item>
               );
             })
-            .slice(0, 3)}
+          }
         </Carousel>
       </Container>
     </section>

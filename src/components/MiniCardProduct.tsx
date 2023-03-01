@@ -1,6 +1,7 @@
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { IProduct } from "../api/models";
+import { IProduct } from "../app/types"; 
+import { PICTURE_BASE_URL } from "../features/api/apiSlice";
 
 const MiniCardProduct = ({ product }: { product: IProduct }) => {
   return (
@@ -12,7 +13,7 @@ const MiniCardProduct = ({ product }: { product: IProduct }) => {
             <Card.Img
               variant="top"
               alt={product.image_alt}
-              src={`${product.image_preview}`}
+              src={PICTURE_BASE_URL + product.image_preview}
             />
 
             <Card.Title>{product.price}</Card.Title>

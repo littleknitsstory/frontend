@@ -1,8 +1,10 @@
 import sanitizeHtml from "sanitize-html";
-import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
-import { IArticle } from "../api/models";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+
+import { PICTURE_BASE_URL } from "../features/api/apiSlice";
+import { IArticle } from "../app/types";
 
 const CardArticle = ({ article }: { article: IArticle }) => {
   const { t } = useTranslation();
@@ -12,7 +14,7 @@ const CardArticle = ({ article }: { article: IArticle }) => {
         <Card style={{ width: "18rem" }}>
           <Card.Img
             variant="top"
-            src={`${article.image_preview}`}
+            src={PICTURE_BASE_URL + article.image_preview}
             onClick={() => {
               window.scrollTo({
                 top: 0,

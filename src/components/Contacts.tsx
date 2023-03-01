@@ -1,60 +1,54 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
-import Modal from "react-bootstrap/Modal";
-import { Link } from "react-router-dom";
-import { useTranslation, Trans } from "react-i18next";
-
-import { postContactRequest } from "../api";
-import envelope from "../icons/envelope.svg";
-import map from "../icons/map-point.svg";
-import phone from "../icons/phone.svg";
+import { useTranslation } from "react-i18next";
+import { useAddContactsMutation } from "../features/api/apiSlice";
+import useModalState from "./Hooks/useModalState";
+import ModalThanks from "./atoms/modal/ModalThanks";
+// assets
+import envelope from "../assets/icons/envelope.svg";
+import map from "../assets/icons/map-point.svg";
+import phone from "../assets/icons/phone.svg";
+// import PageError from "./PageError";
 
 const Contacts = () => {
   const { t } = useTranslation();
+  const [addContacts, { isLoading, isError, error }]  = useAddContactsMutation()
+  
+  const initialFormDataState = {
+    name: "",
+    message: "",
+    email: "",
+    company: "",
+    phone_number: ""
+  }
+  const [formData, setFormData] = useState(initialFormDataState)
+  const {
+    showModalThanks, 
+    handleShowThanks,
+    handleClose
+  } = useModalState()
 
-  const [showModalThanks, setShowModalThanks] = useState<boolean>(false);
-  const [name, setName] = useState<string>("");
-  const [message, setMessage] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [company, setCompany] = useState<string>("");
-  const [phone_number, setPhone_number] = useState<string>("");
-
-  const clearForm = useCallback((): void => {
-    setName("");
-    setMessage("");
-    setEmail("");
-    setCompany("");
-    setPhone_number("");
-  }, []);
-
-  const handleChange = useCallback(
-    (
-      handler: (value: string) => void
-    ): ((e: React.ChangeEvent<HTMLInputElement>) => void) => {
-      return (e) => {
-        handler(e.target.value);
-      };
-    },
-    []
-  );
-
-  const onSubmitOrder = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-      e.preventDefault();
-      const result = await postContactRequest({
-        name,
-        message,
-        email,
-        company,
-        phone_number,
-      });
-      if (result) {
-        setShowModalThanks(true);
-        clearForm();
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = e.currentTarget
+    setFormData(prevData => {
+      return {
+        ...prevData,
+        [name]: value
       }
-    },
-    [clearForm, company, email, message, name, phone_number]
-  );
+    })
+  }
+
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault()
+    if (!isLoading) {
+      try {
+        await addContacts(formData).unwrap()
+        setFormData(initialFormDataState)
+        handleShowThanks()
+      }
+      catch (error) {}
+    }
+  }
 
   return (
     <section className="contacts">
@@ -69,23 +63,25 @@ const Contacts = () => {
           >
             <div className="coffee-card">
               <div className="coffee-card__title">{t("Contacts.title")}</div>
-              <Form className="contacts__form" onSubmit={onSubmitOrder}>
+              <Form className="contacts__form" onSubmit={handleFormSubmit}>
                 <Row>
                   <Form.Group as={Col} md="6" controlId="name">
                     <Form.Control
                       required
                       type="text"
                       placeholder={t("Contacts.name")}
-                      value={name}
-                      onChange={handleChange(setName)}
+                      name="name"
+                      value={formData.name}
+                      onChange={handleFormChange}
                     />
                   </Form.Group>
                   <Form.Group as={Col} md="6" controlId="theme">
                     <Form.Control
                       type="text"
                       placeholder={t("Contacts.subject")}
-                      value={company}
-                      onChange={handleChange(setCompany)}
+                      name="company"
+                      value={formData.company}
+                      onChange={handleFormChange}
                     />
                   </Form.Group>
                 </Row>
@@ -94,10 +90,11 @@ const Contacts = () => {
                   <Form.Group as={Col} md="12" controlId="phone">
                     <Form.Control
                       required
-                      type="text"
+                      type="tel"
                       placeholder={t("Contacts.phone")}
-                      value={phone_number}
-                      onChange={handleChange(setPhone_number)}
+                      name="phone_number"
+                      value={formData.phone_number}
+                      onChange={handleFormChange}
                     />
                   </Form.Group>
                   <Form.Group as={Col} md="12" controlId="email">
@@ -105,8 +102,9 @@ const Contacts = () => {
                       required
                       type="email"
                       placeholder="Е-mail"
-                      value={email}
-                      onChange={handleChange(setEmail)}
+                      name="email"
+                      value={formData.email}
+                      onChange={handleFormChange}
                     />
                   </Form.Group>
                 </Row>
@@ -116,8 +114,9 @@ const Contacts = () => {
                       required
                       as="textarea"
                       placeholder={t("Contacts.message")}
-                      value={message}
-                      onChange={handleChange(setMessage)}
+                      name="message"
+                      value={formData.message}
+                      onChange={handleFormChange}
                     />
                   </Form.Group>
                 </Row>
@@ -168,32 +167,13 @@ const Contacts = () => {
           </Row>
         </div>
         <div className="card-modal-thanks">
-          <Modal
-            show={showModalThanks}
-            onHide={() => setShowModalThanks(false)}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-          >
-            <Modal.Header closeButton className="modal-header-without-border">
-              <Modal.Title id="contained-modal-title-vcenter">
-                {t("Modal.thanks")}
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <div className="card-modal-thanks__text">
-                <p>{t("Modal.thanksText1")}</p>
-                <p>{t("Modal.thanksText2")}</p>
-              </div>
-              <Link to={`/`}>
-                <button className="btn btn_vinous btn_center card-modal-thanks__btn">
-                  <div className="btn__text btn__text_center">
-                    {t("Modal.backHome")}
-                  </div>
-                </button>
-              </Link>
-            </Modal.Body>
-          </Modal>
+        <ModalThanks 
+          showModal={showModalThanks}
+          handleClose={handleClose}
+          button={true}
+          title={t("Modal.titleThanks.thanks")}
+          message={<p>{t("Modal.thanksText.contacts")}</p>}
+        />
         </div>
       </Container>
     </section>

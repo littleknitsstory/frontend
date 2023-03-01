@@ -1,7 +1,7 @@
-import vk from "../icons/logo-vk_white.svg";
-import facebook from "../icons/logo-facebook_white.svg";
-import pinterest from "../icons/logo-pinterest_white.svg";
-import instagram from "../icons/logo-instagram_white.svg";
+import vk from "../assets/icons/logo-vk_white.svg";
+import facebook from "../assets/icons/logo-facebook_white.svg";
+import pinterest from "../assets/icons/logo-pinterest_white.svg";
+import instagram from "../assets/icons/logo-instagram_white.svg";
 
 const Social = () => {
   return (

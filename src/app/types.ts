@@ -104,6 +104,13 @@ export interface IArticlesResponse {
   results: IArticle[];
 }
 
+export interface IReviewsResponse {
+  title: string;
+  author: string;
+  comment: string;
+  rating: number;
+  image_preview: string;
+}
 export interface ISavedProducts {
   savedProducts: IProduct[];
 }

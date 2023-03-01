@@ -32,13 +32,18 @@
     "policy": "Privacy policy",
     "subscribe": {
       "text": "We run special promotions for our clients. Checkout subscribe and we will keep you updated",
+      "email": "Email",
       "buttonText": "Subscribe"
     }
   },
   "Filter": {
     "title": "Filters",
     "price": "Price",
-    "buttonText": "Clear filter"
+    "buttonText": "Clear filters",
+    "selectCategory": "All Categories",
+    "categories": "Categories",
+    "colors": "Colors",
+    "clear": "Clear"
   },
   "CardProduct": {
     "material": "Material",
@@ -80,11 +85,16 @@
     "phone": "Phone",
     "send": "Send",
     "policy": "By submitting your personal data, you agree to its processing.",
-    "thanks": "Thanks",
-    "thanksText1": "Your application is accepted.",
-    "thanksText2": "Our manager will contact you shortly",
-    "backHome": "Back to home",
-    "subscription": "You have successfully subscribed to our newsletter"
+    "titleThanks": {
+      "thanks": "Thank you!"
+    },
+    "thanksText": {
+      "quickOrder1": "Your application is accepted.",
+      "quickOrder2": "Our manager will contact you shortly",
+      "subscription": "You're successfully subscribe. Thank you!",
+      "contacts": "Message sent"
+    },
+    "backHome": "Back to home"
   },
   "lastReviews": "Last Reviews",
   "otherPosts": "Other posts",
@@ -93,5 +103,7 @@
   "popular": "Popular",
   "goCart": "Cart",
   "reviews": "Reviews",
-  "quickOrder": "Quick Order"
+  "quickOrder": "Quick Order",
+  "price": "Price",
+  "color": "Color"
 }

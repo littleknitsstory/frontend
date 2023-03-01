@@ -27,14 +27,45 @@
       object-fit: contain;
     }
     &-descr {
-      padding: 1rem 0 0 1.5rem;
+      padding: 0.5rem 0 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
     }
     &-title,
-    &-color,
+    &-color {
+      display: flex;
+      align-items: center;
+    }
+    &-title {
+      font-size: 1.125rem;
+      // text-align: center;
+    }
+    &-color-circle-wrapper {
+      margin-left: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    &-color-circle {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      &:hover {
+        cursor: pointer;
+      }
+    }
     &-part-number {
       color: $text-color-dark;
       font-size: 1rem;
-      margin-bottom: 0.5rem;
+      // margin-bottom: 0.5rem;
+    }
+    &-color {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
     }
     &-policy {
       margin-top: 1rem;
@@ -45,6 +76,7 @@
     &-wrapper {
       &-price {
         color: $text-color-dark;
+        text-align: center;
         font-size: 1.25rem;
         margin-bottom: 0.5rem;
       }
@@ -70,7 +102,7 @@
 
       .form-check-input {
         &:checked[type="checkbox"] {
-          background-image: url("../icons/check.svg");
+          background-image: url("../assets/icons/check.svg");
         }
         &:checked {
           background-color: $light-grey-color;

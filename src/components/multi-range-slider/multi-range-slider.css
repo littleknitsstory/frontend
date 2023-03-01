@@ -7,7 +7,7 @@
 
 .mrs-slider {
   position: relative;
-  width: 200px;
+  width: 225px;
 }
 
 .mrs-slider__track,
@@ -60,7 +60,7 @@
   pointer-events: none;
   position: absolute;
   height: 0;
-  width: 200px;
+  width: 225px;
   outline: none;
 }
 
