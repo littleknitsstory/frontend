@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { useGetProductsQuery } from "../features/api/apiSlice";
+import { useGetProductsQuery } from "../../features/api/apiSlice";
 // components
-import Filters from "./Filters";
-import CardProduct from "./CardProduct";
-import Spinner from "./Spinner";
-import PageError from "./PageError";
+import Filters from "../../components/Filters";
+import CardProduct from "../../components/CardProduct";
+import Spinner from "../../components/Spinner";
+import PageError from "../PageError";
 // assets
-import arrowRight from "../assets/icons/arrow-right.svg";
-import { IProduct } from "../app/types"; 
+import arrowRight from "../../assets/icons/arrow-right.svg";
+import { IProduct } from "../../app/types"; 
 
 const Products = () => {
   const { t, i18n } = useTranslation();

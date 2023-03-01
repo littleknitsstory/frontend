@@ -3,7 +3,7 @@ import MiniCardProduct from "./MiniCardProduct";
 import { useTranslation } from "react-i18next";
 import { useGetProductsQuery } from "../features/api/apiSlice"; 
 import Spinner from "./Spinner";
-import PageError from "./PageError";
+import PageError from "../pages/PageError";
 
 const PopularProducts = () => {
   const { t, i18n } = useTranslation();

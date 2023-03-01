@@ -1,13 +1,13 @@
 import { Container } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
-import { useGetProductQuery } from "../features/api/apiSlice";
+import { useGetProductQuery } from "../../features/api/apiSlice";
 // components
-import PageError from "./PageError";
-import PopularProducts from "./PopularProducts";
-import Reviews from "./Reviews";
-import SchemaCard from "./SchemaCard";
-import Spinner from "./Spinner";
+import PageError from "../PageError";
+import PopularProducts from "../../components/PopularProducts";
+import Reviews from "../../components/Reviews";
+import SchemaCard from "../../components/SchemaCard";
+import Spinner from "../../components/Spinner";
 
 const Product = () => {
   const { slug } = useParams<string>();

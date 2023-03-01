@@ -7,7 +7,7 @@ import { removeFromCart } from "../features/products/productsSlice";
 import { PICTURE_BASE_URL, useGetProductQuery } from "../features/api/apiSlice";
 import { useTranslation } from "react-i18next";
 import Spinner from "./Spinner";
-import PageError from "./PageError";
+import PageError from "../pages/PageError";
 
 const CardProductCart = ({ productSlug }: { productSlug: string }) => {
   const { t, i18n } = useTranslation()

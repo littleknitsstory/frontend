@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
-import CardProductCart from "./CardProductCart";
+import CardProductCart from "../components/CardProductCart";
 
 const Cart = () => {
   const cartProducts = useAppSelector(state => state.products.cart)

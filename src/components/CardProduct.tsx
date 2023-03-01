@@ -11,7 +11,7 @@ import useModalState from "./Hooks/useModalState";
 import ModalThanks from "./atoms/modal/ModalThanks";
 import { PICTURE_BASE_URL, useGetProductQuery } from "../features/api/apiSlice";
 import Spinner from "./Spinner";
-import PageError from "./PageError";
+import PageError from "../pages/PageError";
 import { IProduct, IProductDetails } from "../app/types";
 
 const CardProduct = ({ productSlug }: { productSlug: string }) => {
