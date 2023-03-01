@@ -19,10 +19,10 @@ const Articles = () => {
   } = useGetArticlesQuery({lang: i18n.language, limit})
   const { t } = useTranslation();
 
-  const [isAllShown, setAllShown] = useState<boolean>(false);
+  const [isAllShown, setIsAllShown] = useState<boolean>(false);
 
   useEffect(() => {
-    if (articles) setAllShown(limit > articles?.count)
+    if (articles) setIsAllShown(limit > articles?.count)
   }, [articles, limit]);
 
   if (isFetching) {

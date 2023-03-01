@@ -14,7 +14,7 @@ const CardArticle = ({ article }: { article: IArticle }) => {
         <Card style={{ width: "18rem" }}>
           <Card.Img
             variant="top"
-            src={`${PICTURE_BASE_URL + article.image_preview}`}
+            src={PICTURE_BASE_URL + article.image_preview}
             onClick={() => {
               window.scrollTo({
                 top: 0,

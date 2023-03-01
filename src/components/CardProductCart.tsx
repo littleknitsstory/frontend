@@ -72,7 +72,7 @@ const CardProductCart = ({ productSlug }: { productSlug: string }) => {
                     <div 
                       key={color.color}
                       style={{backgroundColor: color.color}}
-                      className="card-lks__color__circle"
+                      className="card-lks__color-circle"
                     >
                     </div>)
                   }
