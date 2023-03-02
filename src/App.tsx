@@ -5,19 +5,19 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import Article from "./components/Article";
-import Cart from "./components/Cart";
-import PageError from "./components/PageError";
-import PrivacyPolicy from "./components/PrivacyPolicy";
-import Product from "./components/Product";
-import Products from "./components/Products";
-import SavedProducts from "./components/SavedProducts";
+import Article from "./pages/Blog/Article";
+import Cart from "./pages/Cart";
+import PageError from "./pages/PageError";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Product from "./pages/Shop/Product";
+import Products from "./pages/Shop/Products";
+import SavedProducts from "./pages/SavedProducts";
 import ScrollToTop from "./components/ScrollToTop";
 
 // routes
-import Root from "./routes/Root";
-import Blog from "./routes/Blog";
-import ContactPage from "./routes/ContactPage";
+import Root from "./pages/RootLayout";
+import Blog from "./pages/Blog/Blog";
+import ContactPage from "./pages/ContactPage";
 // import Home from "./routes/Home"; /* Temporary unused route */
 
 function App() {

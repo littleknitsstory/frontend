@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useGetArticlesQuery } from "../features/api/apiSlice";
 
 import Spinner from "./Spinner";
-import PageError from "./PageError";
+import PageError from "../pages/PageError";
 // assets
 import arrowWhite from "../assets/icons/arrow-right-white.svg";
 import kateSlider from "../assets/images/kate-slider.png";

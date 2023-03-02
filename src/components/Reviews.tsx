@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useGetReviewsQuery } from "../features/api/apiSlice";
 
 import { nanoid } from '@reduxjs/toolkit' /* Temporary for generating reviewID */
-import PageError from "./PageError";
+import PageError from "../pages/PageError";
 import Spinner from "./Spinner";
 
 const Reviews = () => {

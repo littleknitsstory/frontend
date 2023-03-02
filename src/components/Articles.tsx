@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useGetArticlesQuery } from "../features/api/apiSlice"; 
 import CardArticle from "./CardArticle";
-import PageError from "./PageError";
+import PageError from "../pages/PageError";
 
 import Spinner from "./Spinner";
 import arrowRight from "../assets/icons/arrow-right.svg";

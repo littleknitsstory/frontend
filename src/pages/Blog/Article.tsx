@@ -1,11 +1,11 @@
 import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useGetArticleQuery } from "../features/api/apiSlice";
+import { useGetArticleQuery } from "../../features/api/apiSlice";
 
-import Articles from "./Articles";
-import PageError from "./PageError";
-import Spinner from "./Spinner";
+import Articles from "../../components/Articles";
+import PageError from "../PageError";
+import Spinner from "../../components/Spinner";
 
 const Article = () => {
   const { slug } = useParams<string>();

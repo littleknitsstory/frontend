@@ -5,7 +5,7 @@ import { useGetProductQuery } from "../features/api/apiSlice";
 // components
 import SchemaCard from "./SchemaCard";
 import Spinner from "./Spinner";
-import PageError from "./PageError";
+import PageError from "../pages/PageError";
 // assets
 import cartWhite from "../assets/icons/cart-white.svg";
 
