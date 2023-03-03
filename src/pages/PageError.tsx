@@ -10,8 +10,7 @@ const PageError = ({ errorStatus }: { errorStatus: number }) => {
             <div className="page-error__status">{errorStatus}</div>
             <div className="page-error__subtitle">Not found</div>
             <div className="page-error__text">
-              The page you are trying to reach does not exist or has been
-              deleted. <br />
+              The page you are trying to reach does not exist or has been deleted. <br />
               Click to
               <span>
                 <Link to="/"> home</Link>

@@ -1,8 +1,8 @@
-import AboutMe from "../components/AboutMe"
-import Instagram from "../components/Instagram"
-import LastReviews from "../components/LastReviews"
-import Promo from "../components/Promo"
-import SchemasCard from "../components/SchemasCard"
+import AboutMe from "../components/home/AboutMe";
+import Instagram from "../components/Instagram";
+import LastReviews from "../components/reviews/LastReviews";
+import Promo from "../components/home/Promo";
+import SchemasCard from "../components/home/SchemasCard";
 
 const Home = () => {
   return (
@@ -13,6 +13,6 @@ const Home = () => {
       <LastReviews />
       <Instagram />
     </>
-  )
-}
-export default Home
+  );
+};
+export default Home;
