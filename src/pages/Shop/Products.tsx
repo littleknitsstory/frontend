@@ -58,14 +58,14 @@ const Products = () => {
       const compareProducts = (a: IProduct[], b: IProduct[]) =>
         a.filter((firstArray) => b.some((secondArray) => isSameProduct(firstArray, secondArray)));
 
-      const filteredProducts = compareProducts(filteredCategories, filteredColors);
+      const comparedProducts = compareProducts(filteredCategories, filteredColors);
       // check if filters has overlap
-      if (filteredProducts.length === 0) {
+      if (comparedProducts.length === 0) {
         setHasOverlap(false);
       } else {
         setHasOverlap(true);
         setIsLastPage(true);
-        setRenderProducts(filteredProducts);
+        setFilteredProducts(comparedProducts);
       }
     }
 
@@ -74,6 +74,7 @@ const Products = () => {
       if (products) {
         setRenderProducts(products?.results);
         setIsLastPage(limit >= products?.count);
+        setFilteredProducts([]);
       }
     }
   }, [filteredCategories, filteredColors]);
