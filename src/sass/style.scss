@@ -29,8 +29,9 @@
 @use "./_popular-products";
 @use "./_reviews";
 @use "./_card-modal-thanks";
-@use "./privacy-policy";
-@use "./cart";
+@use "./_privacy-policy";
+@use "./_cart";
+@use "./_primary-nav";
 
 * {
   font-family: "AlethiaNext";

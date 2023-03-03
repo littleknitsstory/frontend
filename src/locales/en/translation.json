@@ -96,6 +96,14 @@
     },
     "backHome": "Back to home"
   },
+  "Cart": {
+    "empty": "Cart is empty",
+    "buttonText": "Catalog"
+  },
+  "Saved": {
+    "empty": "No saved products",
+    "buttonText": "Catalog"
+  },
   "lastReviews": "Last Reviews",
   "otherPosts": "Other posts",
   "seeMore": "More",

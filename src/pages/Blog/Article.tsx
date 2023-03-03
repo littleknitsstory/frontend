@@ -1,11 +1,11 @@
 import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useGetArticleQuery } from "../../features/api/apiSlice";
+import { useGetArticleQuery } from "../../components/features/api/apiSlice";
 
-import Articles from "../../components/Articles";
+import Articles from "./Articles";
 import PageError from "../PageError";
-import Spinner from "../../components/Spinner";
+import Spinner from "../../components/utils/Spinner";
 
 const Article = () => {
   const { slug } = useParams<string>();
@@ -14,11 +14,11 @@ const Article = () => {
     data: article,
     isLoading,
     isError,
-    error
-  } = useGetArticleQuery({ slug, lang: i18n.language })
+    error,
+  } = useGetArticleQuery({ slug, lang: i18n.language });
 
   if (isLoading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (isError) {

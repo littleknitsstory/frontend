@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { useGetProductsQuery } from "../../features/api/apiSlice";
+import { useGetProductsQuery } from "../../components/features/api/apiSlice";
 // components
-import Filters from "../../components/Filters";
-import CardProduct from "../../components/CardProduct";
-import Spinner from "../../components/Spinner";
+import Filters from "../../components/products/Filters";
+import CardProduct from "../../components/products/CardProduct";
+import Spinner from "../../components/utils/Spinner";
 import PageError from "../PageError";
 // assets
 import arrowRight from "../../assets/icons/arrow-right.svg";
-import { IProduct } from "../../app/types"; 
+import { IProduct } from "../../app/types";
 
 const Products = () => {
   const { t, i18n } = useTranslation();
@@ -19,73 +19,74 @@ const Products = () => {
     isLoading,
     isFetching,
     isError,
-    error
-  } = useGetProductsQuery({lang: i18n.language, limit})
+    error,
+  } = useGetProductsQuery({ lang: i18n.language, limit });
 
-  const [isLastPage, setIsLastPage] = useState<boolean>(false)
-  const [renderProducts, setRenderProducts] = useState<IProduct[]>([]) /* Which array of products render */
-  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([])
-  const [filteredColors, setFilteredColors] = useState<IProduct[]>([])
-  const [filteredCategories, setFilteredCategories] = useState<IProduct[]>([])
-  const [hasOverlap, setHasOverlap] = useState<boolean>(true)
+  const [isLastPage, setIsLastPage] = useState<boolean>(false);
+  const [renderProducts, setRenderProducts] = useState<IProduct[]>(
+    [],
+  ); /* Which array of products render */
+  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
+  const [filteredColors, setFilteredColors] = useState<IProduct[]>([]);
+  const [filteredCategories, setFilteredCategories] = useState<IProduct[]>([]);
+  const [hasOverlap, setHasOverlap] = useState<boolean>(true);
 
   useEffect((): void => {
-    if (products) setRenderProducts(products.results)
-  }, [products])
+    if (products) setRenderProducts(products.results);
+  }, [products]);
 
   useEffect(() => {
-    const colorLength: number = filteredColors.length
-    const categoryLength: number = filteredCategories.length
+    const colorLength: number = filteredColors.length;
+    const categoryLength: number = filteredCategories.length;
 
     // check if only one filter active
     if (colorLength > 0 && categoryLength === 0) {
-      setFilteredProducts(filteredColors)
-      setHasOverlap(true)
-      setIsLastPage(true)
-    } 
+      setFilteredProducts(filteredColors);
+      setHasOverlap(true);
+      setIsLastPage(true);
+    }
     if (categoryLength > 0 && colorLength === 0) {
-      setFilteredProducts(filteredCategories)
-      setHasOverlap(true)
-      setIsLastPage(true)
-    } 
+      setFilteredProducts(filteredCategories);
+      setHasOverlap(true);
+      setIsLastPage(true);
+    }
 
     // if both filters are active (find overlap)
     if (categoryLength > 0 && colorLength > 0) {
-      const isSameProduct = (a: IProduct, b: IProduct): boolean => a.id === b.id
-        
-      const compareProducts = (a: IProduct[], b: IProduct[]) => 
-        a.filter(firstArray =>
-          b.some(secondArray => 
-            isSameProduct(firstArray, secondArray)));
-        
-      const filteredProducts = compareProducts(filteredCategories, filteredColors)
-        // check if filters has overlap
-        if (filteredProducts.length === 0) {
-          setHasOverlap(false)
-        } else {
-          setHasOverlap(true)
-          setIsLastPage(true)
-          setRenderProducts(filteredProducts)
-        }
-    } 
-    
+      const isSameProduct = (a: IProduct, b: IProduct): boolean => a.id === b.id;
+
+      const compareProducts = (a: IProduct[], b: IProduct[]) =>
+        a.filter((firstArray) => b.some((secondArray) => isSameProduct(firstArray, secondArray)));
+
+      const comparedProducts = compareProducts(filteredCategories, filteredColors);
+      // check if filters has overlap
+      if (comparedProducts.length === 0) {
+        setHasOverlap(false);
+      } else {
+        setHasOverlap(true);
+        setIsLastPage(true);
+        setFilteredProducts(comparedProducts);
+      }
+    }
+
     // if both filters are inactive
     if (categoryLength === 0 && colorLength === 0) {
       if (products) {
-        setRenderProducts(products?.results)
-        setIsLastPage(limit >= products?.count)
+        setRenderProducts(products?.results);
+        setIsLastPage(limit >= products?.count);
+        setFilteredProducts([]);
       }
     }
-  }, [filteredCategories, filteredColors])
+  }, [filteredCategories, filteredColors]);
 
   // Select which array of products render
   useEffect(() => {
-    if(filteredProducts.length > 0) {
-      setRenderProducts(filteredProducts)
+    if (filteredProducts.length > 0) {
+      setRenderProducts(filteredProducts);
     } else if (products) {
-      setRenderProducts(products.results)
-    } 
-  }, [filteredProducts, products])
+      setRenderProducts(products.results);
+    }
+  }, [filteredProducts, products]);
 
   useEffect(() => {
     if (products) {
@@ -97,17 +98,17 @@ const Products = () => {
 
   const clearFilters = () => {
     if (products) {
-      setFilteredCategories([])
-      setFilteredColors([])
-      setFilteredProducts([])
-      setHasOverlap(true)
-      setRenderProducts(products?.results)
-      setIsLastPage(limit >= products?.count)
+      setFilteredCategories([]);
+      setFilteredColors([]);
+      setFilteredProducts([]);
+      setHasOverlap(true);
+      setRenderProducts(products?.results);
+      setIsLastPage(limit >= products?.count);
     }
-  }
-  
+  };
+
   if (isLoading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (isError) {
@@ -146,24 +147,23 @@ const Products = () => {
               offset: 0,
             }}
           >
-            <Filters 
+            <Filters
               clearFilters={clearFilters}
-              setFilteredCategories={setFilteredCategories} 
+              setFilteredCategories={setFilteredCategories}
               setFilteredColors={setFilteredColors}
             />
           </Col>
           <Col>
             <Row xs={1} md={1} lg={2} xl={2} xxl={3}>
-              {hasOverlap && renderProducts.map((product) => {
-                return (
-                  <Col key={product.id}>
-                    <CardProduct productSlug={product.slug} />
-                  </Col>
-                );
-              })}
-              {!hasOverlap &&
-                <div>Не найдено товаров по выбранным фильтрам.</div>
-              }
+              {hasOverlap &&
+                renderProducts.map((product) => {
+                  return (
+                    <Col key={product.id}>
+                      <CardProduct productSlug={product.slug} />
+                    </Col>
+                  );
+                })}
+              {!hasOverlap && <div>Не найдено товаров по выбранным фильтрам.</div>}
             </Row>
           </Col>
         </Row>
@@ -171,7 +171,7 @@ const Products = () => {
           <Spinner />
         ) : (
           !isLastPage && (
-            <button className="btn btn_border" onClick={() => setLimit(prev => prev + 4)}>
+            <button className="btn btn_border" onClick={() => setLimit((prev) => prev + 4)}>
               <div className="btn__text">{t("seeMore")}</div>
               <div className="btn__icon">
                 <img src={arrowRight} alt="arrowWhite" />
