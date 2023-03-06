@@ -111,3 +111,11 @@ export interface IReviewsResponse {
   rating: number;
   image_preview: string;
 }
+
+export interface FormValues {
+  name?: string;
+  message?: string;
+  email?: string;
+  company?: string;
+  phone_number?: string;
+}

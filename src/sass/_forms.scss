@@ -1,0 +1,16 @@
+@use "./_variables" as *;
+.form-error {
+  color: #870101;
+  margin: 0.2rem 0;
+}
+.form-control {
+  margin-bottom: 1rem;
+  &:focus {
+    box-shadow: 0 0 0 0.25rem $border-color;
+    border-color: $light-grey-color;
+  }
+  &_error {
+    margin-bottom: 0;
+    border: 3px solid #870101;
+  }
+}

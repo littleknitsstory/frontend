@@ -1,31 +1,33 @@
-import React, { useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { Formik, Form as FormikForm, FormikState } from "formik";
+import * as Yup from "yup";
 import { useAddSubscriptionMutation } from "../../components/features/api/apiSlice";
+import { FormValues } from "../../app/types";
 // components
 import Social from "../../components/Social";
 import PrimaryNav from "../../components/primary-nav/PrimaryNav";
 import useModalState from "../../components/hooks/useModalState";
 import ModalThanks from "../../components/modal/ModalThanks";
+import { FormsInput } from "../../components/utils/Forms";
 
 const Footer = () => {
   const { t } = useTranslation();
-  const [email, setEmail] = useState<string>("");
-  const [addSubscribe, { isLoading }] = useAddSubscriptionMutation();
+  const [addSubscribe] = useAddSubscriptionMutation();
   const { showModalThanks, handleShowThanks, handleClose } = useModalState();
 
-  const handleSubscribe = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
-    if (!isLoading) {
-      try {
-        await addSubscribe(email).unwrap();
-        setEmail("");
-        handleShowThanks();
-      } catch (err) {
-        console.error("Failed to subscribe: ", err);
-      }
-    }
+  const initialValue: FormValues = {
+    email: "",
+  };
+
+  const handleFormSubmit = (
+    values: FormValues,
+    resetForm: (nextState?: Partial<FormikState<FormValues>> | undefined) => void,
+  ): void => {
+    addSubscribe(values);
+    handleShowThanks();
+    resetForm();
   };
 
   return (
@@ -34,8 +36,10 @@ const Footer = () => {
         <div className="footer__wrapper">
           <Row>
             <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
-              <div className="footer__subtitle">{t("Footer.subtitle")}</div>
-              <div className="footer__title">Little Knits Story</div>
+              <Link to="/">
+                <div className="footer__subtitle">{t("Footer.subtitle")}</div>
+                <div className="footer__title">Little Knits Story</div>
+              </Link>
               <Row>
                 <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
                   <div className="footer__navbar">
@@ -66,23 +70,30 @@ const Footer = () => {
             <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
               <div className="footer__subscribe">
                 <div className="footer__subscribe-text">{t("Footer.subscribe.text")}</div>
-                <Form onSubmit={handleSubscribe}>
-                  <Form.Group className="mb-3" controlId="formGroupEmail">
-                    <Form.Control
-                      required
+
+                <Formik
+                  initialValues={initialValue}
+                  validationSchema={Yup.object().shape({
+                    email: Yup.string()
+                      .email(t("Contacts.incorrectEmail"))
+                      .required(t("Contacts.required")),
+                  })}
+                  onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}
+                >
+                  <FormikForm>
+                    <FormsInput
+                      name="email"
                       type="email"
                       placeholder="E-mail"
-                      value={email}
-                      onChange={(e) => setEmail(e.currentTarget.value)}
+                      controlId={"formGroupEmail"}
                     />
-
-                    <button className="btn btn_border" type="submit">
+                    <button className="btn btn_border footer__btn" type="submit">
                       <div className="btn__text btn__text_center">
                         {t("Footer.subscribe.buttonText")}
                       </div>
                     </button>
-                  </Form.Group>
-                </Form>
+                  </FormikForm>
+                </Formik>
               </div>
 
               <Social />

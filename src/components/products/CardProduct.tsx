@@ -149,7 +149,7 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
             product={product}
             showModal={showModal}
             handleClose={handleClose}
-            onSubmitOrder={(e: React.FormEvent<HTMLFormElement>) => onSubmitOrder(e)}
+            onSubmitOrder={() => onSubmitOrder()}
           />
         )}
         <ModalThanks

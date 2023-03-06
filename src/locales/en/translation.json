@@ -74,7 +74,14 @@
     "message": "Message",
     "send": "Send",
     "policy": "By submitting your personal data, you agree to its processing.",
-    "contactInfo": "Contacts"
+    "contactInfo": "Contacts",
+    "required": "Required field!",
+    "lengthRequired": "Minimum of 2 characters",
+    "incorrectEmail": "Please enter a valid email address",
+    "lengthMax10" : "Maximum of 10 characters",
+    "lengthMax30" : "Maximum of 30 characters",
+    "lengthMax100" : "Maximum of 100 characters",
+    "incorrectPhone": "Please enter a valid Montenegro phone number"
   },
   "Modal": {
     "title": "Quick Order",
