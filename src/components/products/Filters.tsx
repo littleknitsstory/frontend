@@ -93,74 +93,64 @@ const Filters = (props: FilterProps) => {
     props.setFilteredColors([]);
   };
 
+  const categoryOptions = categories.map((category) => (
+    <option key={category.slug} value={category.slug}>
+      {category.title}
+    </option>
+  ))
+
+  const colorOptions = colors.map((color) => (
+    <div
+      key={color}
+      style={{ backgroundColor: color }}
+      className={`filter__color-circle ${color === selectedColor ? "active" : ""}`}
+      data-color={color}
+      onClick={(e: React.MouseEvent<HTMLElement>) => selectColor(e)}
+    ></div>
+  ))
+
   return (
-    <>
-      <div className="filters">
-        <div className="title">{t("Filter.title")}</div>
-
-        {/* <div className="filters__wrapper-price">
-          <div className="filters__title">{t("Filter.price")}</div>
-          <MultiRangeslider
-            min={0}
-            max={1000}
-            onChange={({ min, max }) =>
-              console.log(`min = ${min}, max = ${max}`)
-            }
-          />
-        </div> */}
-
-        <div className="filters__wrapper-category">
-          <div className="filters__title">{t("Filter.categories")}</div>
-          <select
-            className="filters__select"
-            name="categories"
-            id="categories"
-            value={selectedCategory}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => selectCategory(e)}
-          >
-            <option value="clear">{t("Filter.selectCategory")}</option>
-            {categories.map((category) => (
-              <option key={category.slug} value={category.slug}>
-                {category.title}
-              </option>
-            ))}
-          </select>
-          {/* <button 
-            className="btn btn_clear-filter"
-            onClick={clearColorFilter}
-          >
-            Clear
-          </button> */}
-        </div>
-
-        <div className="filters__wrapper-category">
-          <div className="filters__title">{t("Filter.colors")}</div>
-          <div className="filters__color-palette">
-            {colors.map((color) => (
-              <div
-                key={color}
-                style={{ backgroundColor: color }}
-                className={`color-circle ${color === selectedColor ? "active" : ""}`}
-                data-color={color}
-                onClick={(e: React.MouseEvent<HTMLElement>) => selectColor(e)}
-              ></div>
-            ))}
-            <button className="btn clear-filter" onClick={clearColorFilter}>
-              {t("Filter.clear")}
-            </button>
-          </div>
-        </div>
-
-        <div className="filters__btn">
-          <button className="btn btn_border" onClick={clearFilters}>
-            <div className="btn__text">{t("Filter.buttonText")}</div>
-            <div className="btn__icon">
-              <img src={arrowRight} alt="arrowWhite" />
-            </div>
-          </button>
-        </div>
+    <div className="filters">
+      <h2>{t("Filter.title")}</h2>
+      {/* <div className="filters__wrapper-price">
+        <div className="filters__title">{t("Filter.price")}</div>
+        <MultiRangeslider
+          min={0}
+          max={1000}
+          onChange={({ min, max }) =>
+            console.log(`min = ${min}, max = ${max}`)
+          }
+        />
+      </div> */}
+      <div className="filters__category-wrapper">
+        <h6 className="filter__title">{t("Filter.categories")}</h6>
+        <select 
+          className="form-select" 
+          aria-label="Select category"
+          value={selectedCategory}
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => selectCategory(e)}
+        >
+          <option selected>All categories</option>
+          {categoryOptions}
+        </select>
       </div>
-    </>
+
+      <div className="filters__category-wrapper">
+        <h6 className="filter__title">{t("Filter.colors")}</h6>
+        <div className="filter__color-palette">
+          {colorOptions}
+        </div>
+        <button className="btn filter__clear-filter btn_center" onClick={clearColorFilter}>
+          {t("Filter.clear")}
+        </button>
+      </div>
+
+      <button className="btn btn_border btn_center" onClick={clearFilters}>
+        {t("Filter.buttonText")}
+        <img src={arrowRight} alt="arrowWhite" />
+      </button>
+
+    </div>
   );
 };
 
