@@ -130,7 +130,7 @@ const Filters = (props: FilterProps) => {
           value={selectedCategory}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => selectCategory(e)}
         >
-          <option selected>{t("Filter.selectCategory")}</option>
+          <option>{t("Filter.selectCategory")}</option>
           {categoryOptions}
         </select>
       </div>

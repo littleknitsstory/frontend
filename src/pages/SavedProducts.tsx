@@ -15,7 +15,7 @@ const SavedProducts = () => {
     return (
       <Container>
         <div className="empty-favorites">{t("Saved.empty")}</div>
-        <Link to="/shop" className="empty-cart-link">
+        <Link to="/shop/" className="empty-cart-link">
           {t("Saved.buttonText")} 🛒
         </Link>
       </Container>
