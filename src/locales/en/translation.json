@@ -43,7 +43,8 @@
     "selectCategory": "All Categories",
     "categories": "Categories",
     "colors": "Colors",
-    "clear": "Clear"
+    "clear": "Clear",
+    "noMatch": "There are no products with selected filters. Please clear or change filters"
   },
   "CardProduct": {
     "material": "Material",
