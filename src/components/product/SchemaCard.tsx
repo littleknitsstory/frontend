@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Store } from "react-notifications-component";
 
 import { IProductDetails } from "../../app/types";
 import { PICTURE_BASE_URL } from "../features/api/apiSlice";
-import { useAppDispatch } from "../../app/hooks";
-import { addFavorite } from "../features/products/productsSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { addFavorite, addToCart } from "../features/products/productsSlice";
 import useModalState from "../hooks/useModalState";
+import { notificationSuccess, notificationError } from "../modal/Notification";
 // components
 import Social from "../Social";
 import ModalThanks from "../modal/ModalThanks";
@@ -22,8 +24,10 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
   const dispatch = useAppDispatch();
 
   const { showModal, showModalThanks, handleShow, handleClose, onSubmitOrder } = useModalState();
-
   const [countProduct, setCountProduct] = useState<number>(1);
+  const favoriteProducts = useAppSelector((state) => state.products.favorite);
+  const cartProducts = useAppSelector((state) => state.products.cart);
+
   const increaseCountProduct = (): void => {
     setCountProduct((countProduct) => countProduct + 1);
   };
@@ -33,6 +37,36 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
       return;
     }
     setCountProduct((countProduct) => countProduct - 1);
+  };
+
+  const addFavoriteProduct = (product: IProductDetails): void => {
+    dispatch(addFavorite(product));
+    if (!favoriteProducts.includes(product)) {
+      Store.addNotification({
+        ...notificationSuccess,
+        title: t("Notification.isSaved"),
+      });
+    } else {
+      Store.addNotification({
+        ...notificationError,
+        title: t("Notification.alreadySaved"),
+      });
+    }
+  };
+
+  const addProductInCart = (product: IProductDetails): void => {
+    dispatch(addToCart(product));
+    if (!cartProducts.includes(product)) {
+      Store.addNotification({
+        ...notificationSuccess,
+        title: t("Notification.isAdded"),
+      });
+    } else {
+      Store.addNotification({
+        ...notificationError,
+        title: t("Notification.alreadyAdded"),
+      });
+    }
   };
 
   return (
@@ -49,7 +83,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
               className="schema-card__like"
               src={like}
               alt="like"
-              onClick={() => dispatch(addFavorite(product))}
+              onClick={() => addFavoriteProduct(product)}
             />
           </div>
           <div className="schema-card__counter">
@@ -139,7 +173,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
             </div>
             <div className="schema-card__product-btn">
               <Col>
-                <button className="btn btn_border">
+                <button className="btn btn_border" onClick={() => addProductInCart(product)}>
                   <div className="btn__text_center">{t("SchemaCard.buttonAddCart")}</div>
                 </button>
               </Col>

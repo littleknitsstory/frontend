@@ -1,10 +1,12 @@
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Formik, Form as FormikForm, FormikState } from "formik";
 import * as Yup from "yup";
 import { useAddSubscriptionMutation } from "../../components/features/api/apiSlice";
 import { FormValues } from "../../app/types";
+import { Store } from "react-notifications-component";
+import { notificationSuccess, notificationError } from "../../components/modal/Notification";
 // components
 import Social from "../../components/Social";
 import PrimaryNav from "../../components/primary-nav/PrimaryNav";
@@ -15,19 +17,46 @@ import { FormsInput } from "../../components/utils/Forms";
 const Footer = () => {
   const { t } = useTranslation();
   const [addSubscribe] = useAddSubscriptionMutation();
-  const { showModalThanks, handleShowThanks, handleClose } = useModalState();
+
+  const { showModalThanks, handleClose } = useModalState();
 
   const initialValue: FormValues = {
     email: "",
+  };
+
+  const checkError = (error: any): void => {
+    if ("originalStatus" in error) {
+      Store.addNotification({
+        ...notificationError,
+        title: t("Notification.somethingWrong"),
+      });
+    }
+    if ("data" in error) {
+      if (error.data) {
+        if (error.data.hasOwnProperty("email")) {
+          Store.addNotification({
+            ...notificationError,
+            title: t("Notification.alreadySubscribed"),
+          });
+        }
+      }
+    }
   };
 
   const handleFormSubmit = (
     values: FormValues,
     resetForm: (nextState?: Partial<FormikState<FormValues>> | undefined) => void,
   ): void => {
-    addSubscribe(values);
-    handleShowThanks();
-    resetForm();
+    addSubscribe(values)
+      .unwrap()
+      .then(() => {
+        Store.addNotification({
+          ...notificationSuccess,
+          title: t("Notification.subscribed"),
+        });
+      })
+      .catch((error) => checkError(error))
+      .finally(() => resetForm());
   };
 
   return (
@@ -75,8 +104,8 @@ const Footer = () => {
                   initialValues={initialValue}
                   validationSchema={Yup.object().shape({
                     email: Yup.string()
-                      .email(t("Contacts.incorrectEmail"))
-                      .required(t("Contacts.required")),
+                      .email(t("Forms.incorrectEmail"))
+                      .required(t("Forms.required")),
                   })}
                   onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}
                 >

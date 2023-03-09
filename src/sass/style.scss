@@ -33,6 +33,9 @@
 @use "./_cart";
 @use "./_primary-nav";
 @use "./_forms";
+@use "./_notification";
+
+@import "animate.css";
 
 * {
   font-family: "AlethiaNext";

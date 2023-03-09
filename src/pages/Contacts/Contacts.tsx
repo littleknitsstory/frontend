@@ -52,17 +52,17 @@ const Contacts = () => {
                 initialValues={initialFormDataState}
                 validationSchema={Yup.object().shape({
                   name: Yup.string()
-                    .min(2, t("Contacts.lengthRequired"))
-                    .max(30, t("Contacts.lengthMax30"))
-                    .required(t("Contacts.required")),
+                    .min(2, t("Forms.lengthRequired"))
+                    .max(30, t("Forms.lengthMax30"))
+                    .required(t("Forms.required")),
                   email: Yup.string()
-                    .email(t("Contacts.incorrectEmail"))
-                    .required(t("Contacts.required")),
+                    .email(t("Forms.incorrectEmail"))
+                    .required(t("Forms.required")),
                   phone_number: Yup.string()
-                    .phone("ME", t("Contacts.incorrectPhone"))
-                    .required(t("Contacts.required")),
-                  company: Yup.string().max(30, t("Contacts.lengthMax30")),
-                  message: Yup.string().max(100, t("Contacts.lengthMax100")),
+                    .phone("ME", t("Forms.incorrectPhone"))
+                    .required(t("Forms.required")),
+                  company: Yup.string().max(30, t("Forms.lengthMax30")),
+                  message: Yup.string().max(100, t("Forms.lengthMax100")),
                 })}
                 onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}
               >

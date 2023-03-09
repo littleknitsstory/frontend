@@ -1,4 +1,4 @@
-import { Modal, Row, Col } from "react-bootstrap";
+import { Modal, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Formik, Form as FormikForm, FormikState } from "formik";
 import * as Yup from "yup";
@@ -73,12 +73,12 @@ const ModalMain = ({ product, showModal, handleClose, onSubmitOrder }: ModalProp
           initialValues={initialValue}
           validationSchema={Yup.object().shape({
             name: Yup.string()
-              .min(2, t("Contacts.lengthRequired"))
-              .max(30, t("Contacts.lengthMax30"))
-              .required(t("Contacts.required")),
+              .min(2, t("Forms.lengthRequired"))
+              .max(30, t("Forms.lengthMax30"))
+              .required(t("Forms.required")),
             phone_number: Yup.string()
-              .phone("ME", t("Contacts.incorrectPhone"))
-              .required(t("Contacts.required")),
+              .phone("ME", t("Forms.incorrectPhone"))
+              .required(t("Forms.required")),
           })}
           onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}
         >
