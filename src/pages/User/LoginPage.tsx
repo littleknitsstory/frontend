@@ -1,14 +1,10 @@
 import { useState } from "react"
 import Social from "../../components/Social"
+import SignIn from "../../components/user/SignIn"
+import SignUp from "../../components/user/SignUp"
 
 const LoginPage = () => {
   const [selectedForm, setSelectedForm] = useState("signIn")
-
-  const handleSelect = (arg: string): void => {
-    setSelectedForm(arg)
-  }
-  // console.log(selectedForm)
-  console.log(selectedForm === "signIn")
 
   return (
     <div className="login__wrapper">
@@ -25,10 +21,13 @@ const LoginPage = () => {
         >
           Регистрация
         </button>
+      </div>
+      
+      {selectedForm === "signIn" && <SignIn />}
+      {selectedForm === "signUp" && <SignUp />}
 
       {/* Placeholder for Sign-in Sign-up forms */}
 
-      </div>
       <div className="login__footer">
         <p className="login__forgot-password">Забыли пароль?</p>
         <p>Быстрый доступ с</p>

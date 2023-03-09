@@ -1,0 +1,49 @@
+@use "./variables" as *;
+
+.sign {
+  &__form {
+  margin-top: 3.75rem;
+
+    .input-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .input-group:nth-last-child(2) {
+      margin-bottom: 3.75rem;
+    }
+
+    .input-group-text {
+      border-radius: 10px;
+      background-color: transparent;
+      cursor: pointer;
+    }
+    
+    .form-control {
+      padding: 1rem;
+      border-radius: 10px;
+    }
+
+    
+  }
+  &__btn {
+    padding: 1.25rem 3.125rem;
+    justify-content: center;
+    margin: 0 auto;
+    background-color: $vinous-color;
+    color: $text-color-light;
+
+    &:hover {
+      color: $text-color-light;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .btn {
+    padding: 1rem 3.5rem;
+    width: auto;
+    height: auto;
+    font-size: 1.25rem;
+  }
+
+}
