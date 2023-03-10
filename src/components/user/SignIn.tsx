@@ -15,7 +15,7 @@ interface errorType {
 
 const SignIn = () => {
   const navigate = useNavigate()
-  const { i18n } = useTranslation()
+  const { i18n, t } = useTranslation()
   const initialFormDataState = {
     username: "",
     email: "",
@@ -94,7 +94,7 @@ const SignIn = () => {
           className={`form-control ${errorMessage.email.length > 0 ? "is-invalid" : ""}`}
           required
           type="email"
-          placeholder="Email"
+          placeholder={t("Login.LoginForm.email")}
           name="email"
           value={formData.email}
           aria-label="email"
@@ -108,7 +108,7 @@ const SignIn = () => {
           className={`form-control ${errorMessage.password.length > 0 ? "is-invalid" : ""}`}
           name="password"
           type={passwordShown ? "text" : "password"}
-          placeholder="Password" 
+          placeholder={t("Login.LoginForm.password")}
           aria-label="password" 
           onChange={handleFormChange} 
         />
@@ -117,7 +117,7 @@ const SignIn = () => {
 
       {errorMessage?.password.map((item, i) => <p key={i} className="sign__error-message">{item}</p>)}
       <p className="sign__error-message">{errorMessage?.detail}</p>
-      <button type="submit" className="btn sign__btn">Войти</button>
+      <button type="submit" className="btn sign__btn">{t("Login.Login")}</button>
     </Form>
   )
 }

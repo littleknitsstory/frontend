@@ -104,6 +104,20 @@
     "empty": "No saved products",
     "buttonText": "Catalog"
   },
+  "Login": {
+    "singIn": "Sign-in",
+    "singUp": "Sign-up",
+    "Login": "Log in",
+    "createAccount": "Create Account",
+    "LoginForm": {
+      "email": "Your email",
+      "password": "Password",
+      "confirmPassword": "Confirm password"
+    },
+    "createPolicy": "If you create an account, you automatically agree to the Privacy Policy",
+    "forgotPassword": "Forgot password?",
+    "quickAccess": "Quick access with"
+  },
   "lastReviews": "Last Reviews",
   "otherPosts": "Other posts",
   "seeMore": "More",

@@ -1,10 +1,12 @@
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 import Social from "../../components/Social"
 import SignIn from "../../components/user/SignIn"
 import SignUp from "../../components/user/SignUp"
 
 const LoginPage = () => {
   const [selectedForm, setSelectedForm] = useState("signIn")
+  const { t } = useTranslation()
 
   return (
     <div className="login__wrapper">
@@ -13,13 +15,13 @@ const LoginPage = () => {
           className={`btn btn__link login__btn ${selectedForm === "signIn" ? "active" : ""}`}
           onClick={() => setSelectedForm("signIn")}
           >
-          Вход
+          {t("Login.singIn")}
         </button>
         <button 
           className={`btn btn__link login__btn ${selectedForm === "signUp" ? "active" : ""}`}
           onClick={() => setSelectedForm("signUp")}
         >
-          Регистрация
+          {t("Login.singUp")}
         </button>
       </div>
       
@@ -29,8 +31,8 @@ const LoginPage = () => {
       {/* Placeholder for Sign-in Sign-up forms */}
 
       <div className="login__footer">
-        <p className="login__forgot-password">Забыли пароль?</p>
-        <p>Быстрый доступ с</p>
+        <p className="login__forgot-password">{t("Login.forgotPassword")}</p>
+        <p>{t("Login.quickAccess")}</p>
         <Social />
       </div>
     </div>

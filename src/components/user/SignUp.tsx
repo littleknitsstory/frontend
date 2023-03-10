@@ -6,7 +6,7 @@ import { useSignUpMutation } from "../features/api/apiSlice";
 import Spinner from "../utils/Spinner";
 
 const SignUp = () => {
-  const { i18n } = useTranslation()
+  const { i18n, t } = useTranslation()
   const initialFormDataState = {
     email: "",
     password: "",
@@ -113,7 +113,7 @@ const SignUp = () => {
           className={`form-control ${errorMessage.email.length > 0 ? "is-invalid" : ""}`}
           required
           type="email"
-          placeholder="Email"
+          placeholder={t("Login.LoginForm.email")}
           name="email"
           value={formData.email}
           aria-label="email"
@@ -127,7 +127,7 @@ const SignUp = () => {
         <input 
           className={`form-control ${passwordConfirmError || errorMessage?.password.length > 0 ? "is-invalid" : ""}`}
           type={passwordShown ? "text" : "password"}
-          placeholder="Password"
+          placeholder={t("Login.LoginForm.password")}
           name="password"
           value={formData.password} 
           aria-label="password" 
@@ -145,7 +145,7 @@ const SignUp = () => {
         <input 
           className={`form-control ${passwordConfirmError || errorMessage?.password.length > 0 ? "is-invalid" : ""}`}
           type={passwordConfirmShown ? "text" : "password"}
-          placeholder="Повторите пароль" 
+          placeholder={t("Login.LoginForm.confirmPassword")}
           name="passwordConfirm"
           value={passwordConfirmInput} 
           aria-label="password" 
@@ -161,7 +161,9 @@ const SignUp = () => {
       <p className="sign__error-message">{passwordConfirmError}</p>
       {errorMessage?.password.map((item, i) => <p key={item} className="sign__error-message">{item}</p>)}
       
-      <button type="submit" className="btn sign__btn" >Создать учетную запись</button>
+      <button type="submit" className="btn sign__btn" >{t("Login.createAccount")}</button>
+
+      <p className="sign__policy">{t("Login.createPolicy")}</p>
     </Form>
   )
 }
