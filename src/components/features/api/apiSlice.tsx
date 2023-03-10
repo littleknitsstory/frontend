@@ -28,6 +28,8 @@ enum URLS {
   ARTICLES = "/posts/",
   REVIEWS = "/reviews/",
   CATEGORIES = "/categories/",
+  SIGN_UP = "/sign-up/",
+  SIGN_IN = "/sign-in/"
 }
 
 export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";
@@ -100,6 +102,22 @@ export const apiSlice = createApi({
         body: { email: email },
       }),
     }),
+    signUp: builder.mutation({
+      query: ({user, lang}) => ({
+        url: URLS.SIGN_UP,
+        method: "POST",
+        body: user,
+        headers: { "Accept-Language": lang }
+      }),
+    }),
+    signIn: builder.mutation({
+      query: ({user, lang}) => ({
+        url: URLS.SIGN_IN,
+        method: "POST",
+        body: user,
+        headers: { "Accept-Language": lang }
+      }),
+    }),
   }),
 });
 
@@ -112,4 +130,6 @@ export const {
   useGetReviewsQuery,
   useAddContactsMutation,
   useAddSubscriptionMutation,
+  useSignUpMutation,
+  useSignInMutation
 } = apiSlice;
