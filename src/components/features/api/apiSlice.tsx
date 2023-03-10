@@ -10,6 +10,25 @@ import {
   IReviewsResponse,
 } from "../../../app/types";
 
+interface IUserData {
+  username: string;
+  avatar: "";
+  first_name: string;
+  last_name: string;
+  birth_data: string;
+  country: string;
+  city: string;
+  address: string;
+  email: string;
+  is_email_confirmed: boolean;
+  is_profile_full: boolean;
+  phone_number: string;
+  vk_profile: string;
+  fb_profile: string;
+  inst_profile: string;
+  tg_profile: string
+}
+
 // creating "offset / limit" query string
 const getQueryString = (limit?: number, offset?: number): string => {
   let queryString = "";
@@ -29,7 +48,8 @@ enum URLS {
   REVIEWS = "/reviews/",
   CATEGORIES = "/categories/",
   SIGN_UP = "/sign-up/",
-  SIGN_IN = "/sign-in/"
+  SIGN_IN = "/sign-in/",
+  PROFILE = "/profile/"
 }
 
 export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";
@@ -118,6 +138,23 @@ export const apiSlice = createApi({
         headers: { "Accept-Language": lang }
       }),
     }),
+    getProfile: builder.query({
+      query: ({ token }) => ({
+        url: URLS.PROFILE,
+        headers: { "Authorization": "Bearer " + token },
+      }),
+    }),
+    updateProfile: builder.mutation<IUserData[], {user: IUserData; token: string}>({
+      query: ({user, token}) => ({
+        url: URLS.PROFILE + user.username + "/",
+        method: "PUT",
+        body: user,
+        headers: { 
+          "Authorization": "Bearer " + token 
+        }
+        
+      }),
+    }),
   }),
 });
 
@@ -131,5 +168,7 @@ export const {
   useAddContactsMutation,
   useAddSubscriptionMutation,
   useSignUpMutation,
-  useSignInMutation
+  useSignInMutation,
+  useGetProfileQuery,
+  useUpdateProfileMutation
 } = apiSlice;

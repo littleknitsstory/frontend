@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import eye from "../../assets/icons/eye.svg"
 import { useSignInMutation } from "../features/api/apiSlice";
 import Spinner from "../utils/Spinner";
@@ -13,6 +14,7 @@ interface errorType {
 }
 
 const SignIn = () => {
+  const navigate = useNavigate()
   const { i18n } = useTranslation()
   const initialFormDataState = {
     username: "",
@@ -22,9 +24,14 @@ const SignIn = () => {
   
   const [formData, setFormData] = useState(initialFormDataState);
   const [passwordShown, setPasswordShown] = useState<boolean>(false)
-  const [errorMessage, setErrorMessage] = useState<errorType>()
+  const [errorMessage, setErrorMessage] = useState<errorType>(({
+    email: [],
+    password: [],
+    username: [],
+    detail: ""
+  }))
 
-  const [ signIn, { isError, error, isLoading }] = useSignInMutation()
+  const [ signIn, { isError, error, isLoading, isSuccess }] = useSignInMutation()
 
   const togglePasswordShown = (): void => {
     setPasswordShown(prev => !prev)
@@ -32,10 +39,12 @@ const SignIn = () => {
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.currentTarget;
+    const beforeAtSign = /[^@]*/
     setFormData((prevData) => {
       return {
         ...prevData,
         [name]: value,
+        username: formData.email.match(beforeAtSign)![0]
       };
     });
   };
@@ -46,9 +55,9 @@ const SignIn = () => {
         try {
           const data = await signIn({user: formData, lang: i18n.language}).unwrap();
           setFormData(initialFormDataState);
-          sessionStorage.setItem("token", data.refresh)
+          localStorage.setItem("token", data.access)
+          navigate("/profile")
         } catch (error) {
-          console.log(error)          
           
         }
       }
@@ -60,7 +69,7 @@ const SignIn = () => {
         setErrorMessage(prevData => {
           return {
             ...prevData,
-            ...error.data as errorType
+            ...error.data as {[key: string]: string[]}
           }
         })
       }
@@ -79,23 +88,10 @@ const SignIn = () => {
 
   return (
     <Form className="sign__form" onSubmit={handleFormSubmit} noValidate>
-      <div className="input-group">
-        <input
-          className="form-control" 
-          required
-          type="text"
-          placeholder="Username"
-          name="username"
-          value={formData.username}
-          aria-label="username"
-          onChange={handleFormChange} 
-        />
-      </div>
-      {errorMessage?.username.map((item, i) => <p key={i} className="sign__error-message">{item}</p>)}
 
       <div className="input-group">
         <input
-          className="form-control" 
+          className={`form-control ${errorMessage.email.length > 0 ? "is-invalid" : ""}`}
           required
           type="email"
           placeholder="Email"
@@ -106,9 +102,10 @@ const SignIn = () => {
         />
       </div>
       {errorMessage?.email.map((item, i) => <p key={i} className="sign__error-message">{item}</p>)}
+
       <div className="input-group">
         <input 
-          className="form-control" 
+          className={`form-control ${errorMessage.password.length > 0 ? "is-invalid" : ""}`}
           name="password"
           type={passwordShown ? "text" : "password"}
           placeholder="Password" 
@@ -117,10 +114,12 @@ const SignIn = () => {
         />
         <img src={eye} onClick={togglePasswordShown} alt="eye-icon" className="input-group-text" id="button-addon1"></img>
       </div>
+
       {errorMessage?.password.map((item, i) => <p key={i} className="sign__error-message">{item}</p>)}
       <p className="sign__error-message">{errorMessage?.detail}</p>
       <button type="submit" className="btn sign__btn">Войти</button>
     </Form>
   )
 }
+
 export default SignIn
