@@ -121,32 +121,7 @@ const Products = () => {
     <Container>
       <div className="products">
         <Row>
-          <Col
-            xs={{
-              span: 12,
-              offset: 0,
-            }}
-            sm={{
-              span: 8,
-              offset: 3,
-            }}
-            md={{
-              span: 6,
-              offset: 0,
-            }}
-            lg={{
-              span: 4,
-              offset: 0,
-            }}
-            xl={{
-              span: 4,
-              offset: 0,
-            }}
-            xxl={{
-              span: 3,
-              offset: 0,
-            }}
-          >
+          <Col sm={12} md={6} lg={4} xl={4} xxl={3}>
             <Filters
               clearFilters={clearFilters}
               setFilteredCategories={setFilteredCategories}
@@ -163,7 +138,7 @@ const Products = () => {
                     </Col>
                   );
                 })}
-              {!hasOverlap && <div>Не найдено товаров по выбранным фильтрам.</div>}
+              {!hasOverlap && <p className="filters__no-overlap">{t("Filter.noMatch")}</p>}
             </Row>
           </Col>
         </Row>
