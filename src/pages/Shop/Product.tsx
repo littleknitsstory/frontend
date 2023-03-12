@@ -1,6 +1,6 @@
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetProductQuery } from "../../components/features/api/apiSlice";
 // components
 import PageError from "../PageError";
@@ -32,6 +32,15 @@ const Product = () => {
   return (
     <section className="product">
       <Container>
+        <Row>
+          <Col>
+            <div>
+              <Link to="/">Main</Link>
+              <Link to="/shop/"> / Shop</Link>
+              <Link to={`/product/${product?.slug}`}> / {product?.title}</Link>
+            </div>
+          </Col>
+        </Row>
         {product && <SchemaCard product={product} />}
         <PopularProducts />
         <Reviews />
