@@ -8,7 +8,7 @@ import heart from "../../assets/icons/heart.svg";
 import shoppingBag from "../../assets/icons/shopping-bag.svg";
 //? Temporary unused assets
 // import logout from "../icons/logout.svg";
-// import user from "../icons/user.svg";
+import user from "../../assets/icons/user.svg";
 
 const NavBar = () => {
   const { i18n } = useTranslation();
@@ -21,10 +21,10 @@ const NavBar = () => {
 
           <div className="lks-navbar__right">
             <div className="lks-navbar__icons">
-              {/* <a href="#">
+              <Link to="/login">
                 <img src={user} alt="user" />
-              </a>
-              <a href="#">
+              </Link>
+              {/* <a href="#">
                 <img src={logout} alt="logout" />
               </a> */}
               <Link to="/saved">

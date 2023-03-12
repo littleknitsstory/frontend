@@ -10,6 +10,9 @@ import RootLayout from "../pages/RootLayout";
 import Products from "../pages/Shop/Products";
 import Article from "../pages/Blog/Article";
 import Home from "../pages/Home";
+import LoginPage from "../pages/User/LoginPage";
+import Profile from "../components/user/Profile";
+import AuthRequired from "../components/AuthRequired";
 
 const routes: RouteObject = {
   element: <RootLayout />,
@@ -52,7 +55,22 @@ const routes: RouteObject = {
       path: "privacyPolicy",
       element: <PrivacyPolicy />,
     },
+    {
+      path: "login",
+      element: <LoginPage />,
+    },
+    {
+      element: <AuthRequired />,
+      children: [
+        {
+          path: "profile",
+          element: <Profile />
+        },
+      ]
+    }
   ],
 };
+
+
 
 export default routes;
