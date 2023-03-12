@@ -119,7 +119,7 @@ export const apiSlice = createApi({
       query: (email) => ({
         url: URLS.SUBSCRIBE,
         method: "POST",
-        body: { email: email },
+        body: email,
       }),
     }),
     signUp: builder.mutation({

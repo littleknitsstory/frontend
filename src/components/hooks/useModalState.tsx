@@ -17,8 +17,8 @@ const useModalState = () => {
     setShowModalThanks(false);
   };
 
-  const onSubmitOrder = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
+  const onSubmitOrder = (): void => {
+    //e.preventDefault();
     setShowModal(false);
     setShowModalThanks(true);
   };

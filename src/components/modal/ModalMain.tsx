@@ -1,16 +1,32 @@
-import { Modal, Form } from "react-bootstrap";
+import { Modal, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { IProduct } from "../../app/types";
+import { Formik, Form as FormikForm, FormikState } from "formik";
+import * as Yup from "yup";
+import { FormsInput } from "../../components/utils/Forms";
+import { IProduct, FormValues } from "../../app/types";
 import { PICTURE_BASE_URL } from "../features/api/apiSlice";
 interface ModalProps {
   product: IProduct;
   showModal: boolean;
   handleClose: () => void;
-  onSubmitOrder: (e: React.FormEvent<HTMLFormElement>) => void;
+  onSubmitOrder: () => void;
 }
 
 const ModalMain = ({ product, showModal, handleClose, onSubmitOrder }: ModalProps) => {
   const { t } = useTranslation();
+
+  const initialValue: FormValues = {
+    name: "",
+    phone_number: "",
+  };
+
+  const handleFormSubmit = (
+    values: FormValues,
+    resetForm: (nextState?: Partial<FormikState<FormValues>> | undefined) => void,
+  ): void => {
+    onSubmitOrder();
+    resetForm();
+  };
 
   return (
     <Modal show={showModal} onHide={handleClose} centered>
@@ -53,7 +69,46 @@ const ModalMain = ({ product, showModal, handleClose, onSubmitOrder }: ModalProp
           </div>
         </div>
 
-        <Form onSubmit={onSubmitOrder}>
+        <Formik
+          initialValues={initialValue}
+          validationSchema={Yup.object().shape({
+            name: Yup.string()
+              .min(2, t("Forms.lengthRequired"))
+              .max(30, t("Forms.lengthMax30"))
+              .required(t("Forms.required")),
+            phone_number: Yup.string()
+              .phone("ME", t("Forms.incorrectPhone"))
+              .required(t("Forms.required")),
+          })}
+          onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}
+        >
+          <FormikForm>
+            <Row>
+              <FormsInput
+                className="mb-3"
+                controlId={"formGroupModalName"}
+                type="text"
+                placeholder={t("CardProduct.fullName")}
+                name="name"
+              />
+            </Row>
+            <Row>
+              <FormsInput
+                className="mb-3"
+                controlId={"formGroupModalPhone"}
+                type="tel"
+                placeholder={t("Contacts.phone")}
+                name="phone_number"
+              />
+            </Row>
+
+            <button type="submit" className="btn btn_vinous btn_center">
+              <div className="btn__text btn__text_center">{t("CardProduct.buttonSendText")}</div>
+            </button>
+          </FormikForm>
+        </Formik>
+
+        {/* <Form onSubmit={onSubmitOrder}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Control required type="text" placeholder={t("CardProduct.fullName")} autoFocus />
           </Form.Group>
@@ -64,7 +119,7 @@ const ModalMain = ({ product, showModal, handleClose, onSubmitOrder }: ModalProp
           <button type="submit" className="btn btn_vinous btn_center">
             <div className="btn__text btn__text_center">{t("CardProduct.buttonSendText")}</div>
           </button>
-        </Form>
+        </Form> */}
         <div className="product-card__modal-quick-purchase-policy">
           {t("CardProduct.purchasePolice")}
         </div>

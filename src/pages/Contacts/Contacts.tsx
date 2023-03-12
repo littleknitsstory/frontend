@@ -1,48 +1,38 @@
-import React, { useState } from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { Formik, Form as FormikForm, FormikState } from "formik";
+import * as Yup from "yup";
+import "yup-phone-lite";
 import { useAddContactsMutation } from "../../components/features/api/apiSlice";
 import useModalState from "../../components/hooks/useModalState";
 import ModalThanks from "../../components/modal/ModalThanks";
+import { FormsInput } from "../../components/utils/Forms";
+import { FormValues } from "../../app/types";
 // assets
 import envelope from "../../assets/icons/envelope.svg";
 import map from "../../assets/icons/map-point.svg";
 import phone from "../../assets/icons/phone.svg";
-// import PageError from "./PageError";
 
 const Contacts = () => {
   const { t } = useTranslation();
-  const [addContacts, { isLoading, isError, error }] = useAddContactsMutation();
+  const [addContacts] = useAddContactsMutation();
+  const { showModalThanks, handleShowThanks, handleClose } = useModalState();
 
-  const initialFormDataState = {
+  const initialFormDataState: FormValues = {
     name: "",
     message: "",
     email: "",
     company: "",
     phone_number: "",
   };
-  const [formData, setFormData] = useState(initialFormDataState);
-  const { showModalThanks, handleShowThanks, handleClose } = useModalState();
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = e.currentTarget;
-    setFormData((prevData) => {
-      return {
-        ...prevData,
-        [name]: value,
-      };
-    });
-  };
-
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
-    if (!isLoading) {
-      try {
-        await addContacts(formData).unwrap();
-        setFormData(initialFormDataState);
-        handleShowThanks();
-      } catch (error) {}
-    }
+  const handleFormSubmit = (
+    values: FormValues,
+    resetForm: (nextState?: Partial<FormikState<FormValues>> | undefined) => void,
+  ): void => {
+    addContacts(values);
+    handleShowThanks();
+    resetForm();
   };
 
   return (
@@ -58,67 +48,73 @@ const Contacts = () => {
           >
             <div className="coffee-card">
               <div className="coffee-card__title">{t("Contacts.title")}</div>
-              <Form className="contacts__form" onSubmit={handleFormSubmit}>
-                <Row>
-                  <Form.Group as={Col} md="6" controlId="name">
-                    <Form.Control
-                      required
+              <Formik
+                initialValues={initialFormDataState}
+                validationSchema={Yup.object().shape({
+                  name: Yup.string()
+                    .min(2, t("Forms.lengthRequired"))
+                    .max(30, t("Forms.lengthMax30"))
+                    .required(t("Forms.required")),
+                  email: Yup.string()
+                    .email(t("Forms.incorrectEmail"))
+                    .required(t("Forms.required")),
+                  phone_number: Yup.string()
+                    .phone("ME", t("Forms.incorrectPhone"))
+                    .required(t("Forms.required")),
+                  company: Yup.string().max(30, t("Forms.lengthMax30")),
+                  message: Yup.string().max(100, t("Forms.lengthMax100")),
+                })}
+                onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}
+              >
+                <FormikForm className="contacts__form">
+                  <Row>
+                    <FormsInput
+                      col={6}
+                      controlId={"name"}
                       type="text"
                       placeholder={t("Contacts.name")}
                       name="name"
-                      value={formData.name}
-                      onChange={handleFormChange}
                     />
-                  </Form.Group>
-                  <Form.Group as={Col} md="6" controlId="theme">
-                    <Form.Control
+                    <FormsInput
+                      col={6}
+                      controlId={"theme"}
                       type="text"
                       placeholder={t("Contacts.subject")}
                       name="company"
-                      value={formData.company}
-                      onChange={handleFormChange}
                     />
-                  </Form.Group>
-                </Row>
+                  </Row>
 
-                <Row>
-                  <Form.Group as={Col} md="12" controlId="phone">
-                    <Form.Control
-                      required
+                  <Row>
+                    <FormsInput
+                      col={12}
+                      controlId={"phone"}
                       type="tel"
                       placeholder={t("Contacts.phone")}
                       name="phone_number"
-                      value={formData.phone_number}
-                      onChange={handleFormChange}
                     />
-                  </Form.Group>
-                  <Form.Group as={Col} md="12" controlId="email">
-                    <Form.Control
-                      required
-                      type="email"
+
+                    <FormsInput
+                      col={12}
+                      controlId={"email"}
+                      type="text"
                       placeholder="Е-mail"
                       name="email"
-                      value={formData.email}
-                      onChange={handleFormChange}
                     />
-                  </Form.Group>
-                </Row>
-                <Row>
-                  <Form.Group as={Col} md="12" controlId="message">
-                    <Form.Control
-                      required
+                  </Row>
+                  <Row>
+                    <FormsInput
                       as="textarea"
+                      col={12}
+                      controlId={"message"}
                       placeholder={t("Contacts.message")}
                       name="message"
-                      value={formData.message}
-                      onChange={handleFormChange}
                     />
-                  </Form.Group>
-                </Row>
-                <button className="btn btn_white btn_center contacts__btn" type="submit">
-                  <div className="btn__text btn__text_center">{t("Contacts.send")}</div>
-                </button>
-              </Form>
+                  </Row>
+                  <button className="btn btn_white btn_center contacts__btn" type="submit">
+                    <div className="btn__text btn__text_center">{t("Contacts.send")}</div>
+                  </button>
+                </FormikForm>
+              </Formik>
 
               <div className="contacts__policy">{t("Contacts.policy")}</div>
             </div>

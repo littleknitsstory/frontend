@@ -10,6 +10,7 @@ import PageError from "../PageError";
 // assets
 import arrowRight from "../../assets/icons/arrow-right.svg";
 import { IProduct } from "../../app/types";
+import { Link } from "react-router-dom";
 
 const Products = () => {
   const { t, i18n } = useTranslation();

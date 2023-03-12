@@ -76,6 +76,7 @@
     "send": "Send",
     "policy": "By submitting your personal data, you agree to its processing.",
     "contactInfo": "Contacts"
+   
   },
   "Modal": {
     "title": "Quick Order",
@@ -105,6 +106,24 @@
     "empty": "No saved products",
     "buttonText": "Catalog"
   },
+  "Forms": {
+    "required": "Required field!",
+    "lengthRequired": "Minimum of 2 characters",
+    "incorrectEmail": "Please enter a valid email address",
+    "lengthMax10" : "Maximum of 10 characters",
+    "lengthMax30" : "Maximum of 30 characters",
+    "lengthMax100" : "Maximum of 100 characters",
+    "incorrectPhone": "Please enter a valid Montenegro phone number"
+  },
+  "Notification": {
+    "isSaved": "The product is saved",
+    "alreadySaved": "The product has already been saved",
+    "isAdded": "The product is added to the cart",
+    "alreadyAdded" : "The product has already been added",
+    "somethingWrong" : "Something went wrong",
+    "subscribed" : "Successfully subscribed",
+    "alreadySubscribed": "Already subscribed"
+  },
   "Login": {
     "singIn": "Sign-in",
     "singUp": "Sign-up",
@@ -130,3 +149,4 @@
   "price": "Price",
   "color": "Color"
 }
+
