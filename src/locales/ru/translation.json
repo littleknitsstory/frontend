@@ -43,7 +43,8 @@
     "selectCategory": "Все категории",
     "categories": "Категории",
     "colors": "Цвета",
-    "clear": "Очистить"
+    "clear": "Очистить",
+    "noMatch": "Не найдено товаров по выбранным фильтрам. Очистите или измените фильтры"
   },
   "CardProduct": {
     "material": "Материал",
@@ -120,6 +121,20 @@
     "somethingWrong" : "Что-то пошло не так",
     "subscribed" : "Вы успешно подписаны",
     "alreadySubscribed": "Вы уже подписаны"
+  },
+  "Login": {
+    "singIn": "Вход",
+    "singUp": "Регистрация",
+    "Login": "Войти",
+    "createAccount": "Создать учетную запись",
+    "LoginForm": {
+      "email": "Ваш email",
+      "password": "Пароль",
+      "confirmPassword": "Подтвердите пароль"
+    },
+    "createPolicy": "Если вы создаёте учётную запись, вы автоматически соглашаетесь с Политикой конфиденциальности",
+    "forgotPassword": "Забыли пароль",
+    "quickAccess": "Быстрый доступ с"
   },
   "lastReviews": "Последние отзывы",
   "otherPosts": "Другие блоги",
