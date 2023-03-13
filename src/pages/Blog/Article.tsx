@@ -6,8 +6,10 @@ import { useGetArticleQuery } from "../../components/features/api/apiSlice";
 import Articles from "./Articles";
 import PageError from "../PageError";
 import Spinner from "../../components/utils/Spinner";
+import { useGetFeaturesQuery } from "../../components/features/api/featuresSlice";
 
 const Article = () => {
+  const { data } = useGetFeaturesQuery();
   const { slug } = useParams<string>();
   const { t, i18n } = useTranslation();
   const {
@@ -29,23 +31,21 @@ const Article = () => {
 
   return (
     <section className="article">
-      <Container>
-        {article && (
-          <div>
-            <h3 className="title">{article.title}</h3>
-            <div className="article__wrapper-article">
-              <div
-                className="article__text"
-                dangerouslySetInnerHTML={{
-                  __html: article.content,
-                }}
-              ></div>
-            </div>
+      {data?.blog && article && (
+        <Container>
+          <h3 className="title">{article.title}</h3>
+          <div className="article__wrapper-article">
+            <div
+              className="article__text"
+              dangerouslySetInnerHTML={{
+                __html: article.content,
+              }}
+            ></div>
           </div>
-        )}
-        <h3 className="title">{t("otherPosts")}</h3>
-        <Articles />
-      </Container>
+          <h3 className="title">{t("otherPosts")}</h3>
+          <Articles />
+        </Container>
+      )}
     </section>
   );
 };

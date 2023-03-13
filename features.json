@@ -1,0 +1,13 @@
+{
+  "features": {
+    "account": true,
+    "blog": true,
+    "comments": false,
+    "contacts": true,
+    "course": false,
+    "feed": false,
+    "menu": true,
+    "reviews": true,
+    "slider": true
+  } 
+}

@@ -13,6 +13,7 @@
     "@types/react-dom": "^18.0.10",
     "@types/react-notifications-component": "^3.1.1",
     "animate.css": "^4.1.1",
+    "concurrently": "^7.6.0",
     "formik": "^2.2.9",
     "i18next": "^22.4.9",
     "i18next-browser-languagedetector": "^7.0.1",
@@ -32,7 +33,7 @@
     "yup-phone-lite": "^2.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"react-scripts start\" \"npx json-server features.json --port 3003\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

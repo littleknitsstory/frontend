@@ -32,9 +32,13 @@
 @use "./_privacy-policy";
 @use "./_cart";
 @use "./_primary-nav";
+@use "./_forms";
+@use "./_notification";
 @use "./login-page";
 @use "./sign-in";
 @use "./profile";
+
+@import "animate.css";
 
 * {
   font-family: "AlethiaNext";

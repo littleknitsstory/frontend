@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const PageError = ({ errorStatus }: { errorStatus: number }) => {
+const PageError = ({ errorStatus }: { errorStatus: number | string }) => {
   return (
     <section className="page-error">
       <Container>

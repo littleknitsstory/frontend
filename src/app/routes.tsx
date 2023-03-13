@@ -64,13 +64,11 @@ const routes: RouteObject = {
       children: [
         {
           path: "profile",
-          element: <Profile />
+          element: <Profile />,
         },
-      ]
-    }
+      ],
+    },
   ],
 };
-
-
 
 export default routes;

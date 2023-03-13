@@ -13,8 +13,10 @@ import PrimaryNav from "../../components/primary-nav/PrimaryNav";
 import useModalState from "../../components/hooks/useModalState";
 import ModalThanks from "../../components/modal/ModalThanks";
 import { FormsInput } from "../../components/utils/Forms";
+import { useGetFeaturesQuery } from "../../components/features/api/featuresSlice";
 
 const Footer = () => {
+  const { data } = useGetFeaturesQuery();
   const { t } = useTranslation();
   const [addSubscribe] = useAddSubscriptionMutation();
 
@@ -70,30 +72,33 @@ const Footer = () => {
                 <div className="footer__title">Little Knits Story</div>
               </Link>
               <Row>
-                <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
-                  <div className="footer__navbar">
-                    <PrimaryNav type={"footer"} />
-                  </div>
-                </Col>
-                {/* Temporary comment out */}
-                {/* <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
-                  <div className="footer__links-account">
-                    <div className="footer__links-account footer__links-account-title">
-                      личный кабинет
+                {data?.menu ? (
+                  <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
+                    <div className="footer__navbar">
+                      <PrimaryNav type={"footer"} />
                     </div>
-                    <ul>
-                      <li>
-                        <a href="#">Войти</a>
-                      </li>
-                      <li>
-                        <a href="#">Корзина</a>
-                      </li>
-                      <li>
-                        <a href="#">Сохраненные товары</a>
-                      </li>
-                    </ul>
-                  </div>
-                </Col> */}
+                  </Col>
+                ) : null}
+                {data?.account ? (
+                  <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
+                    <div className="footer__links-account">
+                      <div className="footer__links-account footer__links-account-title">
+                        личный кабинет
+                      </div>
+                      <ul>
+                        <li>
+                          <Link to="/login">Войти</Link>
+                        </li>
+                        <li>
+                          <Link to="/cart">Корзина</Link>
+                        </li>
+                        <li>
+                          <Link to="/saved">Сохраненные товары</Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </Col>
+                ) : null}
               </Row>
             </Col>
             <Col xs={12} md={12} lg={6} xl={6} xxl={6}>

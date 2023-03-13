@@ -8,8 +8,10 @@ import PopularProducts from "../../components/products/PopularProducts";
 import Reviews from "../../components/reviews/Reviews";
 import SchemaCard from "../../components/product/SchemaCard";
 import Spinner from "../../components/utils/Spinner";
+import { useGetFeaturesQuery } from "../../components/features/api/featuresSlice";
 
 const Product = () => {
+  const { data } = useGetFeaturesQuery();
   const { slug } = useParams<string>();
   const { i18n } = useTranslation();
   const {
@@ -24,26 +26,17 @@ const Product = () => {
   }
 
   if (isError) {
-    if ("originalStatus" in error) {
-      return <PageError errorStatus={error.originalStatus} />;
+    if ("status" in error) {
+      return <PageError errorStatus={error.status} />;
     }
   }
 
   return (
     <section className="product">
       <Container>
-        <Row>
-          <Col>
-            <div>
-              <Link to="/">Main</Link>
-              <Link to="/shop/"> / Shop</Link>
-              <Link to={`/product/${product?.slug}`}> / {product?.title}</Link>
-            </div>
-          </Col>
-        </Row>
         {product && <SchemaCard product={product} />}
         <PopularProducts />
-        <Reviews />
+        {data?.reviews ? <Reviews /> : null}
       </Container>
     </section>
   );
