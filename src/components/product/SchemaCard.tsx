@@ -7,7 +7,8 @@ import { Store } from "react-notifications-component";
 import { IProductDetails } from "../../app/types";
 import { PICTURE_BASE_URL } from "../features/api/apiSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { addFavorite, addToCart } from "../features/products/productsSlice";
+import { addFavorite } from "../features/products/productsSlice";
+import { addToCart, ICartProduct } from "../features/products/cartSlice";
 import useModalState from "../hooks/useModalState";
 import { notificationSuccess, notificationError } from "../modal/Notification";
 // components
@@ -26,7 +27,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
   const { showModal, showModalThanks, handleShow, handleClose, onSubmitOrder } = useModalState();
   const [countProduct, setCountProduct] = useState<number>(1);
   const favoriteProducts = useAppSelector((state) => state.products.favorite);
-  const cartProducts = useAppSelector((state) => state.products.cart);
+  const cartProducts = useAppSelector((state) => state.cart.cart);
 
   const increaseCountProduct = (): void => {
     setCountProduct((countProduct) => countProduct + 1);
@@ -54,7 +55,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
     }
   };
 
-  const addProductInCart = (product: IProductDetails): void => {
+  const addProductInCart = (product: ICartProduct): void => {
     dispatch(addToCart(product));
     if (!cartProducts.includes(product)) {
       Store.addNotification({
@@ -173,7 +174,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
             </div>
             <div className="schema-card__product-btn">
               <Col>
-                <button className="btn btn_border" onClick={() => addProductInCart(product)}>
+                <button className="btn btn_border" onClick={() => addProductInCart({id: product.id, slug: product.slug, amount: 1, code: product.code, price: product.price})}>
                   <div className="btn__text_center">{t("SchemaCard.buttonAddCart")}</div>
                 </button>
               </Col>

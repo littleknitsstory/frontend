@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../app/hooks";
 import CardProductCart from "../components/cart/CardProductCart";
+import { formatPrice } from "../utils/convertPrice";
 
 const Cart = () => {
-  const { t } = useTranslation();
-  const cartProducts = useAppSelector((state) => state.products.cart);
+  const { t, i18n } = useTranslation();
+  const { cart, totalPrice } = useAppSelector((state) => state.cart);
 
-  if (cartProducts.length === 0) {
+  if (cart.length === 0) {
     return (
       <Container>
         <div className="empty-cart"> {t("Cart.empty")} </div>
@@ -22,7 +23,7 @@ const Cart = () => {
     <section className="saved-products">
       <Container>
         <Row xs={1} md={2} lg={1} xl={1} xxl={1}>
-          {cartProducts.map((item) => {
+          {cart.map((item) => {
             return (
               <Col key={item.id}>
                 <CardProductCart productSlug={item.slug} />
@@ -30,6 +31,7 @@ const Cart = () => {
             );
           })}
         </Row>
+        <h2>Total price: {formatPrice(totalPrice, i18n.language)  }</h2>
       </Container>
     </section>
   );
