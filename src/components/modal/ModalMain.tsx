@@ -44,7 +44,7 @@ const ModalMain = ({ product, showModal, handleClose, onSubmitOrder }: ModalProp
             <div className="product-card__modal-quick-purchase-title">{product.title}</div>
 
             <div className="product-card__modal-quick-purchase-part-number">
-              {t("CardProduct.partNumber")}:
+              {t("CardProduct.partNumber")}: {product.code}
             </div>
             <div className="product-card__modal-quick-purchase-color">
               {t("CardProduct.color")}:

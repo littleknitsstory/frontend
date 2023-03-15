@@ -1,0 +1,14 @@
+@use "./variables" as *;
+
+.ordering-container {
+  margin-top: 11rem ;
+  gap: 1rem;
+
+  img {
+    margin: 1rem;
+  }
+
+  .cart__total-price {
+    margin-top: 3.75rem;
+  }
+}
