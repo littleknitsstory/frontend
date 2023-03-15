@@ -1,4 +1,4 @@
-export const convertNumber = (num: string, locale: string): number => {
+export const convertToNumber = (num: string, locale: string): number => {
   const { format } = new Intl.NumberFormat(locale);
   const decimalSign = ( /^0(.)1$/.exec(format(0.1))![1])
   
@@ -7,7 +7,7 @@ export const convertNumber = (num: string, locale: string): number => {
   .replace(decimalSign, '.');
 };
 
-export const formatPrice = (price: number, lang: string): string => {
+export const convertToCurrency = (price: number, lang: string): string => {
   if (lang === "en") {
     return price.toLocaleString('en-EU', { style: 'currency', currency: "EUR" })
   } else if (lang === "ru") {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -8,7 +8,7 @@ import { IProductDetails } from "../../app/types";
 import { PICTURE_BASE_URL } from "../features/api/apiSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { addFavorite } from "../features/products/productsSlice";
-import { addToCart, ICartProduct } from "../features/products/cartSlice";
+import { addToCart, increaseProductAmount, decreaseProductAmount } from "../features/products/cartSlice";
 import useModalState from "../hooks/useModalState";
 import { notificationSuccess, notificationError } from "../modal/Notification";
 // components
@@ -27,22 +27,30 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
   const { showModal, showModalThanks, handleShow, handleClose, onSubmitOrder } = useModalState();
   const [countProduct, setCountProduct] = useState<number>(1);
   const favoriteProducts = useAppSelector((state) => state.products.favorite);
-  const cartProducts = useAppSelector((state) => state.cart.cart);
+  const cartProducts = useAppSelector((state) => state.cart.products);
+  const cartProduct = cartProducts.find(item => item.slug === product.slug)
 
   const increaseCountProduct = (): void => {
-    setCountProduct((countProduct) => countProduct + 1);
+    if (cartProduct) {
+      dispatch(increaseProductAmount(product))
+    } else {
+      setCountProduct(prevCount => prevCount + 1)
+    }
   };
 
   const decreaseCountProduct = (): void => {
-    if (countProduct === 1) {
-      return;
+    if (cartProduct) {
+      dispatch(decreaseProductAmount(product))
+    } else {
+      if (countProduct > 1) {
+        setCountProduct(prevCount => prevCount - 1)
+      }
     }
-    setCountProduct((countProduct) => countProduct - 1);
   };
 
   const addFavoriteProduct = (product: IProductDetails): void => {
     dispatch(addFavorite(product));
-    if (!favoriteProducts.includes(product)) {
+    if (!favoriteProducts.some(item => item.id === product.id)) {
       Store.addNotification({
         ...notificationSuccess,
         title: t("Notification.isSaved"),
@@ -55,9 +63,9 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
     }
   };
 
-  const addProductInCart = (product: ICartProduct): void => {
-    dispatch(addToCart(product));
-    if (!cartProducts.includes(product)) {
+  const addProductInCart = (product: IProductDetails): void => {
+    dispatch(addToCart({...product, amount: countProduct}));
+    if (!cartProducts.some(item => item.id === product.id)) {
       Store.addNotification({
         ...notificationSuccess,
         title: t("Notification.isAdded"),
@@ -69,6 +77,13 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
       });
     }
   };
+
+  useEffect(() => {
+    const cartProduct = cartProducts.find(item => item.slug === product.slug)
+    if (cartProduct) {
+      setCountProduct(cartProduct.amount)
+    } 
+  }, [cartProducts, product.slug])
 
   return (
     <div className="schema-card">
@@ -91,7 +106,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
             <button className="schema-card__counter-control-btn" onClick={decreaseCountProduct}>
               -
             </button>
-            {countProduct}
+            {countProduct || 1}
             <button className="schema-card__counter-control-btn" onClick={increaseCountProduct}>
               +
             </button>
@@ -174,7 +189,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
             </div>
             <div className="schema-card__product-btn">
               <Col>
-                <button className="btn btn_border" onClick={() => addProductInCart({id: product.id, slug: product.slug, amount: 1, code: product.code, price: product.price})}>
+                <button className="btn btn_border" onClick={() => addProductInCart(product)}>
                   <div className="btn__text_center">{t("SchemaCard.buttonAddCart")}</div>
                 </button>
               </Col>

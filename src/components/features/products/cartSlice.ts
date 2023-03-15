@@ -1,84 +1,85 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { convertNumber } from "../../../utils/convertPrice";
+import { convertToNumber } from "../../../utils/convertPrice";
+import { IProductDetails } from "../../../app/types";
 import i18n from "../../../i18n"
 
-export interface ICartProduct {
-  id: number,
-  slug: string,
+export interface ICartProduct extends IProductDetails {
   amount: number,
-  code: number;
-  price: string;
 }
 
-interface Cart {
-  cart: ICartProduct[],
+interface ICart {
+  products: ICartProduct[],
   totalPrice: number;
 }
 
-const initialState: Cart = 
+const initialState: ICart = 
   localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart") || "")
-    : {cart: [], totalPrice: 0}
+    : {products: [], totalPrice: 0}
 ;
+
+const updateTotalPrice = (cartItem: ICartProduct[]) => {
+  return cartItem.reduce((acc, current) => 
+  acc + (current.amount * convertToNumber(current.price, i18n.language)), 0)
+}
 
 const productsSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
     addToCart(state, action: PayloadAction<ICartProduct>) {
-      if (state.cart.length === 0) {
-        state.cart.push(action.payload);
+      const isCartEmpty = state.products.length === 0
+      const isProductInCart = state.products.some((product) => product.id === action.payload.id)
+
+      if (isCartEmpty || !isProductInCart) {
+        state.products.push(action.payload);
       }
-      if (state.cart.every((product) => product.id !== action.payload.id)) {
-        state.cart.push(action.payload);
-      }
-      
-      state.totalPrice = state.cart.reduce((acc, current) => 
-        acc + (current.amount * convertNumber(current.price, i18n.language)), 0)
+      state.totalPrice = updateTotalPrice(state.products)
       localStorage.setItem("cart", JSON.stringify(state));
     },
-    removeFromCart(state, action: PayloadAction<ICartProduct>) {
-      state.cart = [...state.cart.filter((product) => product.id !== action.payload.id)]
-      state.totalPrice = state.cart.reduce((acc, current) => 
-        acc + (current.amount * convertNumber(current.price, i18n.language)), 0)
+    removeFromCart(state, action: PayloadAction<IProductDetails>) {
+      state.products = [...state.products.filter((product) => product.id !== action.payload.id)]
+      state.totalPrice = updateTotalPrice(state.products)
       localStorage.setItem("cart", JSON.stringify(state));
     },
-    increaseProductAmount(state, action: PayloadAction<ICartProduct>) {
-      state.cart = state.cart.map(product => 
+    increaseProductAmount(state, action: PayloadAction<IProductDetails>) {
+      state.products = state.products.map(product => 
         product.id === action.payload.id ? 
         {...product, amount: product.amount + 1} : 
         product
         )
-      state.totalPrice = state.cart.reduce((acc, current) => 
-        acc + (current.amount * convertNumber(current.price, i18n.language)), 0)
+        state.totalPrice = updateTotalPrice(state.products)
       localStorage.setItem("cart", JSON.stringify(state));
     },
-    decreaseProductAmount(state, action: PayloadAction<ICartProduct>) {
-      if (state.cart.find(product => product.id === action.payload.id)?.amount === 1) {
-        
-      } else {
-        state.cart = state.cart.map(product => 
+    decreaseProductAmount(state, action: PayloadAction<IProductDetails>) {
+      const currentProduct = state.products.find(product => product.id === action.payload.id)
+      if (currentProduct && currentProduct.amount > 1) {
+        state.products = state.products.map(product => 
           product.id === action.payload.id ? 
           {...product, amount: product.amount - 1} : 
           product
           )
-        state.totalPrice = state.cart.reduce((acc, current) =>
-          acc + (current.amount * convertNumber(current.price, i18n.language)), 0)
+          state.totalPrice = updateTotalPrice(state.products)
         localStorage.setItem("cart", JSON.stringify(state));
-      }
+      } 
     },
-    updatePrice(state, action: PayloadAction<ICartProduct>) {
-      state.cart = state.cart.map(product => 
+    updateProductPrice(state, action: PayloadAction<IProductDetails>) {
+      state.products = state.products.map(product => 
         product.id === action.payload.id ? 
         {...product, price: action.payload.price} : 
         product
         )
-      state.totalPrice = state.cart.reduce((acc, current) => 
-        acc + (current.amount * convertNumber(current.price, i18n.language)), 0)
+        state.totalPrice = updateTotalPrice(state.products)
       localStorage.setItem("cart", JSON.stringify(state));
     },
   },
 });
 
-export const { addToCart, removeFromCart, increaseProductAmount, decreaseProductAmount, updatePrice } = productsSlice.actions;
+export const { 
+  addToCart, 
+  removeFromCart, 
+  increaseProductAmount, 
+  decreaseProductAmount, 
+  updateProductPrice 
+} = productsSlice.actions;
 export default productsSlice.reducer;

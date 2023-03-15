@@ -13,7 +13,6 @@ import ModalThanks from "../modal/ModalThanks";
 import { PICTURE_BASE_URL, useGetProductQuery } from "../features/api/apiSlice";
 import PageError from "../../pages/PageError";
 import { IProductDetails } from "../../app/types";
-import { ICartProduct } from "../features/products/cartSlice";
 import { notificationSuccess, notificationError } from "../modal/Notification";
 
 const CardProduct = ({ productSlug }: { productSlug: string }) => {
@@ -29,7 +28,7 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
   } = useGetProductQuery({ lang: i18n.language, slug: productSlug });
 
   const favoriteProducts = useAppSelector((state) => state.products.favorite);
-  const cartProducts = useAppSelector((state) => state.cart.cart);
+  const cartProducts = useAppSelector((state) => state.cart.products);
 
   if (isError) {
     if ("originalStatus" in error) {
@@ -39,7 +38,7 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
 
   const addFavoriteProduct = (product: IProductDetails): void => {
     dispatch(addFavorite(product));
-    if (!favoriteProducts.includes(product)) {
+    if (!favoriteProducts.some(item => item.id === product.id)) {
       Store.addNotification({
         ...notificationSuccess,
         title: t("Notification.isSaved"),
@@ -52,9 +51,9 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
     }
   };
 
-  const addProductInCart = (product: ICartProduct ): void => {
-    dispatch(addToCart({id: product.id, slug: product.slug, amount: 1, code: product.code, price: product.price}));
-    if (!cartProducts.includes(product)) {
+  const addProductInCart = (product: IProductDetails ): void => {
+    dispatch(addToCart({...product, amount: 1}));
+    if (!cartProducts.some(item => item.id === product.id)) {
       Store.addNotification({
         ...notificationSuccess,
         title: t("Notification.isAdded"),
@@ -110,7 +109,7 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 className="card-lks__svg-bag"
-                onClick={() => addProductInCart({id: product.id, slug: product.slug, amount: 1, code: product.code, price: product.price})}
+                onClick={() => addProductInCart(product)}
               >
                 <g clipPath="url(#clip0_605_6172)">
                   <path

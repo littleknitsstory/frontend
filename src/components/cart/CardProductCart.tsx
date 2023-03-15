@@ -2,14 +2,14 @@ import { useState, useCallback, useEffect } from "react";
 import { Card, Form } from "react-bootstrap";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { increaseProductAmount, decreaseProductAmount, removeFromCart, updatePrice } from "../features/products/cartSlice";
+import { increaseProductAmount, decreaseProductAmount, removeFromCart, updateProductPrice } from "../features/products/cartSlice";
 
 import { PICTURE_BASE_URL, useGetProductQuery } from "../features/api/apiSlice";
 import { useTranslation } from "react-i18next";
 import Spinner from "../utils/Spinner";
 import PageError from "../../pages/PageError";
 
-import { convertNumber, formatPrice } from "../../utils/convertPrice";
+import { convertToNumber, convertToCurrency } from "../../utils/convertPrice";
 
 const CardProductCart = ({ productSlug }: { productSlug: string }) => {
   const { t, i18n } = useTranslation();
@@ -29,20 +29,17 @@ const CardProductCart = ({ productSlug }: { productSlug: string }) => {
     error,
   } = useGetProductQuery({ slug: productSlug, lang: i18n.language });
 
-  
-  const cartProductAmount = useAppSelector((state) => state.cart.cart.find(product => product.slug === productSlug)!.amount)
-  
-
+  const cartProduct = useAppSelector((state) => state.cart.products.find(product => product.slug === productSlug))!
 
   const decreaseCountProduct = (): void => {
     if (product) {
-      dispatch(decreaseProductAmount({id: product.id, slug: product.slug, amount: cartProductAmount, code: product.code, price: product.price}))
+      dispatch(decreaseProductAmount(product))
     };
   }
   
   const increaseCountProduct = (): void => {
     if (product) {
-      dispatch(increaseProductAmount({id: product.id, slug: product.slug, amount: cartProductAmount, code: product.code, price: product.price}))
+      dispatch(increaseProductAmount(product))
     }
   };
 
@@ -52,20 +49,20 @@ const CardProductCart = ({ productSlug }: { productSlug: string }) => {
     </div>
   )
 
-  // Convert, calculate and format back prices
+  // Convert, calculate and format prices 
   useEffect(() => {
-    if (product) {
-      const convertedPrice: number = convertNumber(product?.price, i18n.language)
-      const totalProductPrice = convertedPrice * cartProductAmount
-      const formattedPrice = formatPrice(totalProductPrice, i18n.language)
+    if (product && cartProduct) {
+      const convertedPrice: number = convertToNumber(product?.price, i18n.language)
+      const totalProductPrice = convertedPrice * cartProduct.amount
+      const formattedPrice = convertToCurrency(totalProductPrice, i18n.language)
       
       setFormattedPrice(formattedPrice)
     } 
-  }, [product, cartProductAmount, i18n.language])
+  }, [product, cartProduct, i18n.language])
 
   useEffect(() => {
     if (product) {
-      dispatch(updatePrice({id: product.id, slug: product.slug, amount: cartProductAmount, code: product.code, price: product.price}))
+      dispatch(updateProductPrice(product))
     }
   }, [product?.price])
   
@@ -115,15 +112,17 @@ const CardProductCart = ({ productSlug }: { productSlug: string }) => {
             <button className="schema-card__counter-control-btn" onClick={decreaseCountProduct}>
               -
             </button>
-            {cartProductAmount}
+            {cartProduct?.amount}
             <button className="schema-card__counter-control-btn" onClick={increaseCountProduct}>
               +
             </button>
           </div>
 
           <div className="product-card__modal-quick-purchase-wrapper-price">
-            {t("price")}: {isFetching && spinner} {!isFetching && formattedPrice}
+              {t("price")}: {isFetching && spinner} {!isFetching && formattedPrice}
+              
           </div>
+          
           {product && (
             <button
               className={
@@ -131,7 +130,7 @@ const CardProductCart = ({ productSlug }: { productSlug: string }) => {
                   ? "product-card__cart-btn-deleted-active"
                   : "product-card__cart-btn-deleted"
               }
-              onClick={() => dispatch(removeFromCart({id: product.id, slug: product.slug, amount: 1, code: product.code, price: product.price}))}
+              onClick={() => dispatch(removeFromCart(product))}
             >
               Ｘ
             </button>
