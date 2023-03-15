@@ -1,0 +1,11 @@
+.popular-products {
+  margin-top: 4rem;
+}
+
+@media (max-width: 767px) {
+  .popular-products {
+    .card {
+      margin: 0 auto;
+    }
+  }
+}

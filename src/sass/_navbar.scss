@@ -1,0 +1,86 @@
+@use "./_variables" as *;
+.lks-navbar {
+  margin-top: 6.25rem;
+
+  .container {
+    flex-direction: row-reverse;
+  }
+
+  &__right {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+    // margin-right: 1rem;
+  }
+  &__links {
+    font-size: 1.5rem;
+    color: $text-color-dark;
+    text-transform: uppercase;
+    text-align: center;
+    gap: 1rem;
+    .navbar-expand-lg {
+      .navbar-nav {
+        .nav-link {
+          padding-right: 3.125rem;
+        }
+      }
+    }
+  }
+  &__icons {
+    // margin-right: 2.5rem;
+    a {
+      padding: 0 0.5rem;
+    }
+  }
+
+  .dropdown-menu {
+    --bs-dropdown-min-width: 0rem;
+  }
+
+  &__lang {
+    a {
+      font-family: "Helvetica";
+      font-weight: 700;
+      font-size: 1.125rem;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .lks-navbar {
+    .container {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    margin-top: 1.25rem;
+    .navbar-collapse {
+      margin-bottom: 2rem;
+    }
+    &__icons {
+      margin-right: 0;
+    }
+    .navbar-collapse {
+      margin-top: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .lks-navbar {
+    &__links {
+      font-size: 1rem;
+    }
+    &__icons {
+      padding: 1rem 0rem;
+      a {
+        padding: 0 0.3rem;
+      }
+    }
+    .dropdown-menu {
+      --bs-dropdown-item-padding-x: 0.5rem;
+    }
+    .navbar-collapse {
+      margin-top: 1rem;
+    }
+  }
+}

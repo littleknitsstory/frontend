@@ -1,0 +1,52 @@
+@use "./_variables";
+@use "./_fonts";
+@use "./_title";
+@use "./_buttons";
+@use "./_header";
+@use "./_navbar";
+@use "./_promo";
+@use "./_schemas-card";
+@use "./_about-me";
+@use "./_last-reviews";
+@use "./_instagram";
+@use "./_footer";
+@use "./_main-slider";
+@use "./_card-lks";
+@use "./_articles";
+@use "./_page-error";
+@use "./_article";
+@use "./_coffee-card";
+@use "./_contacts";
+@use "./_card-product";
+@use "./_filters";
+@use "./_products";
+@use "./_schema-card";
+@use "./_social";
+@use "./_product";
+@use "./_review-card";
+@use "./_saved-products";
+@use "./_mini-card-product";
+@use "./_popular-products";
+@use "./_reviews";
+@use "./_card-modal-thanks";
+@use "./_privacy-policy";
+@use "./_cart";
+@use "./_primary-nav";
+@use "./_forms";
+@use "./_notification";
+@use "./login-page";
+@use "./sign-in";
+@use "./profile";
+
+@import "animate.css";
+
+* {
+  font-family: "AlethiaNext";
+  a {
+    color: unset;
+    text-decoration: none;
+    &:hover {
+      color: unset;
+    }
+  }
+}

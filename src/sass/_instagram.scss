@@ -1,51 +1,30 @@
 .instagram {
-  margin: 10px auto 60px auto;
-  .mid-side {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  margin-top: 7rem;
+  &__mid-side {
+    padding: 2rem;
     h2 {
-      font-family: "Helvetica";
-      font-size: 24px;
-      line-height: 41px;
       text-align: center;
-
-      color: #000000;
     }
   }
-  min-height: 200px;
-  display: flex;
-  align-items: stretch;
-  & > * {
-    flex: 1;
-  }
-  .right-side {
-    background-image: url("../assests/images/bitmap/ig-right.svg");
+
+  &__right-side {
+    height: 13rem;
+    background-image: url("../assets/images/ig-right.svg");
     background-repeat: no-repeat;
     background-position: right;
     z-index: 2;
   }
 
-  .left-side {
-    background-image: url("../assests/images/bitmap/ig-left.svg");
+  &__left-side {
+    height: 13rem;
+    background-image: url("../assets/images/ig-left.svg");
     background-repeat: no-repeat;
     background-position: left;
     z-index: 2;
   }
-}
 
-@media screen and (max-width: 500px) {
-  .instagram {
-    & > * {
-      flex: unset;
-
-      margin-left: 80px;
-    }
-
-    .right-side,
-    .left-side {
-      display: none;
-    }
+  &__btn {
+    margin: 2rem auto 0 auto;
+    width: 12rem;
   }
 }

@@ -1,0 +1,27 @@
+.profile {
+  text-align: center;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__form-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__title {
+    margin: 3rem 0;
+  }
+
+  .form-control {
+    margin-bottom: 1rem;
+  }
+
+  .btn__logout {
+    margin-top: 2rem;
+  }
+}
+

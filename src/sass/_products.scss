@@ -1,48 +1,9 @@
 .products {
-  margin: 0 auto 30px auto;
-  .quick-purchase {
-    .lks-btn-icon {
-      padding: 3px;
-    }
-    .lks-btn-icon-icon {
-      height: 30px;
-      width: 30px !important;
-      padding: 5px;
-    }
-  }
-  .products-wrapper {
-    display: flex;
-    justify-content: space-between;
-  }
+  margin-top: 7rem;
 }
 
-.products-top {
-  margin-top: 80px;
-}
-
-@media screen and (max-width: 1399px) {
+@media (max-width: 992px) {
   .products {
-    // .col-3 {
-    //   width: 47%;
-    //   // padding-left: 80px;
-    //   margin: 0 auto;
-    // }
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .products {
-    // .col-3 {
-    //   width: 100%;
-    //   padding-left: 64px;
-    // }
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .products {
-    // .col-3 {
-    //   padding-left: 20px;
-    // }
+    margin-top: 4rem;
   }
 }

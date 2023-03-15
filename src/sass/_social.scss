@@ -1,14 +1,28 @@
+@use "./_variables" as *;
 .social {
-  order: 0;
+  justify-content: flex-start;
   display: flex;
-  flex: 1;
-  justify-content: start;
-  & > * {
-    padding: 0 1vw;
+  margin-top: 5rem;
+}
+
+.social-circle {
+  margin: 0 0.5rem;
+  background-color: $dark-grey-color;
+  width: 3.125rem;
+  height: 3.125rem;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  &:hover {
+    background-color: $burgundy-color;
   }
-  img {
-    &:hover {
-      filter: brightness(0.7);
-    }
+}
+
+@media (max-width: 992px) {
+  .social {
+    justify-content: center;
+    margin: 3rem 0;
   }
 }

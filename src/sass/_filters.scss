@@ -1,0 +1,76 @@
+@use "./_variables" as *;
+
+.filters {
+  text-align: center;
+  color: $main-color;
+  padding-bottom: 3rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e8e8e8;
+
+  &__category-wrapper {
+    box-shadow: 15px 15px 50px -10px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 1rem;
+  }
+
+  &__no-overlap {
+    width: 75%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .filter {
+    &__title {
+      font-size: 1.125rem;
+      margin-bottom: 1.5rem;
+    }
+
+    &__clear-filter {
+      font-size: 1rem;
+      border: 1px solid black;
+      padding: 0.25rem 1rem;
+      width: auto;
+      height: auto;
+      margin-top: 1rem;
+    }
+    
+    &__color-palette {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .75rem;
+    }
+
+    &__color-circle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 25px;
+      height: 25px;
+      font-size: 0.4rem;
+      border-radius: 50%;
+      border: 0.5px solid $main-color;
+      cursor: pointer;
+  
+      &.active {
+        box-shadow: 0 0 7px 1px grey;
+        border: 1.5px solid $main-color
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .filters {
+    position: sticky;
+    top: 1rem;
+    border-right: 1px solid #e8e8e8;
+    border-bottom: none;
+
+    &__no-overlap {
+      width: auto;
+      text-align: left;
+    }
+  }
+}

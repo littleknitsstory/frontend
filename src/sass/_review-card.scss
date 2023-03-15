@@ -1,0 +1,60 @@
+@use "./_variables" as *;
+.review {
+  &__card {
+    margin-top: 3rem;
+    background: $text-color-light;
+    border: 1px solid #d4d4d4;
+    min-height: 28.75rem;
+    box-shadow: 15px 15px 50px -10px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    padding: 1.25rem;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+  }
+
+  &__img {
+    width: 100%;
+  }
+  &__descr {
+    padding: 2.5rem 0;
+    font-size: 1rem;
+  }
+
+  &__author {
+    font-size: 0.875rem;
+  }
+  &__author-name {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .review {
+    &__img-wrapper {
+      text-align: center;
+      margin-top: 1.25rem;
+    }
+    &__img {
+      width: 75%;
+      height: 100%;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .review {
+    &__card {
+      margin-top: 1.56rem;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .review {
+    &__img {
+      width: 100%;
+    }
+  }
+}

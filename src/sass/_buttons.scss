@@ -1,84 +1,87 @@
-.#{$namespace} {
-  // Buttons
-  &btn {
-    border: none;
-    white-space: nowrap;
-    background: white;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-    padding: 5px 30px;
-    font-size: 18px;
-    border-radius: 500px;
-    font-weight: medium;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    color: #656d6d;
-    transition: background 0.4s;
+@use "./_variables" as *;
+.btn {
+  border-radius: 60px;
+  width: 20.625rem;
+  height: 4.125rem;
+  background-color: $text-color-light;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 2rem;
+  font-size: 1.5rem;
+  color: $text-color-dark;
+  &:hover {
+    background-color: $burgundy-color;
+  }
+  &_center {
+    margin: 0 auto;
+  }
+  &_border {
+    border: 1px solid $text-color-dark;
+    width: 16.68rem;
+    height: 3.875rem;
+    font-size: 1.15rem;
+  }
+  &_vinous {
+    // margin-top: 3.75rem;
+    width: 22.56rem;
+    height: 4.125rem;
+    background-color: $vinous-color;
+    padding: 1.25rem 3.125rem;
+    color: $text-color-light;
+    &:hover {
+      background-color: $burgundy-color;
+      color: $text-color-light;
+    }
+  }
+  &_white {
+    background-color: $text-color-light;
+    color: $text-color-dark;
+    width: 13rem;
+
+  }
+  &_clear-filter {
+    font-size: 1rem;
+    text-align: center;
+    border: 1px solid black;
+    padding: 0.5rem 1.5rem;
+    margin-top: 1rem;
+    width: auto;
+    height: auto;
+  }
+  &__text {
+    &_center {
+      margin: 0 auto;
+      justify-content: center;
+    }
+  }
+  &__link {
+    padding-top: 3.05rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Helvetica";
-    &:hover {
-      background: #eee;
-      cursor: pointer;
-    }
-  }
-  &btn-bordered {
-    background: #fff;
-    border: 1px solid $color-main;
-    box-shadow: none;
-    font-size: 80%;
-  }
-  &btn-main {
-    background: $color-main;
-    color: #fff;
-    &:hover {
-      background: darken($color-main, 1.5);
-    }
-  }
-
-  &btn-icon-main {
-    background: $color-main;
-    color: #fff;
-    &:hover {
-      background: darken($color-main, 3);
-    }
-    .#{$namespace}btn-icon-icon {
-      background: white;
-    }
-  }
-
-  &btn-icon-bordered {
-    background: #fff;
-    border: 1px solid $color-main;
-    box-shadow: none;
-    font-size: 80%;
-    .#{$namespace}btn-icon-icon {
-      background: none !important;
-      border: 1px solid $color-main;
-    }
-  }
-
-  &btn-icon {
-    padding: 12px;
-    display: inline-flex;
     justify-content: space-between;
     align-items: center;
-
-    &-text {
-      padding: 0px 29px;
-      @media screen and (max-width: 1427px) {
-        padding: 5px 15px;
+    a {
+      font-size: 1.2rem;
+      color: #000;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
       }
     }
-    &-icon {
-      box-sizing: border-box;
-      background: $color-main;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 300px;
-      height: 40px;
-      width: 40px !important;
+    &_end {
+      justify-content: flex-end;
     }
+  }
+}
+
+@media (max-width: 992px) {
+  .btn {
+    font-size: 1.05rem;
+    width: 15.625rem;
+    height: 3.125rem;
+    padding: 1.25rem 1.8rem;
+    // &_vinous {
+    //   margin-top: 1.25rem;
+    // }
   }
 }
