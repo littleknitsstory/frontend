@@ -30,9 +30,7 @@
     "cart": "Корзина",
     "savedProducts": "Сохраненные товары",
     "subscribe": {
-      "text": "Мы проводим специальные акции для наших клиентов. Оформите подписку и мы будем держать вас в курсе",
-      "email": "Ваш e-mail",
-      "buttonText": "Подписаться"
+      "text": "Мы проводим специальные акции для наших клиентов. Оформите подписку и мы будем держать вас в курсе"
     },
     "policy": "Политика конфиденциальности"
   },
@@ -50,12 +48,9 @@
     "material": "Материал",
     "color": "Цвет",
     "buttonQuickOrderText": "Быстрый заказ",
-    "buttonSendText": "Отправить",
     "modalTitle": "Быстрая покупка",
     "partNumber": "Артикул",
     "sale": "Скидка",
-    "fullName": "ФИО",
-    "phone": "Телефон",
     "purchasePolice": "Нажимая «Отправить», вы даете согласие на обработку персональных данных",
     "thanks": "Спасибо",
     "thanksText1": "Ваша заявка принята.",
@@ -68,12 +63,6 @@
   },
   "Contacts": {
     "title": "Отправьте нам сообщение",
-    "name": "Имя",
-    "subject": "Тема сообщения",
-    "phone": "Телефон",
-    "email": "Email",
-    "message": "Сообщения",
-    "send": "Отправить",
     "policy": "Нажимая «Отправить», вы даете согласие на обработку персональных данных",
     "contactInfo": "Контактная информация"  
   },
@@ -81,9 +70,6 @@
     "code": "Артикул",
     "color": "Цвет",
     "discount": "Скидка",
-    "name": "ФИО",
-    "phone": "Телефон",
-    "send": "Отправить",
     "policy": "Нажимая «Отправить», вы даете согласие на обработку персональных данных",
     "titleThanks": {
       "thanks": "Спасибо!"
@@ -116,13 +102,13 @@
     "delivery": "Доставка",
     "courier": "Курьером",
     "pickUp": "Самовывоз",
-    "deliveryDescription": "The cost of delivery in Moscow is 300 rubles. If the order amount exceeds 3,000 rubles, then delivery is free. Including areas: Mitino, Novokosino, Butovo, Kommunarka, Zelenograd, Lyubertsy.",
-    "deliveryDescription2": "The cost of delivery of orders outside the Moscow Ring Road:",
-    "deliveryDescription3": "with an order amount of up to 3,000 rubles - 300 rubles + for each kilometer (up to 20 km from the Moscow Ring Road - 50 rubles / km, from 20 km from the Moscow Ring Road - 60 rubles / km)",
-    "deliveryDescription4": "with an order amount of 3,000 rubles or more - for each kilometer (up to 20 km from the Moscow Ring Road - 50 rubles / km, from 20 km from the Moscow Ring Road - 60 rubles / km)",
-    "contactInfo": "Contact Information",
-    "address": "Address",
-    "order": "Order"
+    "deliveryDescription": "Стоимость доставки по Москве составляет 300 руб. Если сумма заказа превышает 3 000 руб., то доставка бесплатная. Включая районы: Митино, Новокосино, Бутово, Коммунарка, г.Зеленоград, Люберцы.",
+    "deliveryDescription2": "Стоимость доставки заказов за пределами МКАД:",
+    "deliveryDescription3": "при сумме заказа до 3 000 руб - 300 руб + за каждый километр (до 20 км от МКАД - 50 руб/км, от 20 км от МКАД - 60 руб/км)",
+    "deliveryDescription4": "при сумме заказа от 3 000 руб - за каждый километр (до 20 км от МКАД - 50 руб/км, от 20 км от МКАД - 60 руб/км)",
+    "contactInfo": "Данные покупателя",
+    "address": "Адрес",
+    "order": "Оформить заказ"
 
   },
   "Saved": {
@@ -170,5 +156,23 @@
   "reviews": "Отзывы",
   "quickOrder": "Быстрый заказ",
   "price": "Стоимость",
-  "color": "Цвет"
+  "color": "Цвет",
+  "fullName": "ФИО",
+  "comments": "Комментарии",
+  "address": "Адрес",
+
+  "FormFields": {
+    "email": "Ваш email",
+    "fullName": "ФИО",
+    "name": "Имя",
+    "phone": "Телефон",
+    "message": "Сообщение",
+    "comments": "Комментарии",
+    "subject": "Тема сообщения",
+    "send": "Отправить",
+    "subscribe": "Подписаться",
+    "order": "Оформить заказ",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль"
+  }
 }

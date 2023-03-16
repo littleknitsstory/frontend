@@ -48,7 +48,7 @@ const Cart = () => {
               name="bonuses"
               aria-label="email"
             />
-            <button className="btn btn_border btn__link">
+            <button className="btn btn_border">
               {t("Cart.activate")} 
               <img src={arrowRight} alt="arrowWhite" />
             </button>

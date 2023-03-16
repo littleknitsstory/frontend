@@ -3,14 +3,12 @@ import { IProduct } from "../../../app/types";
 
 interface Products {
   favorite: IProduct[];
-  
 }
 
 const initialState: Products = {
   favorite: localStorage.getItem("favoriteProducts")
     ? JSON.parse(localStorage.getItem("favoriteProducts") || "")
     : [],
-  
 };
 
 const productsSlice = createSlice({
@@ -30,19 +28,6 @@ const productsSlice = createSlice({
       state.favorite = [...state.favorite.filter((product) => product.id !== action.payload.id)];
       localStorage.setItem("favoriteProducts", JSON.stringify(state.favorite));
     },
-    // addToCart(state, action: PayloadAction<IProduct>) {
-    //   if (state.cart.length === 0) {
-    //     state.cart.push(action.payload);
-    //   }
-    //   if (state.cart.every((product) => product.id !== action.payload.id)) {
-    //     state.cart.push(action.payload);
-    //   }
-    //   localStorage.setItem("cart", JSON.stringify(state.cart));
-    // },
-    // removeFromCart(state, action: PayloadAction<IProduct>) {
-    //   state.cart = [...state.cart.filter((product) => product.id !== action.payload.id)];
-    //   localStorage.setItem("cart", JSON.stringify(state.cart));
-    // },
   },
 });
 

@@ -120,4 +120,6 @@ export interface FormValues {
   phone_number?: string;
   fullName?: string;
   address?: string;
+  phone?: string;
+  comments?: string;
 }

@@ -113,12 +113,12 @@ const Footer = () => {
                     <FormsInput
                       name="email"
                       type="email"
-                      placeholder="E-mail"
+                      placeholder={t("FormFields.email")}
                       controlId={"formGroupEmail"}
                     />
                     <button className="btn btn_border footer__btn" type="submit">
                       <div className="btn__text btn__text_center">
-                        {t("Footer.subscribe.buttonText")}
+                        {t("FormFields.subscribe")}
                       </div>
                     </button>
                   </FormikForm>

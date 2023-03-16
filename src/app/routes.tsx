@@ -33,7 +33,7 @@ const routes: RouteObject = {
       element: <Article />,
     },
     {
-      path: "products/",
+      path: "products",
       element: <Products />,
     },
     {

@@ -23,7 +23,7 @@ const updateTotalPrice = (cartItem: ICartProduct[]) => {
   acc + (current.amount * convertToNumber(current.price, i18n.language)), 0)
 }
 
-const productsSlice = createSlice({
+const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
@@ -38,7 +38,7 @@ const productsSlice = createSlice({
       localStorage.setItem("cart", JSON.stringify(state));
     },
     removeFromCart(state, action: PayloadAction<IProductDetails>) {
-      state.products = [...state.products.filter((product) => product.id !== action.payload.id)]
+      state.products = state.products.filter((product) => product.id !== action.payload.id)
       state.totalPrice = updateTotalPrice(state.products)
       localStorage.setItem("cart", JSON.stringify(state));
     },
@@ -81,5 +81,5 @@ export const {
   increaseProductAmount, 
   decreaseProductAmount, 
   updateProductPrice 
-} = productsSlice.actions;
-export default productsSlice.reducer;
+} = cartSlice.actions;
+export default cartSlice.reducer;

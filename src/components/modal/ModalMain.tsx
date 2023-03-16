@@ -88,7 +88,7 @@ const ModalMain = ({ product, showModal, handleClose, onSubmitOrder }: ModalProp
                 className="mb-3"
                 controlId={"formGroupModalName"}
                 type="text"
-                placeholder={t("CardProduct.fullName")}
+                placeholder={t("FormFields.fullName")}
                 name="name"
               />
             </Row>
@@ -97,13 +97,15 @@ const ModalMain = ({ product, showModal, handleClose, onSubmitOrder }: ModalProp
                 className="mb-3"
                 controlId={"formGroupModalPhone"}
                 type="tel"
-                placeholder={t("Contacts.phone")}
+                placeholder={t("FormFields.phone")}
                 name="phone_number"
               />
             </Row>
 
             <button type="submit" className="btn btn_vinous btn_center">
-              <div className="btn__text btn__text_center">{t("CardProduct.buttonSendText")}</div>
+              <div className="btn__text btn__text_center">
+                {t("FormFields.send")}
+              </div>
             </button>
           </FormikForm>
         </Formik>

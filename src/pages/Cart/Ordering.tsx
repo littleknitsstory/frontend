@@ -12,10 +12,10 @@ import { useAddOrderMutation } from "../../components/features/api/apiSlice"
 const Ordering = () => {
   const { i18n, t } = useTranslation()
   const [ addOrder ] = useAddOrderMutation()
-  const cart = useAppSelector(state => state.cart)
-  const totalAmount = cart.products.reduce((acc, current) => acc + current.amount, 0)
+  const { products: cartProducts, totalPrice} = useAppSelector(state => state.cart)
 
-  const productImages = cart.products.map(product => 
+  const totalAmount = cartProducts.reduce((acc, current) => acc + current.amount, 0)
+  const productImages = cartProducts.map(product => 
     <img
       key={product.id} 
       src={PICTURE_BASE_URL + product.image_preview} 
@@ -25,10 +25,10 @@ const Ordering = () => {
   )
 
   const initialFormDataState: FormValues = {
-    fullName: "",
+    name: "",
     email: "",
-    message: "",
-    phone_number: "",
+    comments: "",
+    phone: "",
     address: ""
   };
 
@@ -36,13 +36,15 @@ const Ordering = () => {
     values: FormValues,
     resetForm: (nextState?: Partial<FormikState<FormValues>> | undefined) => void,
   ): void => {
-    const products = cart.products.map(product => {
+    const products = cartProducts.map(product => {
+      
       return {
         product: product.id,
         amount: product.amount,
         code: product.code
       }
     })
+    console.log(values)
     addOrder({products, ...values})
     resetForm();
   };
@@ -51,7 +53,7 @@ const Ordering = () => {
     <Container className="cart__ordering">
       {productImages}
       <h4 className="cart__total-price">
-        {t("Cart.total")} {totalAmount} {t("Cart.amount")} — {convertToCurrency(cart.totalPrice, i18n.language)}
+        {t("Cart.total")} {totalAmount} {t("Cart.amount")} — {convertToCurrency(totalPrice, i18n.language)}
       </h4>
 
       <div className="cart__delivery">
@@ -98,9 +100,9 @@ const Ordering = () => {
             email: Yup.string()
               .email(t("Forms.incorrectEmail"))
               .required(t("Forms.required")),
-            phone_number: Yup.string()
-              .phone("ME", t("Forms.incorrectPhone"))
-              .required(t("Forms.required")),
+            // phone: Yup.string()
+            //   .phone("ME", t("Forms.incorrectPhone"))
+            //   .required(t("Forms.required")),
             comments: Yup.string().max(100, t("Forms.lengthMax100")),
           })}
           onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}
@@ -109,25 +111,25 @@ const Ordering = () => {
             <Col md={7} lg={6} xxl={5}>
               <FormsInput
                 col={12}
-                controlId={"fullName"}
+                controlId={"name"}
                 type="text"
-                placeholder="Full Name"
-                name="fullName"
+                placeholder={t("fullName")}
+                name="name"
               />
               <Row>
                 <FormsInput
                   col={6}
                   controlId={"phone"}
                   type="text"
-                  placeholder="Phone"
-                  name="phone_number"
+                  placeholder={t("Contacts.phone")}
+                  name="phone"
                 />
 
                 <FormsInput
                   col={6}
                   controlId={"email"}
                   type="email"
-                  placeholder="Email"
+                  placeholder="E-mail"
                   name="email"
                   />
               </Row>
@@ -135,9 +137,9 @@ const Ordering = () => {
               <FormsInput
                 as="textarea"
                 col={12}
-                controlId={"message"}
-                placeholder="Comments"
-                name="message"
+                controlId={"comments"}
+                placeholder={t("comments")}
+                name="comments"
               />
               <h4 className="cart__title cart__title--small-margin">
                 {t("Cart.address")}
@@ -146,7 +148,7 @@ const Ordering = () => {
                   col={12}
                   controlId={"address"}
                   type="text"
-                  placeholder="Address"
+                  placeholder={t("address")}
                   name="address"
                 />
               <button className="btn btn_vinous btn__text_center mt-5" type="submit">

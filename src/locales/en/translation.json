@@ -54,8 +54,6 @@
     "partNumber": "Code",
     "sale": "Discount",
     "buttonSendText": "Send",
-    "fullName": "Full Name",
-    "phone": "Phone",
     "purchasePolice": "By clicking 'Submit', you consent to the processing of personal data",
     "thanks": "Thanks",
     "thanksText1": "Your application is accepted.",
@@ -76,7 +74,6 @@
     "send": "Send",
     "policy": "By submitting your personal data, you agree to its processing.",
     "contactInfo": "Contacts"
-   
   },
   "Modal": {
     "title": "Quick Order",
@@ -114,9 +111,9 @@
     "warning": "Important! Please note that the discount cannot be added to the shopping cart when placing an order. After accepting the order for work, the manager of the online store will recalculate it, taking into account the discount, and will contact you.",
     "cash": "Cash",
     "card": "Credit Card",
-    "ordering": "Ordering",
+    "ordering": "Continue",
     "delivery": "Delivery",
-    "courier": "courier",
+    "courier": "Courier",
     "pickUp": "Pick up",
     "deliveryDescription": "The cost of delivery in Moscow is 300 rubles. If the order amount exceeds 3,000 rubles, then delivery is free. Including areas: Mitino, Novokosino, Butovo, Kommunarka, Zelenograd, Lyubertsy.",
     "deliveryDescription2": "The cost of delivery of orders outside the Moscow Ring Road:",
@@ -125,8 +122,6 @@
     "contactInfo": "Contact Information",
     "address": "Address",
     "order": "Order"
-
-
   },
   "Saved": {
     "empty": "No saved products",
@@ -173,6 +168,24 @@
   "reviews": "Reviews",
   "quickOrder": "Quick Order",
   "price": "Price",
-  "color": "Color"
+  "color": "Color",
+  "fullName": "Full Name",
+  "comments": "Comments",
+  "address": "Address",
+
+  "FormFields": {
+    "email": "Email",
+    "fullName": "Full Name",
+    "name": "Name",
+    "phone": "Phone",
+    "message": "Message",
+    "comments": "Comments",
+    "subject": "Subject",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "send": "Send",
+    "subscribe": "Subscribe",
+    "order": "Order"
+  }
 }
 
