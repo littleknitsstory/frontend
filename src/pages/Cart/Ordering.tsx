@@ -7,11 +7,12 @@ import { Formik, Form as FormikForm, FormikState } from "formik";
 import * as Yup from "yup";
 import { FormValues } from "../../app/types"
 import { FormsInput } from "../../components/utils/Forms";
+import { useAddOrderMutation } from "../../components/features/api/apiSlice"
 
 const Ordering = () => {
   const { i18n, t } = useTranslation()
+  const [ addOrder ] = useAddOrderMutation()
   const cart = useAppSelector(state => state.cart)
-
   const totalAmount = cart.products.reduce((acc, current) => acc + current.amount, 0)
 
   const productImages = cart.products.map(product => 
@@ -35,6 +36,14 @@ const Ordering = () => {
     values: FormValues,
     resetForm: (nextState?: Partial<FormikState<FormValues>> | undefined) => void,
   ): void => {
+    const products = cart.products.map(product => {
+      return {
+        product: product.id,
+        amount: product.amount,
+        code: product.code
+      }
+    })
+    addOrder({products, ...values})
     resetForm();
   };
 
@@ -42,11 +51,11 @@ const Ordering = () => {
     <Container className="cart__ordering">
       {productImages}
       <h4 className="cart__total-price">
-        Итого: {totalAmount} шт. — {convertToCurrency(cart.totalPrice, i18n.language)}
+        {t("Cart.total")} {totalAmount} {t("Cart.amount")} — {convertToCurrency(cart.totalPrice, i18n.language)}
       </h4>
 
       <div className="cart__delivery">
-        <h4 className="cart__title">Доставка</h4>
+        <h4 className="cart__title">{t("Cart.delivery")}</h4>
 
         <div className="cart__radio-wrapper">
           <div className="cart__radio-item">
@@ -57,7 +66,7 @@ const Ordering = () => {
               id="courier" 
               value="courier" 
             />
-            <label htmlFor="courier">Курьером</label>
+            <label htmlFor="courier">{t("Cart.courier")}</label>
           </div>
           <div className="cart__radio-item">
             <input 
@@ -67,35 +76,32 @@ const Ordering = () => {
               id="pickup" 
               value="pickup" 
             />
-            <label htmlFor="pickup">Самовывоз</label>
+            <label htmlFor="pickup">{t("Cart.pickUp")}</label>
           </div>
         </div>
 
         <Col lg={10} xl={9} xxl={8}>
-          <p className="cart__text">Стоимость доставки по Москве составляет 300 руб. Если сумма заказа превышает 3 000 руб., то доставка бесплатная. Включая районы: Митино, Новокосино, Бутово, Коммунарка, г.Зеленоград, Люберцы.</p>
-          <p className="cart__text">Стоимость доставки заказов за пределами МКАД:</p>
-          <ul>
-            <li>при сумме заказа до 3 000 руб - 300 руб + за каждый километр (до 20 км от МКАД - 50 руб/км, от 20 км от МКАД - 60 руб/км)</li>
-            <li>при сумме заказа от 3 000 руб - за каждый километр (до 20 км от МКАД - 50 руб/км, от 20 км от МКАД - 60 руб/км)</li>
-          </ul>
+          <>
+            <p className="cart__text">{t("Cart.deliveryDescription")}</p>
+            <p className="cart__text">{t("Cart.deliveryDescription2")}</p>
+            <ul>
+              <li>{t("Cart.deliveryDescription3")}</li>
+              <li>{t("Cart.deliveryDescription4")}</li>
+            </ul>
+          </>
         </Col>
 
-        <h4 className="cart__title">Данные получателя</h4>
+        <h4 className="cart__title">{t("Cart.contactInfo")}</h4>
         <Formik
           initialValues={initialFormDataState}
           validationSchema={Yup.object().shape({
-            name: Yup.string()
-              .min(2, t("Forms.lengthRequired"))
-              .max(30, t("Forms.lengthMax30"))
-              .required(t("Forms.required")),
             email: Yup.string()
               .email(t("Forms.incorrectEmail"))
               .required(t("Forms.required")),
             phone_number: Yup.string()
               .phone("ME", t("Forms.incorrectPhone"))
               .required(t("Forms.required")),
-            company: Yup.string().max(30, t("Forms.lengthMax30")),
-            message: Yup.string().max(100, t("Forms.lengthMax100")),
+            comments: Yup.string().max(100, t("Forms.lengthMax100")),
           })}
           onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}
         >
@@ -133,7 +139,9 @@ const Ordering = () => {
                 placeholder="Comments"
                 name="message"
               />
-              <h4 className="cart__title cart__title--small-margin">Адрес доставки</h4>
+              <h4 className="cart__title cart__title--small-margin">
+                {t("Cart.address")}
+              </h4>
               <FormsInput
                   col={12}
                   controlId={"address"}
@@ -141,9 +149,8 @@ const Ordering = () => {
                   placeholder="Address"
                   name="address"
                 />
-
               <button className="btn btn_vinous btn__text_center mt-5" type="submit">
-                Оформить заказ
+                {t("Cart.order")}
               </button>
             </Col>
           </FormikForm>

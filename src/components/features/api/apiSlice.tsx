@@ -49,7 +49,8 @@ enum URLS {
   CATEGORIES = "/categories/",
   SIGN_UP = "/sign-up/",
   SIGN_IN = "/sign-in/",
-  PROFILE = "/profile/"
+  PROFILE = "/profile/",
+  ORDER = "/orders/"
 }
 
 export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";
@@ -122,6 +123,13 @@ export const apiSlice = createApi({
         body: email,
       }),
     }),
+    addOrder: builder.mutation({
+      query: (orderForm) => ({
+        url: URLS.ORDER,
+        method: "POST",
+        body: orderForm,
+      }),
+    }),
     signUp: builder.mutation({
       query: ({user, lang}) => ({
         url: URLS.SIGN_UP,
@@ -170,5 +178,6 @@ export const {
   useSignUpMutation,
   useSignInMutation,
   useGetProfileQuery,
-  useUpdateProfileMutation
+  useUpdateProfileMutation,
+  useAddOrderMutation
 } = apiSlice;

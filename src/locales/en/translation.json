@@ -100,7 +100,33 @@
   },
   "Cart": {
     "empty": "Cart is empty",
-    "buttonText": "Catalog"
+    "buttonText": "Catalog",
+    "total": "Total amount:",
+    "amount": "",
+    "bonus": "Bonuses",
+    "bonusAvailable": "Bonus available",
+    "bonusDescription": "Active bonuses at the moment. You can already use them.",
+    "bonusDescription2": "Using bonuses is possible only when choosing the delivery method - 'Courier'.",
+    "activate": "Activate",
+    "orderBonuses": "Bonuses after order: 255",
+    "bonusDescription3": "Bonuses will be credited for this order. These bonuses will become available only after the payment of the order. They can be used on future purchases.",
+    "paymentMethods": "Payment methods",
+    "warning": "Important! Please note that the discount cannot be added to the shopping cart when placing an order. After accepting the order for work, the manager of the online store will recalculate it, taking into account the discount, and will contact you.",
+    "cash": "Cash",
+    "card": "Credit Card",
+    "ordering": "Ordering",
+    "delivery": "Delivery",
+    "courier": "courier",
+    "pickUp": "Pick up",
+    "deliveryDescription": "The cost of delivery in Moscow is 300 rubles. If the order amount exceeds 3,000 rubles, then delivery is free. Including areas: Mitino, Novokosino, Butovo, Kommunarka, Zelenograd, Lyubertsy.",
+    "deliveryDescription2": "The cost of delivery of orders outside the Moscow Ring Road:",
+    "deliveryDescription3": "with an order amount of up to 3,000 rubles - 300 rubles + for each kilometer (up to 20 km from the Moscow Ring Road - 50 rubles / km, from 20 km from the Moscow Ring Road - 60 rubles / km)",
+    "deliveryDescription4": "with an order amount of 3,000 rubles or more - for each kilometer (up to 20 km from the Moscow Ring Road - 50 rubles / km, from 20 km from the Moscow Ring Road - 60 rubles / km)",
+    "contactInfo": "Contact Information",
+    "address": "Address",
+    "order": "Order"
+
+
   },
   "Saved": {
     "empty": "No saved products",

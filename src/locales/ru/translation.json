@@ -97,8 +97,33 @@
     "backHome": "Вернуться на главную"
   },
   "Cart": {
-    "empty": "Корзина пуста",
-    "buttonText": "Перейти в каталог"
+    "empty": "В корзине ничего нет",
+    "buttonText": "Каталог",
+    "total": "Итого:",
+    "amount": "шт.",
+    "bonus": "Программа лояльности",
+    "bonusAvailable": "Доступно бонусов:",
+    "bonusDescription": "Активные бонусы на данный момент. Их уже можно использовать.",
+    "bonusDescription2": "Списание бонусов возможно только при выборе способа доставки — 'Курьером'.",
+    "activate": "Активировать",
+    "orderBonuses": "Бонусы за заказ:",
+    "bonusDescription3": "Будет начислено бонусов за этот заказ. Эти бонусы станут доступны только после оплаты заказа. Их можно будет использовать при следующих покупках.",
+    "paymentMethods": "Способы оплаты",
+    "warning": "Важно! Просим учесть, что скидка при оформлении заказа в Корзине не проставляется. После принятия заказа в работу, менеджер интернет-магазина пересчитает его с учётом скидки и свяжется с Вами.",
+    "cash": "Наличными",
+    "card": "Карта",
+    "ordering": "Продолжить оформление заказа",
+    "delivery": "Доставка",
+    "courier": "Курьером",
+    "pickUp": "Самовывоз",
+    "deliveryDescription": "The cost of delivery in Moscow is 300 rubles. If the order amount exceeds 3,000 rubles, then delivery is free. Including areas: Mitino, Novokosino, Butovo, Kommunarka, Zelenograd, Lyubertsy.",
+    "deliveryDescription2": "The cost of delivery of orders outside the Moscow Ring Road:",
+    "deliveryDescription3": "with an order amount of up to 3,000 rubles - 300 rubles + for each kilometer (up to 20 km from the Moscow Ring Road - 50 rubles / km, from 20 km from the Moscow Ring Road - 60 rubles / km)",
+    "deliveryDescription4": "with an order amount of 3,000 rubles or more - for each kilometer (up to 20 km from the Moscow Ring Road - 50 rubles / km, from 20 km from the Moscow Ring Road - 60 rubles / km)",
+    "contactInfo": "Contact Information",
+    "address": "Address",
+    "order": "Order"
+
   },
   "Saved": {
     "empty": "Нет сохраненных товаров",

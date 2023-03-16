@@ -34,12 +34,12 @@ const Cart = () => {
           })}
         </Row>
 
-        <h4 className="cart__total-price">Итого: {totalAmount} шт. — {convertToCurrency(totalPrice, i18n.language)  }</h4>
+        <h4 className="cart__total-price">{t("Cart.total")} {totalAmount} {t("Cart.amount")} — {convertToCurrency(totalPrice, i18n.language)  }</h4>
         <Row>
-          <h4 className="cart__title">Программа лояльности</h4>
+          <h4 className="cart__title">{t("Cart.bonus")}</h4>
           
           <Col xs={12} md={5} lg={4} xl={4} xxl={3} className="cart__loyalty">
-            <p className="cart__text">Доступно бонусов: 12555 ₽</p>
+            <p className="cart__text">{t("Cart.bonusAvailable")}</p>
             <input
               className="cart__input form-control"
               type="number"
@@ -48,19 +48,22 @@ const Cart = () => {
               name="bonuses"
               aria-label="email"
             />
-            <button className="btn btn_border btn__link">Активировать <img src={arrowRight} alt="arrowWhite" /></button>
+            <button className="btn btn_border btn__link">
+              {t("Cart.activate")} 
+              <img src={arrowRight} alt="arrowWhite" />
+            </button>
           </Col>
           <Col className="cart__loyalty-description">
-            <p className="cart__text--small">Активные бонусы на данный момент. Их уже можно использовать.</p>
-            <p className="cart__text--small">Списание бонусов возможно только при выборе способа доставки — "Курьером".</p>
+            <p className="cart__text--small">{t("Cart.bonusDescription")}</p>
+            <p className="cart__text--small">{t("Cart.bonusDescription2")}</p>
           </Col>
-            <p className="cart__text">Бонусы за заказ: 251 ₽</p>
-            <p className="cart__text--small">Будет начислено бонусов за этот заказ. Эти бонусы станут доступны только после оплаты заказа. Их можно будет использовать при следующих покупках.</p>
+            <p className="cart__text">{t("Cart.orderBonuses")}</p>
+            <p className="cart__text--small">{t("Cart.bonusDescription3")}</p>
         </Row>
 
         <Col xs={12} md={9} xl={6}> 
-          <h4 className="cart__title">Способы оплаты</h4>
-          <p className="cart__text">Важно! Просим учесть, что скидка при оформлении заказа в Корзине не проставляется. После принятия заказа в работу, менеджер интернет-магазина пересчитает его с учётом скидки и свяжется с Вами.</p>
+          <h4 className="cart__title">{t("Cart.paymentMethods")}</h4>
+          <p className="cart__text">{t("Cart.warning")}</p>
 
           <div className="cart__radio-wrapper">
             <div className="cart__radio-item">
@@ -71,7 +74,7 @@ const Cart = () => {
                 id="cash" 
                 value="cash" 
               />
-              <label htmlFor="cash">Наличными</label>
+              <label htmlFor="cash">{t("Cart.cash")}</label>
             </div>
             <div className="cart__radio-item">
               <input 
@@ -81,11 +84,11 @@ const Cart = () => {
                 id="card" 
                 value="card" 
               />
-              <label htmlFor="card">Карта</label>
+              <label htmlFor="card">{t("Cart.card")}</label>
             </div>
           </div>
 
-          <Link to="/cart/ordering" className="btn btn_vinous">Продолжить оформление заказа</Link>
+          <Link to="/cart/ordering" className="btn btn_vinous">{t("Cart.ordering")}</Link>
         </Col>
       </Container>
     </section>
