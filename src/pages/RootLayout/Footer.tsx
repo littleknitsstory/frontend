@@ -36,7 +36,7 @@ const Footer = () => {
         if (error.data.hasOwnProperty("email")) {
           Store.addNotification({
             ...notificationError,
-            title: t("Notification.alreadySubscribed"),
+            title: error.data.email,
           });
         }
       }

@@ -118,4 +118,6 @@ export interface FormValues {
   email?: string;
   company?: string;
   phone_number?: string;
+  fullName?: string;
+  address?: string;
 }
