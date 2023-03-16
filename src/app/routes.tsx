@@ -25,7 +25,7 @@ const routes: RouteObject = {
       element: <Blog />,
     },
     {
-      path: "blog",
+      path: "posts",
       element: <Blog />,
     },
     {
@@ -33,11 +33,11 @@ const routes: RouteObject = {
       element: <Article />,
     },
     {
-      path: "shop",
+      path: "products/",
       element: <Products />,
     },
     {
-      path: "product/:slug",
+      path: "products/:slug",
       element: <Product />,
     },
     {

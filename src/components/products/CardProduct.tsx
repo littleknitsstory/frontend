@@ -77,7 +77,7 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
             <span></span>
             <span></span>
           </div>
-          <Link to={`/product/${product?.slug}`}>
+          <Link to={`/products/${product?.slug}`}>
             <Card.Img
               variant="top"
               alt={product?.image_alt}
