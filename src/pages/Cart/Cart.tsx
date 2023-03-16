@@ -16,7 +16,7 @@ const Cart = () => {
     return (
       <div className="cart--empty">
         <p> {t("Cart.empty")} </p>
-        <Link to="/shop/">{t("Cart.buttonText")} 🛒</Link>
+        <Link to="/products/">{t("Cart.buttonText")} 🛒</Link>
       </div>
     );
   }
