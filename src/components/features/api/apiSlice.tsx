@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 // import types
 import {
@@ -29,6 +29,32 @@ interface IUserData {
   tg_profile: string
 }
 
+export interface ISignInCredentials {
+  username: string;
+  email: string;
+  password: string;
+}
+export interface ISignUp {
+  email: string;
+  password: string;
+}
+
+interface ILoginResponse {
+  access: string;
+  refresh: string;
+}
+
+interface QueryArgs {
+  limit?: number;
+  offset?: number;
+  lang: string;
+}
+
+interface CategoriesResponse {
+  title: string;
+  slug: string;
+}
+
 // creating "offset / limit" query string
 const getQueryString = (limit?: number, offset?: number): string => {
   let queryString = "";
@@ -49,28 +75,15 @@ enum URLS {
   CATEGORIES = "/categories/",
   SIGN_UP = "/sign-up/",
   SIGN_IN = "/sign-in/",
-  PROFILE = "/profile/"
+  PROFILE = "/profile/",
+  ORDER = "/orders/"
 }
 
 export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";
 
-// types
-interface QueryArgs {
-  limit?: number;
-  offset?: number;
-  lang: string;
-}
-
-interface CategoriesResponse {
-  title: string;
-  slug: string;
-}
-
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_BASE_API_URL,
-  }),
+  baseQuery: fetchBaseQuery({baseUrl: process.env.REACT_APP_BASE_API_URL}),
   endpoints: (builder) => ({
     getMenu: builder.query<IMenuResponse, { lang: string }>({
       query: ({ lang }) => ({
@@ -122,7 +135,14 @@ export const apiSlice = createApi({
         body: email,
       }),
     }),
-    signUp: builder.mutation({
+    addOrder: builder.mutation({
+      query: (orderForm) => ({
+        url: URLS.ORDER,
+        method: "POST",
+        body: orderForm,
+      }),
+    }),
+    signUp: builder.mutation<ILoginResponse, {user: ISignUp, lang: string}>({
       query: ({user, lang}) => ({
         url: URLS.SIGN_UP,
         method: "POST",
@@ -130,11 +150,11 @@ export const apiSlice = createApi({
         headers: { "Accept-Language": lang }
       }),
     }),
-    signIn: builder.mutation({
-      query: ({user, lang}) => ({
+    signIn: builder.mutation<ILoginResponse, {credentials: ISignInCredentials, lang: string}>({
+      query: ({credentials, lang}) => ({
         url: URLS.SIGN_IN,
         method: "POST",
-        body: user,
+        body: credentials,
         headers: { "Accept-Language": lang }
       }),
     }),
@@ -170,5 +190,6 @@ export const {
   useSignUpMutation,
   useSignInMutation,
   useGetProfileQuery,
-  useUpdateProfileMutation
+  useUpdateProfileMutation,
+  useAddOrderMutation
 } = apiSlice;

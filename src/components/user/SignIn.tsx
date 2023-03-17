@@ -1,124 +1,110 @@
-import { useEffect, useState } from "react";
-import { Form } from "react-bootstrap";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import eye from "../../assets/icons/eye.svg"
-import { useSignInMutation } from "../features/api/apiSlice";
+import { ISignInCredentials, useSignInMutation } from "../features/api/apiSlice";
+import { Formik, Form as FormikForm, FormikState } from "formik";
+import { Store } from "react-notifications-component";
+import * as Yup from "yup";
+import "yup-phone-lite";
+
+import { FormsInput } from "../../components/utils/Forms";
+// import { ISignIn } from "../../app/types";
+import { notificationError } from "../../components/modal/Notification";
 import Spinner from "../utils/Spinner";
+import eye from "../../assets/icons/eye.svg"
 
 interface errorType {
-  email: string[],
-  password: string[],
-  username: string[],
-  detail: string
+  status: number;
+  data: {
+    email: string[],
+    password: string[],
+    username: string[],
+    detail: string
+  }
 }
 
 const SignIn = () => {
   const navigate = useNavigate()
   const { i18n, t } = useTranslation()
-  const initialFormDataState = {
+  const [passwordShown, setPasswordShown] = useState<boolean>(false)
+  const initialFormDataState: ISignInCredentials = {
     username: "",
     email: "",
     password: "",
   };
-  
-  const [formData, setFormData] = useState(initialFormDataState);
-  const [passwordShown, setPasswordShown] = useState<boolean>(false)
-  const [errorMessage, setErrorMessage] = useState<errorType>(({
-    email: [],
-    password: [],
-    username: [],
-    detail: ""
-  }))
 
-  const [ signIn, { isError, error, isLoading, isSuccess }] = useSignInMutation()
+  const [ signIn, { isLoading }] = useSignInMutation()
 
-  const togglePasswordShown = (): void => {
-    setPasswordShown(prev => !prev)
+  const getUserCredentials = (values: ISignInCredentials): ISignInCredentials => {
+    let credentials = { ...values }
+    const username = values.email.match(/[^@]*/)
+    if (username !== null) {
+      credentials = { ...values, username: username[0] }
+    }
+    return credentials
   }
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = e.currentTarget;
-    const beforeAtSign = /[^@]*/
-    setFormData((prevData) => {
-      return {
-        ...prevData,
-        [name]: value,
-        username: formData.email.match(beforeAtSign)![0]
-      };
-    });
-  };
+  const handleFormSubmit = async (
+    values: ISignInCredentials,
+    resetForm: (nextState?: Partial<FormikState<ISignInCredentials>> | undefined) => void,
+  ): Promise<void> => {
+    const credentials = getUserCredentials(values)
 
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
-      if (!isLoading) {
-        try {
-          const data = await signIn({user: formData, lang: i18n.language}).unwrap();
-          setFormData(initialFormDataState);
-          localStorage.setItem("token", data.access)
-          navigate("/profile")
-        } catch (error) {
-          
-        }
-      }
+    try {
+      const payload = await signIn({credentials, lang: i18n.language}).unwrap();
+      localStorage.setItem("token", payload.access)
+      navigate("/profile")
+      resetForm();
+    } catch (error) {
+      const myError = error as errorType
+      Store.addNotification({
+        ...notificationError,
+        title: myError.data.detail,
+      });
+    }
   };
-
-  useEffect(() => {
-    if (isError) {
-      if ("data" in error!) {
-        setErrorMessage(prevData => {
-          return {
-            ...prevData,
-            ...error.data as {[key: string]: string[]}
-          }
-        })
-      }
-    
-    } else setErrorMessage({
-      email: [],
-      password: [],
-      username: [],
-      detail: ""
-    })
-  }, [isError])
 
   if (isLoading) {
     return <Spinner />
   }
 
   return (
-    <Form className="sign__form" onSubmit={handleFormSubmit} noValidate>
+    <Formik
+      initialValues={initialFormDataState}
+      validationSchema={Yup.object().shape({
+        email: Yup.string()
+          .email(t("Forms.incorrectEmail"))
+          .required(t("Forms.required")),
+        password: Yup.string()
+          .max(30, t("Forms.lengthMax30"))
+          .required(t("Forms.required")),
+      })}
+      onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}
+    >
 
-      <div className="input-group">
-        <input
-          className={`form-control ${errorMessage.email.length > 0 ? "is-invalid" : ""}`}
-          required
+      <FormikForm className="contacts__form">
+        <FormsInput
+          controlId={"email"}
           type="email"
-          placeholder={t("Login.LoginForm.email")}
+          placeholder={t("FormFields.email")}
           name="email"
-          value={formData.email}
-          aria-label="email"
-          onChange={handleFormChange} 
         />
-      </div>
-      {errorMessage?.email.map((item, i) => <p key={i} className="sign__error-message">{item}</p>)}
-
-      <div className="input-group">
-        <input 
-          className={`form-control ${errorMessage.password.length > 0 ? "is-invalid" : ""}`}
-          name="password"
-          type={passwordShown ? "text" : "password"}
-          placeholder={t("Login.LoginForm.password")}
-          aria-label="password" 
-          onChange={handleFormChange} 
-        />
-        <img src={eye} onClick={togglePasswordShown} alt="eye-icon" className="input-group-text" id="button-addon1"></img>
-      </div>
-
-      {errorMessage?.password.map((item, i) => <p key={i} className="sign__error-message">{item}</p>)}
-      <p className="sign__error-message">{errorMessage?.detail}</p>
-      <button type="submit" className="btn sign__btn">{t("Login.Login")}</button>
-    </Form>
+        <div className="input--with-icon">
+          <FormsInput
+            controlId={"password"}
+            type={passwordShown ? "text" : "password"}
+            placeholder={t("FormFields.password")}
+            name="password"
+          />
+          <img 
+            onClick={() => setPasswordShown(prev => !prev)}
+            src={eye} alt="eye-logo" 
+            className="input__icon" 
+          />
+        </div>
+        <button type="submit" className="btn sign__btn">{t("Login.Login")}</button>
+      </FormikForm>
+    </Formik>
   )
 }
 
