@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { ISignInCredentials, useSignInMutation } from "../features/api/apiSlice";
+import { useSignInMutation } from "../features/api/apiSlice";
 import { Formik, Form as FormikForm, FormikState } from "formik";
 import { Store } from "react-notifications-component";
 import * as Yup from "yup";
 import "yup-phone-lite";
 
 import { FormsInput } from "../../components/utils/Forms";
-// import { ISignIn } from "../../app/types";
 import { notificationError } from "../../components/modal/Notification";
 import Spinner from "../utils/Spinner";
 import eye from "../../assets/icons/eye.svg"
+import { ISignIn } from "../../app/types";
 
 interface errorType {
   status: number;
@@ -27,7 +27,7 @@ const SignIn = () => {
   const navigate = useNavigate()
   const { i18n, t } = useTranslation()
   const [passwordShown, setPasswordShown] = useState<boolean>(false)
-  const initialFormDataState: ISignInCredentials = {
+  const initialFormDataState = {
     username: "",
     email: "",
     password: "",
@@ -35,21 +35,13 @@ const SignIn = () => {
 
   const [ signIn, { isLoading }] = useSignInMutation()
 
-  const getUserCredentials = (values: ISignInCredentials): ISignInCredentials => {
-    let credentials = { ...values }
-    const username = values.email.match(/[^@]*/)
-    if (username !== null) {
-      credentials = { ...values, username: username[0] }
-    }
-    return credentials
-  }
-
   const handleFormSubmit = async (
-    values: ISignInCredentials,
-    resetForm: (nextState?: Partial<FormikState<ISignInCredentials>> | undefined) => void,
+    values: ISignIn,
+    resetForm: (nextState?: Partial<FormikState<ISignIn>> | undefined) => void,
   ): Promise<void> => {
-    const credentials = getUserCredentials(values)
-
+    const username = values.email.split("@")[0]
+    const credentials = {...values, username}
+    
     try {
       const payload = await signIn({credentials, lang: i18n.language}).unwrap();
       localStorage.setItem("token", payload.access)
@@ -76,7 +68,6 @@ const SignIn = () => {
           .email(t("Forms.incorrectEmail"))
           .required(t("Forms.required")),
         password: Yup.string()
-          .max(30, t("Forms.lengthMax30"))
           .required(t("Forms.required")),
       })}
       onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}

@@ -1,4 +1,4 @@
-import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 // import types
 import {
@@ -8,36 +8,10 @@ import {
   IArticle,
   IProductDetails,
   IReviewsResponse,
+  ISignUp,
+  ISignIn,
+  IUserData,
 } from "../../../app/types";
-
-interface IUserData {
-  username: string;
-  avatar: "";
-  first_name: string;
-  last_name: string;
-  birth_data: string;
-  country: string;
-  city: string;
-  address: string;
-  email: string;
-  is_email_confirmed: boolean;
-  is_profile_full: boolean;
-  phone_number: string;
-  vk_profile: string;
-  fb_profile: string;
-  inst_profile: string;
-  tg_profile: string
-}
-
-export interface ISignInCredentials {
-  username: string;
-  email: string;
-  password: string;
-}
-export interface ISignUp {
-  email: string;
-  password: string;
-}
 
 interface ILoginResponse {
   access: string;
@@ -150,7 +124,7 @@ export const apiSlice = createApi({
         headers: { "Accept-Language": lang }
       }),
     }),
-    signIn: builder.mutation<ILoginResponse, {credentials: ISignInCredentials, lang: string}>({
+    signIn: builder.mutation<ILoginResponse, {credentials: ISignIn, lang: string}>({
       query: ({credentials, lang}) => ({
         url: URLS.SIGN_IN,
         method: "POST",

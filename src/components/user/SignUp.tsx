@@ -5,15 +5,18 @@ import { Store } from "react-notifications-component";
 import * as Yup from "yup";
 import "yup-phone-lite";
 import eye from "../../assets/icons/eye.svg"
-import { ISignUp, useSignUpMutation } from "../features/api/apiSlice";
+import { useSignUpMutation } from "../features/api/apiSlice";
 import { FormsInput } from "../../components/utils/Forms";
 import Spinner from "../utils/Spinner";
 import { useNavigate } from "react-router-dom";
 import { notificationError } from "../../components/modal/Notification";
+import { ISignUp } from "../../app/types";
 
 interface errorType {
   status: number;
-  data: any;
+  data: {
+    [key: string]: string
+  };
 }
 
 const SignUp = () => {
@@ -68,7 +71,8 @@ const SignUp = () => {
           .min(8, t("Forms.lengthMin8"))
           .max(30, t("Forms.lengthMax30"))
           .required(t("Forms.required"))
-          .matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, t("Forms.weakPassword")),
+          .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, t("Forms.weakPassword")),
+          // .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, "test"),
         confirmPassword: Yup.string()
           .oneOf([Yup.ref('password')], 'Passwords must match')
       })}
