@@ -1,4 +1,3 @@
-import { Col, Container, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Formik, Form as FormikForm, FormikState } from "formik";
@@ -8,21 +7,13 @@ import { FormValues } from "../../app/types";
 import { Store } from "react-notifications-component";
 import { notificationSuccess, notificationError } from "../../components/modal/Notification";
 // components
-import Social from "../../components/Social";
-import PrimaryNav from "../../components/primary-nav/PrimaryNav";
-import useModalState from "../../components/hooks/useModalState";
-import ModalThanks from "../../components/modal/ModalThanks";
 import { FormsInput } from "../../components/utils/Forms";
+import { ReactComponent as FooterLogo} from "../../assets/images/footer-logo.svg"
 
 const Footer = () => {
   const { t } = useTranslation();
   const [addSubscribe] = useAddSubscriptionMutation();
-
-  const { showModalThanks, handleClose } = useModalState();
-
-  const initialValue: FormValues = {
-    email: "",
-  };
+  const initialValue: FormValues = { email: "" };
 
   const checkError = (error: any): void => {
     if ("originalStatus" in error) {
@@ -43,121 +34,91 @@ const Footer = () => {
     }
   };
 
-  const handleFormSubmit = (
+  const handleFormSubmit = async (
     values: FormValues,
     resetForm: (nextState?: Partial<FormikState<FormValues>> | undefined) => void,
-  ): void => {
-    addSubscribe(values)
-      .unwrap()
-      .then(() => {
+  ): Promise<void> => {
+    try {
+      const response = await addSubscribe(values).unwrap()
+      if (response) {
         Store.addNotification({
           ...notificationSuccess,
           title: t("Notification.subscribed"),
         });
-      })
-      .catch((error) => checkError(error))
-      .finally(() => resetForm());
+      }
+    } catch (error) {
+      checkError(error)
+    } finally {
+      resetForm()
+    }
   };
 
   return (
-    <section className="footer">
-      <Container>
-        <div className="footer__wrapper">
-          <Row>
-            <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
-              <Link to="/">
-                <div className="footer__subtitle">{t("Footer.subtitle")}</div>
-                <div className="footer__title">Little Knits Story</div>
-              </Link>
-              <Row>
-                <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
-                  <div className="footer__navbar">
-                    <PrimaryNav type={"footer"} />
-                  </div>
-                </Col>
-                {/* Temporary comment out */}
-                {/* <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
-                  <div className="footer__links-account">
-                    <div className="footer__links-account footer__links-account-title">
-                      личный кабинет
-                    </div>
-                    <ul>
-                      <li>
-                        <a href="#">Войти</a>
-                      </li>
-                      <li>
-                        <a href="#">Корзина</a>
-                      </li>
-                      <li>
-                        <a href="#">Сохраненные товары</a>
-                      </li>
-                    </ul>
-                  </div>
-                </Col> */}
-              </Row>
-            </Col>
-            <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
-              <div className="footer__subscribe">
-                <div className="footer__subscribe-text">{t("Footer.subscribe.text")}</div>
+    <footer>
+      <div className="footer__flex-container">
 
-                <Formik
-                  initialValues={initialValue}
-                  validationSchema={Yup.object().shape({
-                    email: Yup.string()
-                      .email(t("Forms.incorrectEmail"))
-                      .required(t("Forms.required")),
-                  })}
-                  onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}
-                >
-                  <FormikForm>
-                    <FormsInput
-                      name="email"
-                      type="email"
-                      placeholder="E-mail"
-                      controlId={"formGroupEmail"}
-                    />
-                    <button className="btn btn_border footer__btn" type="submit">
-                      <div className="btn__text btn__text_center">
-                        {t("Footer.subscribe.buttonText")}
-                      </div>
-                    </button>
-                  </FormikForm>
-                </Formik>
-              </div>
-
-              <Social />
-            </Col>
-          </Row>
+        <div className="footer__about">
+          <h2 className="footer__title">О проекте</h2>
+          <nav className="footer__nav">
+            <Link to="" className="footer__link">Наша история</Link>
+            <Link to="" className="footer__link">FAQ</Link>
+            <Link to="" className="footer__link">Реклама</Link>
+          </nav>
         </div>
-        <ModalThanks
-          showModal={showModalThanks}
-          handleClose={handleClose}
-          title={t("Modal.titleThanks.thanks")}
-          button={false}
-          message={
-            <>
-              <p>{t("Modal.thanksText.subscription")}</p>
-            </>
-          }
-        />
 
-        <div className="footer__end">
-          <Row>
-            <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
-              <div className="footer__rights">
-                Little Knits Story {new Date().getFullYear()} | All Rights Reserved
-              </div>
-            </Col>
-
-            <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
-              <Link to="/privacyPolicy" className="footer__policy">
-                {t("Footer.policy")}
-              </Link>
-            </Col>
-          </Row>
+        <div className="footer__contacts">
+          <h2 className="footer__title">Наши контакты</h2>
+          <nav className="footer__nav">
+            <Link to="" className="footer__link">Facebook</Link>
+            <Link to="" className="footer__link">Instagram</Link>
+            <Link to="" className="footer__link">Pinterest</Link>
+            <Link to="" className="footer__link">Вконтакте</Link>
+          </nav>
         </div>
-      </Container>
-    </section>
+
+        <div className="footer__subscribe">
+          <h2 className="footer__title">Рассылка</h2>
+          <p className="footer__text">Оформите подписку, чтобы узнавать о наших специальных акциях</p>
+          
+          <Formik
+            initialValues={initialValue}
+            validationSchema={Yup.object().shape({
+              email: Yup.string()
+                .email(t("Forms.incorrectEmail"))
+                .required(t("Forms.required")),
+            })}
+            onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}
+          >
+            <FormikForm className="footer__form">
+              <FormsInput
+                name="email"
+                type="email"
+                placeholder="e-mail"
+                controlId={"formGroupEmail"}
+              />
+              <button className="btn" type="submit">{t("Footer.subscribe.buttonText")}</button>
+            </FormikForm>
+          </Formik>
+        </div>
+
+      </div>
+      
+      <Link to="/">
+        <FooterLogo className="footer__logo-img"/>
+        <h2 className="footer__logo-text">Блог и магазин по вязанию</h2>
+      </Link>
+
+      <div className="break-line break-line--vertical"></div>
+      
+      <div className="footer__copyrights">
+        <p className="footer__text--small">
+          Little Knits Story {new Date().getFullYear()} | © All Rights Reserved
+        </p>
+        <Link to="/privacyPolicy" className="footer__link footer__link--small">
+          {t("Footer.policy")}
+        </Link>
+      </div>
+    </footer>
   );
 };
 

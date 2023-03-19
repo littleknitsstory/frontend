@@ -45,10 +45,10 @@
 * {
   font-family: 'Montserrat', sans-serif;
   a {
-    color: unset;
     text-decoration: none;
+    color: inherit;
     &:hover {
-      color: unset;
+      color: inherit;
     }
   }
 }
