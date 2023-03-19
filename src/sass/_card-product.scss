@@ -1,6 +1,7 @@
 @use "./_variables" as *;
 .product-card {
   .card {
+    text-align: center;
     padding: 1.25rem 3rem;
     box-shadow: 15px 15px 50px -10px rgba(0, 0, 0, 0.08);
     border-radius: 60px;
@@ -10,11 +11,12 @@
       transform: scale(1.1);
     }
   }
-  &__btn {
-    .btn {
-      font-size: 0.875rem;
-    }
+  & .btn {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    padding: 0.75rem 1.5rem;
   }
+  
 
   &__modal-quick-purchase {
     &-body {
@@ -34,6 +36,8 @@
       align-items: center;
 
     }
+
+    
     &-title,
     &-color {
       display: flex;
@@ -91,6 +95,16 @@
       }
     }
   }
+  &__modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    & .btn {
+      min-width: 150px;
+    }
+  }
+
   &__cart {
     .card {
       margin-bottom: 1.5rem;

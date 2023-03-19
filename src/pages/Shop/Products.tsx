@@ -143,18 +143,7 @@ const Products = () => {
             </Row>
           </Col>
         </Row>
-        {isFetching ? (
-          <Spinner />
-        ) : (
-          !isLastPage && (
-            <button className="btn btn_border" onClick={() => setLimit((prev) => prev + 4)}>
-              <div className="btn__text">{t("seeMore")}</div>
-              <div className="btn__icon">
-                <img src={arrowRight} alt="arrowWhite" />
-              </div>
-            </button>
-          )
-        )}
+        {isFetching && <Spinner />}
       </div>
     </Container>
   );

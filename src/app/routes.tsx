@@ -22,7 +22,7 @@ const routes: RouteObject = {
     {
       path: "/",
       /* Temporary used Blog as homepage */
-      element: <Navigate to="blog"/>,
+      element: <Navigate to="/blog/"/>,
     },
     {
       path: "blog",

@@ -172,16 +172,12 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
               </div>
             </div>
             <div className="schema-card__product-btn">
-              <Col>
-                <button className="btn btn_border" onClick={() => addProductInCart(product)}>
-                  <div className="btn__text_center">{t("SchemaCard.buttonAddCart")}</div>
-                </button>
-              </Col>
-              <Col>
-                <button className="btn btn_vinous schema-card__quick-purchase" onClick={handleShow}>
-                  <div className="btn__text btn__text_center">{t("quickOrder")}</div>
-                </button>
-              </Col>
+              <button className="btn btn--primary" onClick={() => addProductInCart(product)}>
+                {t("SchemaCard.buttonAddCart")}
+              </button>
+              <button className="btn btn--primary" onClick={handleShow}>
+                {t("quickOrder")}
+              </button>
             </div>
           </div>
         </Col>

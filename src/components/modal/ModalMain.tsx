@@ -82,7 +82,7 @@ const ModalMain = ({ product, showModal, handleClose, onSubmitOrder }: ModalProp
           })}
           onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}
         >
-          <FormikForm>
+          <FormikForm className="product-card__modal-form">
             <Row>
               <FormsInput
                 className="mb-3"
@@ -102,8 +102,8 @@ const ModalMain = ({ product, showModal, handleClose, onSubmitOrder }: ModalProp
               />
             </Row>
 
-            <button type="submit" className="btn btn_vinous btn_center">
-              <div className="btn__text btn__text_center">{t("CardProduct.buttonSendText")}</div>
+            <button type="submit" className="btn btn--primary btn--centered">
+              {t("CardProduct.buttonSendText")}
             </button>
           </FormikForm>
         </Formik>

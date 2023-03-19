@@ -12,6 +12,9 @@
   &__product-btn {
     display: none;
   }
+  &__product-btn {
+    gap: 2rem;
+  }
   &__wrapper-title {
     display: flex;
     justify-content: flex-start;

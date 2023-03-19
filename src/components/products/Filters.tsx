@@ -145,9 +145,8 @@ const Filters = (props: FilterProps) => {
         </button>
       </div>
 
-      <button className="btn btn_border btn_center" onClick={clearFilters}>
+      <button className="btn btn--primary" onClick={clearFilters}>
         {t("Filter.buttonText")}
-        <img src={arrowRight} alt="arrowWhite" />
       </button>
 
     </div>

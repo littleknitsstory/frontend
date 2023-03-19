@@ -3,6 +3,7 @@
 .sign {
   &__form {
   margin-top: 3.75rem;
+  margin-bottom: 2rem;
 
     .input-group {
       margin-bottom: 1.25rem;
@@ -17,18 +18,6 @@
     .form-control {
       padding: 1rem;
       border-radius: 10px;
-    }
-  }
-
-  &__btn {
-    padding: 1.25rem 3.5rem;
-    justify-content: center;
-    margin: 3.75rem auto;
-    background-color: $vinous-color;
-    color: $text-color-light;
-
-    &:hover {
-      color: $text-color-light;
     }
   }
   

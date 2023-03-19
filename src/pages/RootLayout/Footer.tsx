@@ -91,12 +91,18 @@ const Footer = () => {
           >
             <FormikForm className="footer__form">
               <FormsInput
+                className="footer__input"
                 name="email"
                 type="email"
                 placeholder="e-mail"
                 controlId={"formGroupEmail"}
               />
-              <button className="btn" type="submit">{t("Footer.subscribe.buttonText")}</button>
+              <button 
+                className="btn btn--primary" 
+                type="submit"
+              >
+                {t("Footer.subscribe.buttonText")}
+              </button>
             </FormikForm>
           </Formik>
         </div>
@@ -108,7 +114,7 @@ const Footer = () => {
         <h2 className="footer__logo-text">Блог и магазин по вязанию</h2>
       </Link>
 
-      <div className="break-line break-line--vertical"></div>
+      <div className="break-line"></div>
       
       <div className="footer__copyrights">
         <p className="footer__text--small">

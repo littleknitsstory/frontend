@@ -2,6 +2,7 @@
 .contacts {
   margin-top: 7rem;
   &__form {
+    // text-align: center;
     margin-top: 1.5rem;
     input {
       height: 3rem;
@@ -11,6 +12,13 @@
       margin: 0.5rem 0;
       min-height: calc(6.5em + 0.75rem + 2px);
     }
+    
+    & .btn {
+      min-width: 150px;
+      display: block;
+      margin: 1rem auto 0;
+    }
+    
   }
 
   &__policy {

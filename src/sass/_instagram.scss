@@ -5,6 +5,11 @@
     h2 {
       text-align: center;
     }
+
+    & .btn {
+      display: block;
+      margin: 1rem auto 0;
+    }
   }
 
   &__right-side {

@@ -1,18 +1,22 @@
 @use "./_variables" as *;
 .btn {
   border-radius: 60px;
-  width: 20.625rem;
-  height: 4.125rem;
-  background-color: $text-color-light;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.25rem 2rem;
-  font-size: 1.5rem;
-  color: $text-color-dark;
-  &:hover {
-    background-color: $burgundy-color;
+  padding: 1rem 2rem;
+  &--primary {
+    background-color: $accent-burgundy;
+    color: $white;
+    &:hover {
+      background-color: $accent-burgundy-dark;
+      color: $white;
+    }
   }
+  &--centered {
+    display: block;
+    margin: 0 auto;
+  }
+
+
+  /*  */
   &_center {
     margin: 0 auto;
   }
@@ -71,17 +75,5 @@
     &_end {
       justify-content: flex-end;
     }
-  }
-}
-
-@media (max-width: 992px) {
-  .btn {
-    font-size: 1.05rem;
-    width: 15.625rem;
-    height: 3.125rem;
-    padding: 1.25rem 1.8rem;
-    // &_vinous {
-    //   margin-top: 1.25rem;
-    // }
   }
 }

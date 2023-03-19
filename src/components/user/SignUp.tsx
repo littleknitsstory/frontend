@@ -107,64 +107,65 @@ const SignUp = () => {
   }
 
   return (
-    <Form className="sign__form" onSubmit={handleFormSubmit} noValidate>
-      <div className="input-group">
-        <input
-          className={`form-control ${errorMessage.email.length > 0 ? "is-invalid" : ""}`}
-          required
-          type="email"
-          placeholder={t("Login.LoginForm.email")}
-          name="email"
-          value={formData.email}
-          aria-label="email"
-          onChange={handleFormChange} 
-        />
-      </div>
-      {errorMessage?.email.map((item, i) => <p key={i} className="sign__error-message">{item}</p>)}
-      
+    <>
+      <Form className="sign__form" onSubmit={handleFormSubmit} noValidate>
+        <div className="input-group">
+          <input
+            className={`form-control ${errorMessage.email.length > 0 ? "is-invalid" : ""}`}
+            required
+            type="email"
+            placeholder={t("Login.LoginForm.email")}
+            name="email"
+            value={formData.email}
+            aria-label="email"
+            onChange={handleFormChange} 
+          />
+        </div>
+        {errorMessage?.email.map((item, i) => <p key={i} className="sign__error-message">{item}</p>)}
 
-      <div className="input-group">
-        <input 
-          className={`form-control ${passwordConfirmError || errorMessage?.password.length > 0 ? "is-invalid" : ""}`}
-          type={passwordShown ? "text" : "password"}
-          placeholder={t("Login.LoginForm.password")}
-          name="password"
-          value={formData.password} 
-          aria-label="password" 
-          onChange={handleFormChange} 
-        />
-        <img 
-          src={eye} 
-          onClick={() => setPasswordShown(prev => !prev)} 
-          alt="eye-icon" 
-          className="input-group-text" 
-        ></img>
-      </div>
+        <div className="input-group">
+          <input 
+            className={`form-control ${passwordConfirmError || errorMessage?.password.length > 0 ? "is-invalid" : ""}`}
+            type={passwordShown ? "text" : "password"}
+            placeholder={t("Login.LoginForm.password")}
+            name="password"
+            value={formData.password} 
+            aria-label="password" 
+            onChange={handleFormChange} 
+          />
+          <img 
+            src={eye} 
+            onClick={() => setPasswordShown(prev => !prev)} 
+            alt="eye-icon" 
+            className="input-group-text" 
+          ></img>
+        </div>
 
-      <div className="input-group">
-        <input 
-          className={`form-control ${passwordConfirmError || errorMessage?.password.length > 0 ? "is-invalid" : ""}`}
-          type={passwordConfirmShown ? "text" : "password"}
-          placeholder={t("Login.LoginForm.confirmPassword")}
-          name="passwordConfirm"
-          value={passwordConfirmInput} 
-          aria-label="password" 
-          onChange={handleConfirmChange} 
-        />
-        <img 
-          src={eye} 
-          onClick={() => setPasswordConfirmShown(prev => !prev)} 
-          alt="eye-icon" 
-          className="input-group-text" 
-        ></img>
-      </div>
-      <p className="sign__error-message">{passwordConfirmError}</p>
-      {errorMessage?.password.map((item, i) => <p key={item} className="sign__error-message">{item}</p>)}
-      
-      <button type="submit" className="btn sign__btn" >{t("Login.createAccount")}</button>
+        <div className="input-group">
+          <input 
+            className={`form-control ${passwordConfirmError || errorMessage?.password.length > 0 ? "is-invalid" : ""}`}
+            type={passwordConfirmShown ? "text" : "password"}
+            placeholder={t("Login.LoginForm.confirmPassword")}
+            name="passwordConfirm"
+            value={passwordConfirmInput} 
+            aria-label="password" 
+            onChange={handleConfirmChange} 
+          />
+          <img 
+            src={eye} 
+            onClick={() => setPasswordConfirmShown(prev => !prev)} 
+            alt="eye-icon" 
+            className="input-group-text" 
+          ></img>
+        </div>
+        <p className="sign__error-message">{passwordConfirmError}</p>
+        {errorMessage?.password.map((item, i) => <p key={item} className="sign__error-message">{item}</p>)}
+        
+        <button type="submit" className="btn btn btn--primary btn--centered" >{t("Login.createAccount")}</button>
 
+      </Form>
       <p className="sign__policy">{t("Login.createPolicy")}</p>
-    </Form>
+    </>
   )
 }
 export default SignUp

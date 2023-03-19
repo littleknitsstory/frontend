@@ -27,7 +27,7 @@ export const FormsInput = ({
   const [field, meta] = useField(props);
   return (
     <>
-      <Form.Group as={Col} md={col} controlId={controlId}>
+      <Form.Group as={Col} md={col} controlId={controlId} className="form-group">
         <Field
           {...field}
           {...props}
@@ -35,7 +35,7 @@ export const FormsInput = ({
             meta.touched && meta.error ? "form-control form-control_error" : "form-control"
           }
         />
-        {meta.touched && meta.error ? <div className="form-error">{meta.error}</div> : null}
+        {meta.touched && meta.error ? <p className="form-error">{meta.error}</p> : null}
       </Form.Group>
     </>
   );

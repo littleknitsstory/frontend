@@ -117,7 +117,7 @@ const SignIn = () => {
 
       {errorMessage?.password.map((item, i) => <p key={i} className="sign__error-message">{item}</p>)}
       <p className="sign__error-message">{errorMessage?.detail}</p>
-      <button type="submit" className="btn sign__btn">{t("Login.Login")}</button>
+      <button type="submit" className="btn btn--primary btn--centered">{t("Login.Login")}</button>
     </Form>
   )
 }
