@@ -13,6 +13,7 @@ import Home from "../pages/Home";
 import LoginPage from "../pages/User/LoginPage";
 import Profile from "../components/user/Profile";
 import AuthRequired from "../components/AuthRequired";
+import { Navigate } from "react-router-dom";
 
 const routes: RouteObject = {
   element: <RootLayout />,
@@ -21,7 +22,7 @@ const routes: RouteObject = {
     {
       path: "/",
       /* Temporary used Blog as homepage */
-      element: <Blog />,
+      element: <Navigate to="blog"/>,
     },
     {
       path: "blog",
