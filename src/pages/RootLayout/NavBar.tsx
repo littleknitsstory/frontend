@@ -1,5 +1,5 @@
 import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 // components
 import PrimaryNav from "../../components/primary-nav/PrimaryNav";
@@ -8,51 +8,54 @@ import heart from "../../assets/icons/heart.svg";
 import shoppingBag from "../../assets/icons/shopping-bag.svg";
 //? Temporary unused assets
 // import logout from "../icons/logout.svg";
-import user from "../../assets/icons/user.svg";
+import { ReactComponent as ProfileIcon} from "../../assets/icons/user.svg";
+import { ReactEventHandler, useState } from "react";
 
 const NavBar = () => {
   const { i18n } = useTranslation();
+  const [lang, setLang] = useState("English")
 
+  const changeLang = (e: React.MouseEvent) => {
+    if (e.currentTarget.textContent === "English") {
+      setLang("Русский")
+      i18n.changeLanguage("ru")
+    } else {
+      setLang("English")
+      i18n.changeLanguage("en")
+    }
+  }
   return (
-    <section className="lks-navbar">
-      <Navbar expand="lg">
-        <Container>
+    <section className="navbar">
+      <Container>
+        <Navbar expand="lg">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
-          <div className="lks-navbar__right">
-            <div className="lks-navbar__icons">
-              <Link to="/login">
-                <img src={user} alt="user" />
-              </Link>
-              {/* <a href="#">
-                <img src={logout} alt="logout" />
-              </a> */}
-              <Link to="/saved">
-                <img src={heart} alt="heart" />
-              </Link>
-              <Link to="/cart">
-                <img src={shoppingBag} alt="shoppingBag" />
-              </Link>
-            </div>
+          {/* <div className="lks-navbar__right"> */}
+          <nav className="navbar__aside">
+            <NavLink to="/login" id="profile-icon">
+              <ProfileIcon id="profile-icon-svg"/>
+            </NavLink>
+            {/* <a href="#">
+              <img src={logout} alt="logout" />
+            </a> */}
+            <Link to="/saved">
+              <img src={heart} alt="heart" />
+            </Link>
+            <Link to="/cart">
+              <img src={shoppingBag} alt="shoppingBag" />
+            </Link>
+            <p className="navbar__change-lang"onClick={changeLang}>{lang}</p>
+          </nav>
 
-            <NavDropdown
-              title={i18n.language.toUpperCase()}
-              id="basic-nav-dropdown"
-              className="lks-navbar__lang"
-            >
-              <NavDropdown.Item onClick={() => i18n.changeLanguage("en")}>EN</NavDropdown.Item>
+          {/* </div> */}
 
-              <NavDropdown.Item onClick={() => i18n.changeLanguage("ru")}>RU</NavDropdown.Item>
-            </NavDropdown>
-          </div>
-
-          <Navbar.Collapse>
-            <Nav className="lks-navbar__links">
-              <PrimaryNav type={"header"} />
-            </Nav>
+          <Navbar.Collapse className="navbar__main">
+            {/* <Nav className="navbar__main"> */}
+              <PrimaryNav type={"header"} className="navbar__main-link"/>
+            {/* </Nav> */}
           </Navbar.Collapse>
-        </Container>
-      </Navbar>
+        </Navbar>
+      </Container>
     </section>
   );
 };

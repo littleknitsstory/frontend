@@ -10,17 +10,15 @@
     }
 
     &:hover {
-      transform: translateY(-10%);
-
+      transform: translateY(-5%);
       box-shadow: 15px 15px 50px -10px rgba(0, 0, 0, 0.08);
 
       .card-lks {
         &__btn {
-          visibility: visible;
-          bottom: 0.8rem;
+          display: block;
+          bottom: 1rem;
           left: 50%;
           transform: translate(-50%);
-          padding-top: 2rem;
         }
         &__wrapper-icons {
           display: block;
@@ -73,18 +71,19 @@
     text-align: right;
   }
   &__btn {
-    // transition: 0.5s bottom;
+    transition: 0.5s bottom;
     position: absolute;
-    bottom: -1rem;
-    visibility: hidden;
-    font-size: 1.25rem;
+    // bottom: -1rem;
+    display: none;
+    padding: 0.5rem 2rem;
+    // font-size: 1.25rem;
 
-    .btn_vinous {
-      width: 9rem;
-      height: 2.625rem;
-      text-align: center;
-      padding: 0;
-    }
+    // .btn--primary {
+    //   // width: 9rem;
+    //   // height: 2.625rem;
+    //   // text-align: center;
+    //   // padding: 0;
+    // }
   }
   &__color-circle-wrapper {
     margin-left: 0.5rem;

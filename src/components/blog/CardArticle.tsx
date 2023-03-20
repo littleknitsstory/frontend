@@ -39,19 +39,17 @@ const CardArticle = ({ article }: { article: IArticle }) => {
                 {article.created_at.slice(8, 10)}:{article.created_at.slice(11, 13)}
                 <br /> {article.created_at.slice(0, 8)}
               </div>
-              <div className="card-lks__btn">
-                <button
-                  className="btn btn_vinous btn_center"
-                  onClick={() => {
-                    window.scrollTo({
-                      top: 0,
-                      behavior: "smooth",
-                    });
-                  }}
-                >
-                  <div className="btn__text btn__text_center">{t("read")}</div>
-                </button>
-              </div>
+              <button
+                className="btn btn--primary card-lks__btn"
+                onClick={() => {
+                  window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                  });
+                }}
+              >
+                {t("read")}
+              </button>
             </div>
           </Card.Body>
         </Card>

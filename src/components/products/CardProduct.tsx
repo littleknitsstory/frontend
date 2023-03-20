@@ -104,9 +104,12 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
                 ></div>
               ))}
             </div>
-            <button className="btn btn--primary" onClick={handleShow}>
-              {t("CardProduct.buttonQuickOrderText")}
-            </button>
+            <div className="card-lks__price">{product?.price}</div>
+            {/* <div className="card-lks__btn product-card__btn"> */}
+              <button className="btn btn--primary card-lks__btn product-card__btn" onClick={handleShow}>
+                {t("CardProduct.buttonQuickOrderText")}
+              </button>
+            {/* </div> */}
           </Card.Body>
         </Card>
       )}
