@@ -12,9 +12,7 @@
 @use "./_footer";
 @use "./_main-slider";
 @use "./_card-lks";
-@use "./_articles";
 @use "./_page-error";
-@use "./_article";
 @use "./_coffee-card";
 @use "./_contacts";
 @use "./_card-product";
@@ -37,7 +35,9 @@
 @use "./sign-in";
 @use "./profile";
 @use "./posts";
+@use "./post";
 @use "./card-article";
+@use "./card-article-small";
 
 @import "animate.css";
 
@@ -52,4 +52,8 @@
       color: inherit;
     }
   }
+}
+
+body {
+  background-color: #FAFAFA;
 }

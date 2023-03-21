@@ -8,7 +8,7 @@ import Posts from "../pages/Blog";
 import ContactPage from "../pages/Contacts";
 import RootLayout from "../pages/RootLayout";
 import Products from "../pages/Shop/Products";
-import Article from "../pages/Blog/Article";
+import Post from "../pages/Blog/Post"
 import Home from "../pages/Home";
 import LoginPage from "../pages/User/LoginPage";
 import Profile from "../components/user/Profile";
@@ -30,7 +30,7 @@ const routes: RouteObject = {
     },
     {
       path: "posts/:slug",
-      element: <Article />,
+      element: <Post />,
     },
     {
       path: "shop",

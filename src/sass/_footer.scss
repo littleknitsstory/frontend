@@ -23,7 +23,7 @@ footer {
     align-items: center;
   }
   &__link {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: $black-text;
     &--small {
       font-size: 0.875rem;
@@ -34,7 +34,7 @@ footer {
   }
   
   &__text {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     line-height: 150%;
     &--small {
       font-size: 0.875rem;
@@ -100,7 +100,7 @@ footer {
   }
 }
 
-@media (min-width: 1095px) {
+@media (min-width: 1032px) {
   .footer {
     &__flex-container {
       text-align: left;
