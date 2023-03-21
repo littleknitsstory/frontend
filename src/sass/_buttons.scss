@@ -2,12 +2,31 @@
 .btn {
   border-radius: 60px;
   padding: 1rem 2rem;
+  color: $black-text;
   &--primary {
     background-color: $accent-burgundy;
     color: $white;
     &:hover {
       background-color: $accent-burgundy-dark;
       color: $white;
+    }
+  }
+  &--tag {
+    padding: 1rem 1.5rem;
+    border-radius: 48px;
+    border: 1px solid $black-text;
+    &:hover {
+      background-color: $secondary-light-grey;
+      border: 1px solid $black-text;
+    }
+    &:active {
+      background-color: $secondary-light-grey;
+      border: none;
+    }
+    &:disabled {
+      border: 1px solid $secondary-light-grey;
+      color: $secondary-light-grey;
+
     }
   }
   &--centered {

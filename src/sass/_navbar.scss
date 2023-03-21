@@ -1,23 +1,17 @@
 @use "./_variables" as *;
+@use "./mixins.scss" as *;
 
 // svg styling
 @mixin profile-icon-active {
-  #profile-icon-svg {
-    .head {
-      fill: #484848;
-    }
-    .bottom {
-      fill: #484848;
-    }
+  .pressed {
+    fill: #484848;
   }
 }
 
 .navbar {
   margin-top: 3.75rem;
-
-  .container {
-    display: block;
-  }
+  display: flex;
+  @include container;
 
   &__main {
     margin-top: 3rem;
@@ -43,15 +37,23 @@
 
   &__aside {
     display: flex;
-    gap: 1.5rem;
-    align-items: center;
+    gap: 1rem;
 
-    #profile-icon {
+    .profile-icon {
+      position: relative;
+      padding: 0.2rem 0;
       &:active,
       &.active {
         @include profile-icon-active()
       }
+      &:hover {
+        animation: shake 0.1s;
+      }
     }
+  }
+
+  &__divider {
+    border-right: 1px solid $secondary-dark-grey;
   }
 
   &__change-lang {
@@ -59,6 +61,7 @@
     cursor: pointer;
     font-size: 1.5rem;
     color: $black-text;
+    align-self: center;
   }
 }
 
@@ -70,4 +73,12 @@
       margin-top: 0;
     }
   }
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  25% { transform: translate(-1px, -2px) rotate(-1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  75% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
 }

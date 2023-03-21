@@ -39,32 +39,41 @@ const Articles = () => {
   }
 
   return (
-    <Container>
-      <div className="articles">
-        <Row xs={1} md={2} lg={3} xl={3} xxl={4}>
-          {articles?.results.map((item) => {
-            return (
-              <Col key={item.slug}>
-                <CardArticle article={item} />
-              </Col>
-            );
-          })}
-        </Row>
-        {isFetching ? (
-          <Spinner />
-        ) : (
-          !isLastPage && (
-            <button className="btn btn_border" onClick={() => setLimit((prev) => prev + 4)}>
-              <div className="btn__text">{t("seeMore")}</div>
-              <div className="btn__icon">
-                <img src={arrowRight} alt="arrowWhite" />
-              </div>
-            </button>
-          )
-        )}
-      </div>
-    </Container>
+    <main className="posts">
+      
+    </main>
+
+
+    
+    
   );
 };
 
 export default Articles;
+
+
+// <Container>
+//       <div className="articles">
+//         <Row xs={1} md={2} lg={3} xl={3} xxl={4}>
+//           {articles?.results.map((item) => {
+//             return (
+//               <Col key={item.slug}>
+//                 <CardArticle article={item} />
+//               </Col>
+//             );
+//           })}
+//         </Row>
+//         {isFetching ? (
+//           <Spinner />
+//         ) : (
+//           !isLastPage && (
+//             <button className="btn btn_border" onClick={() => setLimit((prev) => prev + 4)}>
+//               <div className="btn__text">{t("seeMore")}</div>
+//               <div className="btn__icon">
+//                 <img src={arrowRight} alt="arrowWhite" />
+//               </div>
+//             </button>
+//           )
+//         )}
+//       </div>
+//     </Container>

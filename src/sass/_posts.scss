@@ -1,0 +1,91 @@
+@use "./variables" as *;
+@use "./mixins.scss" as *;
+
+.posts {
+  margin-top: 6rem;
+  display: flex;
+  @include container;
+
+  &__tags {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 2rem;
+    overflow: hidden;
+  }
+  
+  &__tags-slider {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  &__btn {
+    &--arrow {
+      box-sizing: content-box;
+      padding: 0.25rem;
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.25);
+      }
+    }
+  }
+
+  &__articles {
+    height: 72vh;
+    overflow: scroll;
+  }
+
+  &__divider {
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+    border-right: 1px solid $secondary-grey;
+  }
+
+  &__aside {
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-width: 400px;
+      color: $black-text;
+      gap: 1.5rem;
+      padding: 0 1.5rem;
+      }
+    &--avatar {
+      width: 40px;
+      border-radius: 50%;
+    }
+    &--header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      p {
+        margin: 0;
+      }
+    }
+    &--author {
+      font-size: 1rem;
+    }
+    &--title {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+  }
+}
+
+@media (max-width: 1150px) {
+  .posts {
+    aside {
+      display: none;
+    }
+    &__wrapper {
+      width: 100%;
+    }
+    &__divider {
+      display: none;
+    }
+  }
+}

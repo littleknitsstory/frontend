@@ -1,15 +1,15 @@
-import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Container, Navbar } from "react-bootstrap";
+import {  NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 // components
 import PrimaryNav from "../../components/primary-nav/PrimaryNav";
 // assets
-import heart from "../../assets/icons/heart.svg";
-import shoppingBag from "../../assets/icons/shopping-bag.svg";
 //? Temporary unused assets
 // import logout from "../icons/logout.svg";
 import { ReactComponent as ProfileIcon} from "../../assets/icons/user.svg";
-import { ReactEventHandler, useState } from "react";
+import { ReactComponent as HeartIcon} from "../../assets/icons/heart-big.svg";
+import { ReactComponent as BagIcon} from "../../assets/icons/bag.svg";
+import { useState } from "react";
 
 const NavBar = () => {
   const { i18n } = useTranslation();
@@ -24,39 +24,34 @@ const NavBar = () => {
       i18n.changeLanguage("en")
     }
   }
+  
   return (
-    <section className="navbar">
-      <Container>
-        <Navbar expand="lg">
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+    <Navbar expand="lg" className="navbar">
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
-          {/* <div className="lks-navbar__right"> */}
-          <nav className="navbar__aside">
-            <NavLink to="/login" id="profile-icon">
-              <ProfileIcon id="profile-icon-svg"/>
-            </NavLink>
-            {/* <a href="#">
-              <img src={logout} alt="logout" />
-            </a> */}
-            <Link to="/saved">
-              <img src={heart} alt="heart" />
-            </Link>
-            <Link to="/cart">
-              <img src={shoppingBag} alt="shoppingBag" />
-            </Link>
-            <p className="navbar__change-lang"onClick={changeLang}>{lang}</p>
-          </nav>
+      <nav className="navbar__aside">
+        <div className="navbar__divider"></div>
+        <NavLink to="/login" className="profile-icon">
+          <ProfileIcon id="profile-icon-svg"/>
+        </NavLink>
+        <div className="navbar__divider"></div>
+        {/* <a href="#">
+          <img src={logout} alt="logout" />
+        </a> */}
+        <NavLink to="/saved" className="profile-icon">
+          <HeartIcon id="favorite-icon-svg"/>
+        </NavLink>
+        <NavLink to="/cart" className="profile-icon">
+          <BagIcon id="bag-icon-svg" />
+        </NavLink>
+        <div className="navbar__divider"></div>
+        <p className="navbar__change-lang"onClick={changeLang}>{lang}</p>
+      </nav>
 
-          {/* </div> */}
-
-          <Navbar.Collapse className="navbar__main">
-            {/* <Nav className="navbar__main"> */}
-              <PrimaryNav type={"header"} className="navbar__main-link"/>
-            {/* </Nav> */}
-          </Navbar.Collapse>
-        </Navbar>
-      </Container>
-    </section>
+      <Navbar.Collapse className="navbar__main">
+        <PrimaryNav type={"header"} className="navbar__main-link"/>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
 

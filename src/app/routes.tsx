@@ -4,7 +4,7 @@ import PageError from "../pages/PageError";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import Product from "../pages/Shop/Product";
 import SavedProducts from "../pages/SavedProducts";
-import Blog from "../pages/Blog";
+import Posts from "../pages/Blog";
 import ContactPage from "../pages/Contacts";
 import RootLayout from "../pages/RootLayout";
 import Products from "../pages/Shop/Products";
@@ -26,7 +26,7 @@ const routes: RouteObject = {
     },
     {
       path: "blog",
-      element: <Blog />,
+      element: <Posts />,
     },
     {
       path: "posts/:slug",

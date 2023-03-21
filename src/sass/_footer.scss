@@ -1,10 +1,11 @@
 @use "./_variables" as *;
+@use "./mixins.scss" as *;
 
 footer {
   text-align: center;
-  padding: 0 2rem 2rem;
   margin-top: 11.875rem;
   color: $black;
+  @include container;
 }
 
 .footer {
@@ -99,7 +100,7 @@ footer {
   }
 }
 
-@media (min-width: 1050px) {
+@media (min-width: 1095px) {
   .footer {
     &__flex-container {
       text-align: left;
@@ -108,13 +109,5 @@ footer {
     &__nav {
       align-items: start;
     }
-  }
-}
-
-@media (min-width: 1400px) {
-  footer {
-    margin: 11.875rem auto 0;
-    max-width: 1320px;
-    padding: 0 0 1rem;
   }
 }
