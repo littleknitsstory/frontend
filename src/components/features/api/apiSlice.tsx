@@ -49,7 +49,8 @@ enum URLS {
   CATEGORIES = "/categories/",
   SIGN_UP = "/sign-up/",
   SIGN_IN = "/sign-in/",
-  PROFILE = "/profile/"
+  PROFILE = "/profile/",
+  COMMENTS = "/comments/"
 }
 
 export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";
@@ -138,6 +139,17 @@ export const apiSlice = createApi({
         headers: { "Accept-Language": lang }
       }),
     }),
+    addComments: builder.mutation({
+      query: (message: string) => ({
+        url: URLS.COMMENTS,
+        method: "POST",
+        body: { text: message },
+        headers: { 
+          "Authorization": "Bearer " + localStorage.getItem("token") 
+        }
+        
+      }),
+    }),
     getProfile: builder.query({
       query: ({ token }) => ({
         url: URLS.PROFILE,
@@ -170,5 +182,6 @@ export const {
   useSignUpMutation,
   useSignInMutation,
   useGetProfileQuery,
-  useUpdateProfileMutation
+  useUpdateProfileMutation,
+  useAddCommentsMutation
 } = apiSlice;

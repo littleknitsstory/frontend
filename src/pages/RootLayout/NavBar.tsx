@@ -31,7 +31,7 @@ const NavBar = () => {
 
       <nav className="navbar__aside">
         <div className="navbar__divider"></div>
-        <NavLink to="/login" className="profile-icon">
+        <NavLink to="/profile" className="profile-icon">
           <ProfileIcon id="profile-icon-svg"/>
         </NavLink>
         <div className="navbar__divider"></div>

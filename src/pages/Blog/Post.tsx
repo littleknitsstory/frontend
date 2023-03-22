@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { ChangeEvent, ChangeEventHandler, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import parse from 'html-react-parser'
-import { PICTURE_BASE_URL } from "../../components/features/api/apiSlice";
+import { PICTURE_BASE_URL, useAddCommentsMutation } from "../../components/features/api/apiSlice";
 import { useGetArticleQuery, useGetArticlesQuery } from "../../components/features/api/apiSlice";
 import PageError from "../PageError";
 import Spinner from "../../components/utils/Spinner";
@@ -24,6 +24,7 @@ const Post = () => {
   const { slug } = useParams<string>();
   const { t, i18n } = useTranslation();
   const [offset, setOffset] = useState<number>(0);
+  const [message, setMessage] = useState<string>("")
   const {
     data: article,
     isLoading,
@@ -34,6 +35,8 @@ const Post = () => {
   const {
     data: articles,
   } = useGetArticlesQuery({limit: 3, offset, lang: i18n.language})
+
+  const [ postComment, { isLoading: commentsIsLoading } ] = useAddCommentsMutation()
 
   const sliderForward = () => {
     if (articles) {
@@ -52,6 +55,20 @@ const Post = () => {
       } else {
         setOffset(prevOffset => prevOffset - 1)
       }
+    }
+  }
+
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
+    setMessage(e.currentTarget.value)
+  }
+
+  const handleSubmit = async (): Promise<void> => {
+    try {
+      const payload = await postComment(message).unwrap();
+      setMessage("")
+      
+    } catch (error) {
+      
     }
   }
   
@@ -112,10 +129,18 @@ const Post = () => {
             name="postContent" 
             rows={5}
             placeholder="Что вы об этом думаете?"
+            value={message}
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleChange(e)}
           />
           <div className="post__comments--buttons">
             <button className="btn btn--transparent">Отмена</button>
-            <button className="btn btn--primary" disabled>Отправить</button>
+            <button 
+              className="btn btn--primary" 
+              disabled={message.length === 0}
+              onClick={handleSubmit}
+            >
+              Отправить
+            </button>
           </div>
         </div>
       </section>
@@ -124,7 +149,7 @@ const Post = () => {
         <h4 className="post__subtitle">Читайте также</h4>
         <div className="post__card-container">
           <ArrowLeftSVG className="posts__btn--arrow" onClick={sliderBackward}/>
-            {articles && articles.results.map(article => <CardArticleSmall {...article}/>)}
+            {articles && articles.results.map(article => <CardArticleSmall key={article.slug} {...article}/>)}
           <ArrowRightSVG className="posts__btn--arrow" onClick={sliderForward}/>
         </div>
         <Link to="/blog/" className="link link--with-icon link--centered">
