@@ -12,11 +12,18 @@ interface ICart {
   totalPrice: number;
 }
 
-const initialState: ICart = 
+let initialState: ICart = 
   localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart") || "")
     : {products: [], totalPrice: 0}
 ;
+
+// in case old version of cart object already in Local Storage
+if (initialState.hasOwnProperty("products")) {
+} else {
+  initialState = {products: [], totalPrice: 0}
+  localStorage.setItem("cart", JSON.stringify(initialState))
+}
 
 const updateTotalPrice = (cartItem: ICartProduct[]) => {
   return cartItem.reduce((acc, current) => 
