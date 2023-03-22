@@ -72,14 +72,14 @@ const Contacts = () => {
                       col={6}
                       controlId={"name"}
                       type="text"
-                      placeholder={t("Contacts.name")}
+                      placeholder={t("FormFields.name")}
                       name="name"
                     />
                     <FormsInput
                       col={6}
                       controlId={"theme"}
                       type="text"
-                      placeholder={t("Contacts.subject")}
+                      placeholder={t("FormFields.subject")}
                       name="company"
                     />
                   </Row>
@@ -89,7 +89,7 @@ const Contacts = () => {
                       col={12}
                       controlId={"phone"}
                       type="tel"
-                      placeholder={t("Contacts.phone")}
+                      placeholder={t("FormFields.phone")}
                       name="phone_number"
                     />
 
@@ -97,7 +97,7 @@ const Contacts = () => {
                       col={12}
                       controlId={"email"}
                       type="text"
-                      placeholder="Е-mail"
+                      placeholder={t("FormFields.email")}
                       name="email"
                     />
                   </Row>
@@ -106,12 +106,12 @@ const Contacts = () => {
                       as="textarea"
                       col={12}
                       controlId={"message"}
-                      placeholder={t("Contacts.message")}
+                      placeholder={t("FormFields.message")}
                       name="message"
                     />
                   </Row>
                   <button className="btn btn_white btn_center contacts__btn" type="submit">
-                    <div className="btn__text btn__text_center">{t("Contacts.send")}</div>
+                    <div className="btn__text btn__text_center">{t("FormFields.send")}</div>
                   </button>
                 </FormikForm>
               </Formik>

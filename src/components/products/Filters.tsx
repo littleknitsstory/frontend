@@ -1,9 +1,8 @@
-import { useTranslation } from "react-i18next";
-import MultiRangeslider from "./multi-range-slider/MultiRangeSlider";
-import arrowRight from "../../assets/icons/arrow-right.svg";
-import { useGetProductsQuery } from "../features/api/apiSlice";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import { IProduct } from "../../app/types";
+import arrowRight from "../../assets/icons/arrow-right.svg";
 
 interface Category {
   title: string;
@@ -11,14 +10,12 @@ interface Category {
 }
 
 interface FilterProps {
-  clearFilters: () => void;
-  setFilteredCategories: (arg: IProduct[]) => void;
-  setFilteredColors: (arg: IProduct[]) => void;
+  products: IProduct[];
+  setFilteredProducts: (products: IProduct[]) => void;
 }
 
-const Filters = (props: FilterProps) => {
-  const { t, i18n } = useTranslation();
-  const { data: products } = useGetProductsQuery({ lang: i18n.language });
+const Filters = ({ products, setFilteredProducts }: FilterProps) => {
+  const { t } = useTranslation();
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
@@ -26,78 +23,73 @@ const Filters = (props: FilterProps) => {
   const [selectedColor, setSelectedColor] = useState<string>("");
 
   useEffect(() => {
-    if (products) {
-      // get all categories from products
-      let allCategories: Category[] = [];
-      products?.results.forEach((product) => {
+    // get all categories from products
+    const categoriesSet: { [key: string]: string } = products.reduce(
+      (result: { [key: string]: string }, product: IProduct) => {
         product.categories.forEach((category) => {
-          if (allCategories.every((item) => item.title !== category.title)) {
-            allCategories.push(category);
+          if (!result[category.title]) {
+            result[category.title] = category.slug;
           }
         });
+        return result;
+      },
+      {},
+    );
+    const allCategories: Category[] = Object.entries(categoriesSet).map(([title, slug]) => ({
+      title,
+      slug,
+    }));
+    setCategories(allCategories);
+    // get all colors from products
+    const allColors: string[] = products.reduce((result: string[], product: IProduct) => {
+      product.colors.forEach((color: { color: string }) => {
+        if (!result.includes(color.color)) {
+          result.push(color.color);
+        }
       });
-      setCategories(allCategories);
-      // get all colors from products
-      let allColors: string[] = [];
-      products.results.forEach((product) => {
-        product.colors.forEach((color) => {
-          if (allColors.every((item) => item !== color.color)) {
-            allColors.push(color.color);
-          }
-        });
-      });
-      setColors(allColors);
-    }
+      return result;
+    }, [] as string[]);
+    setColors(allColors);
   }, [products]);
+
+  useEffect(() => {
+    const filteredByCategory: IProduct[] = products.filter((product) =>
+      selectedCategory
+        ? product.categories.some((category) => category.slug === selectedCategory)
+        : true,
+    );
+    const filteredByColor: IProduct[] = filteredByCategory.filter((product) =>
+      selectedColor ? product.colors.some((color) => color.color === selectedColor) : true,
+    );
+    setFilteredProducts(filteredByColor);
+  }, [products, selectedCategory, selectedColor, setFilteredProducts]);
 
   // filtering by category
   const selectCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedCategory = e.currentTarget.value;
     setSelectedCategory(selectedCategory);
-    if (products) {
-      if (selectedCategory === "clear") {
-        props.setFilteredCategories([]);
-      } else {
-        const filtered: IProduct[] = products?.results.filter((product) =>
-          product.categories.some((category) => category.slug === selectedCategory),
-        );
-        props.setFilteredCategories(filtered);
-      }
-    }
   };
 
   // filtering by color
   const selectColor = (e: React.MouseEvent<HTMLElement>) => {
     const selectedColor = e.currentTarget.dataset.color!;
     setSelectedColor(selectedColor);
-    if (products) {
-      if (selectedColor === "clear") {
-        props.setFilteredColors([]);
-      } else {
-        const filtered: IProduct[] = products?.results.filter((product) =>
-          product.colors.some((color) => color.color === selectedColor),
-        );
-        props.setFilteredColors(filtered);
-      }
-    }
   };
 
-  const clearFilters = (): void => {
-    props.clearFilters();
-    setSelectedCategory("clear");
-    setSelectedColor("clear");
+  const handleClear = (): void => {
+    setSelectedCategory("");
+    setSelectedColor("");
   };
 
   const clearColorFilter = (): void => {
-    setSelectedColor("clear");
-    props.setFilteredColors([]);
+    setSelectedColor("");
   };
 
   const categoryOptions = categories.map((category) => (
     <option key={category.slug} value={category.slug}>
       {category.title}
     </option>
-  ))
+  ));
 
   const colorOptions = colors.map((color) => (
     <div
@@ -107,7 +99,7 @@ const Filters = (props: FilterProps) => {
       data-color={color}
       onClick={(e: React.MouseEvent<HTMLElement>) => selectColor(e)}
     ></div>
-  ))
+  ));
 
   return (
     <div className="filters">
@@ -124,32 +116,29 @@ const Filters = (props: FilterProps) => {
       </div> */}
       <div className="filters__category-wrapper">
         <h6 className="filter__title">{t("Filter.categories")}</h6>
-        <select 
-          className="form-select" 
+        <select
+          className="form-select"
           aria-label="Select category"
           value={selectedCategory}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => selectCategory(e)}
         >
-          <option>{t("Filter.selectCategory")}</option>
+          <option value="">{t("Filter.selectCategory")}</option>
           {categoryOptions}
         </select>
       </div>
 
       <div className="filters__category-wrapper">
         <h6 className="filter__title">{t("Filter.colors")}</h6>
-        <div className="filter__color-palette">
-          {colorOptions}
-        </div>
+        <div className="filter__color-palette">{colorOptions}</div>
         <button className="btn filter__clear-filter btn_center" onClick={clearColorFilter}>
           {t("Filter.clear")}
         </button>
       </div>
 
-      <button className="btn btn_border btn_center" onClick={clearFilters}>
+      <button className="btn btn_border btn_center" onClick={handleClear}>
         {t("Filter.buttonText")}
         <img src={arrowRight} alt="arrowWhite" />
       </button>
-
     </div>
   );
 };
