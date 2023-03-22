@@ -113,9 +113,5 @@ export interface IReviewsResponse {
 }
 
 export interface FormValues {
-  name?: string;
-  message?: string;
-  email?: string;
-  company?: string;
-  phone_number?: string;
+  [key: string]: string
 }

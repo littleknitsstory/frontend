@@ -21,7 +21,7 @@ const NavBar = () => {
 
           <div className="lks-navbar__right">
             <div className="lks-navbar__icons">
-              <Link to="/login">
+              <Link to="/profile">
                 <img src={user} alt="user" />
               </Link>
               {/* <a href="#">
