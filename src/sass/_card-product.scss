@@ -59,13 +59,13 @@
       }
     }
     &-part-number {
-      color: #606060;
+      color: $text-color-dark;
       font-size: 0.875rem;
       // margin-bottom: 0.5rem;
     }
     &-color {
       font-size: 0.875rem;
-      color: #606060;
+      color: $text-color-dark;
       display: flex;
       align-items: center;
       gap: 0.25rem;
