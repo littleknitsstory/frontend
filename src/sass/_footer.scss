@@ -95,19 +95,19 @@ footer {
     &__copyrights {
       display: flex;
       justify-content: space-between;
-      align-items: start;
+      align-items: flex-start;
     }
   }
 }
 
-@media (min-width: 1032px) {
+@media (min-width: 1089px) {
   .footer {
     &__flex-container {
       text-align: left;
       justify-content: space-between;
     }
     &__nav {
-      align-items: start;
+      align-items: flex-start;
     }
   }
 }

@@ -1,4 +1,5 @@
 import { RouteObject } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Cart from "../pages/Cart/Cart";
 import PageError from "../pages/PageError";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
@@ -9,11 +10,9 @@ import ContactPage from "../pages/Contacts";
 import RootLayout from "../pages/RootLayout";
 import Products from "../pages/Shop/Products";
 import Post from "../pages/Blog/Post"
-import Home from "../pages/Home";
 import LoginPage from "../pages/User/LoginPage";
 import Profile from "../components/user/Profile";
 import AuthRequired from "../components/utils/AuthRequired";
-import { Navigate } from "react-router-dom";
 import Ordering from "../pages/Cart/Ordering";
 
 const routes: RouteObject = {

@@ -64,7 +64,7 @@ const CardProductCart = ({ productSlug }: { productSlug: string }) => {
     if (product) {
       dispatch(updateProductPrice(product))
     }
-  }, [product?.price])
+  }, [product?.price, dispatch, product])
   
   if (isLoading) {
     return <Spinner />;
@@ -112,7 +112,7 @@ const CardProductCart = ({ productSlug }: { productSlug: string }) => {
             <button className="schema-card__counter-control-btn" onClick={decreaseCountProduct}>
               -
             </button>
-            {cartProduct?.amount}
+            <p className="schema-card__count-number">{cartProduct.amount ?? 1}</p> 
             <button className="schema-card__counter-control-btn" onClick={increaseCountProduct}>
               +
             </button>

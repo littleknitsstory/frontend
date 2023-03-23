@@ -1,8 +1,11 @@
 @use "./_variables" as *;
 .social {
-  justify-content: flex-start;
+  justify-content: center;
   display: flex;
-  margin-top: 5rem;
+
+  margin: 3rem 0;
+  margin-inline: auto;
+  justify-content: center;
 }
 
 .social-circle {
@@ -10,7 +13,7 @@
   background-color: $dark-grey-color;
   width: 3.125rem;
   height: 3.125rem;
-  border-radius: 100%;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,9 +23,9 @@
   }
 }
 
-@media (max-width: 992px) {
+@media (min-width: 992px) {
   .social {
-    justify-content: center;
-    margin: 3rem 0;
+    margin: 5rem 0;
+    justify-content: flex-start;
   }
 }

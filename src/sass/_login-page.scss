@@ -1,8 +1,10 @@
 @use './variables' as *;
+@use "./mixins.scss" as *;
 
 .login {
   &__wrapper {
-    width: 400px;
+    @include container;
+    max-width: 400px;
     margin: 6rem auto;
   }
   &__select-form {

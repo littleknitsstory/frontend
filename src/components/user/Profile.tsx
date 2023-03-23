@@ -3,7 +3,6 @@ import { Navigate, useNavigate } from "react-router-dom"
 import { useGetProfileQuery, useUpdateProfileMutation } from "../features/api/apiSlice"
 import { Form, Col, Container } from "react-bootstrap"
 import Spinner from "../utils/Spinner"
-import PageError from "../../pages/PageError"
 
 interface IUserData {
   username: string;
@@ -61,13 +60,11 @@ const Profile = () => {
   const {
     data: user,
     isLoading,
-    isError,
-    error
+    isError
   } = useGetProfileQuery(tokens.access)
 
   const [updateProfile, 
     { 
-      isLoading: isUpdateLoading, 
       isError: isUpdateError, 
       error: updateError 
     }] = useUpdateProfileMutation()
@@ -118,7 +115,7 @@ const Profile = () => {
       first_name: [],
       last_name: []
     })
-  }, [isUpdateError])
+  }, [isUpdateError, updateError])
 
   if (isLoading) {
     return <Spinner />

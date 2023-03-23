@@ -15,7 +15,6 @@
     margin-top: 0.5rem;
     font-size: 0.875rem;
     padding: 0.75rem 1rem;
-    // overflow-x: auto;
   }
   
 
@@ -34,7 +33,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      align-items: start;
+      align-items: flex-start;
       gap: 0.5rem;
 
     }
@@ -47,7 +46,6 @@
     }
     &-title {
       font-size: 1.5rem;
-      // text-align: center;
     }
     &-color-circle-wrapper {
       margin-left: 0.5rem;
@@ -66,7 +64,6 @@
     &-part-number {
       color: $text-color-dark;
       font-size: 0.875rem;
-      // margin-bottom: 0.5rem;
     }
     &-color {
       font-size: 0.875rem;
@@ -158,25 +155,28 @@
     .schema-card {
       &__counter {
         margin: 2.5rem auto 3rem auto;
-        display: flex;
-        justify-content: space-between;
+        display: inline-flex;
         align-items: center;
-        width: 7rem;
-        height: 3rem;
-        background-color: $vinous-color;
+        background-color: $accent-burgundy;
         border-radius: 40px;
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 0.75rem;
         color: $text-color-light;
-        font-weight: bold;
-        font-size: 1.35rem;
+        font-size: 1.25rem;
         &-control-btn {
+          margin: 0 0.75rem;
           border: none;
-          background-color: $vinous-color;
+          background-color: inherit;
           color: $text-color-light;
           font-weight: bold;
         }
       }
+      &__count-number {
+        text-align: center;
+        margin: 0;
+        min-width: 1.75rem;
+      }
     }
+    
     &-img {
       margin-left: 1.5rem;
       width: 10rem;

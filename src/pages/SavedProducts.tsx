@@ -2,10 +2,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../app/hooks";
-// components
 import CardProduct from "../components/products/CardProduct";
-// assets
-import arrowRight from "../assets/icons/arrow-right.svg";
 
 const SavedProducts = () => {
   const { t } = useTranslation();

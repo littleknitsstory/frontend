@@ -88,7 +88,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
   return (
     <div className="schema-card">
       <Row className="schema-card__card">
-        <Col xs={12} md={12} lg={6} xl={6} xxl={6}>
+        <Col xs={12} md={12} lg={6} xl={6} xxl={6} className="schema-card--centered">
           <div className="schema-card__img-wrapper">
             <img
               className="schema-card__img"
@@ -106,7 +106,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
             <button className="schema-card__counter-control-btn" onClick={decreaseCountProduct}>
               -
             </button>
-            {countProduct || 1}
+              <p className="schema-card__count-number">{countProduct ?? 1}</p> 
             <button className="schema-card__counter-control-btn" onClick={increaseCountProduct}>
               +
             </button>

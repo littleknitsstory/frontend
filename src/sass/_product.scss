@@ -7,23 +7,28 @@
     }
     &__counter {
       margin: 2.5rem auto 3rem auto;
-      display: flex;
-      justify-content: space-between;
+      display: inline-flex;
       align-items: center;
-      width: 7rem;
-      height: 3rem;
-      background-color: $vinous-color;
+      background-color: $accent-burgundy;
       border-radius: 40px;
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 0.75rem;
       color: $text-color-light;
-      font-weight: bold;
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       &-control-btn {
+        margin: 0 0.75rem;
         border: none;
-        background-color: $vinous-color;
+        background-color: inherit;
         color: $text-color-light;
         font-weight: bold;
       }
+    }
+    &__count-number {
+      text-align: center;
+      margin: 0;
+      min-width: 1.75rem;
+    }
+    &--centered {
+      text-align: center;
     }
     &__dicount {
       display: flex;
@@ -95,7 +100,17 @@
   }
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 992px) {
+  .product {
+    .schema-card {
+      &__product-btn {
+        flex-direction: column;
+        justify-content: space-evenly;
+      }
+    }
+  }
+}
+@media (min-width: 1200px) {
   .product {
     .schema-card {
       &__product-btn {

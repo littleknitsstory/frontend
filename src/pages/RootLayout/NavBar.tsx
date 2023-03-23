@@ -1,11 +1,7 @@
-import { Container, Navbar } from "react-bootstrap";
-import {  NavLink } from "react-router-dom";
+import { Navbar } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-// components
 import PrimaryNav from "../../components/primary-nav/PrimaryNav";
-// assets
-//? Temporary unused assets
-// import logout from "../icons/logout.svg";
 import { ReactComponent as ProfileIcon} from "../../assets/icons/user.svg";
 import { ReactComponent as HeartIcon} from "../../assets/icons/heart-big.svg";
 import { ReactComponent as BagIcon} from "../../assets/icons/bag.svg";
@@ -15,14 +11,11 @@ const NavBar = () => {
   const { i18n } = useTranslation();
   const [lang, setLang] = useState(localStorage.getItem("lang"))
 
-
   useEffect(() => {
     if (lang) {
       i18n.changeLanguage(localStorage.getItem("i18nextLng") || "en")
     }
-  }, [])
-
-
+  }, [i18n, lang])
 
   const changeLang = (e: React.MouseEvent) => {
     if (e.currentTarget.textContent === "English") {

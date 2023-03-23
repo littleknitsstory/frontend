@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../../app/hooks";
 import CardProductCart from "../../components/cart/CardProductCart";
 import { convertToCurrency } from "../../utils/convertPrice";
-import arrowRight from "../../assets/icons/arrow-right.svg";
 
 const Cart = () => {
   const { t, i18n } = useTranslation();

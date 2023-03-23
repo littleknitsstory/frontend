@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { IProduct } from "../../app/types";
-import arrowRight from "../../assets/icons/arrow-right.svg";
 
 interface Category {
   title: string;

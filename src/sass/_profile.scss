@@ -1,5 +1,8 @@
+@use "./mixins.scss" as *;
+
 .profile {
   text-align: center;
+  @include container;
 
   &__wrapper {
     display: flex;
