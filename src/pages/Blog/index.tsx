@@ -1,5 +1,5 @@
 // import Articles from "./Articles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IArticle } from "../../app/types";
 import { useGetArticlesQuery } from "../../components/features/api/apiSlice";
@@ -10,9 +10,16 @@ import { ReactComponent as ArrowRightSVG } from "../../assets/icons/arrow-right-
 import { ReactComponent as ArrowLeftSVG } from "../../assets/icons/arrow-left-nd.svg"
 import avatar from "../../assets/images/test-avatar.png"
 
+interface Tag {
+  title: string;
+  slug: string;
+}
+
 const Posts = () => {
   const [limit, setLimit] = useState<number>(15);
   const { t, i18n } = useTranslation();
+  const [tags, setTags] = useState<Tag[]>([])
+  const [elements, setElements] = useState<JSX.Element[]>([])
 
   const {
     data: articles,
@@ -22,16 +29,35 @@ const Posts = () => {
     error,
   } = useGetArticlesQuery({ limit, lang: i18n.language });
 
-  const tags = [
-    <button key={1} className="btn btn--tag">Урок</button>,
-    <button key={2} className="btn btn--tag">Инструменты</button>,
-    <button key={3} className="btn btn--tag">Обзор</button>,
-    <button key={4} className="btn btn--tag">Пряжа</button>,
-    <button key={5} className="btn btn--tag">История</button>
-  ]
+  useEffect(() => {
+    // get all tags from articles
+    if (articles) {
+      const tagsSet: { [key: string]: string } = articles?.results.reduce(
+        (result: { [key: string]: string }, article: IArticle) => {
+          article.tags.forEach((tag) => {
+            if (!result[tag.title]) {
+              result[tag.title] = tag.slug;
+            }
+          });
+          return result;
+        },
+        {},
+      );
+      const allTags: Tag[] = Object.entries(tagsSet).map(([title, slug]) => ({
+        title,
+        slug,
+      }));
+      setTags(allTags);
+    }
+  }, [articles])
   
-  const [elements, setElements] = useState(tags)
-  
+  useEffect(() => {
+    const tagSelectors = tags.map(item => (
+      <button key={item.slug} className="btn btn--tag">{item.title}</button>
+    ))
+    setElements(tagSelectors)
+  }, [tags])
+
   const sliderForward = () => {
       setElements(prevArray => {
         const updated = [...prevArray]
@@ -70,7 +96,7 @@ const Posts = () => {
           <div className="posts__tags-slider">
             <ArrowLeftSVG onClick={sliderBackward} className="posts__btn--arrow"/>
               <div className="posts__tags">
-                {elements.slice(0, 5)}
+                {elements}
               </div>
             <ArrowRightSVG onClick={sliderForward} className="posts__btn--arrow"/>
           </div>
@@ -81,7 +107,7 @@ const Posts = () => {
         </div>
         <div className="posts__divider"></div>
         <aside className="posts__aside-wrapper">
-          <h2>Новости</h2>
+          <h2>{t("posts.news")}</h2>
           {articles?.results.slice(0, 3).map(article => postsAside(article))}
         </aside>
       </main>

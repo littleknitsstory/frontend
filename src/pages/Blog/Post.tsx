@@ -75,6 +75,11 @@ const Post = () => {
       });
     }
   }
+
+  const copyToClipboard = (): void => {
+    const currentUrl = window.location.href
+    navigator.clipboard.writeText(currentUrl)
+  }
   
   if (isLoading) {
     return <Spinner />;
@@ -89,7 +94,7 @@ const Post = () => {
   return (
     <section className="post">
       <Link to="/posts/" className="link link--with-icon">
-        <ArrowLeftSVG /> Назад
+        <ArrowLeftSVG /> {t("posts.back")}
       </Link>
 
       <article className="post__wrapper">
@@ -100,21 +105,21 @@ const Post = () => {
           <p>·</p>
           <p>{article?.created_at}</p>
           <p>·</p>
-          <p>3 минуты на чтение</p>
+          <p>{t("posts.tempRead")}</p>
         </div>
         <div className="post__content-wrapper">
           {article && parse(article.content)}
           <img src={PICTURE_BASE_URL + article?.image_preview} alt={article?.image_alt} className="post__image"/>
         </div>
         <div className="post__footer">
-          <h4 className="post__footer-text">Поделиться</h4>
+          <h4 className="post__footer-text">{t("posts.share")}</h4>
           <div className="post__footer--wrapper">
             <div className="post__share-links">
               <VkontakteIcon />
               <FacebookIcon />
               <InstagramIcon />
               <PinterestIcon />
-              <ChainIcon />
+              <ChainIcon onClick={copyToClipboard}/>
             </div>
             <div className="post__reactions">
               <HandIcon /><p>50</p>
@@ -127,30 +132,31 @@ const Post = () => {
       </article>
 
       <section className="post__comments">
-        <h4>Комментарии</h4>
+        <h4>{t("posts.comments")}</h4>
         <div className="post__comments--wrapper">
           <textarea 
             name="postContent" 
             rows={5}
-            placeholder="Что вы об этом думаете?"
             value={message}
+            
             onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleChange(e)}
+            placeholder={t("posts.placeholderComments")}
           />
           <div className="post__comments--buttons">
-            <button className="btn btn--transparent">Отмена</button>
+            <button className="btn btn--transparent">{t("posts.cancel")}</button>
             <button 
               className="btn btn--primary" 
               disabled={message.length === 0}
               onClick={handleSubmit}
             >
-              Отправить
+              {t("posts.send")}
             </button>
           </div>
         </div>
       </section>
 
       <section className="post__more-posts">
-        <h4 className="post__subtitle">Читайте также</h4>
+        <h4 className="post__subtitle">{t("posts.readAlso")}</h4>
           <div className="post__slider">
             <ArrowLeftSVG className="posts__btn--arrow" onClick={sliderBackward}/>
             <div className="post__card-container">
@@ -159,7 +165,7 @@ const Post = () => {
             <ArrowRightSVG className="posts__btn--arrow" onClick={sliderForward}/>
           </div>
         <Link to="/posts/" className="link link--with-icon link--centered">
-          Смотреть все <ArrowRightSVG /> 
+          {t("posts.watchAll")} <ArrowRightSVG /> 
         </Link>
       </section>
       

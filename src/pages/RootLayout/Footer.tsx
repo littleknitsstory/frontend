@@ -58,27 +58,27 @@ const Footer = () => {
       <div className="footer__flex-container">
 
         <div className="footer__about">
-          <h2 className="footer__title">О проекте</h2>
+          <h2 className="footer__title">{t("Footer.about")}</h2>
           <nav className="footer__nav">
-            <Link to="" className="footer__link">Наша история</Link>
+            <Link to="" className="footer__link">{t("Footer.history")}</Link>
             <Link to="" className="footer__link">FAQ</Link>
-            <Link to="" className="footer__link">Реклама</Link>
+            <Link to="" className="footer__link">{t("Footer.ad")}</Link>
           </nav>
         </div>
 
         <div className="footer__contacts">
-          <h2 className="footer__title">Наши контакты</h2>
+          <h2 className="footer__title">{t("Footer.contacts")}</h2>
           <nav className="footer__nav">
             <Link to="" className="footer__link">Facebook</Link>
             <Link to="" className="footer__link">Instagram</Link>
             <Link to="" className="footer__link">Pinterest</Link>
-            <Link to="" className="footer__link">Вконтакте</Link>
+            <Link to="" className="footer__link">VK</Link>
           </nav>
         </div>
 
         <div className="footer__subscribe">
-          <h2 className="footer__title">Рассылка</h2>
-          <p className="footer__text">Оформите подписку, чтобы узнавать о наших специальных акциях</p>
+          <h2 className="footer__title">{t("Footer.subscribe.title")}</h2>
+          <p className="footer__text">{t("Footer.subscribe.text")}</p>
           
           <Formik
             initialValues={initialValue}
@@ -111,7 +111,7 @@ const Footer = () => {
       
       <Link to="/">
         <FooterLogo className="footer__logo-img"/>
-        <h2 className="footer__logo-text">Блог и магазин по вязанию</h2>
+        <h2 className="footer__logo-text">{t("Footer.title")}</h2>
       </Link>
 
       <div className="break-line"></div>

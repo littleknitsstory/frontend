@@ -23,15 +23,15 @@
     "descr": "Hello! I'm Katya. I am a knitted toy designer. My passion for knitting began in 2016, and during this time I embodied already 47 toys. In the Little Knits online store. Story, you can purchase ready-made knitting patterns."
   },
   "Footer": {
-    "subtitle": "Blog and knitting shop",
-    "title": "Little Knits Story",
-    "personalAccount": "Personal Account",
-    "login": "Login",
-    "cart": "Cart",
-    "savedProducts": "Favorite",
-    "policy": "Privacy policy",
+    "about": "About",
+    "history": "Our history",
+    "ad": "Advertising",
+    "contacts": "Contacts",
+    "title": "Blog and knitting shop",
+    "policy": "Privacy Policy",
     "subscribe": {
-      "text": "We run special promotions for our clients. Checkout subscribe and we will keep you updated",
+      "title": "Subscription",
+      "text": "We run special promotions for our clients. Subscribe and we will keep you updated",
       "email": "Email",
       "buttonText": "Subscribe"
     }
@@ -137,6 +137,19 @@
     "createPolicy": "If you create an account, you automatically agree to the Privacy Policy",
     "forgotPassword": "Forgot password?",
     "quickAccess": "Quick access with"
+  },
+  "posts": {
+    "news": "News",
+    "back": "Back",
+    "tempRead": "3 min read",
+    "share": "Share",
+    "comments": "Comments",
+    "placeholderComments": "What do you think?",
+    "cancel": "Cancel",
+    "send": "Send",
+    "readAlso": "Also read",
+    "watchAll": "See All"
+    
   },
   "lastReviews": "Last Reviews",
   "otherPosts": "Other posts",

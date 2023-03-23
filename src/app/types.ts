@@ -95,6 +95,7 @@ export interface IArticle {
   image_preview: string;
   image_alt: string;
   created_at: string;
+  tags: {slug: string, title: string}[]
 }
 
 export interface IArticlesResponse {
