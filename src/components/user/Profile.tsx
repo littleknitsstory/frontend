@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
 import { useGetProfileQuery, useUpdateProfileMutation } from "../features/api/apiSlice"
 import { Form, Col, Container } from "react-bootstrap"
 import Spinner from "../utils/Spinner"
@@ -29,7 +29,9 @@ interface errorType {
 }
 
 const Profile = () => {
-  const [token, setToken] = useState<string>(localStorage.getItem("token") || "")
+  const tokens = localStorage.getItem("tokens") ? 
+    JSON.parse(localStorage.getItem("tokens") || "") : 
+    {tokens: {access: "", refresh: ""}}
   const [errorMessage, setErrorMessage] = useState<errorType>()
   const [userData, setUserData] = useState<IUserData>({
     username: "",
@@ -52,9 +54,8 @@ const Profile = () => {
   const navigate = useNavigate()
 
   const logout = () => {
-    localStorage.removeItem("token")
-    navigate("/login")
-    setToken("")
+    localStorage.removeItem("tokens")
+    navigate("/login/")
   }
 
   const {
@@ -62,7 +63,7 @@ const Profile = () => {
     isLoading,
     isError,
     error
-  } = useGetProfileQuery({ token })
+  } = useGetProfileQuery(tokens.access)
 
   const [updateProfile, 
     { 
@@ -91,7 +92,7 @@ const Profile = () => {
     e.preventDefault();
       if (!isLoading) {
         try {
-          await updateProfile({user: userData, token}).unwrap();
+          await updateProfile({user: userData, token: tokens.access}).unwrap();
         } catch (error) {
           
         }
@@ -124,9 +125,7 @@ const Profile = () => {
   }
 
   if (isError) {
-    if ("originalStatus" in error) {
-      return <PageError errorStatus={error.originalStatus} />;
-    }
+    return <Navigate to="/login/" />
   }
 
   return (
@@ -198,19 +197,14 @@ const Profile = () => {
                     onChange={handleChange}
                   />
                   {errorMessage?.last_name.map((item, i) => <p key={i} className="sign__error-message">{item}</p>)}
-                  <button type="submit" className="btn btn_vinous btn_center btn__text_center">Update</button>
+                  <button type="submit" className="btn btn--primary">Update</button>
                   
                 </Form>
               </Col>
           </Container>
         </div>
       }
-      <button 
-        className="btn btn_vinous btn_center btn__text_center btn__logout" 
-        onClick={logout}
-      >
-        Logout
-      </button>
+      <button className="btn btn--primary mt-4" onClick={logout}>Logout</button>
 
     </div>
   )

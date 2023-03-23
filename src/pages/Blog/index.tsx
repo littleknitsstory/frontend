@@ -11,7 +11,7 @@ import { ReactComponent as ArrowLeftSVG } from "../../assets/icons/arrow-left-nd
 import avatar from "../../assets/images/test-avatar.png"
 
 const Posts = () => {
-  const [limit, setLimit] = useState<number>(3);
+  const [limit, setLimit] = useState<number>(15);
   const { t, i18n } = useTranslation();
 
   const {

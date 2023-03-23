@@ -19,6 +19,8 @@ import {ReactComponent as HandIcon} from "../../assets/icons/reactions/hand.svg"
 import {ReactComponent as HeartIcon} from "../../assets/icons/reactions/heart.svg"
 import {ReactComponent as SpeechBubbleIcon} from "../../assets/icons/reactions/speech-bubble.svg"
 import {ReactComponent as ArrowRightSVG} from "../../assets/icons/arrow-right-nd.svg"
+import { Store } from "react-notifications-component";
+import { notificationSuccess } from "../../components/modal/Notification";
 
 const Post = () => {
   const { slug } = useParams<string>();
@@ -36,7 +38,7 @@ const Post = () => {
     data: articles,
   } = useGetArticlesQuery({limit: 3, offset, lang: i18n.language})
 
-  const [ postComment, { isLoading: commentsIsLoading } ] = useAddCommentsMutation()
+  const [ postComment ] = useAddCommentsMutation()
 
   const sliderForward = () => {
     if (articles) {
@@ -64,11 +66,13 @@ const Post = () => {
 
   const handleSubmit = async (): Promise<void> => {
     try {
-      const payload = await postComment(message).unwrap();
+      await postComment(message).unwrap();
       setMessage("")
-      
     } catch (error) {
-      
+      Store.addNotification({
+        ...notificationSuccess,
+        title: "Please login",
+      });
     }
   }
   
@@ -84,7 +88,7 @@ const Post = () => {
 
   return (
     <section className="post">
-      <Link to="/blog/" className="link link--with-icon">
+      <Link to="/posts/" className="link link--with-icon">
         <ArrowLeftSVG /> Назад
       </Link>
 
@@ -147,12 +151,14 @@ const Post = () => {
 
       <section className="post__more-posts">
         <h4 className="post__subtitle">Читайте также</h4>
-        <div className="post__card-container">
-          <ArrowLeftSVG className="posts__btn--arrow" onClick={sliderBackward}/>
-            {articles && articles.results.map(article => <CardArticleSmall key={article.slug} {...article}/>)}
-          <ArrowRightSVG className="posts__btn--arrow" onClick={sliderForward}/>
-        </div>
-        <Link to="/blog/" className="link link--with-icon link--centered">
+          <div className="post__slider">
+            <ArrowLeftSVG className="posts__btn--arrow" onClick={sliderBackward}/>
+            <div className="post__card-container">
+              {articles && articles.results.map(article => <CardArticleSmall key={article.slug} {...article}/>)}
+            </div>
+            <ArrowRightSVG className="posts__btn--arrow" onClick={sliderForward}/>
+          </div>
+        <Link to="/posts/" className="link link--with-icon link--centered">
           Смотреть все <ArrowRightSVG /> 
         </Link>
       </section>

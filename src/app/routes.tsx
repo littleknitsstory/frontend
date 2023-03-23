@@ -12,7 +12,7 @@ import Post from "../pages/Blog/Post"
 import Home from "../pages/Home";
 import LoginPage from "../pages/User/LoginPage";
 import Profile from "../components/user/Profile";
-import AuthRequired from "../components/AuthRequired";
+import AuthRequired from "../components/utils/AuthRequired";
 import { Navigate } from "react-router-dom";
 
 const routes: RouteObject = {
@@ -22,10 +22,10 @@ const routes: RouteObject = {
     {
       path: "/",
       /* Temporary used Blog as homepage */
-      element: <Navigate to="/blog/"/>,
+      element: <Navigate to="/posts/"/>,
     },
     {
-      path: "blog",
+      path: "posts",
       element: <Posts />,
     },
     {
@@ -33,11 +33,11 @@ const routes: RouteObject = {
       element: <Post />,
     },
     {
-      path: "shop",
+      path: "products",
       element: <Products />,
     },
     {
-      path: "product/:slug",
+      path: "products/:slug",
       element: <Product />,
     },
     {

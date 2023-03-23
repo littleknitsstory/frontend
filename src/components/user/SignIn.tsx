@@ -55,10 +55,10 @@ const SignIn = () => {
         try {
           const data = await signIn({user: formData, lang: i18n.language}).unwrap();
           setFormData(initialFormDataState);
-          localStorage.setItem("token", data.access)
-          navigate("/profile")
+          localStorage.setItem("tokens", JSON.stringify({ access: data.access, refresh: data.refresh }))
+          navigate("/profile/")
         } catch (error) {
-          
+          console.log(error)
         }
       }
   };

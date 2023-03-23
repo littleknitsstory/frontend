@@ -87,9 +87,9 @@ const ModalMain = ({ product, showModal, handleClose, onSubmitOrder }: ModalProp
               <FormsInput
                 className="mb-3"
                 controlId={"formGroupModalName"}
-                type="text"
-                placeholder={t("CardProduct.fullName")}
+                type="text"                
                 name="name"
+                placeholder={t("CardProduct.fullName")}
               />
             </Row>
             <Row>

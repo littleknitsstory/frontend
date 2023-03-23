@@ -119,23 +119,31 @@
   &__subtitle {
     font-size: 2rem;
   }
+
+  &__slider {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
   &__card-container {
     margin-top: 4rem;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     gap: 4rem;
     margin-bottom: 3.3125rem;
   }
 }
 
-@media (max-width: 992px) {
-  .article {
-    margin-top: 1.875rem;
-    &__wrapper-article {
-      margin-top: 0;
-    }
-    &__wrapper-text {
-      margin-top: 2rem;
-    }
-  }
-}
+// @media (max-width: 992px) {
+//   .article {
+//     margin-top: 1.875rem;
+//     &__wrapper-article {
+//       margin-top: 0;
+//     }
+//     &__wrapper-text {
+//       margin-top: 2rem;
+//     }
+//   }
+// }

@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import eye from "../../assets/icons/eye.svg"
 import { useSignUpMutation } from "../features/api/apiSlice";
 import Spinner from "../utils/Spinner";
 
 const SignUp = () => {
   const { i18n, t } = useTranslation()
+  const navigate = useNavigate()
   const initialFormDataState = {
     email: "",
     password: "",
@@ -66,9 +68,10 @@ const SignUp = () => {
       if (!isLoading) {
         try {
           await signUp({user: formData, lang: i18n.language}).unwrap();
-          
+          localStorage.setItem("tokens", JSON.stringify({ access: data.access, refresh: data.refresh }))
           setFormData(initialFormDataState);
           setPasswordConfirmInput("")
+          navigate("/profile/")
         } catch (error) {
           
           

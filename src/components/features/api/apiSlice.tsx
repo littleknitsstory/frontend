@@ -47,6 +47,7 @@ enum URLS {
   ARTICLES = "/posts/",
   REVIEWS = "/reviews/",
   CATEGORIES = "/categories/",
+  REFRESH_TOKEN = "/token/refresh/",
   SIGN_UP = "/sign-up/",
   SIGN_IN = "/sign-in/",
   PROFILE = "/profile/",
@@ -145,13 +146,13 @@ export const apiSlice = createApi({
         method: "POST",
         body: { text: message },
         headers: { 
-          "Authorization": "Bearer " + localStorage.getItem("token") 
+          "Authorization": "Bearer " + JSON.parse(localStorage.getItem("tokens") || "{}")?.access 
         }
         
       }),
     }),
     getProfile: builder.query({
-      query: ({ token }) => ({
+      query: ( token ) => ({
         url: URLS.PROFILE,
         headers: { "Authorization": "Bearer " + token },
       }),
@@ -164,6 +165,13 @@ export const apiSlice = createApi({
         headers: { 
           "Authorization": "Bearer " + token 
         }
+      }),
+    }),
+    refreshToken: builder.mutation({
+      query: (token) => ({
+        url: URLS.REFRESH_TOKEN,
+        method: "POST",
+        body: { refresh: token },
         
       }),
     }),
@@ -183,5 +191,6 @@ export const {
   useSignInMutation,
   useGetProfileQuery,
   useUpdateProfileMutation,
-  useAddCommentsMutation
+  useAddCommentsMutation,
+  useRefreshTokenMutation
 } = apiSlice;
