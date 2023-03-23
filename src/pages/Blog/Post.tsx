@@ -10,7 +10,7 @@ import PageError from "../PageError";
 import Spinner from "../../components/utils/Spinner";
 import avatar from "../../assets/images/test-avatar.png"
 import CardArticleSmall from "../../components/blog/CardArticleSmall";
-import { notificationSuccess } from "../../components/modal/Notification";
+import { notificationError, notificationSuccess } from "../../components/modal/Notification";
 import {ReactComponent as ArrowLeftSVG} from "../../assets/icons/arrow-left-nd.svg"
 import {ReactComponent as VKIcon} from "../../assets/icons/social/vkontakte.svg"
 import {ReactComponent as FacebookIcon} from "../../assets/icons/social/facebook.svg"
@@ -68,9 +68,13 @@ const Post = () => {
     try {
       await postComment(message).unwrap();
       setMessage("")
-    } catch (error) {
       Store.addNotification({
         ...notificationSuccess,
+        title: t("posts.successSend"),
+      });
+    } catch (error) {
+      Store.addNotification({
+        ...notificationError,
         title: t("posts.noAuthorize"),
       });
     }
