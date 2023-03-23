@@ -1,7 +1,8 @@
-import { ChangeEvent, ChangeEventHandler, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { Store } from "react-notifications-component";
 import parse from 'html-react-parser'
 import { PICTURE_BASE_URL, useAddCommentsMutation } from "../../components/features/api/apiSlice";
 import { useGetArticleQuery, useGetArticlesQuery } from "../../components/features/api/apiSlice";
@@ -9,8 +10,9 @@ import PageError from "../PageError";
 import Spinner from "../../components/utils/Spinner";
 import avatar from "../../assets/images/test-avatar.png"
 import CardArticleSmall from "../../components/blog/CardArticleSmall";
+import { notificationSuccess } from "../../components/modal/Notification";
 import {ReactComponent as ArrowLeftSVG} from "../../assets/icons/arrow-left-nd.svg"
-import {ReactComponent as VkontakteIcon} from "../../assets/icons/social/vkontakte.svg"
+import {ReactComponent as VKIcon} from "../../assets/icons/social/vkontakte.svg"
 import {ReactComponent as FacebookIcon} from "../../assets/icons/social/facebook.svg"
 import {ReactComponent as InstagramIcon} from "../../assets/icons/social/instagram.svg"
 import {ReactComponent as PinterestIcon} from "../../assets/icons/social/pinterest.svg"
@@ -19,8 +21,6 @@ import {ReactComponent as HandIcon} from "../../assets/icons/reactions/hand.svg"
 import {ReactComponent as HeartIcon} from "../../assets/icons/reactions/heart.svg"
 import {ReactComponent as SpeechBubbleIcon} from "../../assets/icons/reactions/speech-bubble.svg"
 import {ReactComponent as ArrowRightSVG} from "../../assets/icons/arrow-right-nd.svg"
-import { Store } from "react-notifications-component";
-import { notificationSuccess } from "../../components/modal/Notification";
 
 const Post = () => {
   const { slug } = useParams<string>();
@@ -71,7 +71,7 @@ const Post = () => {
     } catch (error) {
       Store.addNotification({
         ...notificationSuccess,
-        title: "Please login",
+        title: t("posts.noAuthorize"),
       });
     }
   }
@@ -115,7 +115,7 @@ const Post = () => {
           <h4 className="post__footer-text">{t("posts.share")}</h4>
           <div className="post__footer--wrapper">
             <div className="post__share-links">
-              <VkontakteIcon />
+              <VKIcon />
               <FacebookIcon />
               <InstagramIcon />
               <PinterestIcon />

@@ -148,7 +148,10 @@
     "cancel": "Cancel",
     "send": "Send",
     "readAlso": "Also read",
-    "watchAll": "See All"
+    "watchAll": "See All",
+    "readingList1": "Click on",
+    "readingList2": "to add any story into your reading list",
+    "noAuthorize": "Please login"
     
   },
   "lastReviews": "Last Reviews",

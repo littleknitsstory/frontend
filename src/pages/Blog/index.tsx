@@ -1,19 +1,17 @@
-// import Articles from "./Articles";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IArticle } from "../../app/types";
 import { useGetArticlesQuery } from "../../components/features/api/apiSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { removeSavedPost } from "../../components/features/posts/postsSlice"
 import CardArticle from "../../components/blog/CardArticle";
 import PageError from "../PageError";
 import Spinner from "../../components/utils/Spinner";
+import ArticleTitle from "../../components/blog/ArticleTitle";
 import { ReactComponent as ArrowRightSVG } from "../../assets/icons/arrow-right-nd.svg"
 import { ReactComponent as ArrowLeftSVG } from "../../assets/icons/arrow-left-nd.svg"
 import BookmarkIcon from "../../assets/icons/bookmark.svg"
 import avatar from "../../assets/images/test-avatar.png"
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { removeSavedPost } from "../../components/features/posts/postsSlice"
-import { Link } from "react-router-dom";
-import ArticleTitle from "../../components/blog/ArticleTitle";
 
 interface Tag {
   title: string;
@@ -21,14 +19,12 @@ interface Tag {
 }
 
 const Posts = () => {
-  const [limit, setLimit] = useState<number>(15);
+  const [limit, setLimit] = useState<number>(100);
   const { t, i18n } = useTranslation();
   const [tags, setTags] = useState<Tag[]>([])
-  const [elements, setElements] = useState<JSX.Element[]>([])
   const dispatch = useAppDispatch()
   const savedPosts = useAppSelector(state => state.posts.posts)
 
-  console.log(savedPosts)
   const {
     data: articles,
     isLoading,
@@ -59,22 +55,15 @@ const Posts = () => {
     }
   }, [articles])
   
-  useEffect(() => {
-    const tagSelectors = tags.map(item => (
-      <button key={item.slug} className="btn btn--tag">{item.title}</button>
-    ))
-    setElements(tagSelectors)
-  }, [tags])
-
   const sliderForward = () => {
-      setElements(prevArray => {
+      setTags(prevArray => {
         const updated = [...prevArray]
         updated.unshift(updated.pop()!)
         return updated
       })
   }
   const sliderBackward = () => {
-      setElements(prevArray => {
+      setTags(prevArray => {
         const updated = [...prevArray]
         updated.push(updated.shift()!)
         return updated
@@ -94,7 +83,9 @@ const Posts = () => {
           <div className="posts__tags-slider">
             <ArrowLeftSVG onClick={sliderBackward} className="posts__btn--arrow"/>
               <div className="posts__tags">
-                {elements}
+                {tags.map(item => (
+                  <button key={item.slug} className="btn btn--tag">{item.title}</button>
+                ))}
               </div>
             <ArrowRightSVG onClick={sliderForward} className="posts__btn--arrow"/>
           </div>
@@ -119,7 +110,7 @@ const Posts = () => {
           <h2  className="posts__subtitle">Список для чтения</h2>
           {savedPosts.length === 0 &&
             <p className="posts__aside--text">
-              Кликнете на {<img src={BookmarkIcon}></img>}, чтобы добавить любую историю в ваш список для чтения, и прочитать его позже 
+              {t("posts.readingList1")} {<img src={BookmarkIcon}></img>}, {t("posts.readingList2")} 
             </p>
           }
           {savedPosts.length > 0 && 
