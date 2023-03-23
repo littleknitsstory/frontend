@@ -29,7 +29,6 @@ i18next
   .use(LanguageDetector)
   .use(Backend)
   .init({
-    lng: "en",
     ns: ["translationEn", "translationRu"],
     defaultNS,
     resources,

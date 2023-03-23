@@ -36,8 +36,8 @@ const Product = () => {
           <Col>
             <div>
               <Link to="/">Main</Link>
-              <Link to="/shop/"> / Shop</Link>
-              <Link to={`/product/${product?.slug}`}> / {product?.title}</Link>
+              <Link to="/products/"> / Shop</Link>
+              <Link to={`/products/${product?.slug}`}> / {product?.title}</Link>
             </div>
           </Col>
         </Row>

@@ -6,7 +6,7 @@ import { PICTURE_BASE_URL } from "../features/api/apiSlice";
 const MiniCardProduct = ({ product }: { product: IProduct }) => {
   return (
     <div className="mini-card-product">
-      <Link to={`/product/${product.slug}`}>
+      <Link to={`/products/${product.slug}`}>
         <Card style={{ width: "18rem" }}>
           <Card.Title>{product.title}</Card.Title>
           <Card.Body>

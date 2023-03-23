@@ -34,12 +34,6 @@ const SavedProducts = () => {
             );
           })}
         </Row>
-        <Link className="btn btn_border" to="/cart/">
-          <div className="btn__text"></div>
-          <div className="btn__icon">
-            <img src={arrowRight} alt="arrowWhite" />
-          </div>
-        </Link>
       </Container>
     </section>
   );

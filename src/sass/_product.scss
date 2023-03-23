@@ -83,6 +83,18 @@
     }
   }
 }
+
+@media (min-width: 768px) {
+  .product {
+    .schema-card {
+      &__product-btn {
+        flex-direction: row;
+        justify-content: space-evenly;
+      }
+    }
+  }
+}
+
 @media (min-width: 1400px) {
   .product {
     .schema-card {

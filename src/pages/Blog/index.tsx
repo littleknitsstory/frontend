@@ -7,7 +7,7 @@ import { removeSavedPost } from "../../components/features/posts/postsSlice"
 import CardArticle from "../../components/blog/CardArticle";
 import PageError from "../PageError";
 import Spinner from "../../components/utils/Spinner";
-import ArticleTitle from "../../components/blog/ArticleTitle";
+import ArticleTitle from "../../components/blog/ArticleTitle"
 import { ReactComponent as ArrowRightSVG } from "../../assets/icons/arrow-right-nd.svg"
 import { ReactComponent as ArrowLeftSVG } from "../../assets/icons/arrow-left-nd.svg"
 import BookmarkIcon from "../../assets/icons/bookmark.svg"
@@ -24,9 +24,16 @@ const Posts = () => {
   const [tags, setTags] = useState<Tag[]>([])
   const dispatch = useAppDispatch()
   const savedPosts = useAppSelector(state => state.posts.posts)
+  const [filteredPosts, setFilteredPosts] = useState<IArticle[]>([])
+  const [selectedTag, setSelectedTag] = useState<string>("")
+
+  const activeStyle = {
+    backgroundColor: "#5E6959",
+    color: "#FEFEFE"
+  }
 
   const {
-    data: articles,
+    data: posts,
     isLoading,
     isFetching,
     isError,
@@ -35,10 +42,10 @@ const Posts = () => {
 
   useEffect(() => {
     // get all tags from articles
-    if (articles) {
-      const tagsSet: { [key: string]: string } = articles?.results.reduce(
-        (result: { [key: string]: string }, article: IArticle) => {
-          article.tags.forEach((tag) => {
+    if (posts) {
+      const tagsSet: { [key: string]: string } = posts?.results.reduce(
+        (result: { [key: string]: string }, post: IArticle) => {
+          post.tags.forEach((tag) => {
             if (!result[tag.title]) {
               result[tag.title] = tag.slug;
             }
@@ -53,7 +60,24 @@ const Posts = () => {
       }));
       setTags(allTags);
     }
-  }, [articles])
+  }, [posts])
+
+  useEffect(() => {
+    const filteredByTag: IArticle[] = posts?.results.filter((post) =>
+      selectedTag
+        ? post.tags.some((tag) => tag.slug === selectedTag)
+        : true,
+    ) ?? [];
+    setFilteredPosts(filteredByTag)
+  }, [posts, selectedTag])
+
+  const handleSelectTag = (e: React.SyntheticEvent<HTMLButtonElement>) => {
+    if (selectedTag === e.currentTarget.dataset.slug) {
+      setSelectedTag("")
+    } else {
+      setSelectedTag(e.currentTarget.dataset.slug || "")
+    }
+  }
   
   const sliderForward = () => {
       setTags(prevArray => {
@@ -68,6 +92,9 @@ const Posts = () => {
         updated.push(updated.shift()!)
         return updated
       })
+  }
+  if (isLoading) {
+    return <Spinner />
   }
 
   if (isError) {
@@ -84,20 +111,27 @@ const Posts = () => {
             <ArrowLeftSVG onClick={sliderBackward} className="posts__btn--arrow"/>
               <div className="posts__tags">
                 {tags.map(item => (
-                  <button key={item.slug} className="btn btn--tag">{item.title}</button>
+                  <button 
+                    key={item.slug} 
+                    onClick={(e: React.SyntheticEvent<HTMLButtonElement>) => handleSelectTag(e)} 
+                    data-slug={item.slug}
+                    className="btn btn--tag"
+                    style={selectedTag === item.slug ? activeStyle : {}}
+                  >{item.title}
+                  </button>
                 ))}
               </div>
             <ArrowRightSVG onClick={sliderForward} className="posts__btn--arrow"/>
           </div>
           {isFetching && <Spinner />}
           <article className="posts__articles">
-            {articles?.results.map(article => <CardArticle key={article.slug} article={article}/>)}
+            {filteredPosts?.map(post => <CardArticle key={post.slug} article={post}/>)}
           </article>
         </div>
         <div className="posts__divider"></div>
         <aside className="posts__aside-wrapper">
           <h2 className="posts__subtitle">{t("posts.news")}</h2>
-          {articles?.results.slice(0, 3).map(post => (
+          {posts?.results.slice(0, 3).map(post => (
             <div className="posts__aside" key={post.slug}>
               <div className="posts__aside--header">
                 <img src={avatar} alt="" className="posts__aside--avatar" />
@@ -110,14 +144,16 @@ const Posts = () => {
           <h2  className="posts__subtitle">Список для чтения</h2>
           {savedPosts.length === 0 &&
             <p className="posts__aside--text">
-              {t("posts.readingList1")} {<img src={BookmarkIcon}></img>}, {t("posts.readingList2")} 
+              {t("posts.readingList1")} 
+              {<img src={BookmarkIcon} alt="bookmark icon"></img>}, 
+              {t("posts.readingList2")} 
             </p>
           }
           {savedPosts.length > 0 && 
             <div className="posts__saved-posts">
               {savedPosts.map(post => (
-                <div className="posts__saved-post-wrapper">
-                  <ArticleTitle post={post}/>
+                <div key={post.slug} className="posts__saved-post-wrapper">
+                  <ArticleTitle  post={post}/>
                   <button className="btn btn--icon"onClick={() => dispatch(removeSavedPost(post))}>🗑️</button>
                 </div>
               ))}

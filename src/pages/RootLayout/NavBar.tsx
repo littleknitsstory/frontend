@@ -9,19 +9,30 @@ import PrimaryNav from "../../components/primary-nav/PrimaryNav";
 import { ReactComponent as ProfileIcon} from "../../assets/icons/user.svg";
 import { ReactComponent as HeartIcon} from "../../assets/icons/heart-big.svg";
 import { ReactComponent as BagIcon} from "../../assets/icons/bag.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const NavBar = () => {
   const { i18n } = useTranslation();
-  const [lang, setLang] = useState("English")
+  const [lang, setLang] = useState(localStorage.getItem("lang"))
+
+
+  useEffect(() => {
+    if (lang) {
+      i18n.changeLanguage(localStorage.getItem("i18nextLng") || "en")
+    }
+  }, [])
+
+
 
   const changeLang = (e: React.MouseEvent) => {
     if (e.currentTarget.textContent === "English") {
       setLang("Русский")
       i18n.changeLanguage("ru")
+      localStorage.setItem("lang", "Русский")
     } else {
       setLang("English")
       i18n.changeLanguage("en")
+      localStorage.setItem("lang", "English")
     }
   }
   

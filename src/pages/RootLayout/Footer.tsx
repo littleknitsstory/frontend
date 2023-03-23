@@ -69,10 +69,34 @@ const Footer = () => {
         <div className="footer__contacts">
           <h2 className="footer__title">{t("Footer.contacts")}</h2>
           <nav className="footer__nav">
-            <Link to="" className="footer__link">Facebook</Link>
-            <Link to="" className="footer__link">Instagram</Link>
-            <Link to="" className="footer__link">Pinterest</Link>
-            <Link to="" className="footer__link">VK</Link>
+            <a 
+              href="https://www.facebook.com/littleknitsstory/" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="footer__link"
+            >Facebook
+            </a>
+            <a 
+              href="https://www.instagram.com/littleknitsstory/" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="footer__link"
+            >Instagram
+            </a>
+            <a 
+              href="https://www.pinterest.ru/littleknitsstory/" 
+              target="_blank" 
+              rel="noreferrer"
+              className="footer__link"
+            >Pinterest
+            </a>
+            <a 
+              href="https://vk.com/littleknitsstory" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="footer__link"
+            >VK
+            </a>
           </nav>
         </div>
 
