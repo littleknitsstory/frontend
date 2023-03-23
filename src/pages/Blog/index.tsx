@@ -8,7 +8,12 @@ import PageError from "../PageError";
 import Spinner from "../../components/utils/Spinner";
 import { ReactComponent as ArrowRightSVG } from "../../assets/icons/arrow-right-nd.svg"
 import { ReactComponent as ArrowLeftSVG } from "../../assets/icons/arrow-left-nd.svg"
+import BookmarkIcon from "../../assets/icons/bookmark.svg"
 import avatar from "../../assets/images/test-avatar.png"
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { removeSavedPost } from "../../components/features/posts/postsSlice"
+import { Link } from "react-router-dom";
+import ArticleTitle from "../../components/blog/ArticleTitle";
 
 interface Tag {
   title: string;
@@ -20,7 +25,10 @@ const Posts = () => {
   const { t, i18n } = useTranslation();
   const [tags, setTags] = useState<Tag[]>([])
   const [elements, setElements] = useState<JSX.Element[]>([])
+  const dispatch = useAppDispatch()
+  const savedPosts = useAppSelector(state => state.posts.posts)
 
+  console.log(savedPosts)
   const {
     data: articles,
     isLoading,
@@ -73,16 +81,6 @@ const Posts = () => {
       })
   }
 
-  const postsAside = (article: IArticle) => (
-    <div className="posts__aside" key={article.slug}>
-      <div className="posts__aside--header">
-        <img src={avatar} alt="" className="posts__aside--avatar" />
-        <p className="posts__aside--author">{article.author}</p>
-      </div>
-      <p className="posts__aside--title">{article.title}</p>
-    </div>
-  )
-
   if (isError) {
     if ("originalStatus" in error) {
       return <PageError errorStatus={error.originalStatus} />;
@@ -107,8 +105,33 @@ const Posts = () => {
         </div>
         <div className="posts__divider"></div>
         <aside className="posts__aside-wrapper">
-          <h2>{t("posts.news")}</h2>
-          {articles?.results.slice(0, 3).map(article => postsAside(article))}
+          <h2 className="posts__subtitle">{t("posts.news")}</h2>
+          {articles?.results.slice(0, 3).map(post => (
+            <div className="posts__aside" key={post.slug}>
+              <div className="posts__aside--header">
+                <img src={avatar} alt="" className="posts__aside--avatar" />
+                <p className="posts__aside--author">{post.author}</p>
+              </div>
+              <p className="posts__aside--title">{post.title}</p>
+            </div>
+          ))}
+          <div className="divider"></div>
+          <h2  className="posts__subtitle">Список для чтения</h2>
+          {savedPosts.length === 0 &&
+            <p className="posts__aside--text">
+              Кликнете на {<img src={BookmarkIcon}></img>}, чтобы добавить любую историю в ваш список для чтения, и прочитать его позже 
+            </p>
+          }
+          {savedPosts.length > 0 && 
+            <div className="posts__saved-posts">
+              {savedPosts.map(post => (
+                <div className="posts__saved-post-wrapper">
+                  <ArticleTitle post={post}/>
+                  <button className="btn btn--icon"onClick={() => dispatch(removeSavedPost(post))}>🗑️</button>
+                </div>
+              ))}
+            </div>
+          }
         </aside>
       </main>
     </>

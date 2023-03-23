@@ -27,7 +27,7 @@ const productsSlice = createSlice({
       localStorage.setItem("favoriteProducts", JSON.stringify(state.favorite));
     },
     removeFavorite(state, action: PayloadAction<IProduct>) {
-      state.favorite = [...state.favorite.filter((product) => product.id !== action.payload.id)];
+      state.favorite = state.favorite.filter((product) => product.id !== action.payload.id);
       localStorage.setItem("favoriteProducts", JSON.stringify(state.favorite));
     },
     addToCart(state, action: PayloadAction<IProduct>) {
