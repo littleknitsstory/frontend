@@ -1,112 +1,59 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+
+import { IProduct } from "../../app/types";
 import { useGetProductsQuery } from "../../components/features/api/apiSlice";
-// components
-import Filters from "../../components/products/Filters";
 import CardProduct from "../../components/products/CardProduct";
+import Filters from "../../components/products/Filters";
 import Spinner from "../../components/utils/Spinner";
 import PageError from "../PageError";
-// assets
-import arrowRight from "../../assets/icons/arrow-right.svg";
-import { IProduct } from "../../app/types";
-import { Link } from "react-router-dom";
+
+const INITIAL_LIMIT = 4;
 
 const Products = () => {
   const { t, i18n } = useTranslation();
-  const [limit, setLimit] = useState<number>(4);
+  const [limit, setLimit] = useState<number>(INITIAL_LIMIT);
+  const observer = useRef<IntersectionObserver>();
   const {
     data: products,
     isLoading,
     isFetching,
     isError,
     error,
-  } = useGetProductsQuery({ lang: i18n.language, limit });
+  } = useGetProductsQuery({ lang: i18n.language, limit: 200 });
 
-  const [isLastPage, setIsLastPage] = useState<boolean>(false);
-  const [renderProducts, setRenderProducts] = useState<IProduct[]>(
-    [],
-  ); /* Which array of products render */
-  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
-  const [filteredColors, setFilteredColors] = useState<IProduct[]>([]);
-  const [filteredCategories, setFilteredCategories] = useState<IProduct[]>([]);
-  const [hasOverlap, setHasOverlap] = useState<boolean>(true);
-
-  useEffect((): void => {
-    if (products) setRenderProducts(products.results);
-  }, [products]);
+  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>(products?.results ?? []);
+  const [shownProducts, setShownProducts] = useState<IProduct[]>([]);
+  const hasMore = filteredProducts.length > shownProducts.length;
 
   useEffect(() => {
-    const colorLength: number = filteredColors.length;
-    const categoryLength: number = filteredCategories.length;
-
-    // check if only one filter active
-    if (colorLength > 0 && categoryLength === 0) {
-      setFilteredProducts(filteredColors);
-      setHasOverlap(true);
-      setIsLastPage(true);
-    }
-    if (categoryLength > 0 && colorLength === 0) {
-      setFilteredProducts(filteredCategories);
-      setHasOverlap(true);
-      setIsLastPage(true);
-    }
-
-    // if both filters are active (find overlap)
-    if (categoryLength > 0 && colorLength > 0) {
-      const isSameProduct = (a: IProduct, b: IProduct): boolean => a.id === b.id;
-
-      const compareProducts = (a: IProduct[], b: IProduct[]) =>
-        a.filter((firstArray) => b.some((secondArray) => isSameProduct(firstArray, secondArray)));
-
-      const comparedProducts = compareProducts(filteredCategories, filteredColors);
-      // check if filters has overlap
-      if (comparedProducts.length === 0) {
-        setHasOverlap(false);
-      } else {
-        setHasOverlap(true);
-        setIsLastPage(true);
-        setFilteredProducts(comparedProducts);
-      }
-    }
-
-    // if both filters are inactive
-    if (categoryLength === 0 && colorLength === 0) {
-      if (products) {
-        setRenderProducts(products?.results);
-        setIsLastPage(limit >= products?.count);
-        setFilteredProducts([]);
-      }
-    }
-  }, [filteredCategories, filteredColors]);
-
-  // Select which array of products render
-  useEffect(() => {
-    if (filteredProducts.length > 0) {
-      setRenderProducts(filteredProducts);
-    } else if (products) {
-      setRenderProducts(products.results);
-    }
-  }, [filteredProducts, products]);
+    setLimit(INITIAL_LIMIT);
+  }, [filteredProducts]);
 
   useEffect(() => {
-    if (products) {
-      if (limit !== 3 && limit >= products?.count) {
-        setIsLastPage(true);
-      }
-    }
-  }, [limit]);
+    setShownProducts(filteredProducts.slice(0, limit));
+  }, [filteredProducts, limit]);
 
-  const clearFilters = () => {
-    if (products) {
-      setFilteredCategories([]);
-      setFilteredColors([]);
-      setFilteredProducts([]);
-      setHasOverlap(true);
-      setRenderProducts(products?.results);
-      setIsLastPage(limit >= products?.count);
-    }
-  };
+  const loaderRef = useCallback(
+    (node: HTMLDivElement) => {
+      if (isFetching) return;
+      if (!node) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && hasMore) {
+            setLimit((prevLimit) => prevLimit + 4);
+          }
+        },
+        {
+          rootMargin: "40px",
+        },
+      );
+      observer.current.observe(node);
+    },
+    [hasMore, isFetching],
+  );
 
   if (isLoading) {
     return <Spinner />;
@@ -123,26 +70,24 @@ const Products = () => {
       <div className="products">
         <Row>
           <Col sm={12} md={6} lg={4} xl={4} xxl={3}>
-            <Filters
-              clearFilters={clearFilters}
-              setFilteredCategories={setFilteredCategories}
-              setFilteredColors={setFilteredColors}
-            />
+            <Filters products={products?.results ?? []} setFilteredProducts={setFilteredProducts} />
           </Col>
           <Col>
             <Row xs={1} md={1} lg={2} xl={2} xxl={3}>
-              {hasOverlap &&
-                renderProducts.map((product) => {
-                  return (
-                    <Col key={product.id}>
-                      <CardProduct productSlug={product.slug} />
-                    </Col>
-                  );
-                })}
-              {!hasOverlap && <p className="filters__no-overlap">{t("Filter.noMatch")}</p>}
+              {shownProducts.map((product, index) => {
+                return (
+                  <Col key={product.id}>
+                    <CardProduct productSlug={product.slug} />
+                  </Col>
+                );
+              })}
+              {!shownProducts.length && (
+                <p className="filters__no-overlap">{t("Filter.noMatch")}</p>
+              )}
             </Row>
           </Col>
         </Row>
+        <div ref={loaderRef} />
         {isFetching && <Spinner />}
       </div>
     </Container>

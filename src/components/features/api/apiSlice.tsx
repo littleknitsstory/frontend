@@ -8,25 +8,25 @@ import {
   IArticle,
   IProductDetails,
   IReviewsResponse,
+  ISignUp,
+  ISignIn,
+  IUserData,
 } from "../../../app/types";
 
-interface IUserData {
-  username: string;
-  avatar: "";
-  first_name: string;
-  last_name: string;
-  birth_data: string;
-  country: string;
-  city: string;
-  address: string;
-  email: string;
-  is_email_confirmed: boolean;
-  is_profile_full: boolean;
-  phone_number: string;
-  vk_profile: string;
-  fb_profile: string;
-  inst_profile: string;
-  tg_profile: string
+interface ILoginResponse {
+  access: string;
+  refresh: string;
+}
+
+interface QueryArgs {
+  limit?: number;
+  offset?: number;
+  lang: string;
+}
+
+interface CategoriesResponse {
+  title: string;
+  slug: string;
 }
 
 // creating "offset / limit" query string
@@ -51,28 +51,15 @@ enum URLS {
   SIGN_UP = "/sign-up/",
   SIGN_IN = "/sign-in/",
   PROFILE = "/profile/",
-  COMMENTS = "/comments/"
+  COMMENTS = "/comments/",
+  ORDER = "/orders/"
 }
 
 export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";
 
-// types
-interface QueryArgs {
-  limit?: number;
-  offset?: number;
-  lang: string;
-}
-
-interface CategoriesResponse {
-  title: string;
-  slug: string;
-}
-
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_BASE_API_URL,
-  }),
+  baseQuery: fetchBaseQuery({baseUrl: "http://dev.backend.littleknitsstory.com:26363/api/v1"}),
   endpoints: (builder) => ({
     getMenu: builder.query<IMenuResponse, { lang: string }>({
       query: ({ lang }) => ({
@@ -124,7 +111,14 @@ export const apiSlice = createApi({
         body: email,
       }),
     }),
-    signUp: builder.mutation({
+    addOrder: builder.mutation({
+      query: (orderForm) => ({
+        url: URLS.ORDER,
+        method: "POST",
+        body: orderForm,
+      }),
+    }),
+    signUp: builder.mutation<ILoginResponse, {user: ISignUp, lang: string}>({
       query: ({user, lang}) => ({
         url: URLS.SIGN_UP,
         method: "POST",
@@ -132,11 +126,11 @@ export const apiSlice = createApi({
         headers: { "Accept-Language": lang }
       }),
     }),
-    signIn: builder.mutation({
-      query: ({user, lang}) => ({
+    signIn: builder.mutation<ILoginResponse, {credentials: ISignIn, lang: string}>({
+      query: ({credentials, lang}) => ({
         url: URLS.SIGN_IN,
         method: "POST",
-        body: user,
+        body: credentials,
         headers: { "Accept-Language": lang }
       }),
     }),
@@ -192,5 +186,6 @@ export const {
   useGetProfileQuery,
   useUpdateProfileMutation,
   useAddCommentsMutation,
-  useRefreshTokenMutation
+  useRefreshTokenMutation,
+  useAddOrderMutation
 } = apiSlice;

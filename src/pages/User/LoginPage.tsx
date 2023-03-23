@@ -12,13 +12,13 @@ const LoginPage = () => {
     <div className="login__wrapper">
       <div className="login__select-form">
         <button 
-          className={`btn btn__link login__btn ${selectedForm === "signIn" ? "active" : ""}`}
+          className={`btn login__btn ${selectedForm === "signIn" ? "active" : ""}`}
           onClick={() => setSelectedForm("signIn")}
           >
           {t("Login.singIn")}
         </button>
         <button 
-          className={`btn btn__link login__btn ${selectedForm === "signUp" ? "active" : ""}`}
+          className={`btn login__btn ${selectedForm === "signUp" ? "active" : ""}`}
           onClick={() => setSelectedForm("signUp")}
         >
           {t("Login.singUp")}

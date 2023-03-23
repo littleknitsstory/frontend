@@ -1,5 +1,5 @@
 import { RouteObject } from "react-router-dom";
-import Cart from "../pages/Cart";
+import Cart from "../pages/Cart/Cart";
 import PageError from "../pages/PageError";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import Product from "../pages/Shop/Product";
@@ -14,6 +14,7 @@ import LoginPage from "../pages/User/LoginPage";
 import Profile from "../components/user/Profile";
 import AuthRequired from "../components/utils/AuthRequired";
 import { Navigate } from "react-router-dom";
+import Ordering from "../pages/Cart/Ordering";
 
 const routes: RouteObject = {
   element: <RootLayout />,
@@ -51,6 +52,10 @@ const routes: RouteObject = {
     {
       path: "cart",
       element: <Cart />,
+    },
+    {
+      path: "cart/ordering",
+      element: <Ordering />
     },
     {
       path: "privacyPolicy",

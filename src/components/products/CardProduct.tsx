@@ -4,7 +4,8 @@ import { useTranslation } from "react-i18next";
 import { Store } from "react-notifications-component";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { addFavorite, removeFavorite, addToCart } from "../features/products/productsSlice";
+import { addFavorite, removeFavorite } from "../features/products/productsSlice";
+import { addToCart } from "../features/products/cartSlice";
 
 import ModalMain from "../modal/ModalMain";
 import useModalState from "../hooks/useModalState";
@@ -29,7 +30,7 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
   } = useGetProductQuery({ lang: i18n.language, slug: productSlug });
 
   const favoriteProducts = useAppSelector((state) => state.products.favorite);
-  const cartProducts = useAppSelector((state) => state.products.cart);
+  const cartProducts = useAppSelector((state) => state.cart.products);
 
   if (isError) {
     if ("originalStatus" in error) {
@@ -39,7 +40,7 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
 
   const addFavoriteProduct = (product: IProductDetails): void => {
     dispatch(addFavorite(product));
-    if (!favoriteProducts.includes(product)) {
+    if (!favoriteProducts.some(item => item.id === product.id)) {
       Store.addNotification({
         ...notificationSuccess,
         title: t("Notification.isSaved"),
@@ -52,10 +53,9 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
     }
   };
 
-  const addProductInCart = (product: IProductDetails): void => {
-    console.log("clicked")
-    dispatch(addToCart(product));
-    if (!cartProducts.includes(product)) {
+  const addProductInCart = (product: IProductDetails ): void => {
+    dispatch(addToCart({...product, amount: 1}));
+    if (!cartProducts.some(item => item.id === product.id)) {
       Store.addNotification({
         ...notificationSuccess,
         title: t("Notification.isAdded"),
@@ -79,7 +79,7 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
             <span></span>
             <span></span>
           </div>
-          <Link to={`/product/${product?.slug}`}>
+          <Link to={`/products/${product?.slug}`}>
             <Card.Img
               variant="top"
               alt={product?.image_alt}
@@ -93,7 +93,7 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
               <LikeIcon onClick={() => addFavoriteProduct(product)}/>
               <BagIcon onClick={() => addProductInCart(product)}/>
             </div>
-            <div className="card-lks__material">{t("CardProduct.material")}:</div>
+            <div className="card-lks__material">{t("CardProduct.material")}: {product.material}</div>
             <div className="card-lks__color">
               {t("CardProduct.color")}:
               {product?.colors.map((color) => (

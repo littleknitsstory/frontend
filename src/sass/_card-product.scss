@@ -34,7 +34,8 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      align-items: center;
+      align-items: start;
+      gap: 0.5rem;
 
     }
 
@@ -45,7 +46,7 @@
       align-items: center;
     }
     &-title {
-      font-size: 1.125rem;
+      font-size: 1.5rem;
       // text-align: center;
     }
     &-color-circle-wrapper {
@@ -64,10 +65,12 @@
     }
     &-part-number {
       color: $text-color-dark;
-      font-size: 1rem;
+      font-size: 0.875rem;
       // margin-bottom: 0.5rem;
     }
     &-color {
+      font-size: 0.875rem;
+      color: $text-color-dark;
       display: flex;
       align-items: center;
       gap: 0.25rem;
@@ -82,7 +85,7 @@
       &-price {
         color: $text-color-dark;
         text-align: center;
-        font-size: 1.25rem;
+        font-size: 1rem;
         margin-bottom: 0.5rem;
       }
       &-discount {

@@ -114,9 +114,34 @@ export interface IReviewsResponse {
 }
 
 export interface FormValues {
-  name?: string;
-  message?: string;
-  email?: string;
-  company?: string;
-  phone_number?: string;
+  [key: string]: string
+}
+
+export interface IUserData {
+  username: string;
+  avatar: "";
+  first_name: string;
+  last_name: string;
+  birth_data: string;
+  country: string;
+  city: string;
+  address: string;
+  email: string;
+  is_email_confirmed: boolean;
+  is_profile_full: boolean;
+  phone_number: string;
+  vk_profile: string;
+  fb_profile: string;
+  inst_profile: string;
+  tg_profile: string
+}
+
+export interface ISignIn {
+  username: string;
+  email: string;
+  password: string;
+}
+export interface ISignUp {
+  email: string;
+  password: string;
 }

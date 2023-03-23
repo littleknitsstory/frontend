@@ -44,7 +44,7 @@ const ModalMain = ({ product, showModal, handleClose, onSubmitOrder }: ModalProp
             <div className="product-card__modal-quick-purchase-title">{product.title}</div>
 
             <div className="product-card__modal-quick-purchase-part-number">
-              {t("CardProduct.partNumber")}:
+              {t("CardProduct.partNumber")}: {product.code}
             </div>
             <div className="product-card__modal-quick-purchase-color">
               {t("CardProduct.color")}:
@@ -87,9 +87,9 @@ const ModalMain = ({ product, showModal, handleClose, onSubmitOrder }: ModalProp
               <FormsInput
                 className="mb-3"
                 controlId={"formGroupModalName"}
-                type="text"                
+                type="text"
+                placeholder={t("FormFields.fullName")}           
                 name="name"
-                placeholder={t("CardProduct.fullName")}
               />
             </Row>
             <Row>
@@ -97,7 +97,7 @@ const ModalMain = ({ product, showModal, handleClose, onSubmitOrder }: ModalProp
                 className="mb-3"
                 controlId={"formGroupModalPhone"}
                 type="tel"
-                placeholder={t("Contacts.phone")}
+                placeholder={t("FormFields.phone")}
                 name="phone_number"
               />
             </Row>
