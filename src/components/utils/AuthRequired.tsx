@@ -1,7 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom"
 import jwtDecode from "jwt-decode"
 import { useRefreshTokenMutation } from "../features/api/apiSlice";
-import { useEffect, useState } from "react";
 
 interface IJwtDecode {
   token_type: string;
@@ -18,26 +17,29 @@ const AuthRequired = () => {
   if (!tokens.access) {
     return <Navigate to="/login/" />
   }
+  try {
+    const decodedJWT: IJwtDecode = jwtDecode(tokens.access, { header: true })
+    const isTokenExpired = decodedJWT.exp * 1000 < Date.now()
+    
+    const updateToken = async (token: string) => {
+      try {
+        const payload = await refreshTokenCall(token).unwrap()
+        localStorage.setItem("tokens", JSON.stringify({ access: payload.access, refresh: tokens.refresh  }))
+      }
+      catch (error) {
+        localStorage.removeItem("tokens")
+      }
+    }
+    
+    if (isTokenExpired) {
+      updateToken(tokens.access)
+    }
 
-  const decodedJWT: IJwtDecode = jwtDecode(tokens.access)
-  const isTokenExpired = decodedJWT.exp * 1000 < Date.now()
-  
-  const updateToken = async (token: string) => {
-    try {
-      const payload = await refreshTokenCall(token).unwrap()
-      localStorage.setItem("tokens", JSON.stringify({ access: payload.access, refresh: tokens.refresh  }))
-    }
-    catch (error) {
-      localStorage.removeItem("tokens")
-    }
-  }
-  
-  if (isTokenExpired) {
-    updateToken(tokens.access)
+  } catch (error) {
+    localStorage.removeItem("tokens")
+    return <Navigate to="/login/" />
   }
 
   return <Outlet />
-
-
 }
 export default AuthRequired

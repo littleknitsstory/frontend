@@ -2,11 +2,11 @@
 @use "./mixins.scss" as *;
 
 header {
+  @include container;
   margin-top: 2.5rem;
   text-align: center;
   color: $secondary-dark-grey;
   color: $black;
-  @include container;
 }
 
 .header {
@@ -15,11 +15,6 @@ header {
     font-size: 1.25rem;
     line-height: 150%;
     font-weight: 400;
-  }
-
-  &__logo {
-    width: 100%;
-    display: block;
   }
 }
 
