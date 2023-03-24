@@ -88,7 +88,7 @@ const ModalMain = ({ product, showModal, handleClose, onSubmitOrder }: ModalProp
                 className="mb-3"
                 controlId={"formGroupModalName"}
                 type="text"
-                placeholder={t("FormFields.fullName")}           
+                placeholder={t("FormFields.fullName")}
                 name="name"
               />
             </Row>

@@ -1,22 +1,20 @@
-import { useTranslation } from "react-i18next"
-import { Link } from "react-router-dom"
-import { IArticle } from "../../app/types"
-import { useGetArticleQuery } from "../features/api/apiSlice"
-import avatar from "../../assets/images/test-avatar.png"
-import Spinner from "../utils/Spinner"
-import PageError from "../../pages/PageError"
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { IArticle } from "../../app/types";
+import { useGetArticleQuery } from "../features/api/apiSlice";
+import avatar from "../../assets/images/test-avatar.png";
+import Spinner from "../utils/Spinner";
+import PageError from "../../pages/PageError";
 
-const ArticleTitle = ({ post } : {post: IArticle}) => {
-  const {i18n} = useTranslation()
-  const {
-    data,
-    isLoading,
-    isError,
-    error
-  } = useGetArticleQuery({ slug: post.slug, lang: i18n.language})
+const ArticleTitle = ({ post }: { post: IArticle }) => {
+  const { i18n } = useTranslation();
+  const { data, isLoading, isError, error } = useGetArticleQuery({
+    slug: post.slug,
+    lang: i18n.language,
+  });
 
   if (isLoading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (isError) {
@@ -33,6 +31,6 @@ const ArticleTitle = ({ post } : {post: IArticle}) => {
       </div>
       <p className="posts__aside--title">{data?.title}</p>
     </Link>
-  )
-}
-export default ArticleTitle
+  );
+};
+export default ArticleTitle;

@@ -3,30 +3,30 @@ import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Store } from "react-notifications-component";
-import parse from 'html-react-parser'
+import parse from "html-react-parser";
 import { PICTURE_BASE_URL, useAddCommentsMutation } from "../../components/features/api/apiSlice";
 import { useGetArticleQuery, useGetArticlesQuery } from "../../components/features/api/apiSlice";
 import PageError from "../PageError";
 import Spinner from "../../components/utils/Spinner";
-import avatar from "../../assets/images/test-avatar.png"
+import avatar from "../../assets/images/test-avatar.png";
 import CardArticleSmall from "../../components/blog/CardArticleSmall";
 import { notificationError, notificationSuccess } from "../../components/modal/Notification";
-import {ReactComponent as ArrowLeftSVG} from "../../assets/icons/arrow-left-nd.svg"
-import {ReactComponent as VKIcon} from "../../assets/icons/social/vkontakte.svg"
-import {ReactComponent as FacebookIcon} from "../../assets/icons/social/facebook.svg"
-import {ReactComponent as InstagramIcon} from "../../assets/icons/social/instagram.svg"
-import {ReactComponent as PinterestIcon} from "../../assets/icons/social/pinterest.svg"
-import {ReactComponent as ChainIcon} from "../../assets/icons/chain.svg"
-import {ReactComponent as HandIcon} from "../../assets/icons/reactions/hand.svg"
-import {ReactComponent as HeartIcon} from "../../assets/icons/reactions/heart.svg"
-import {ReactComponent as SpeechBubbleIcon} from "../../assets/icons/reactions/speech-bubble.svg"
-import {ReactComponent as ArrowRightSVG} from "../../assets/icons/arrow-right-nd.svg"
+import { ReactComponent as ArrowLeftSVG } from "../../assets/icons/arrow-left-nd.svg";
+import { ReactComponent as VKIcon } from "../../assets/icons/social/vkontakte.svg";
+import { ReactComponent as FacebookIcon } from "../../assets/icons/social/facebook.svg";
+import { ReactComponent as InstagramIcon } from "../../assets/icons/social/instagram.svg";
+import { ReactComponent as PinterestIcon } from "../../assets/icons/social/pinterest.svg";
+import { ReactComponent as ChainIcon } from "../../assets/icons/chain.svg";
+import { ReactComponent as HandIcon } from "../../assets/icons/reactions/hand.svg";
+import { ReactComponent as HeartIcon } from "../../assets/icons/reactions/heart.svg";
+import { ReactComponent as SpeechBubbleIcon } from "../../assets/icons/reactions/speech-bubble.svg";
+import { ReactComponent as ArrowRightSVG } from "../../assets/icons/arrow-right-nd.svg";
 
 const Post = () => {
   const { slug } = useParams<string>();
   const { t, i18n } = useTranslation();
   const [offset, setOffset] = useState<number>(0);
-  const [message, setMessage] = useState<string>("")
+  const [message, setMessage] = useState<string>("");
   const {
     data: article,
     isLoading,
@@ -34,40 +34,38 @@ const Post = () => {
     error,
   } = useGetArticleQuery({ slug, lang: i18n.language });
 
-  const {
-    data: articles,
-  } = useGetArticlesQuery({limit: 3, offset, lang: i18n.language})
+  const { data: articles } = useGetArticlesQuery({ limit: 3, offset, lang: i18n.language });
 
-  const [ postComment ] = useAddCommentsMutation()
+  const [postComment] = useAddCommentsMutation();
 
   const sliderForward = () => {
     if (articles) {
       if (offset === articles.count - 3) {
-        setOffset(0)
+        setOffset(0);
       } else {
-        setOffset(prevOffset => prevOffset + 1)
+        setOffset((prevOffset) => prevOffset + 1);
       }
     }
-  }
-  
+  };
+
   const sliderBackward = () => {
     if (articles) {
       if (offset === 0) {
-        setOffset(articles.count - 3)
+        setOffset(articles.count - 3);
       } else {
-        setOffset(prevOffset => prevOffset - 1)
+        setOffset((prevOffset) => prevOffset - 1);
       }
     }
-  }
+  };
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
-    setMessage(e.currentTarget.value)
-  }
+    setMessage(e.currentTarget.value);
+  };
 
   const handleSubmit = async (): Promise<void> => {
     try {
       await postComment(message).unwrap();
-      setMessage("")
+      setMessage("");
       Store.addNotification({
         ...notificationSuccess,
         title: t("posts.successSend"),
@@ -78,13 +76,13 @@ const Post = () => {
         title: t("posts.noAuthorize"),
       });
     }
-  }
+  };
 
   const copyToClipboard = (): void => {
-    const currentUrl = window.location.href
-    navigator.clipboard.writeText(currentUrl)
-  }
-  
+    const currentUrl = window.location.href;
+    navigator.clipboard.writeText(currentUrl);
+  };
+
   if (isLoading) {
     return <Spinner />;
   }
@@ -104,7 +102,7 @@ const Post = () => {
       <article className="post__wrapper">
         <h2 className="post__title">{article?.title}</h2>
         <div className="post__about">
-          <img src={avatar} alt="avatar" className="post__avatar"/>
+          <img src={avatar} alt="avatar" className="post__avatar" />
           <p>{article?.author}</p>
           <p>·</p>
           <p>{article?.created_at}</p>
@@ -113,7 +111,11 @@ const Post = () => {
         </div>
         <div className="post__content-wrapper">
           {article && parse(article.content)}
-          <img src={PICTURE_BASE_URL + article?.image_preview} alt={article?.image_alt} className="post__image"/>
+          <img
+            src={PICTURE_BASE_URL + article?.image_preview}
+            alt={article?.image_alt}
+            className="post__image"
+          />
         </div>
         <div className="post__footer">
           <h4 className="post__footer-text">{t("posts.share")}</h4>
@@ -123,12 +125,15 @@ const Post = () => {
               <FacebookIcon />
               <InstagramIcon />
               <PinterestIcon />
-              <ChainIcon onClick={copyToClipboard}/>
+              <ChainIcon onClick={copyToClipboard} />
             </div>
             <div className="post__reactions">
-              <HandIcon /><p>50</p>
-              <HeartIcon /><p>23</p>
-              <SpeechBubbleIcon /><p>32</p>
+              <HandIcon />
+              <p>50</p>
+              <HeartIcon />
+              <p>23</p>
+              <SpeechBubbleIcon />
+              <p>32</p>
             </div>
           </div>
         </div>
@@ -138,18 +143,17 @@ const Post = () => {
       <section className="post__comments">
         <h4>{t("posts.comments")}</h4>
         <div className="post__comments--wrapper">
-          <textarea 
-            name="postContent" 
+          <textarea
+            name="postContent"
             rows={5}
             value={message}
-            
             onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleChange(e)}
             placeholder={t("posts.placeholderComments")}
           />
           <div className="post__comments--buttons">
             <button className="btn btn--transparent">{t("posts.cancel")}</button>
-            <button 
-              className="btn btn--primary" 
+            <button
+              className="btn btn--primary"
               disabled={message.length === 0}
               onClick={handleSubmit}
             >
@@ -161,20 +165,21 @@ const Post = () => {
 
       <section className="post__more-posts">
         <h4 className="post__subtitle">{t("posts.readAlso")}</h4>
-          <div className="post__slider">
-            <ArrowLeftSVG className="posts__btn--arrow" onClick={sliderBackward}/>
-            <div className="post__card-container">
-              {articles && articles.results.map(article => <CardArticleSmall key={article.slug} {...article}/>)}
-            </div>
-            <ArrowRightSVG className="posts__btn--arrow" onClick={sliderForward}/>
+        <div className="post__slider">
+          <ArrowLeftSVG className="posts__btn--arrow" onClick={sliderBackward} />
+          <div className="post__card-container">
+            {articles &&
+              articles.results.map((article) => (
+                <CardArticleSmall key={article.slug} {...article} />
+              ))}
           </div>
+          <ArrowRightSVG className="posts__btn--arrow" onClick={sliderForward} />
+        </div>
         <Link to="/posts/" className="link link--with-icon link--centered">
-          {t("posts.watchAll")} <ArrowRightSVG /> 
+          {t("posts.watchAll")} <ArrowRightSVG />
         </Link>
       </section>
-      
     </section>
-    
   );
 };
 

@@ -8,7 +8,11 @@ import { IProductDetails } from "../../app/types";
 import { PICTURE_BASE_URL } from "../features/api/apiSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { addFavorite } from "../features/products/productsSlice";
-import { addToCart, increaseProductAmount, decreaseProductAmount } from "../features/products/cartSlice";
+import {
+  addToCart,
+  increaseProductAmount,
+  decreaseProductAmount,
+} from "../features/products/cartSlice";
 import useModalState from "../hooks/useModalState";
 import { notificationSuccess, notificationError } from "../modal/Notification";
 // components
@@ -16,7 +20,7 @@ import Social from "../Social";
 import ModalThanks from "../modal/ModalThanks";
 import ModalMain from "../modal/ModalMain";
 // assets
-import arrowRight from "../../assets/icons/arrow-right.svg";
+import arrowRight from "../../assets/icons/arrow-right-nd.svg";
 import like from "../../assets/icons/like.svg";
 import questionInfo from "../../assets/icons/question.svg";
 
@@ -28,29 +32,29 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
   const [countProduct, setCountProduct] = useState<number>(1);
   const favoriteProducts = useAppSelector((state) => state.products.favorite);
   const cartProducts = useAppSelector((state) => state.cart.products);
-  const cartProduct = cartProducts.find(item => item.slug === product.slug)
+  const cartProduct = cartProducts.find((item) => item.slug === product.slug);
 
   const increaseCountProduct = (): void => {
     if (cartProduct) {
-      dispatch(increaseProductAmount(product))
+      dispatch(increaseProductAmount(product));
     } else {
-      setCountProduct(prevCount => prevCount + 1)
+      setCountProduct((prevCount) => prevCount + 1);
     }
   };
 
   const decreaseCountProduct = (): void => {
     if (cartProduct) {
-      dispatch(decreaseProductAmount(product))
+      dispatch(decreaseProductAmount(product));
     } else {
       if (countProduct > 1) {
-        setCountProduct(prevCount => prevCount - 1)
+        setCountProduct((prevCount) => prevCount - 1);
       }
     }
   };
 
   const addFavoriteProduct = (product: IProductDetails): void => {
     dispatch(addFavorite(product));
-    if (!favoriteProducts.some(item => item.id === product.id)) {
+    if (!favoriteProducts.some((item) => item.id === product.id)) {
       Store.addNotification({
         ...notificationSuccess,
         title: t("Notification.isSaved"),
@@ -64,8 +68,8 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
   };
 
   const addProductInCart = (product: IProductDetails): void => {
-    dispatch(addToCart({...product, amount: countProduct}));
-    if (!cartProducts.some(item => item.id === product.id)) {
+    dispatch(addToCart({ ...product, amount: countProduct }));
+    if (!cartProducts.some((item) => item.id === product.id)) {
       Store.addNotification({
         ...notificationSuccess,
         title: t("Notification.isAdded"),
@@ -79,11 +83,11 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
   };
 
   useEffect(() => {
-    const cartProduct = cartProducts.find(item => item.slug === product.slug)
+    const cartProduct = cartProducts.find((item) => item.slug === product.slug);
     if (cartProduct) {
-      setCountProduct(cartProduct.amount)
-    } 
-  }, [cartProducts, product.slug])
+      setCountProduct(cartProduct.amount);
+    }
+  }, [cartProducts, product.slug]);
 
   return (
     <div className="schema-card">
@@ -106,7 +110,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
             <button className="schema-card__counter-control-btn" onClick={decreaseCountProduct}>
               -
             </button>
-              <p className="schema-card__count-number">{countProduct ?? 1}</p> 
+            <p className="schema-card__count-number">{countProduct ?? 1}</p>
             <button className="schema-card__counter-control-btn" onClick={increaseCountProduct}>
               +
             </button>
@@ -181,7 +185,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
                 </button>
               </div>
               <div className="col-xl-4 col-lg-4 col-md-4 offset-xl-2 offset-lg-2 offset-md-2 col-xs-12 ">
-                <Link to="/product">
+                <Link to="/products/">
                   {t("SchemaCard.details")}
                   <img src={arrowRight} alt="arrowRight" />
                 </Link>

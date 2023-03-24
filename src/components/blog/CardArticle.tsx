@@ -1,42 +1,48 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import parse from 'html-react-parser'
+import parse from "html-react-parser";
 import { PICTURE_BASE_URL } from "../features/api/apiSlice";
 import { IArticle } from "../../app/types";
-import { ReactComponent as BookmarkIcon} from "../../assets/icons/bookmark.svg"
-import avatar from "../../assets/images/test-avatar.png"
+import { ReactComponent as BookmarkIcon } from "../../assets/icons/bookmark.svg";
+import avatar from "../../assets/images/test-avatar.png";
 import { useAppDispatch } from "../../app/hooks";
-import { addToSavedPost } from "../features/posts/postsSlice"
+import { addToSavedPost } from "../features/posts/postsSlice";
 const CardArticle = ({ article }: { article: IArticle }) => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch()
-
+  const dispatch = useAppDispatch();
 
   return (
     <>
-        <div className="card-article">
-          <div className="card-article__header">
-            <img src={avatar} alt="" className="card-article__avatar" />
-            <p className="card-article__text">{article.author}</p>
-            <p className="card-article__text">{article.created_at}</p>
-          </div>
-
-          <div className="card-article__title-wrapper">
-            <h2 className="card-article__title">{article.title}</h2>
-            <BookmarkIcon onClick={() => dispatch(addToSavedPost(article))} className="card-article__save-icon"/>
-          </div>
-
-          <Link to={`/posts/${article.slug}`}>
-            <div className="card-article__content-wrapper">
-              <div className="card-article__content">
-                {parse(article.content)}
-                <p className="card-article__text--small">3 минуты на чтение (HC)</p>
-              </div>
-
-              <img src={PICTURE_BASE_URL + article.image_preview} alt={article.image_alt} className="card-article__image"/>
-            </div>
-          </Link>
+      <div className="card-article">
+        <div className="card-article__header">
+          <img src={avatar} alt="" className="card-article__avatar" />
+          <p className="card-article__text">{article.author}</p>
+          <p className="card-article__text">{article.created_at}</p>
         </div>
+
+        <div className="card-article__title-wrapper">
+          <h2 className="card-article__title">{article.title}</h2>
+          <BookmarkIcon
+            onClick={() => dispatch(addToSavedPost(article))}
+            className="card-article__save-icon"
+          />
+        </div>
+
+        <Link to={`/posts/${article.slug}`}>
+          <div className="card-article__content-wrapper">
+            <div className="card-article__content">
+              {parse(article.content)}
+              <p className="card-article__text--small">3 минуты на чтение (HC)</p>
+            </div>
+
+            <img
+              src={PICTURE_BASE_URL + article.image_preview}
+              alt={article.image_alt}
+              className="card-article__image"
+            />
+          </div>
+        </Link>
+      </div>
       <div className="card-article__divider"></div>
     </>
   );

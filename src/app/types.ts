@@ -95,7 +95,7 @@ export interface IArticle {
   image_preview: string;
   image_alt: string;
   created_at: string;
-  tags: {slug: string, title: string}[]
+  tags: { slug: string; title: string }[];
 }
 
 export interface IArticlesResponse {
@@ -114,7 +114,7 @@ export interface IReviewsResponse {
 }
 
 export interface FormValues {
-  [key: string]: string
+  [key: string]: string;
 }
 
 export interface IUserData {
@@ -133,7 +133,7 @@ export interface IUserData {
   vk_profile: string;
   fb_profile: string;
   inst_profile: string;
-  tg_profile: string
+  tg_profile: string;
 }
 
 export interface ISignIn {

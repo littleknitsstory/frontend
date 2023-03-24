@@ -8,7 +8,7 @@ import cartSliceReducer from "../components/features/products/cartSlice";
 const store = configureStore({
   reducer: {
     products: productReducer,
-    posts: postsSliceReducer, 
+    posts: postsSliceReducer,
     cart: cartSliceReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },

@@ -9,7 +9,7 @@ import Posts from "../pages/Blog";
 import ContactPage from "../pages/Contacts";
 import RootLayout from "../pages/RootLayout";
 import Products from "../pages/Shop/Products";
-import Post from "../pages/Blog/Post"
+import Post from "../pages/Blog/Post";
 import LoginPage from "../pages/User/LoginPage";
 import Profile from "../components/user/Profile";
 import AuthRequired from "../components/utils/AuthRequired";
@@ -22,7 +22,7 @@ const routes: RouteObject = {
     {
       path: "/",
       /* Temporary used Blog as homepage */
-      element: <Navigate to="/posts/"/>,
+      element: <Navigate to="/posts/" />,
     },
     {
       path: "posts",
@@ -54,7 +54,7 @@ const routes: RouteObject = {
     },
     {
       path: "cart/ordering",
-      element: <Ordering />
+      element: <Ordering />,
     },
     {
       path: "privacyPolicy",
@@ -69,13 +69,11 @@ const routes: RouteObject = {
       children: [
         {
           path: "profile",
-          element: <Profile />
+          element: <Profile />,
         },
-      ]
-    }
+      ],
+    },
   ],
 };
-
-
 
 export default routes;

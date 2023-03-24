@@ -1,12 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IArticle } from "../../../app/types";
 
-
-const initialState: {posts: IArticle[]} = {
+const initialState: { posts: IArticle[] } = {
   posts: localStorage.getItem("posts")
     ? JSON.parse(localStorage.getItem("posts") || '{posts: ""}')
-    : []
-}
+    : [],
+};
 const postsSlice = createSlice({
   name: "posts",
   initialState,

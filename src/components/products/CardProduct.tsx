@@ -14,8 +14,8 @@ import { PICTURE_BASE_URL, useGetProductQuery } from "../features/api/apiSlice";
 import PageError from "../../pages/PageError";
 import { IProductDetails } from "../../app/types";
 import { notificationSuccess, notificationError } from "../modal/Notification";
-import { ReactComponent as BagIcon} from "../../assets/icons/bag-coffee.svg";
-import { ReactComponent as LikeIcon} from "../../assets/icons/like_coffee.svg"
+import { ReactComponent as BagIcon } from "../../assets/icons/bag-coffee.svg";
+import { ReactComponent as LikeIcon } from "../../assets/icons/like_coffee.svg";
 
 const CardProduct = ({ productSlug }: { productSlug: string }) => {
   const { t, i18n } = useTranslation();
@@ -40,7 +40,7 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
 
   const addFavoriteProduct = (product: IProductDetails): void => {
     dispatch(addFavorite(product));
-    if (!favoriteProducts.some(item => item.id === product.id)) {
+    if (!favoriteProducts.some((item) => item.id === product.id)) {
       Store.addNotification({
         ...notificationSuccess,
         title: t("Notification.isSaved"),
@@ -53,9 +53,9 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
     }
   };
 
-  const addProductInCart = (product: IProductDetails ): void => {
-    dispatch(addToCart({...product, amount: 1}));
-    if (!cartProducts.some(item => item.id === product.id)) {
+  const addProductInCart = (product: IProductDetails): void => {
+    dispatch(addToCart({ ...product, amount: 1 }));
+    if (!cartProducts.some((item) => item.id === product.id)) {
       Store.addNotification({
         ...notificationSuccess,
         title: t("Notification.isAdded"),
@@ -90,10 +90,12 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
           <Card.Body>
             <Card.Title>{product?.title}</Card.Title>
             <div className="card-lks__wrapper-icons">
-              <LikeIcon onClick={() => addFavoriteProduct(product)}/>
-              <BagIcon onClick={() => addProductInCart(product)}/>
+              <LikeIcon onClick={() => addFavoriteProduct(product)} />
+              <BagIcon onClick={() => addProductInCart(product)} />
             </div>
-            <div className="card-lks__material">{t("CardProduct.material")}: {product.material}</div>
+            <div className="card-lks__material">
+              {t("CardProduct.material")}: {product.material}
+            </div>
             <div className="card-lks__color">
               {t("CardProduct.color")}:
               {product?.colors.map((color) => (
@@ -105,9 +107,9 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
               ))}
             </div>
             <div className="card-lks__price">{product?.price}</div>
-              <button className="btn btn--primary card-lks__btn " onClick={handleShow}>
-                {t("CardProduct.buttonQuickOrderText")}
-              </button>
+            <button className="btn btn--primary card-lks__btn " onClick={handleShow}>
+              {t("CardProduct.buttonQuickOrderText")}
+            </button>
           </Card.Body>
         </Card>
       )}

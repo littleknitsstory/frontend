@@ -52,14 +52,14 @@ enum URLS {
   SIGN_IN = "/sign-in/",
   PROFILE = "/profile/",
   COMMENTS = "/comments/",
-  ORDER = "/orders/"
+  ORDER = "/orders/",
 }
 
 export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";
 
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({baseUrl: "http://dev.backend.littleknitsstory.com:26363/api/v1"}),
+  baseQuery: fetchBaseQuery({ baseUrl: "http://dev.backend.littleknitsstory.com:26363/api/v1" }),
   endpoints: (builder) => ({
     getMenu: builder.query<IMenuResponse, { lang: string }>({
       query: ({ lang }) => ({
@@ -118,20 +118,20 @@ export const apiSlice = createApi({
         body: orderForm,
       }),
     }),
-    signUp: builder.mutation<ILoginResponse, {user: ISignUp, lang: string}>({
-      query: ({user, lang}) => ({
+    signUp: builder.mutation<ILoginResponse, { user: ISignUp; lang: string }>({
+      query: ({ user, lang }) => ({
         url: URLS.SIGN_UP,
         method: "POST",
         body: user,
-        headers: { "Accept-Language": lang }
+        headers: { "Accept-Language": lang },
       }),
     }),
-    signIn: builder.mutation<ILoginResponse, {credentials: ISignIn, lang: string}>({
-      query: ({credentials, lang}) => ({
+    signIn: builder.mutation<ILoginResponse, { credentials: ISignIn; lang: string }>({
+      query: ({ credentials, lang }) => ({
         url: URLS.SIGN_IN,
         method: "POST",
         body: credentials,
-        headers: { "Accept-Language": lang }
+        headers: { "Accept-Language": lang },
       }),
     }),
     addComments: builder.mutation({
@@ -139,26 +139,25 @@ export const apiSlice = createApi({
         url: URLS.COMMENTS,
         method: "POST",
         body: { text: message },
-        headers: { 
-          "Authorization": "Bearer " + JSON.parse(localStorage.getItem("tokens") || "{}")?.access 
-        }
-        
+        headers: {
+          Authorization: "Bearer " + JSON.parse(localStorage.getItem("tokens") || "{}")?.access,
+        },
       }),
     }),
     getProfile: builder.query({
-      query: ( token ) => ({
+      query: (token) => ({
         url: URLS.PROFILE,
-        headers: { "Authorization": "Bearer " + token },
+        headers: { Authorization: "Bearer " + token },
       }),
     }),
-    updateProfile: builder.mutation<IUserData[], {user: IUserData; token: string}>({
-      query: ({user, token}) => ({
+    updateProfile: builder.mutation<IUserData[], { user: IUserData; token: string }>({
+      query: ({ user, token }) => ({
         url: URLS.PROFILE + user.username + "/",
         method: "PUT",
         body: user,
-        headers: { 
-          "Authorization": "Bearer " + token 
-        }
+        headers: {
+          Authorization: "Bearer " + token,
+        },
       }),
     }),
     refreshToken: builder.mutation({
@@ -166,7 +165,6 @@ export const apiSlice = createApi({
         url: URLS.REFRESH_TOKEN,
         method: "POST",
         body: { refresh: token },
-        
       }),
     }),
   }),
@@ -187,5 +185,5 @@ export const {
   useUpdateProfileMutation,
   useAddCommentsMutation,
   useRefreshTokenMutation,
-  useAddOrderMutation
+  useAddOrderMutation,
 } = apiSlice;

@@ -33,7 +33,7 @@ i18next
     defaultNS,
     resources,
     debug: false,
-    fallbackLng: 'en'
+    fallbackLng: "en",
   });
 
-export default i18next
+export default i18next;
