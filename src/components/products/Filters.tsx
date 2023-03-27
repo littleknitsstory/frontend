@@ -21,6 +21,14 @@ const Filters = ({ products, setFilteredProducts }: FilterProps) => {
   const [colors, setColors] = useState<string[]>([]);
   const [selectedColor, setSelectedColor] = useState<string>("");
 
+  const scrollToTop = (): void => {
+    document.documentElement.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+
   useEffect(() => {
     // get all categories from products
     const categoriesSet: { [key: string]: string } = products.reduce(
@@ -67,21 +75,25 @@ const Filters = ({ products, setFilteredProducts }: FilterProps) => {
   const selectCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedCategory = e.currentTarget.value;
     setSelectedCategory(selectedCategory);
+    scrollToTop();
   };
 
   // filtering by color
   const selectColor = (e: React.MouseEvent<HTMLElement>) => {
     const selectedColor = e.currentTarget.dataset.color!;
     setSelectedColor(selectedColor);
+    scrollToTop();
   };
 
   const handleClear = (): void => {
     setSelectedCategory("");
     setSelectedColor("");
+    scrollToTop();
   };
 
   const clearColorFilter = (): void => {
     setSelectedColor("");
+    scrollToTop();
   };
 
   const categoryOptions = categories.map((category) => (

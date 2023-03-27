@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IArticle } from "../../app/types";
 import { useGetArticlesQuery } from "../../components/features/api/apiSlice";
@@ -18,17 +18,18 @@ interface Tag {
   slug: string;
 }
 
+const INITIAL_LIMIT = 3;
+
 const Posts = () => {
-  // const [limit, setLimit] = useState<number>(100);
-  const limit = 100;
+  const [limit, setLimit] = useState<number>(INITIAL_LIMIT);
   const { t, i18n } = useTranslation();
   const [tags, setTags] = useState<Tag[]>([]);
+  const [selectedTag, setSelectedTag] = useState<string>("");
+  const [filteredPosts, setFilteredPosts] = useState<IArticle[]>([]);
+  const [shownPosts, setShownPosts] = useState<IArticle[]>([]);
+  const observer = useRef<IntersectionObserver>();
   const dispatch = useAppDispatch();
   const savedPosts = useAppSelector((state) => state.posts.posts);
-  const [filteredPosts, setFilteredPosts] = useState<IArticle[]>([]);
-  const [selectedTag, setSelectedTag] = useState<string>("");
-
-  // function to filter posts by tags
 
   const activeStyle = {
     backgroundColor: "#5E6959",
@@ -41,7 +42,32 @@ const Posts = () => {
     isFetching,
     isError,
     error,
-  } = useGetArticlesQuery({ limit, lang: i18n.language });
+  } = useGetArticlesQuery({ limit: 200, lang: i18n.language });
+
+  useEffect(() => {
+    setShownPosts(filteredPosts.slice(0, limit));
+  }, [filteredPosts, limit]);
+
+  const loaderRef = useCallback(
+    (node: HTMLDivElement) => {
+      if (isFetching) return;
+      if (!node) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            console.log("test");
+            setLimit((prevLimit) => prevLimit + 3);
+          }
+        },
+        {
+          rootMargin: "40px",
+        },
+      );
+      observer.current.observe(node);
+    },
+    [isFetching],
+  );
 
   useEffect(() => {
     // get all tags from articles
@@ -71,7 +97,7 @@ const Posts = () => {
         selectedTag ? post.tags.some((tag) => tag.slug === selectedTag) : true,
       ) ?? [];
     setFilteredPosts(filteredByTag);
-  }, [posts, selectedTag]);
+  }, [posts, selectedTag, limit]);
 
   const handleSelectTag = (e: React.SyntheticEvent<HTMLButtonElement>) => {
     if (selectedTag === e.currentTarget.dataset.slug) {
@@ -128,10 +154,11 @@ const Posts = () => {
           </div>
           {isFetching && <Spinner />}
           <article className="posts__articles">
-            {filteredPosts?.map((post) => (
+            {shownPosts?.map((post) => (
               <CardArticle key={post.slug} article={post} />
             ))}
           </article>
+          <div ref={loaderRef} />
         </div>
         <div className="posts__divider"></div>
         <aside className="posts__aside-wrapper">
@@ -155,7 +182,7 @@ const Posts = () => {
           )}
           {savedPosts.length > 0 && (
             <div className="posts__saved-posts">
-              {savedPosts.map((post) => (
+              {savedPosts.slice(0, 5).map((post) => (
                 <div key={post.slug} className="posts__saved-post-wrapper">
                   <ArticleTitle post={post} />
                   <button className="btn btn--icon" onClick={() => dispatch(removeSavedPost(post))}>
