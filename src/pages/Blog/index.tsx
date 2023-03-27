@@ -56,7 +56,6 @@ const Posts = () => {
       observer.current = new IntersectionObserver(
         (entries) => {
           if (entries[0].isIntersecting) {
-            console.log("test");
             setLimit((prevLimit) => prevLimit + 3);
           }
         },
