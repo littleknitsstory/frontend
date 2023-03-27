@@ -14,6 +14,7 @@ import LoginPage from "../pages/User/LoginPage";
 import Profile from "../components/user/Profile";
 import AuthRequired from "../components/utils/AuthRequired";
 import Ordering from "../pages/Cart/Ordering";
+import Home from "../pages/Home";
 
 const routes: RouteObject = {
   element: <RootLayout />,

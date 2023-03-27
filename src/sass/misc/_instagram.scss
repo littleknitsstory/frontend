@@ -1,0 +1,35 @@
+.instagram {
+  margin-top: 7rem;
+  &__mid-side {
+    padding: 2rem;
+    h2 {
+      text-align: center;
+    }
+
+    & .btn {
+      display: block;
+      margin: 1rem auto 0;
+    }
+  }
+
+  &__right-side {
+    height: 13rem;
+    background-image: url("../../assets/images/ig-right.svg");
+    background-repeat: no-repeat;
+    background-position: right;
+    z-index: 2;
+  }
+
+  &__left-side {
+    height: 13rem;
+    background-image: url("../../assets/images/ig-left.svg");
+    background-repeat: no-repeat;
+    background-position: left;
+    z-index: 2;
+  }
+
+  &__btn {
+    margin: 2rem auto 0 auto;
+    width: 12rem;
+  }
+}

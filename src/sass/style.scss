@@ -1,49 +1,19 @@
-@use "./_variables";
-@use "./_title";
-@use "./_buttons";
-@use "./_header";
-@use "./_navbar";
-@use "./_promo";
-@use "./_schemas-card";
-@use "./_about-me";
-@use "./_last-reviews";
-@use "./_instagram";
-@use "./_footer";
-@use "./_main-slider";
-@use "./_card-lks";
-@use "./_page-error";
-@use "./_coffee-card";
-@use "./_contacts";
-@use "./_card-product";
-@use "./_filters";
-@use "./_products";
-@use "./_schema-card";
-@use "./_social";
-@use "./_product";
-@use "./_review-card";
-@use "./_saved-products";
-@use "./_mini-card-product";
-@use "./_popular-products";
-@use "./_reviews";
-@use "./_card-modal-thanks";
-@use "./_privacy-policy";
-@use "./_cart";
-@use "./_forms";
-@use "./_notification";
-@use "./login-page";
-@use "./sign-in";
-@use "./profile";
-@use "./posts";
-@use "./post";
-@use "./card-article";
-@use "./card-article-small";
+@use "./variables";
+@use "general";
+@use "home";
+@use "posts";
+@use "products";
+@use "user";
+@use "rootLayout";
+@use "singlePages";
+@use "reviews";
+@use "misc";
 
 @import "animate.css";
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap");
 
 * {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   a {
     text-decoration: none;
     color: inherit;
@@ -54,5 +24,5 @@
 }
 
 body {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }

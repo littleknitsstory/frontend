@@ -1,0 +1,80 @@
+@use "../variables" as *;
+.contacts {
+  margin-top: 7rem;
+  &__form {
+    // text-align: center;
+    margin-top: 1.5rem;
+    input {
+      height: 3rem;
+      margin: 0.5rem 0;
+    }
+    textarea.form-control {
+      margin: 0.5rem 0;
+      min-height: calc(6.5em + 0.75rem + 2px);
+    }
+
+    & .btn {
+      min-width: 150px;
+      display: block;
+      margin: 1rem auto 0;
+    }
+  }
+
+  &__policy {
+    color: $text-color-light;
+    font-size: 0.875rem;
+    padding: 1.5rem 0;
+    text-align: center;
+  }
+  &__info {
+    margin-top: 4rem;
+    text-align: center;
+  }
+  &__wrapper-info {
+    display: flex;
+    margin-top: 1.5rem;
+    align-items: center;
+    justify-content: center;
+  }
+  &__text {
+    padding: 0 0 0 1.5rem;
+    color: $text-color-dark;
+    font-size: 1.125rem;
+    text-decoration: none;
+    &:hover {
+      color: $burgundy-color;
+    }
+  }
+  &__btn {
+    margin-top: 1.5rem;
+  }
+}
+
+.coffee-card {
+  background-color: $coffee-color;
+  border-radius: 60px;
+  padding: 1.25rem 2.4rem 2.3rem 2.3rem;
+  min-height: 28.75rem;
+  &__title {
+    font-size: 1.5rem;
+    color: $text-color-light;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .contacts {
+    margin-top: 4rem;
+  }
+}
+
+@media (max-width: 575px) {
+  .contacts {
+    .coffee-card {
+      padding: 1.25rem 1.3rem 2.3rem 1.3rem;
+    }
+    &__btn {
+      width: 13rem;
+    }
+  }
+}

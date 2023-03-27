@@ -26,13 +26,11 @@ const ModalThanks = ({ showModal, handleClose, message, title, button }: ModalTh
       </Modal.Header>
       <Modal.Body>
         <div className="card-modal-thanks__text">{message}</div>
-        <Link to={`/`}>
-          {button && (
-            <button className="btn btn_vinous btn_center card-modal-thanks__btn">
-              <div className="btn__text btn__text_center">{t("CardProduct.backHome")}</div>
-            </button>
-          )}
-        </Link>
+        {button && (
+          <Link to={`/`} className="btn btn--primary btn--centered">
+            {t("CardProduct.backHome")}{" "}
+          </Link>
+        )}
       </Modal.Body>
     </Modal>
   );

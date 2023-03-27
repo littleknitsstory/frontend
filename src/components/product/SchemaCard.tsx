@@ -179,17 +179,13 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
           </Row>
           <div className="row">
             <div className="btn__link">
-              <div className="col-xl-6 col-lg-6 col-md-6 col-xs-12">
-                <button className="btn btn_border">
-                  <div className="btn__text_center">{t("SchemaCard.buttonAddCart")}</div>
-                </button>
-              </div>
-              <div className="col-xl-4 col-lg-4 col-md-4 offset-xl-2 offset-lg-2 offset-md-2 col-xs-12 ">
-                <Link to="/products/">
-                  {t("SchemaCard.details")}
-                  <img src={arrowRight} alt="arrowRight" />
-                </Link>
-              </div>
+              <button className="btn btn--primary">{t("SchemaCard.buttonAddCart")}</button>
+              {/* <div className="col-xl-4 col-lg-4 col-md-4 offset-xl-2 offset-lg-2 offset-md-2 col-xs-12 "> */}
+              <Link to="/products/" className="link link--with-icon">
+                {t("SchemaCard.details")}
+                <img src={arrowRight} alt="arrowRight" />
+              </Link>
+              {/* </div> */}
             </div>
             <div className="schema-card__product-btn">
               <button className="btn btn--primary" onClick={() => addProductInCart(product)}>

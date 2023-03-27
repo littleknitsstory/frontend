@@ -120,7 +120,7 @@ const Footer = () => {
             })}
             onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}
           >
-            <FormikForm className="footer__form">
+            <FormikForm className="footer__form" noValidate>
               <FormsInput
                 className="footer__input"
                 name="email"

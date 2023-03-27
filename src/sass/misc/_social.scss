@@ -1,0 +1,31 @@
+@use "../variables" as *;
+.social {
+  justify-content: center;
+  display: flex;
+
+  margin: 3rem 0;
+  margin-inline: auto;
+  justify-content: center;
+}
+
+.social-circle {
+  margin: 0 0.5rem;
+  background-color: $dark-grey-color;
+  width: 3.125rem;
+  height: 3.125rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  &:hover {
+    background-color: $burgundy-color;
+  }
+}
+
+@media (min-width: 992px) {
+  .social {
+    margin: 5rem 0;
+    justify-content: center;
+  }
+}

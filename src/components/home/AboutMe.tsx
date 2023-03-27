@@ -1,11 +1,11 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 // assets
-import kate from "../images/kate.png";
-import vk from "../icons/logo-vk_white.svg";
-import facebook from "../icons/logo-facebook_white.svg";
-import instagram from "../icons/logo-instagram_white.svg";
-import telegram from "../icons/telegram.svg";
+import kate from "../../assets/images/kate.png";
+import vk from "../../assets/icons/logo-vk_white.svg";
+import facebook from "../../assets/icons/logo-facebook_white.svg";
+import instagram from "../../assets/icons/logo-instagram_white.svg";
+import telegram from "../../assets/icons/telegram.svg";
 
 const AboutMe = () => {
   const { t } = useTranslation();
