@@ -1,0 +1,19 @@
+@use "../_variables" as *;
+@use "../mixins.scss" as *;
+
+header {
+  @include container;
+  margin-top: 2.5rem;
+  text-align: center;
+  color: $secondary-dark-grey;
+  color: $black;
+}
+
+.header {
+  &__title {
+    margin-top: 1.31125rem;
+    font-size: 1.25rem;
+    line-height: 150%;
+    font-weight: 400;
+  }
+}

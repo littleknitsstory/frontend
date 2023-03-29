@@ -1,19 +1,20 @@
 import { RouteObject } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Cart from "../pages/Cart/Cart";
 import PageError from "../pages/PageError";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import Product from "../pages/Shop/Product";
 import SavedProducts from "../pages/SavedProducts";
-import Blog from "../pages/Blog";
+import Posts from "../pages/Blog";
 import ContactPage from "../pages/Contacts";
 import RootLayout from "../pages/RootLayout";
 import Products from "../pages/Shop/Products";
-import Article from "../pages/Blog/Article";
-import Home from "../pages/Home";
+import Post from "../pages/Blog/Post";
 import LoginPage from "../pages/User/LoginPage";
 import Profile from "../components/user/Profile";
-import AuthRequired from "../components/AuthRequired";
+import AuthRequired from "../components/utils/AuthRequired";
 import Ordering from "../pages/Cart/Ordering";
+import Home from "../pages/Home";
 
 const routes: RouteObject = {
   element: <RootLayout />,
@@ -22,15 +23,15 @@ const routes: RouteObject = {
     {
       path: "/",
       /* Temporary used Blog as homepage */
-      element: <Blog />,
+      element: <Navigate to="/posts/" />,
     },
     {
       path: "posts",
-      element: <Blog />,
+      element: <Posts />,
     },
     {
       path: "posts/:slug",
-      element: <Article />,
+      element: <Post />,
     },
     {
       path: "products",
@@ -54,7 +55,7 @@ const routes: RouteObject = {
     },
     {
       path: "cart/ordering",
-      element: <Ordering />
+      element: <Ordering />,
     },
     {
       path: "privacyPolicy",
@@ -69,13 +70,11 @@ const routes: RouteObject = {
       children: [
         {
           path: "profile",
-          element: <Profile />
+          element: <Profile />,
         },
-      ]
-    }
+      ],
+    },
   ],
 };
-
-
 
 export default routes;

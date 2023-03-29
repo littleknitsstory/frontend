@@ -32,15 +32,6 @@ const Product = () => {
   return (
     <section className="product">
       <Container>
-        <Row>
-          <Col>
-            <div>
-              <Link to="/">Main</Link>
-              <Link to="/shop/"> / Shop</Link>
-              <Link to={`/product/${product?.slug}`}> / {product?.title}</Link>
-            </div>
-          </Col>
-        </Row>
         {product && <SchemaCard product={product} />}
         <PopularProducts />
         <Reviews />

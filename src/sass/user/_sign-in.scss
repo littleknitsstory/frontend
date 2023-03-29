@@ -1,0 +1,22 @@
+@use "../variables" as *;
+
+.sign {
+  &__form {
+  margin-top: 3.75rem;
+  margin-bottom: 2rem;
+
+  }
+  
+  &__error-message {
+    color: $burgundy-color;
+    padding: 0 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  &__policy {
+    width: 80%;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 0.75rem;
+  }
+}

@@ -110,9 +110,10 @@ const Contacts = () => {
                       name="message"
                     />
                   </Row>
-                  <button className="btn btn_white btn_center contacts__btn" type="submit">
-                    <div className="btn__text btn__text_center">{t("FormFields.send")}</div>
-                  </button>
+                  <button className="btn btn--primary">{t("Contacts.send")}</button>
+                  {/* <button className="btn btn_white btn_center contacts__btn" type="submit">
+                    <div className="btn__text btn__text_center">{t("Contacts.send")}</div>
+                  </button> */}
                 </FormikForm>
               </Formik>
 

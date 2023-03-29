@@ -10,45 +10,46 @@ import "yup-phone-lite";
 import { FormsInput } from "../../components/utils/Forms";
 import { notificationError } from "../../components/modal/Notification";
 import Spinner from "../utils/Spinner";
-import eye from "../../assets/icons/eye.svg"
+import eye from "../../assets/icons/eye.svg";
 import { ISignIn } from "../../app/types";
 
 interface errorType {
   status: number;
   data: {
-    email: string[],
-    password: string[],
-    username: string[],
-    detail: string
-  }
+    email: string[];
+    password: string[];
+    username: string[];
+    detail: string;
+  };
 }
 
 const SignIn = () => {
-  const navigate = useNavigate()
-  const { i18n, t } = useTranslation()
-  const [passwordShown, setPasswordShown] = useState<boolean>(false)
+  const navigate = useNavigate();
+  const { i18n, t } = useTranslation();
+  const [passwordShown, setPasswordShown] = useState<boolean>(false);
   const initialFormDataState = {
     username: "",
     email: "",
     password: "",
   };
 
-  const [ signIn, { isLoading }] = useSignInMutation()
+  const [signIn, { isLoading }] = useSignInMutation();
 
   const handleFormSubmit = async (
     values: ISignIn,
     resetForm: (nextState?: Partial<FormikState<ISignIn>> | undefined) => void,
   ): Promise<void> => {
-    const username = values.email.split("@")[0]
-    const credentials = {...values, username}
-    
+    const username = values.email.split("@")[0];
+    const credentials = { ...values, username };
+
     try {
-      const payload = await signIn({credentials, lang: i18n.language}).unwrap();
-      localStorage.setItem("token", payload.access)
-      navigate("/profile")
+      const payload = await signIn({ credentials, lang: i18n.language }).unwrap();
+      const { access, refresh } = payload;
+      localStorage.setItem("tokens", JSON.stringify({ access, refresh }));
+      navigate("/profile");
       resetForm();
     } catch (error) {
-      const myError = error as errorType
+      const myError = error as errorType;
       Store.addNotification({
         ...notificationError,
         title: myError.data.detail,
@@ -57,22 +58,18 @@ const SignIn = () => {
   };
 
   if (isLoading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   return (
     <Formik
       initialValues={initialFormDataState}
       validationSchema={Yup.object().shape({
-        email: Yup.string()
-          .email(t("Forms.incorrectEmail"))
-          .required(t("Forms.required")),
-        password: Yup.string()
-          .required(t("Forms.required")),
+        email: Yup.string().email(t("Forms.incorrectEmail")).required(t("Forms.required")),
+        password: Yup.string().required(t("Forms.required")),
       })}
       onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}
     >
-
       <FormikForm className="contacts__form">
         <FormsInput
           controlId={"email"}
@@ -87,16 +84,19 @@ const SignIn = () => {
             placeholder={t("FormFields.password")}
             name="password"
           />
-          <img 
-            onClick={() => setPasswordShown(prev => !prev)}
-            src={eye} alt="eye-logo" 
-            className="input__icon" 
+          <img
+            onClick={() => setPasswordShown((prev) => !prev)}
+            src={eye}
+            alt="eye-logo"
+            className="input__icon"
           />
         </div>
-        <button type="submit" className="btn sign__btn">{t("Login.Login")}</button>
+        <button type="submit" className="btn btn--primary">
+          {t("Login.Login")}
+        </button>
       </FormikForm>
     </Formik>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;

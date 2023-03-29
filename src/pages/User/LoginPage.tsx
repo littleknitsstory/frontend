@@ -1,30 +1,30 @@
-import { useState } from "react"
-import { useTranslation } from "react-i18next"
-import Social from "../../components/Social"
-import SignIn from "../../components/user/SignIn"
-import SignUp from "../../components/user/SignUp"
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import Social from "../../components/Social";
+import SignIn from "../../components/user/SignIn";
+import SignUp from "../../components/user/SignUp";
 
 const LoginPage = () => {
-  const [selectedForm, setSelectedForm] = useState("signIn")
-  const { t } = useTranslation()
+  const [selectedForm, setSelectedForm] = useState("signIn");
+  const { t } = useTranslation();
 
   return (
     <div className="login__wrapper">
       <div className="login__select-form">
-        <button 
-          className={`btn btn__link login__btn ${selectedForm === "signIn" ? "active" : ""}`}
+        <button
+          className={`btn login__btn ${selectedForm === "signIn" ? "active" : ""}`}
           onClick={() => setSelectedForm("signIn")}
-          >
+        >
           {t("Login.singIn")}
         </button>
-        <button 
-          className={`btn btn__link login__btn ${selectedForm === "signUp" ? "active" : ""}`}
+        <button
+          className={`btn login__btn ${selectedForm === "signUp" ? "active" : ""}`}
           onClick={() => setSelectedForm("signUp")}
         >
           {t("Login.singUp")}
         </button>
       </div>
-      
+
       {selectedForm === "signIn" && <SignIn />}
       {selectedForm === "signUp" && <SignUp />}
 
@@ -36,6 +36,6 @@ const LoginPage = () => {
         <Social />
       </div>
     </div>
-  )
-}
-export default LoginPage
+  );
+};
+export default LoginPage;

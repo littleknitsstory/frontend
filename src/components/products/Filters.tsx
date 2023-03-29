@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { IProduct } from "../../app/types";
-import arrowRight from "../../assets/icons/arrow-right.svg";
 
 interface Category {
   title: string;
@@ -21,6 +20,14 @@ const Filters = ({ products, setFilteredProducts }: FilterProps) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [colors, setColors] = useState<string[]>([]);
   const [selectedColor, setSelectedColor] = useState<string>("");
+
+  const scrollToTop = (): void => {
+    document.documentElement.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
 
   useEffect(() => {
     // get all categories from products
@@ -68,21 +75,25 @@ const Filters = ({ products, setFilteredProducts }: FilterProps) => {
   const selectCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedCategory = e.currentTarget.value;
     setSelectedCategory(selectedCategory);
+    scrollToTop();
   };
 
   // filtering by color
   const selectColor = (e: React.MouseEvent<HTMLElement>) => {
     const selectedColor = e.currentTarget.dataset.color!;
     setSelectedColor(selectedColor);
+    scrollToTop();
   };
 
   const handleClear = (): void => {
     setSelectedCategory("");
     setSelectedColor("");
+    scrollToTop();
   };
 
   const clearColorFilter = (): void => {
     setSelectedColor("");
+    scrollToTop();
   };
 
   const categoryOptions = categories.map((category) => (
@@ -135,9 +146,8 @@ const Filters = ({ products, setFilteredProducts }: FilterProps) => {
         </button>
       </div>
 
-      <button className="btn btn_border btn_center" onClick={handleClear}>
+      <button className="btn btn--primary" onClick={handleClear}>
         {t("Filter.buttonText")}
-        <img src={arrowRight} alt="arrowWhite" />
       </button>
     </div>
   );

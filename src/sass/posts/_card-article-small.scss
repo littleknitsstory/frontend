@@ -1,0 +1,61 @@
+@use "../variables" as *;
+
+.avatar{
+  width: 40px;
+  border-radius: 50%;
+}
+
+.card-article-small {
+  border-radius: 12px;
+  background-color: #FEFEFE;
+  color: $black-text;
+  width: 325px;
+  text-align: left;
+  box-shadow: 15px 15px 50px -10px rgba(0, 0, 0, 0.08);
+
+  &__body {
+    padding: 1rem;
+  }
+  
+  &__title {
+    font-size: 1.5rem;
+  }
+  
+  &__content {
+    height: 95px;
+    overflow: hidden;
+    font-size: 1.25rem;
+    margin: 0.5rem 0;
+  }
+
+  &__image {
+    border-radius: 12px 12px 0 0;
+    width: 325px;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  &__text {
+    font-size: 0.875rem;
+    margin: 0;
+    &--grey {
+      color: $secondary-dark-grey;
+    }
+  }
+  &__description {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .divider {
+    border-bottom: 1px solid $light-grey;
+    margin: 1rem 0;
+  }
+}
+

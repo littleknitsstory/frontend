@@ -7,7 +7,7 @@ import SchemaCard from "../product/SchemaCard";
 import Spinner from "../utils/Spinner";
 import PageError from "../../pages/PageError";
 // assets
-import cartWhite from "../assets/icons/cart-white.svg";
+// import cartWhite from "../assets/icons/cart-white.svg";
 
 const SchemasCard = () => {
   const { t, i18n } = useTranslation();
@@ -34,15 +34,8 @@ const SchemasCard = () => {
       <Container>
         <h3 className="title">{t("SchemasCard.title")}</h3>
         {product && <SchemaCard product={product} />}
-        <Link to={`/shop`}>
-          <div className="schemas-card__btn">
-            <button className="btn btn_vinous">
-              <div className="btn__text_center">{t("SchemasCard.button")}</div>
-              <div className="btn__icon">
-                <img src={cartWhite} alt="cartWhite" />
-              </div>
-            </button>
-          </div>
+        <Link to="/products/">
+          <button className="btn btn--primary">{t("SchemasCard.button")}</button>
         </Link>
       </Container>
     </section>

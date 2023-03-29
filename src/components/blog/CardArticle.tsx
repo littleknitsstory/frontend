@@ -1,62 +1,74 @@
-import sanitizeHtml from "sanitize-html";
-import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
-import { PICTURE_BASE_URL } from "../features/api/apiSlice";
+import parse from "html-react-parser";
+import { PICTURE_BASE_URL, useGetArticleQuery } from "../features/api/apiSlice";
 import { IArticle } from "../../app/types";
+import { ReactComponent as BookmarkIcon } from "../../assets/icons/bookmark.svg";
+import avatar from "../../assets/images/test-avatar.png";
+import { useAppDispatch } from "../../app/hooks";
+import { addToSavedPost } from "../features/posts/postsSlice";
+import Spinner from "../utils/Spinner";
+import PageError from "../../pages/PageError";
 
 const CardArticle = ({ article }: { article: IArticle }) => {
-  const { t } = useTranslation();
-  return (
-    <div className="card-lks">
-      <Link to={`/posts/${article.slug}`}>
-        <Card style={{ width: "18rem" }}>
-          <Card.Img
-            variant="top"
-            src={PICTURE_BASE_URL + article.image_preview}
-            onClick={() => {
-              window.scrollTo({
-                top: 0,
-                behavior: "smooth",
-              });
-            }}
-          />
+  const { t, i18n } = useTranslation();
+  const dispatch = useAppDispatch();
 
-          <Card.Body>
-            <Card.Title>{article.title}</Card.Title>
-            <div className="card-lks__text">
-              {sanitizeHtml(article.content, {
-                allowedTags: ["p"],
-              }).slice(14, -1)}
+  const {
+    data: post,
+    isLoading,
+    isError,
+    error,
+  } = useGetArticleQuery({ slug: article.slug, lang: i18n.language });
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (isError) {
+    if ("originalStatus" in error) {
+      return <PageError errorStatus={error.originalStatus} />;
+    }
+  }
+
+  return (
+    <>
+      {post && (
+        <>
+          <div className="card-article">
+            <div className="card-article__header">
+              <img src={avatar} alt="" className="card-article__avatar" />
+              <p className="card-article__text">{post.author}</p>
+              <p className="card-article__text">{post.created_at}</p>
             </div>
-            <div className="card-lks__footer">
-              <div className="card-lks__author">
-                {t("AboutMe.author")}:
-                <br /> Катя Анаприенко
-              </div>
-              <div className="card-lks__created_at">
-                {article.created_at.slice(8, 10)}:{article.created_at.slice(11, 13)}
-                <br /> {article.created_at.slice(0, 8)}
-              </div>
-              <div className="card-lks__btn">
-                <button
-                  className="btn btn_vinous btn_center"
-                  onClick={() => {
-                    window.scrollTo({
-                      top: 0,
-                      behavior: "smooth",
-                    });
-                  }}
-                >
-                  <div className="btn__text btn__text_center">{t("read")}</div>
-                </button>
-              </div>
+
+            <div className="card-article__title-wrapper">
+              <h2 className="card-article__title">{post.title}</h2>
+              <BookmarkIcon
+                onClick={() => dispatch(addToSavedPost(post))}
+                className="card-article__save-icon"
+              />
             </div>
-          </Card.Body>
-        </Card>
-      </Link>
-    </div>
+
+            <Link to={`/posts/${post?.slug}`}>
+              <div className="card-article__content-wrapper">
+                <div className="card-article__content">
+                  {post && parse(post.content)}
+                  <p className="card-article__text--small">3 минуты на чтение (HC)</p>
+                </div>
+
+                <img
+                  src={PICTURE_BASE_URL + post.image_preview}
+                  alt={post?.image_alt}
+                  className="card-article__image"
+                />
+              </div>
+            </Link>
+          </div>
+          <div className="card-article__divider"></div>
+        </>
+      )}
+    </>
   );
 };
 

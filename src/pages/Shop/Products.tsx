@@ -84,10 +84,11 @@ const Products = () => {
               {!shownProducts.length && (
                 <p className="filters__no-overlap">{t("Filter.noMatch")}</p>
               )}
-              <div ref={loaderRef} />
             </Row>
           </Col>
         </Row>
+        <div ref={loaderRef} />
+        {isFetching && <Spinner />}
       </div>
     </Container>
   );

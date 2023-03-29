@@ -29,12 +29,11 @@ i18next
   .use(LanguageDetector)
   .use(Backend)
   .init({
-    lng: "en",
     ns: ["translationEn", "translationRu"],
     defaultNS,
     resources,
     debug: false,
-    // fallbackLng: 'en'
+    fallbackLng: "en",
   });
 
-export default i18next
+export default i18next;

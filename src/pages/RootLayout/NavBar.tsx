@@ -1,59 +1,63 @@
-import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Navbar } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-// components
 import PrimaryNav from "../../components/primary-nav/PrimaryNav";
-// assets
-import heart from "../../assets/icons/heart.svg";
-import shoppingBag from "../../assets/icons/shopping-bag.svg";
-//? Temporary unused assets
-// import logout from "../icons/logout.svg";
-import user from "../../assets/icons/user.svg";
+import { ReactComponent as ProfileIcon } from "../../assets/icons/user.svg";
+import { ReactComponent as HeartIcon } from "../../assets/icons/heart-big.svg";
+import { ReactComponent as BagIcon } from "../../assets/icons/bag.svg";
+import { useEffect, useState } from "react";
 
 const NavBar = () => {
   const { i18n } = useTranslation();
+  const [lang, setLang] = useState(localStorage.getItem("lang") || "English");
+
+  useEffect(() => {
+    if (lang) {
+      i18n.changeLanguage(localStorage.getItem("i18nextLng") || "en");
+    }
+  }, [i18n, lang]);
+
+  const changeLang = (e: React.MouseEvent) => {
+    if (e.currentTarget.textContent === "English") {
+      setLang("Русский");
+      i18n.changeLanguage("ru");
+      localStorage.setItem("lang", "Русский");
+    } else {
+      setLang("English");
+      i18n.changeLanguage("en");
+      localStorage.setItem("lang", "English");
+    }
+  };
 
   return (
-    <section className="lks-navbar">
-      <Navbar expand="lg">
-        <Container>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+    <Navbar expand="lg" className="navbar">
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
-          <div className="lks-navbar__right">
-            <div className="lks-navbar__icons">
-              <Link to="/profile">
-                <img src={user} alt="user" />
-              </Link>
-              {/* <a href="#">
-                <img src={logout} alt="logout" />
-              </a> */}
-              <Link to="/saved">
-                <img src={heart} alt="heart" />
-              </Link>
-              <Link to="/cart">
-                <img src={shoppingBag} alt="shoppingBag" />
-              </Link>
-            </div>
+      <nav className="navbar__aside">
+        <div className="navbar__divider"></div>
+        <NavLink to="/profile" className="profile-icon">
+          <ProfileIcon id="profile-icon-svg" />
+        </NavLink>
+        <div className="navbar__divider"></div>
+        {/* <a href="#">
+          <img src={logout} alt="logout" />
+        </a> */}
+        <NavLink to="/saved" className="profile-icon">
+          <HeartIcon id="favorite-icon-svg" />
+        </NavLink>
+        <NavLink to="/cart" className="profile-icon">
+          <BagIcon id="bag-icon-svg" />
+        </NavLink>
+        <div className="navbar__divider"></div>
+        <p className="navbar__change-lang" onClick={changeLang}>
+          {lang}
+        </p>
+      </nav>
 
-            <NavDropdown
-              title={i18n.language.toUpperCase()}
-              id="basic-nav-dropdown"
-              className="lks-navbar__lang"
-            >
-              <NavDropdown.Item onClick={() => i18n.changeLanguage("en")}>EN</NavDropdown.Item>
-
-              <NavDropdown.Item onClick={() => i18n.changeLanguage("ru")}>RU</NavDropdown.Item>
-            </NavDropdown>
-          </div>
-
-          <Navbar.Collapse>
-            <Nav className="lks-navbar__links">
-              <PrimaryNav type={"header"} />
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </section>
+      <Navbar.Collapse className="navbar__main">
+        <PrimaryNav type={"header"} className="navbar__main-link" />
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
 

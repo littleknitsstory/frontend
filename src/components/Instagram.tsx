@@ -16,9 +16,10 @@ const Instagram = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <button className="btn btn_vinous instagram__btn">
+                <button className="btn btn--primary">Follow</button>
+                {/* <button className="btn btn_vinous instagram__btn">
                   <div className="btn__text btn__text_center">Follow</div>
-                </button>
+                </button> */}
               </a>
             </div>
           </Col>
