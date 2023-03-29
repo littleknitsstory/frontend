@@ -3,7 +3,7 @@ const Spinner = () => {
     <svg
       style={{
         margin: "auto",
-        background: "rgb(255, 255, 255)",
+        background: "#FAFAFA",
         display: "block",
       }}
       width="220px"
