@@ -3,7 +3,7 @@ version: "3"
 services:
   frontend:
     container_name: frontend
-    image: "63phc/lks:front"
+    image: ghcr.io/littleknitsstory/frontend:latest
     ports:
       - "63000:80/tcp"
     volumes:

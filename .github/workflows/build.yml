@@ -13,7 +13,7 @@ jobs:
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@v4
       env:
-        REACT_APP_BASE_API_URL: http://dev.backend.littleknitsstory.com:26363
+        REACT_APP_BASE_API_URL: http://dev.backend.littleknitsstory.com:26363/api/v1
       with:
         name: littleknitsstory/frontend
         username: ${{ github.actor }}
