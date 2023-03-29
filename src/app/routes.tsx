@@ -23,14 +23,14 @@ const routes: RouteObject = {
     {
       path: "/",
       /* Temporary used Blog as homepage */
-      element: <Navigate to="/posts/" />,
+      element: <Navigate to="/articles/" />,
     },
     {
-      path: "posts",
+      path: "articles",
       element: <Posts />,
     },
     {
-      path: "posts/:slug",
+      path: "articles/:slug",
       element: <Post />,
     },
     {

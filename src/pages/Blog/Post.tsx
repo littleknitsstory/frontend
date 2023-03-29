@@ -95,7 +95,8 @@ const Post = () => {
 
   return (
     <section className="post">
-      <Link to="/posts/" className="link link--with-icon">
+//       TODO: magic articles
+      <Link to="/articles/" className="link link--with-icon">
         <ArrowLeftSVG /> {t("posts.back")}
       </Link>
 

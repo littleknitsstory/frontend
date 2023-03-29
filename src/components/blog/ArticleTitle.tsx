@@ -22,9 +22,9 @@ const ArticleTitle = ({ post }: { post: IArticle }) => {
       return <PageError errorStatus={error.originalStatus} />;
     }
   }
-
+{/* TODO: magic str articles */}
   return (
-    <Link to={`/posts/${data?.slug}`} className="posts__saved-post" key={data?.slug}>
+    <Link to={`/articles/${data?.slug}`} className="posts__saved-post" key={data?.slug}>
       <div className="posts__aside--header">
         <img src={avatar} alt={post.image_alt} className="posts__aside--avatar" />
         <p className="posts__aside--author">{data?.author}</p>

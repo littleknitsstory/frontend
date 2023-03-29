@@ -49,8 +49,8 @@ const CardArticle = ({ article }: { article: IArticle }) => {
                 className="card-article__save-icon"
               />
             </div>
-
-            <Link to={`/posts/${post?.slug}`}>
+            {/* TODO: magic articles */}
+            <Link to={`/articles/${post?.slug}`}>
               <div className="card-article__content-wrapper">
                 <div className="card-article__content">
                   {post && parse(post.content)}

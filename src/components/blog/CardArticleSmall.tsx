@@ -7,7 +7,8 @@ import { Link } from "react-router-dom";
 const CardArticleSmall = ({ ...article }: IArticle) => {
   return (
     <div className="card-article-small">
-      <Link to={`/posts/${article.slug}`}>
+//       TODO: magic articles
+      <Link to={`/articles/${article.slug}`}>
         <img
           src={PICTURE_BASE_URL + article.image_preview}
           alt=""

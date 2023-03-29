@@ -44,7 +44,7 @@ enum URLS {
   CONTACTS = "/contacts/",
   MENU = "/menu/",
   SUBSCRIBE = "/subscribe/",
-  ARTICLES = "/posts/",
+  ARTICLES = "/articles/",
   REVIEWS = "/reviews/",
   CATEGORIES = "/categories/",
   REFRESH_TOKEN = "/token/refresh/",

@@ -52,7 +52,8 @@ const MainSlider = () => {
                       <div className="main-slider__created_at">{item.created_at}</div>
                       <div className="col-12">
                         <div className="main-slider__btn">
-                          <Link to={`/posts/${item.slug}`}>
+                            {/* TODO: magic articles */}
+                          <Link to={`/articles/${item.slug}`}>
                             <button className="btn btn_vinous">
                               <div className="btn__text">{t("read")}</div>
                               <div className="btn__icon">
