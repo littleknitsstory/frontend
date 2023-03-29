@@ -26,7 +26,7 @@ const ArticleTitle = ({ post }: { post: IArticle }) => {
   return (
     <Link to={`/posts/${data?.slug}`} className="posts__saved-post" key={data?.slug}>
       <div className="posts__aside--header">
-        <img src={avatar} alt="" className="posts__aside--avatar" />
+        <img src={avatar} alt={post.image_alt} className="posts__aside--avatar" />
         <p className="posts__aside--author">{data?.author}</p>
       </div>
       <p className="posts__aside--title">{data?.title}</p>
