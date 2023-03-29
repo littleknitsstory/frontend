@@ -20,6 +20,7 @@ jobs:
         password: ${{ secrets.PACKAGE_TOKEN }}
         registry: ghcr.io
         tags: ${{ steps.meta.outputs.tags }}
+        buildargs: REACT_APP_BASE_API_URL
 
   deploy:
     needs: build
