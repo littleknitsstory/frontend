@@ -23,7 +23,7 @@ const CardProductCart = ({ productSlug }: { productSlug: string }) => {
   const dispatch = useAppDispatch();
 
   const handler = useCallback((): void => {
-    setIsChecked(!isChecked);
+    setIsChecked((prevState) => !prevState);
   }, [isChecked]);
 
   const {

@@ -59,7 +59,7 @@ export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";
 
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://dev.backend.littleknitsstory.com:26363/api/v1" }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_API_URL }),
   endpoints: (builder) => ({
     getMenu: builder.query<IMenuResponse, { lang: string }>({
       query: ({ lang }) => ({
