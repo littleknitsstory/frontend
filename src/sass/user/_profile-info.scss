@@ -1,0 +1,70 @@
+@use "../variables" as *;
+
+.profile-info {
+  margin-top: 5rem;
+  color: $black-text;
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 4rem 0 2rem;
+  }
+
+  &__form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  &__form-group {
+    flex: 1 1 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__form-label {
+    color: $secondary-dark-grey;
+    font-size: 0.875rem;
+  }
+
+  &__socials {
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__social {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 768px) {
+  .profile-info {
+    &__form {
+      gap: 2rem;
+      width: 75%;
+    }
+
+    &__form-group {
+      flex: 1 1 auto;
+      width: 45%;
+    }
+  }
+}
+@media (min-width: 1200px) {
+  .profile-info {
+    &__form {
+      gap: 2rem;
+      width: 50%;
+    }
+
+    &__form-group {
+      flex: 1 1 auto;
+      width: 45%;
+    }
+  }
+}

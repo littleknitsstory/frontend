@@ -15,20 +15,25 @@ import Profile from "../components/user/Profile";
 import AuthRequired from "../components/utils/AuthRequired";
 import Ordering from "../pages/Cart/Ordering";
 import Home from "../pages/Home";
+import PersonalInfo from "../components/user/PersonalInfo";
 
 // import { URLS } from "../components/features/api/apiSlice";
-export enum ROUTES {
-  HOME = "/",
-  ARTICLES = "/articles/",
-  PRODUCTS = "/products/",
-  CONTACTS = "/contacts/",
-  CART = "/cart/",
-  ORDERING = "/cart/ordering/",
-  LOGIN = "/login/",
-  PROFILE = "/profile/",
-  FAVORITE_PRODUCTS = "/favorites/",
-  PRIVACY_POLICY = "/privacyPolicy/",
-}
+export const ROUTES = {
+  HOME: "/",
+  ARTICLES: "/articles/",
+  PRODUCTS: "/products/",
+  CONTACTS: "/contacts/",
+  CART: "/cart/",
+  ORDERING: "cart/ordering",
+  LOGIN: "/login/",
+  FAVORITE_PRODUCTS: "/favorites/",
+  PRIVACY_POLICY: "/privacyPolicy/",
+  PROFILE: "/profile/",
+  PROFILE_INFO: "/profile/info",
+  PROFILE_COURSES: "/profile/courses",
+  PROFILE_ARTICLES: "/profile/articles",
+  PROFILE_ORDERS: "/profile/orders",
+};
 
 const routes: RouteObject = {
   element: <RootLayout />,
@@ -83,8 +88,13 @@ const routes: RouteObject = {
       element: <AuthRequired />,
       children: [
         {
-          path: ROUTES.PROFILE,
           element: <Profile />,
+          children: [
+            {
+              path: ROUTES.PROFILE,
+              element: <PersonalInfo />,
+            },
+          ],
         },
       ],
     },

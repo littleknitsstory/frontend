@@ -144,13 +144,13 @@ export const apiSlice = createApi({
         },
       }),
     }),
-    getProfile: builder.query({
+    getProfile: builder.query<IUserData[], string>({
       query: (token) => ({
         url: URLS.PROFILE,
         headers: { Authorization: "Bearer " + token },
       }),
     }),
-    updateProfile: builder.mutation<IUserData[], { user: IUserData; token: string }>({
+    updateProfile: builder.mutation<IUserData, { user: IUserData; token: string }>({
       query: ({ user, token }) => ({
         url: URLS.PROFILE + user.username + "/",
         method: "PUT",
