@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Store } from "react-notifications-component";
@@ -36,6 +36,7 @@ const Post = () => {
   } = useGetArticleQuery({ slug, lang: i18n.language });
 
   const { data: articles } = useGetArticlesQuery({ limit: 3, offset, lang: i18n.language });
+  const navigate = useNavigate();
 
   const [postComment] = useAddCommentsMutation();
 
@@ -96,9 +97,9 @@ const Post = () => {
 
   return (
     <section className="post">
-      <Link to={ROUTES.ARTICLES} className="link link--with-icon">
+      <p onClick={() => navigate(-1)} className="link link--with-icon">
         <ArrowLeftSVG /> {t("posts.back")}
-      </Link>
+      </p>
 
       <article className="post__wrapper">
         <h2 className="post__title">{article?.title}</h2>

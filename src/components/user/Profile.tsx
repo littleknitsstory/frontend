@@ -3,6 +3,7 @@ import { NavLink, Navigate, Outlet, useNavigate } from "react-router-dom";
 import { useGetProfileQuery, useUpdateProfileMutation } from "../features/api/apiSlice";
 import Spinner from "../utils/Spinner";
 import { ROUTES } from "../../app/routes";
+import { useTranslation } from "react-i18next";
 
 interface errorType {
   [key: string]: string[];
@@ -14,10 +15,10 @@ export interface ITokens {
 }
 
 const Profile = () => {
+  const { t } = useTranslation();
   const tokens: ITokens = localStorage.getItem("tokens")
     ? JSON.parse(localStorage.getItem("tokens") || "")
     : { tokens: { access: "", refresh: "" } };
-  const [errorMessage, setErrorMessage] = useState<errorType>();
   const navigate = useNavigate();
 
   const logout = () => {
@@ -26,30 +27,6 @@ const Profile = () => {
   };
 
   const { data: user, isLoading, isError } = useGetProfileQuery(tokens.access);
-
-  // const [updateProfile, { isError: isUpdateError, error: updateError }] =
-  //   useUpdateProfileMutation();
-
-  // useEffect(() => {
-  //   if (isUpdateError) {
-  //     if ("data" in updateError!) {
-  //       setErrorMessage((prevData) => {
-  //         return {
-  //           ...prevData,
-  //           ...(updateError.data as errorType),
-  //         };
-  //       });
-  //     }
-  //   } else
-  //     setErrorMessage({
-  //       email: [],
-  //       country: [],
-  //       avatar: [],
-  //       username: [],
-  //       first_name: [],
-  //       last_name: [],
-  //     });
-  // }, [isUpdateError, updateError]);
 
   if (isLoading) {
     return <Spinner />;
@@ -60,38 +37,40 @@ const Profile = () => {
   }
 
   return (
-    <div className="profile">
-      <nav className="profile__nav">
-        <ul className="profile__links">
-          <li className="profile__list">
-            <NavLink to={ROUTES.PROFILE} className="profile__link">
-              Личные данные
-            </NavLink>
-          </li>
-          <li className="profile__list">
-            <NavLink to={ROUTES.PROFILE + "courses"} className="profile__link">
-              Мои курсы
-            </NavLink>
-          </li>
-          <li className="profile__list">
-            <NavLink to={ROUTES.PROFILE + "articles"} className="profile__link">
-              Мои посты
-            </NavLink>
-          </li>
-          <li className="profile__list">
-            <NavLink to={ROUTES.PROFILE + "orders"} className="profile__link">
-              Мои заказы
-            </NavLink>
-          </li>
-          <li className="profile__list">
-            <NavLink to={ROUTES.PROFILE + "bookmarks"} className="profile__link">
-              Список для чтения
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
-      <Outlet context={{ user: user, tokens: tokens }} />
-    </div>
+    <>
+      <div className="profile">
+        <nav className="profile__nav">
+          <ul className="profile__links">
+            <li className="profile__list">
+              <NavLink to={ROUTES.PROFILE} className="profile__link">
+                {t("profile.userInfo")}
+              </NavLink>
+            </li>
+            <li className="profile__list">
+              <NavLink to={ROUTES.PROFILE_COURSES} className="profile__link">
+                {t("profile.courses")}
+              </NavLink>
+            </li>
+            <li className="profile__list">
+              <NavLink to={ROUTES.PROFILE_ARTICLES} className="profile__link">
+                {t("profile.posts")}
+              </NavLink>
+            </li>
+            <li className="profile__list">
+              <NavLink to={ROUTES.PROFILE_ORDERS} className="profile__link">
+                {t("profile.orders")}
+              </NavLink>
+            </li>
+            <li className="profile__list">
+              <NavLink to={ROUTES.BOOKMARKS} className="profile__link">
+                {t("profile.bookmarks")}
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+        <Outlet context={{ user: user, tokens: tokens }} />
+      </div>
+    </>
   );
 };
 export default Profile;

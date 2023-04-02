@@ -204,6 +204,23 @@
     "send": "Send",
     "subscribe": "Subscribe",
     "order": "Order"
+  },
+  "profile": {
+    "userInfo": "Account Info",
+    "courses": "My Courses",
+    "posts": "My Articles",
+    "orders": "My Orders",
+    "bookmarks": "Bookmarks",
+    "personalData": "Personal Data",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "socials": "Socials",
+    "linkSocial": "Link",
+    "deliveryAddress": "Delivery Address",
+    "modalTitle": "Paste link to your account"
   }
 }
 

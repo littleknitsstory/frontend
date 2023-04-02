@@ -110,12 +110,12 @@ const PersonalInfo = () => {
 
   return (
     <div className="profile-info">
-      <h2 className="profile-info__title">Основные сведения</h2>
+      <h2 className="profile-info__title">{t("profile.personalData")}</h2>
 
       <form action="" className="profile-info__form">
         <div className="profile-info__form-group">
           <label htmlFor="first_name" className="profile-info__form-label">
-            Имя
+            {t("profile.firstName")}
           </label>
           <input
             type="text"
@@ -129,7 +129,7 @@ const PersonalInfo = () => {
         </div>
         <div className="profile-info__form-group">
           <label htmlFor="last_name" className="profile-info__form-label">
-            Фамилия
+            {t("profile.lastName")}
           </label>
           <input
             type="text"
@@ -144,7 +144,7 @@ const PersonalInfo = () => {
         </div>
         <div className="profile-info__form-group">
           <label htmlFor="email" className="profile-info__form-label">
-            Email
+            {t("profile.email")}
           </label>
           <input
             type="email"
@@ -158,7 +158,7 @@ const PersonalInfo = () => {
         </div>
         <div className="profile-info__form-group">
           <label htmlFor="phone_number" className="profile-info__form-label">
-            Phone
+            {t("profile.phone")}
           </label>
           <input
             type="phone_number"
@@ -171,9 +171,9 @@ const PersonalInfo = () => {
           />
         </div>
         <div className="profile-info__form-group">
-          <h2 className="profile-info__title">Адрес доставки</h2>
+          <h2 className="profile-info__title">{t("profile.deliveryAddress")}</h2>
           <label htmlFor="address" className="profile-info__form-label">
-            Address
+            {t("profile.address")}
           </label>
           <input
             type="address"
@@ -187,7 +187,7 @@ const PersonalInfo = () => {
         </div>
       </form>
 
-      <h2 className="profile-info__title">В интернете</h2>
+      <h2 className="profile-info__title">{t("profile.socials")}</h2>
       <div className="profile-info__socials">
         <div className="profile-info__social">
           <a href={userData.inst_profile} target="_blank" rel="noreferrer">
@@ -211,12 +211,12 @@ const PersonalInfo = () => {
                 })
               }
             >
-              Связать
+              {t("profile.linkSocial")}
             </button>
           )}
           <Modal show={showModal.instagram} onHide={() => handleCloseModal("instagram")} centered>
             <Modal.Header closeButton>
-              <Modal.Title>Вставьте ссылку на Instagram</Modal.Title>
+              <Modal.Title>{t("profile.modalTitle")}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <input
@@ -234,7 +234,7 @@ const PersonalInfo = () => {
                 className="btn btn--primary btn--centered"
                 onClick={() => handleCloseModal("instagram")}
               >
-                Связать аккаунт
+                {t("profile.linkSocial")}
               </button>
             </Modal.Footer>
           </Modal>
@@ -262,12 +262,12 @@ const PersonalInfo = () => {
                 })
               }
             >
-              Связать
+              {t("profile.linkSocial")}
             </button>
           )}
           <Modal show={showModal.telegram} onHide={() => handleCloseModal("telegram")} centered>
             <Modal.Header closeButton>
-              <Modal.Title>Вставьте ссылку на Telegram</Modal.Title>
+              <Modal.Title>{t("profile.modalTitle")}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <input
@@ -285,7 +285,7 @@ const PersonalInfo = () => {
                 className="btn btn--primary btn--centered"
                 onClick={() => handleCloseModal("telegram")}
               >
-                Связать аккаунт
+                {t("profile.linkSocial")}
               </button>
             </Modal.Footer>
           </Modal>
@@ -309,12 +309,12 @@ const PersonalInfo = () => {
                 })
               }
             >
-              Связать
+              {t("profile.linkSocial")}
             </button>
           )}
           <Modal show={showModal.facebook} onHide={() => handleCloseModal("facebook")} centered>
             <Modal.Header closeButton>
-              <Modal.Title>Вставьте ссылку на Facebook</Modal.Title>
+              <Modal.Title>{t("profile.modalTitle")}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <input
@@ -332,7 +332,7 @@ const PersonalInfo = () => {
                 className="btn btn--primary btn--centered"
                 onClick={() => handleCloseModal("facebook")}
               >
-                Связать аккаунт
+                {t("profile.linkSocial")}
               </button>
             </Modal.Footer>
           </Modal>

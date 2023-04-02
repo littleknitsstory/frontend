@@ -16,6 +16,10 @@ import AuthRequired from "../components/utils/AuthRequired";
 import Ordering from "../pages/Cart/Ordering";
 import Home from "../pages/Home";
 import PersonalInfo from "../components/user/PersonalInfo";
+import Bookmarks from "../components/blog/Bookmarks";
+import UserCourses from "../components/user/UserCourses";
+import UserArticles from "../components/user/UserArticles";
+import Orders from "../components/user/Orders";
 
 // import { URLS } from "../components/features/api/apiSlice";
 export const ROUTES = {
@@ -30,9 +34,10 @@ export const ROUTES = {
   PRIVACY_POLICY: "/privacyPolicy/",
   PROFILE: "/profile/",
   PROFILE_INFO: "/profile/info",
-  PROFILE_COURSES: "/profile/courses",
+  PROFILE_COURSES: "courses",
   PROFILE_ARTICLES: "/profile/articles",
   PROFILE_ORDERS: "/profile/orders",
+  BOOKMARKS: "/bookmarks/",
 };
 
 const routes: RouteObject = {
@@ -85,14 +90,32 @@ const routes: RouteObject = {
       element: <LoginPage />,
     },
     {
+      path: ROUTES.BOOKMARKS,
+      element: <Bookmarks />,
+    },
+    {
       element: <AuthRequired />,
       children: [
         {
           element: <Profile />,
+          path: ROUTES.PROFILE,
           children: [
             {
               path: ROUTES.PROFILE,
               element: <PersonalInfo />,
+            },
+
+            {
+              path: ROUTES.PROFILE_COURSES,
+              element: <UserCourses />,
+            },
+            {
+              path: ROUTES.PROFILE_ARTICLES,
+              element: <UserArticles />,
+            },
+            {
+              path: ROUTES.PROFILE_ORDERS,
+              element: <Orders />,
             },
           ],
         },

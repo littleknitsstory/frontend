@@ -5,6 +5,7 @@ import PrimaryNav from "../../components/primary-nav/PrimaryNav";
 import { ReactComponent as ProfileIcon } from "../../assets/icons/user.svg";
 import { ReactComponent as HeartIcon } from "../../assets/icons/heart-big.svg";
 import { ReactComponent as BagIcon } from "../../assets/icons/bag.svg";
+import { ReactComponent as BookmarksIcon } from "../../assets/icons/bookmark-link.svg";
 import { useEffect, useState } from "react";
 import { ROUTES } from "../../app/routes";
 
@@ -38,6 +39,9 @@ const NavBar = () => {
         <div className="navbar__divider"></div>
         <NavLink to={ROUTES.PROFILE} className="profile-icon">
           <ProfileIcon id="profile-icon-svg" />
+        </NavLink>
+        <NavLink to={ROUTES.BOOKMARKS} className="profile-icon">
+          <BookmarksIcon id="profile-icon-svg" />
         </NavLink>
         <div className="navbar__divider"></div>
         {/* <a href="#">

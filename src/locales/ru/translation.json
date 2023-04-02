@@ -194,5 +194,22 @@
     "order": "Оформить заказ",
     "password": "Пароль",
     "confirmPassword": "Подтвердите пароль"
+  },
+  "profile": {
+    "userInfo": "Личные данные",
+    "courses": "Мои курсы",
+    "posts": "Мои посты",
+    "orders": "Мои заказы",
+    "bookmarks": "Список для чтения",
+    "personalData": "Основные сведения",
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "email": "Email",
+    "phone": "Телефон",
+    "address": "Адрес доставки",
+    "socials": "В интернете",
+    "linkSocial": "Связать",
+    "deliveryAddress": "Адрес доставки",
+    "modalTitle": "Paste link to your account"
   }
 }
