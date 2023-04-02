@@ -23,6 +23,7 @@ import ModalMain from "../modal/ModalMain";
 import arrowRight from "../../assets/icons/arrow-right-nd.svg";
 import like from "../../assets/icons/like.svg";
 import questionInfo from "../../assets/icons/question.svg";
+import { ROUTES } from "../../app/routes";
 
 const SchemaCard = ({ product }: { product: IProductDetails }) => {
   const { t } = useTranslation();
@@ -180,7 +181,7 @@ const SchemaCard = ({ product }: { product: IProductDetails }) => {
           <div className="row">
             <div className="btn__link">
               <button className="btn btn--primary">{t("SchemaCard.buttonAddCart")}</button>
-              <Link to="/products/" className="link link--with-icon">
+              <Link to={ROUTES.PRODUCTS} className="link link--with-icon">
                 {t("SchemaCard.details")}
                 <img src={arrowRight} alt="arrowRight" />
               </Link>

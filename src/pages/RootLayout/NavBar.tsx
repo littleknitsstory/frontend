@@ -6,6 +6,7 @@ import { ReactComponent as ProfileIcon } from "../../assets/icons/user.svg";
 import { ReactComponent as HeartIcon } from "../../assets/icons/heart-big.svg";
 import { ReactComponent as BagIcon } from "../../assets/icons/bag.svg";
 import { useEffect, useState } from "react";
+import { ROUTES } from "../../app/routes";
 
 const NavBar = () => {
   const { i18n } = useTranslation();
@@ -35,17 +36,17 @@ const NavBar = () => {
 
       <nav className="navbar__aside">
         <div className="navbar__divider"></div>
-        <NavLink to="/profile" className="profile-icon">
+        <NavLink to={ROUTES.PROFILE} className="profile-icon">
           <ProfileIcon id="profile-icon-svg" />
         </NavLink>
         <div className="navbar__divider"></div>
         {/* <a href="#">
           <img src={logout} alt="logout" />
         </a> */}
-        <NavLink to="/saved" className="profile-icon">
+        <NavLink to={ROUTES.FAVORITE_PRODUCTS} className="profile-icon">
           <HeartIcon id="favorite-icon-svg" />
         </NavLink>
-        <NavLink to="/cart" className="profile-icon">
+        <NavLink to={ROUTES.CART} className="profile-icon">
           <BagIcon id="bag-icon-svg" />
         </NavLink>
         <div className="navbar__divider"></div>

@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../../app/hooks";
 import CardProductCart from "../../components/cart/CardProductCart";
 import { convertToCurrency } from "../../utils/convertPrice";
+import { ROUTES } from "../../app/routes";
 
 const Cart = () => {
   const { t, i18n } = useTranslation();
@@ -15,7 +16,7 @@ const Cart = () => {
     return (
       <div className="cart--empty">
         <p> {t("Cart.empty")} </p>
-        <Link to="/products/">{t("Cart.buttonText")} 🛒</Link>
+        <Link to={ROUTES.PRODUCTS}>{t("Cart.buttonText")} 🛒</Link>
       </div>
     );
   }
@@ -87,7 +88,7 @@ const Cart = () => {
             </div>
           </div>
 
-          <Link to="/cart/ordering" className="btn btn--primary">
+          <Link to={ROUTES.ORDERING} className="btn btn--primary">
             {t("Cart.ordering")}
           </Link>
         </Col>

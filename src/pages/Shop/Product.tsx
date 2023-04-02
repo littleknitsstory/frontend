@@ -1,6 +1,6 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGetProductQuery } from "../../components/features/api/apiSlice";
 // components
 import PageError from "../PageError";

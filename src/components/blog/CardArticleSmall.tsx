@@ -3,12 +3,12 @@ import { PICTURE_BASE_URL } from "../features/api/apiSlice";
 import parse from "html-react-parser";
 import avatar from "../../assets/images/test-avatar.png";
 import { Link } from "react-router-dom";
+import { ROUTES } from "../../app/routes";
 
 const CardArticleSmall = ({ ...article }: IArticle) => {
   return (
     <div className="card-article-small">
-//       TODO: magic articles
-      <Link to={`/articles/${article.slug}`}>
+      <Link to={ROUTES.ARTICLES + article?.slug}>
         <img
           src={PICTURE_BASE_URL + article.image_preview}
           alt=""

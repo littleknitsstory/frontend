@@ -1,5 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { ROUTES } from "../app/routes";
 
 const PageError = ({ errorStatus }: { errorStatus: number }) => {
   return (
@@ -13,7 +14,7 @@ const PageError = ({ errorStatus }: { errorStatus: number }) => {
               The page you are trying to reach does not exist or has been deleted. <br />
               Click to
               <span>
-                <Link to="/"> home</Link>
+                <Link to={ROUTES.HOME}> home</Link>
               </span>
             </div>
           </Col>

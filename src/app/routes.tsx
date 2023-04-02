@@ -16,6 +16,20 @@ import AuthRequired from "../components/utils/AuthRequired";
 import Ordering from "../pages/Cart/Ordering";
 import Home from "../pages/Home";
 
+// import { URLS } from "../components/features/api/apiSlice";
+export enum ROUTES {
+  HOME = "/",
+  ARTICLES = "/articles/",
+  PRODUCTS = "/products/",
+  CONTACTS = "/contacts/",
+  CART = "/cart/",
+  ORDERING = "/cart/ordering/",
+  LOGIN = "/login/",
+  PROFILE = "/profile/",
+  FAVORITE_PRODUCTS = "/favorites/",
+  PRIVACY_POLICY = "/privacyPolicy/",
+}
+
 const routes: RouteObject = {
   element: <RootLayout />,
   errorElement: <PageError errorStatus={404} />,
@@ -23,53 +37,53 @@ const routes: RouteObject = {
     {
       path: "/",
       /* Temporary used Blog as homepage */
-      element: <Navigate to="/articles/" />,
+      element: <Navigate to={ROUTES.ARTICLES} />,
     },
     {
-      path: "articles",
+      path: ROUTES.ARTICLES,
       element: <Posts />,
     },
     {
-      path: "articles/:slug",
+      path: ROUTES.ARTICLES + ":slug",
       element: <Post />,
     },
     {
-      path: "products",
+      path: ROUTES.PRODUCTS,
       element: <Products />,
     },
     {
-      path: "products/:slug",
+      path: ROUTES.PRODUCTS + ":slug",
       element: <Product />,
     },
     {
-      path: "contacts",
+      path: ROUTES.CONTACTS,
       element: <ContactPage />,
     },
     {
-      path: "saved",
+      path: ROUTES.FAVORITE_PRODUCTS,
       element: <SavedProducts />,
     },
     {
-      path: "cart",
+      path: ROUTES.CART,
       element: <Cart />,
     },
     {
-      path: "cart/ordering",
+      path: ROUTES.ORDERING,
       element: <Ordering />,
     },
     {
-      path: "privacyPolicy",
+      path: ROUTES.PRIVACY_POLICY,
       element: <PrivacyPolicy />,
     },
     {
-      path: "login",
+      path: ROUTES.LOGIN,
       element: <LoginPage />,
     },
     {
       element: <AuthRequired />,
       children: [
         {
-          path: "profile",
+          path: ROUTES.PROFILE,
           element: <Profile />,
         },
       ],

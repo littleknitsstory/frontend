@@ -39,7 +39,7 @@ const getQueryString = (limit?: number, offset?: number): string => {
   return queryString;
 };
 
-enum URLS {
+export enum URLS {
   PRODUCTS = "/products/",
   CONTACTS = "/contacts/",
   MENU = "/menu/",

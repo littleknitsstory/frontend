@@ -21,6 +21,7 @@ import { ReactComponent as HandIcon } from "../../assets/icons/reactions/hand.sv
 import { ReactComponent as HeartIcon } from "../../assets/icons/reactions/heart.svg";
 import { ReactComponent as SpeechBubbleIcon } from "../../assets/icons/reactions/speech-bubble.svg";
 import { ReactComponent as ArrowRightSVG } from "../../assets/icons/arrow-right-nd.svg";
+import { ROUTES } from "../../app/routes";
 
 const Post = () => {
   const { slug } = useParams<string>();
@@ -95,8 +96,7 @@ const Post = () => {
 
   return (
     <section className="post">
-//       TODO: magic articles
-      <Link to="/articles/" className="link link--with-icon">
+      <Link to={ROUTES.ARTICLES} className="link link--with-icon">
         <ArrowLeftSVG /> {t("posts.back")}
       </Link>
 
@@ -176,7 +176,7 @@ const Post = () => {
           </div>
           <ArrowRightSVG className="posts__btn--arrow" onClick={sliderForward} />
         </div>
-        <Link to="/posts/" className="link link--with-icon link--centered">
+        <Link to={ROUTES.ARTICLES} className="link link--with-icon link--centered">
           {t("posts.watchAll")} <ArrowRightSVG />
         </Link>
       </section>

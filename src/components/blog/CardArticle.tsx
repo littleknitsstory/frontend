@@ -9,6 +9,7 @@ import { useAppDispatch } from "../../app/hooks";
 import { addToSavedPost } from "../features/posts/postsSlice";
 import Spinner from "../utils/Spinner";
 import PageError from "../../pages/PageError";
+import { ROUTES } from "../../app/routes";
 
 const CardArticle = ({ article }: { article: IArticle }) => {
   const { t, i18n } = useTranslation();
@@ -49,8 +50,7 @@ const CardArticle = ({ article }: { article: IArticle }) => {
                 className="card-article__save-icon"
               />
             </div>
-            {/* TODO: magic articles */}
-            <Link to={`/articles/${post?.slug}`}>
+            <Link to={ROUTES.ARTICLES + post?.slug}>
               <div className="card-article__content-wrapper">
                 <div className="card-article__content">
                   {post && parse(post.content)}

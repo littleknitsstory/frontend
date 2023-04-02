@@ -16,6 +16,7 @@ import { IProductDetails } from "../../app/types";
 import { notificationSuccess, notificationError } from "../modal/Notification";
 import { ReactComponent as BagIcon } from "../../assets/icons/bag-coffee.svg";
 import { ReactComponent as LikeIcon } from "../../assets/icons/like_coffee.svg";
+import { ROUTES } from "../../app/routes";
 
 const CardProduct = ({ productSlug }: { productSlug: string }) => {
   const { t, i18n } = useTranslation();
@@ -79,7 +80,7 @@ const CardProduct = ({ productSlug }: { productSlug: string }) => {
             <span></span>
             <span></span>
           </div>
-          <Link to={`/products/${product?.slug}`}>
+          <Link to={ROUTES.PRODUCTS + product?.slug}>
             <Card.Img
               variant="top"
               alt={product?.image_alt}
