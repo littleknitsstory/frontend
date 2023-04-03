@@ -11,7 +11,7 @@ import RootLayout from "../pages/RootLayout";
 import Products from "../pages/Shop/Products";
 import Post from "../pages/Blog/Post";
 import LoginPage from "../pages/User/LoginPage";
-import Profile from "../components/user/Profile";
+import Profile from "../pages/User/Profile";
 import AuthRequired from "../components/utils/AuthRequired";
 import Ordering from "../pages/Cart/Ordering";
 import Home from "../pages/Home";
@@ -24,20 +24,20 @@ import Orders from "../components/user/Orders";
 // import { URLS } from "../components/features/api/apiSlice";
 export const ROUTES = {
   HOME: "/",
-  ARTICLES: "/articles/",
-  PRODUCTS: "/products/",
-  CONTACTS: "/contacts/",
-  CART: "/cart/",
+  ARTICLES: "/articles",
+  PRODUCTS: "/products",
+  CONTACTS: "/contacts",
+  CART: "/cart",
   ORDERING: "cart/ordering",
-  LOGIN: "/login/",
-  FAVORITE_PRODUCTS: "/favorites/",
-  PRIVACY_POLICY: "/privacyPolicy/",
-  PROFILE: "/profile/",
-  PROFILE_INFO: "/profile/info",
+  LOGIN: "/login",
+  FAVORITE_PRODUCTS: "/favorites",
+  PRIVACY_POLICY: "/privacyPolicy",
+  PROFILE: "/profile",
+  PROFILE_INFO: "info",
   PROFILE_COURSES: "courses",
-  PROFILE_ARTICLES: "/profile/articles",
-  PROFILE_ORDERS: "/profile/orders",
-  BOOKMARKS: "/bookmarks/",
+  PROFILE_ARTICLES: "articles",
+  PROFILE_ORDERS: "orders",
+  BOOKMARKS: "/bookmarks",
 };
 
 const routes: RouteObject = {
@@ -54,7 +54,7 @@ const routes: RouteObject = {
       element: <Posts />,
     },
     {
-      path: ROUTES.ARTICLES + ":slug",
+      path: ROUTES.ARTICLES + "/:slug",
       element: <Post />,
     },
     {
@@ -62,7 +62,7 @@ const routes: RouteObject = {
       element: <Products />,
     },
     {
-      path: ROUTES.PRODUCTS + ":slug",
+      path: ROUTES.PRODUCTS + "/:slug",
       element: <Product />,
     },
     {

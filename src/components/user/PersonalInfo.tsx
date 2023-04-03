@@ -1,8 +1,8 @@
 import { useOutletContext } from "react-router-dom";
 import { IUserData } from "../../app/types";
-import { useState } from "react";
-import { ITokens } from "./Profile";
-import { useUpdateProfileMutation } from "../features/api/apiSlice";
+import { useEffect, useState } from "react";
+import { ITokens } from "../../pages/User/Profile";
+import { useGetUserQuery, useUpdateUserMutation } from "../features/api/apiSlice";
 import { Store } from "react-notifications-component";
 import { notificationSuccess } from "../modal/Notification";
 import { useTranslation } from "react-i18next";
@@ -11,31 +11,52 @@ import { ReactComponent as InstagramLogo } from "../../assets/icons/social/insta
 import { ReactComponent as FacebookLogo } from "../../assets/icons/social/facebook.svg";
 import { ReactComponent as Cross } from "../../assets/icons/cross.svg";
 import { Modal } from "react-bootstrap";
+import Spinner from "../utils/Spinner";
 
 const PersonalInfo = () => {
   const { t } = useTranslation();
-  const { tokens, user }: { user: IUserData[]; tokens: ITokens } = useOutletContext();
+  const { tokens, user }: { tokens: ITokens; user: IUserData[] } = useOutletContext();
   const [showModal, setShowModal] = useState({
     instagram: false,
     facebook: false,
     telegram: false,
   });
 
-  const [userData, setUserData] = useState({
-    ...user[0],
+  const { data: userFromAPI, isLoading } = useGetUserQuery({
+    token: tokens.access,
+    username: user[0].username,
   });
 
-  // Create second object to compare user data after changes
-  const [currentData, setCurrentData] = useState({
-    ...user[0],
+  const [userUpdatedData, setUserUpdatedData] = useState<IUserData>({
+    username: "",
+    avatar: "",
+    first_name: "",
+    last_name: "",
+    birth_data: "",
+    country: "",
+    city: "",
+    address: "",
+    email: "",
+    is_email_confirmed: false,
+    is_profile_full: false,
+    phone_number: "",
+    vk_profile: "",
+    fb_profile: "",
+    inst_profile: "",
+    tg_profile: "",
   });
 
-  const [updateProfile, { isError: isUpdateError, error: updateError }] =
-    useUpdateProfileMutation();
+  useEffect(() => {
+    if (userFromAPI) {
+      setUserUpdatedData(userFromAPI);
+    }
+  }, [userFromAPI]);
+
+  const [updateUser, { isError: isUpdateError, error: updateError }] = useUpdateUserMutation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
-    setUserData((prevData) => {
+    setUserUpdatedData((prevData) => {
       return {
         ...prevData,
         [name]: value,
@@ -61,41 +82,40 @@ const PersonalInfo = () => {
     return true;
   };
 
-  const handleUpdateProfile = async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
-    // temporarily update userData to satisfy the API requirements
-    const updatedUser: IUserData = {
-      ...userData,
-      avatar: "test",
-    };
-
-    if (!shallowEqual(userData, currentData)) {
-      try {
-        const data = await updateProfile({ user: updatedUser, token: tokens.access }).unwrap();
-        Store.addNotification({
-          ...notificationSuccess,
-          title: "Профиль обновлен",
-        });
-        setUserData(data);
-        setCurrentData(data);
-      } catch (error) {}
+  const handleUpdateUser = async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
+    if (userFromAPI) {
+      if (!shallowEqual(userUpdatedData, userFromAPI)) {
+        // temporarily update userData to satisfy the API requirements
+        const updatedUser: IUserData = {
+          ...userUpdatedData,
+          avatar: "test",
+        };
+        try {
+          const data = await updateUser({ user: updatedUser, token: tokens.access }).unwrap();
+          Store.addNotification({
+            ...notificationSuccess,
+            title: "Профиль обновлен",
+          });
+          setUserUpdatedData(data);
+        } catch (error) {}
+      }
     }
   };
 
   const clearSocialLink = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const social: string = e.currentTarget.dataset.social!;
     const updatedUser: IUserData = {
-      ...userData,
+      ...userUpdatedData,
       [social]: null,
       avatar: "test",
     };
     try {
-      const data = await updateProfile({ user: updatedUser, token: tokens.access }).unwrap();
+      const data = await updateUser({ user: updatedUser, token: tokens.access }).unwrap();
       Store.addNotification({
         ...notificationSuccess,
         title: "Профиль обновлен",
       });
-      setUserData(data);
-      setCurrentData(data);
+      setUserUpdatedData(data);
     } catch (error) {}
   };
 
@@ -107,6 +127,10 @@ const PersonalInfo = () => {
       };
     });
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="profile-info">
@@ -122,9 +146,9 @@ const PersonalInfo = () => {
             className="profile-info__form-input form-control"
             id="first_name"
             name="first_name"
-            value={userData.first_name ?? ""}
+            value={userUpdatedData.first_name ?? ""}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-            onBlur={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateProfile(e)}
+            onBlur={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateUser(e)}
           />
         </div>
         <div className="profile-info__form-group">
@@ -136,9 +160,9 @@ const PersonalInfo = () => {
             className="profile-info__form-input form-control"
             id="last_name"
             name="last_name"
-            value={userData.last_name ?? ""}
+            value={userUpdatedData.last_name ?? ""}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-            onBlur={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateProfile(e)}
+            onBlur={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateUser(e)}
             // placeholder="Фамилия"
           />
         </div>
@@ -151,9 +175,9 @@ const PersonalInfo = () => {
             className="profile-info__form-input form-control"
             id="email"
             name="email"
-            value={userData.email ?? ""}
+            value={userUpdatedData.email ?? ""}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-            onBlur={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateProfile(e)}
+            onBlur={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateUser(e)}
           />
         </div>
         <div className="profile-info__form-group">
@@ -165,9 +189,9 @@ const PersonalInfo = () => {
             className="profile-info__form-input form-control"
             id="phone_number"
             name="phone_number"
-            value={userData.phone_number ?? ""}
+            value={userUpdatedData.phone_number ?? ""}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-            onBlur={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateProfile(e)}
+            onBlur={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateUser(e)}
           />
         </div>
         <div className="profile-info__form-group">
@@ -180,9 +204,9 @@ const PersonalInfo = () => {
             className="profile-info__form-input form-control"
             id="address"
             name="address"
-            value={userData.address ?? ""}
+            value={userUpdatedData.address ?? ""}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-            onBlur={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateProfile(e)}
+            onBlur={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateUser(e)}
           />
         </div>
       </form>
@@ -190,10 +214,10 @@ const PersonalInfo = () => {
       <h2 className="profile-info__title">{t("profile.socials")}</h2>
       <div className="profile-info__socials">
         <div className="profile-info__social">
-          <a href={userData.inst_profile} target="_blank" rel="noreferrer">
+          <a href={userUpdatedData.inst_profile} target="_blank" rel="noreferrer">
             <InstagramLogo /> Instagram
           </a>
-          {userData.inst_profile && (
+          {userUpdatedData.inst_profile && (
             <button
               className="btn btn--transparent"
               data-social="inst_profile"
@@ -202,7 +226,7 @@ const PersonalInfo = () => {
               <Cross />
             </button>
           )}
-          {!userData.inst_profile && (
+          {!userUpdatedData.inst_profile && (
             <button
               className="btn btn--transparent"
               onClick={() =>
@@ -224,9 +248,9 @@ const PersonalInfo = () => {
                 className="profile-info__form-input form-control"
                 id="instagram"
                 name="inst_profile"
-                value={userData.inst_profile ?? ""}
+                value={userUpdatedData.inst_profile ?? ""}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-                onBlur={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateProfile(e)}
+                onBlur={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateUser(e)}
               />
             </Modal.Body>
             <Modal.Footer>
@@ -241,10 +265,10 @@ const PersonalInfo = () => {
         </div>
 
         <div className="profile-info__social">
-          <a href={userData.tg_profile} target="_blank" rel="noreferrer">
+          <a href={userUpdatedData.tg_profile} target="_blank" rel="noreferrer">
             <TelegramLogo /> Telegram
           </a>
-          {userData.tg_profile && (
+          {userUpdatedData.tg_profile && (
             <button
               className="btn btn--transparent"
               data-social="tg_profile"
@@ -253,7 +277,7 @@ const PersonalInfo = () => {
               <Cross />
             </button>
           )}
-          {!userData.tg_profile && (
+          {!userUpdatedData.tg_profile && (
             <button
               className="btn btn--transparent"
               onClick={() =>
@@ -275,9 +299,9 @@ const PersonalInfo = () => {
                 className="profile-info__form-input form-control"
                 id="telegram"
                 name="tg_profile"
-                value={userData.tg_profile ?? ""}
+                value={userUpdatedData.tg_profile ?? ""}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-                onBlur={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateProfile(e)}
+                onBlur={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateUser(e)}
               />
             </Modal.Body>
             <Modal.Footer>
@@ -292,15 +316,15 @@ const PersonalInfo = () => {
         </div>
 
         <div className="profile-info__social">
-          <a href={userData.fb_profile} target="_blank" rel="noreferrer">
+          <a href={userUpdatedData.fb_profile} target="_blank" rel="noreferrer">
             <FacebookLogo /> Facebook
           </a>
-          {userData.fb_profile && (
+          {userUpdatedData.fb_profile && (
             <button className="btn btn--transparent" data-social="fb_profile">
               <Cross />
             </button>
           )}
-          {!userData.fb_profile && (
+          {!userUpdatedData.fb_profile && (
             <button
               className="btn btn--transparent"
               onClick={() =>
@@ -322,9 +346,9 @@ const PersonalInfo = () => {
                 className="profile-info__form-input form-control"
                 id="facebook"
                 name="fb_profile"
-                value={userData.fb_profile ?? ""}
+                value={userUpdatedData.fb_profile ?? ""}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-                onBlur={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateProfile(e)}
+                onBlur={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateUser(e)}
               />
             </Modal.Body>
             <Modal.Footer>

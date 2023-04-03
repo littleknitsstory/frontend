@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
 import { NavLink, Navigate, Outlet, useNavigate } from "react-router-dom";
-import { useGetProfileQuery, useUpdateProfileMutation } from "../features/api/apiSlice";
-import Spinner from "../utils/Spinner";
+import { useGetAllUsersQuery } from "../../components/features/api/apiSlice";
+import Spinner from "../../components/utils/Spinner";
 import { ROUTES } from "../../app/routes";
 import { useTranslation } from "react-i18next";
 
@@ -26,7 +25,8 @@ const Profile = () => {
     navigate("/login/");
   };
 
-  const { data: user, isLoading, isError } = useGetProfileQuery(tokens.access);
+  //! DELETE: getUser by ID instead of username
+  const { data: user, isLoading, isError } = useGetAllUsersQuery(tokens.access);
 
   if (isLoading) {
     return <Spinner />;
@@ -42,7 +42,7 @@ const Profile = () => {
         <nav className="profile__nav">
           <ul className="profile__links">
             <li className="profile__list">
-              <NavLink to={ROUTES.PROFILE} className="profile__link">
+              <NavLink to={ROUTES.PROFILE} end className="profile__link">
                 {t("profile.userInfo")}
               </NavLink>
             </li>
@@ -61,11 +61,11 @@ const Profile = () => {
                 {t("profile.orders")}
               </NavLink>
             </li>
-            <li className="profile__list">
+            {/* <li className="profile__list">
               <NavLink to={ROUTES.BOOKMARKS} className="profile__link">
                 {t("profile.bookmarks")}
               </NavLink>
-            </li>
+            </li> */}
           </ul>
         </nav>
         <Outlet context={{ user: user, tokens: tokens }} />

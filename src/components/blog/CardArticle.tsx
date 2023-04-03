@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import parse from "html-react-parser";
 import { PICTURE_BASE_URL, useGetArticleQuery } from "../features/api/apiSlice";
@@ -50,7 +50,7 @@ const CardArticle = ({ article }: { article: IArticle }) => {
                 className="card-article__save-icon"
               />
             </div>
-            <Link to={ROUTES.ARTICLES + post?.slug}>
+            <NavLink to={ROUTES.ARTICLES + "/" + post?.slug}>
               <div className="card-article__content-wrapper">
                 <div className="card-article__content">
                   {post && parse(post.content)}
@@ -63,7 +63,7 @@ const CardArticle = ({ article }: { article: IArticle }) => {
                   className="card-article__image"
                 />
               </div>
-            </Link>
+            </NavLink>
           </div>
           <div className="card-article__divider"></div>
         </>

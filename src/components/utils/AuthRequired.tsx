@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { useRefreshTokenMutation } from "../features/api/apiSlice";
+import { ROUTES } from "../../app/routes";
 
 interface IJwtDecode {
   token_type: string;
@@ -15,10 +16,10 @@ const AuthRequired = () => {
   const [refreshTokenCall] = useRefreshTokenMutation();
 
   if (!tokens.access) {
-    return <Navigate to="/login/" />;
+    return <Navigate to={ROUTES.LOGIN} />;
   }
   try {
-    const decodedJWT: IJwtDecode = jwtDecode(tokens.access, { header: true });
+    const decodedJWT: IJwtDecode = jwtDecode(tokens.access);
     const isTokenExpired = decodedJWT.exp * 1000 < Date.now();
 
     const updateToken = async (token: string) => {

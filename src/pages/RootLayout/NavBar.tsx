@@ -37,8 +37,12 @@ const NavBar = () => {
 
       <nav className="navbar__aside">
         <div className="navbar__divider"></div>
-        <NavLink to={ROUTES.PROFILE} className="profile-icon">
-          <ProfileIcon id="profile-icon-svg" />
+        <NavLink to="/profile" className="profile-icon">
+          {({ isActive, isPending }) => (
+            <span className={isActive ? "active" : ""}>
+              <ProfileIcon id="profile-icon-svg" />
+            </span>
+          )}
         </NavLink>
         <NavLink to={ROUTES.BOOKMARKS} className="profile-icon">
           <BookmarksIcon id="profile-icon-svg" />
