@@ -1,6 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { ROUTES } from "../../app/routes";
 // import cartBlack from "../assets/icons/cart-black.svg";
 
 const Promo = () => {
@@ -12,7 +13,7 @@ const Promo = () => {
           <h1 className="promo__title">Little Knits Story</h1>
           <Col xs={12} md={8} lg={6} xl={6} xxl={6}>
             <div className="promo__text">{t("Promo.text")}</div>
-            <Link to={`/shop`}>
+            <Link to={ROUTES.PRODUCTS}>
               <button className="btn btn--primary">{t("Promo.buttonText")}</button>
             </Link>
           </Col>

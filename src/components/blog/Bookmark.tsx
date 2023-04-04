@@ -7,32 +7,31 @@ import { useGetArticleQuery } from "../features/api/apiSlice";
 import { ReactComponent as BookmarkIcon } from "../../assets/icons/bookmark.svg";
 
 interface IBookmarks {
-  slugPost: string | void;
+  slugPost: string;
 }
 const Bookmark = ({ slugPost }: IBookmarks) => {
   const { i18n } = useTranslation();
   const [isAddedPost, setIsAddedPost] = useState<Boolean>(false);
   const dispatch = useAppDispatch();
-  const savedPosts = useAppSelector((state) => state.posts.posts);
+  const savedPostsSlugs = useAppSelector((state) => state.posts.posts);
   const { data: article } = useGetArticleQuery({ slug: slugPost, lang: i18n.language });
 
-  const addSavedPost = (post: any): void => {
-    if (post) {
-      dispatch(addToSavedPost(post));
-      setIsAddedPost(true);
-    }
+  const addSavedPost = (slug: string): void => {
+    dispatch(addToSavedPost(slugPost));
+    setIsAddedPost(true);
   };
 
-  const removeToSavedPost = (post: any): void => {
-    dispatch(removeSavedPost(post));
+  const removeToSavedPost = (slug: string): void => {
+    dispatch(removeSavedPost(slugPost));
     setIsAddedPost(false);
   };
 
   useEffect(() => {
-    const isSaved = savedPosts.some((item) => item.slug === slugPost);
+    const isSaved = savedPostsSlugs.some((slug: string) => slug === slugPost);
     if (isSaved) {
       setIsAddedPost(true);
     }
+
     return () => {
       setIsAddedPost(false);
     };
@@ -40,7 +39,7 @@ const Bookmark = ({ slugPost }: IBookmarks) => {
 
   return (
     <BookmarkIcon
-      onClick={isAddedPost ? () => removeToSavedPost(article) : () => addSavedPost(article)}
+      onClick={isAddedPost ? () => removeToSavedPost(slugPost) : () => addSavedPost(slugPost)}
       className={isAddedPost ? "card-article__save-icon active" : "card-article__save-icon"}
     />
   );

@@ -167,20 +167,6 @@
     "noAuthorize": "Вы не авторизованы. Войдите в аккаунт",
     "successSend": "Спасибо, ваш комментарий отправлен"
   },
-  "lastReviews": "Последние отзывы",
-  "otherPosts": "Другие блоги",
-  "seeMore": "Смотреть все",
-  "read": "Читать",
-  "popular": "Популярное",
-  "goCart": "В корзину",
-  "reviews": "Отзывы",
-  "quickOrder": "Быстрый заказ",
-  "price": "Стоимость",
-  "color": "Цвет",
-  "fullName": "ФИО",
-  "comments": "Комментарии",
-  "address": "Адрес",
-
   "FormFields": {
     "email": "Ваш email",
     "fullName": "ФИО",
@@ -194,5 +180,36 @@
     "order": "Оформить заказ",
     "password": "Пароль",
     "confirmPassword": "Подтвердите пароль"
-  }
+  },
+  "profile": {
+    "userInfo": "Личные данные",
+    "courses": "Мои курсы",
+    "posts": "Мои посты",
+    "orders": "Мои заказы",
+    "bookmarks": "Список для чтения",
+    "personalData": "Основные сведения",
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "email": "Email",
+    "phone": "Телефон",
+    "address": "Адрес доставки",
+    "socials": "В интернете",
+    "linkSocial": "Связать",
+    "deliveryAddress": "Адрес доставки",
+    "modalTitle": "Paste link to your account"
+  },
+  "lastReviews": "Последние отзывы",
+  "otherPosts": "Другие блоги",
+  "seeMore": "Смотреть все",
+  "read": "Читать",
+  "popular": "Популярное",
+  "goCart": "В корзину",
+  "reviews": "Отзывы",
+  "quickOrder": "Быстрый заказ",
+  "price": "Стоимость",
+  "color": "Цвет",
+  "fullName": "ФИО",
+  "comments": "Комментарии",
+  "address": "Адрес",
+  "emptyBookmarks": "Нет сохраненных статей"
 }

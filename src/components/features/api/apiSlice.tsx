@@ -39,7 +39,7 @@ const getQueryString = (limit?: number, offset?: number): string => {
   return queryString;
 };
 
-enum URLS {
+export enum URLS {
   PRODUCTS = "/products/",
   CONTACTS = "/contacts/",
   MENU = "/menu/",
@@ -60,6 +60,7 @@ export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_API_URL }),
+  tagTypes: ["user"],
   endpoints: (builder) => ({
     getMenu: builder.query<IMenuResponse, { lang: string }>({
       query: ({ lang }) => ({
@@ -144,13 +145,20 @@ export const apiSlice = createApi({
         },
       }),
     }),
-    getProfile: builder.query({
+    getAllUsers: builder.query<IUserData[], string>({
       query: (token) => ({
         url: URLS.PROFILE,
         headers: { Authorization: "Bearer " + token },
       }),
     }),
-    updateProfile: builder.mutation<IUserData[], { user: IUserData; token: string }>({
+    getUser: builder.query<IUserData, { token: string; username: string }>({
+      query: ({ token, username }) => ({
+        url: URLS.PROFILE + username + "/",
+        headers: { Authorization: "Bearer " + token },
+      }),
+      providesTags: (result, error, arg) => [{ type: "user", id: arg.username }],
+    }),
+    updateUser: builder.mutation<IUserData, { user: IUserData; token: string }>({
       query: ({ user, token }) => ({
         url: URLS.PROFILE + user.username + "/",
         method: "PUT",
@@ -159,6 +167,7 @@ export const apiSlice = createApi({
           Authorization: "Bearer " + token,
         },
       }),
+      invalidatesTags: ["user"],
     }),
     refreshToken: builder.mutation({
       query: (token) => ({
@@ -181,8 +190,9 @@ export const {
   useAddSubscriptionMutation,
   useSignUpMutation,
   useSignInMutation,
-  useGetProfileQuery,
-  useUpdateProfileMutation,
+  useGetAllUsersQuery,
+  useGetUserQuery,
+  useUpdateUserMutation,
   useAddCommentsMutation,
   useRefreshTokenMutation,
   useAddOrderMutation,

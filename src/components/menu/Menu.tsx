@@ -37,7 +37,9 @@ const PrimaryNav = (props: propTypes) => {
           </a>
         ) : (
           <NavLink key={item.id} className={props.className} to={item.url}>
-            {item.name}
+            {({ isActive, isPending }) => (
+              <span className={isActive ? "active" : ""}>{item.name}</span>
+            )}
           </NavLink>
         ),
       )}

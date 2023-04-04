@@ -97,6 +97,12 @@
   }
 }
 
+.bookmarks {
+  margin-top: 6rem;
+  display: flex;
+  @include container;
+}
+
 .divider {
   width: 100%;
   border-bottom: 1px solid $secondary-grey;

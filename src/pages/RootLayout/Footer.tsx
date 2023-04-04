@@ -9,6 +9,7 @@ import { notificationSuccess, notificationError } from "../../components/modal/N
 // components
 import { FormsInput } from "../../components/utils/Forms";
 import { ReactComponent as FooterLogo } from "../../assets/images/footer-logo.svg";
+import { ROUTES } from "../../app/routes";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -136,7 +137,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <Link to="/">
+      <Link to={ROUTES.HOME}>
         <FooterLogo className="footer__logo-img" />
         <h2 className="footer__logo-text">{t("Footer.title")}</h2>
       </Link>
@@ -147,7 +148,7 @@ const Footer = () => {
         <p className="footer__text--small">
           Little Knits Story {new Date().getFullYear()} | © All Rights Reserved
         </p>
-        <Link to="/privacyPolicy" className="footer__link footer__link--small">
+        <Link to={ROUTES.PRIVACY_POLICY} className="footer__link footer__link--small">
           {t("Footer.policy")}
         </Link>
       </div>

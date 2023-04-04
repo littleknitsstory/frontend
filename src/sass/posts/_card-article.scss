@@ -84,7 +84,7 @@
   // svg styling
   @mixin bookmark-icon-active {
     .pressed {
-      fill: red;
+      fill: $secondary-dark-grey;
     }
   }
   &__save-icon {

@@ -2,11 +2,12 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { IProduct } from "../../app/types";
 import { PICTURE_BASE_URL } from "../features/api/apiSlice";
+import { ROUTES } from "../../app/routes";
 
 const MiniCardProduct = ({ product }: { product: IProduct }) => {
   return (
     <div className="mini-card-product">
-      <Link to={`/products/${product.slug}`}>
+      <Link to={ROUTES.PRODUCTS + product.slug}>
         <Card style={{ width: "18rem" }}>
           <Card.Title>{product.title}</Card.Title>
           <Card.Body>

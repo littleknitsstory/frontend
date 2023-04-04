@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Store } from "react-notifications-component";
@@ -21,6 +21,7 @@ import { ReactComponent as HandIcon } from "../../assets/icons/reactions/hand.sv
 import { ReactComponent as HeartIcon } from "../../assets/icons/reactions/heart.svg";
 import { ReactComponent as SpeechBubbleIcon } from "../../assets/icons/reactions/speech-bubble.svg";
 import { ReactComponent as ArrowRightSVG } from "../../assets/icons/arrow-right-nd.svg";
+import { ROUTES } from "../../app/routes";
 import { useAppDispatch } from "../../app/hooks";
 import Bookmark from "../../components/blog/Bookmark";
 
@@ -38,6 +39,7 @@ const Post = () => {
   const dispatch = useAppDispatch();
 
   const { data: articles } = useGetArticlesQuery({ limit: 3, offset, lang: i18n.language });
+  const navigate = useNavigate();
 
   const [postComment] = useAddCommentsMutation();
 
@@ -98,12 +100,13 @@ const Post = () => {
 
   return (
     <section className="post">
-      <Link to="/articles/" className="link link--with-icon">
+      <p onClick={() => navigate(-1)} className="link link--with-icon">
         <ArrowLeftSVG /> {t("posts.back")}
-      </Link>
+      </p>
+
       <article className="post__wrapper">
         <h2 className="post__title">
-          {article?.title} <Bookmark slugPost={article?.slug} />
+          {article?.title} {article && <Bookmark slugPost={article?.slug} />}
         </h2>
 
         <div className="post__about">
@@ -177,7 +180,7 @@ const Post = () => {
           </div>
           <ArrowRightSVG className="posts__btn--arrow" onClick={sliderForward} />
         </div>
-        <Link to="/posts/" className="link link--with-icon link--centered">
+        <Link to={ROUTES.ARTICLES} className="link link--with-icon link--centered">
           {t("posts.watchAll")} <ArrowRightSVG />
         </Link>
       </section>

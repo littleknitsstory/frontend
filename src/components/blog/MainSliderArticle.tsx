@@ -9,6 +9,7 @@ import PageError from "../../pages/PageError";
 // assets
 import arrowWhite from "../../assets/icons/arrow-right-white.svg";
 import kateSlider from "../../assets/images/kate-slider.png";
+import { ROUTES } from "../../app/routes";
 
 const MainSlider = () => {
   const { t, i18n } = useTranslation();
@@ -52,8 +53,7 @@ const MainSlider = () => {
                       <div className="main-slider__created_at">{item.created_at}</div>
                       <div className="col-12">
                         <div className="main-slider__btn">
-                            {/* TODO: magic articles */}
-                          <Link to={`/articles/${item.slug}`}>
+                          <Link to={ROUTES.ARTICLES + item.slug}>
                             <button className="btn btn_vinous">
                               <div className="btn__text">{t("read")}</div>
                               <div className="btn__icon">

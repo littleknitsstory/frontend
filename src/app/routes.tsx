@@ -11,10 +11,34 @@ import RootLayout from "../pages/RootLayout";
 import Products from "../pages/Shop/Products";
 import Post from "../pages/Blog/Post";
 import LoginPage from "../pages/User/LoginPage";
-import Profile from "../components/user/Profile";
+import Profile from "../pages/User/Profile";
 import AuthRequired from "../components/utils/AuthRequired";
 import Ordering from "../pages/Cart/Ordering";
 import Home from "../pages/Home";
+import PersonalInfo from "../components/user/PersonalInfo";
+import Bookmarks from "../pages/Bookmarks";
+import UserCourses from "../components/user/UserCourses";
+import UserArticles from "../components/user/UserArticles";
+import Orders from "../components/user/Orders";
+
+// import { URLS } from "../components/features/api/apiSlice";
+export const ROUTES = {
+  HOME: "/",
+  ARTICLES: "/articles",
+  PRODUCTS: "/products",
+  CONTACTS: "/contacts",
+  CART: "/cart",
+  ORDERING: "cart/ordering",
+  LOGIN: "/login",
+  FAVORITE_PRODUCTS: "/favorites",
+  PRIVACY_POLICY: "/privacyPolicy",
+  PROFILE: "/profile",
+  PROFILE_INFO: "info",
+  PROFILE_COURSES: "courses",
+  PROFILE_ARTICLES: "articles",
+  PROFILE_ORDERS: "orders",
+  BOOKMARKS: "/bookmarks",
+};
 
 const routes: RouteObject = {
   element: <RootLayout />,
@@ -23,54 +47,77 @@ const routes: RouteObject = {
     {
       path: "/",
       /* Temporary used Blog as homepage */
-      element: <Navigate to="/articles/" />,
+      element: <Navigate to={ROUTES.ARTICLES} />,
     },
     {
-      path: "articles",
+      path: ROUTES.ARTICLES,
       element: <Posts />,
     },
     {
-      path: "articles/:slug",
+      path: ROUTES.ARTICLES + "/:slug",
       element: <Post />,
     },
     {
-      path: "products",
+      path: ROUTES.PRODUCTS,
       element: <Products />,
     },
     {
-      path: "products/:slug",
+      path: ROUTES.PRODUCTS + "/:slug",
       element: <Product />,
     },
     {
-      path: "contacts",
+      path: ROUTES.CONTACTS,
       element: <ContactPage />,
     },
     {
-      path: "saved",
+      path: ROUTES.FAVORITE_PRODUCTS,
       element: <SavedProducts />,
     },
     {
-      path: "cart",
+      path: ROUTES.CART,
       element: <Cart />,
     },
     {
-      path: "cart/ordering",
+      path: ROUTES.ORDERING,
       element: <Ordering />,
     },
     {
-      path: "privacyPolicy",
+      path: ROUTES.PRIVACY_POLICY,
       element: <PrivacyPolicy />,
     },
     {
-      path: "login",
+      path: ROUTES.LOGIN,
       element: <LoginPage />,
+    },
+    {
+      path: ROUTES.BOOKMARKS,
+      element: <Bookmarks />,
     },
     {
       element: <AuthRequired />,
       children: [
         {
-          path: "profile",
           element: <Profile />,
+          path: ROUTES.PROFILE,
+          children: [
+            {
+              path: ROUTES.PROFILE,
+              element: <PersonalInfo />,
+            },
+
+            {
+              path: ROUTES.PROFILE_COURSES,
+              element: <UserCourses />,
+            },
+            {
+              path: ROUTES.PROFILE_ARTICLES,
+              element: <UserArticles />,
+            },
+            {
+              path: ROUTES.PROFILE_ORDERS,
+              element: <Orders />,
+            },
+          ],
         },
       ],
     },

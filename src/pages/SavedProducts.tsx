@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../app/hooks";
 import CardProduct from "../components/products/CardProduct";
+import { ROUTES } from "../app/routes";
 
 const SavedProducts = () => {
   const { t } = useTranslation();
@@ -12,7 +13,7 @@ const SavedProducts = () => {
     return (
       <Container>
         <div className="empty-favorites">{t("Saved.empty")}</div>
-        <Link to="/products/" className="empty-cart-link">
+        <Link to={ROUTES.PRODUCTS} className="empty-cart-link">
           {t("Saved.buttonText")} 🛒
         </Link>
       </Container>

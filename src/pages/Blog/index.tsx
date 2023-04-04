@@ -148,7 +148,7 @@ const Posts = () => {
           {isFetching && <Spinner />}
           <article className="posts__articles">
             {shownPosts?.map((post) => (
-              <CardArticle key={post.slug} article={post} />
+              <CardArticle key={post.slug} slug={post.slug} />
             ))}
           </article>
           <div ref={loaderRef} />

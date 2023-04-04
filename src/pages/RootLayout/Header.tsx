@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as LogoLKS } from "../../assets/images/logo-lks.svg";
+import { ROUTES } from "../../app/routes";
 
 const Header = () => {
   const { t } = useTranslation();
 
   return (
     <header>
-      <Link to="/">
+      <Link to={ROUTES.HOME}>
         <LogoLKS className="header__logo" />
         <h1 className="header__title">{t("Header.title")}</h1>
       </Link>

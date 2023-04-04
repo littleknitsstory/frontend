@@ -1,6 +1,7 @@
 import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { ROUTES } from "../../app/routes";
 
 interface ModalThanksProps {
   showModal: boolean;
@@ -27,7 +28,7 @@ const ModalThanks = ({ showModal, handleClose, message, title, button }: ModalTh
       <Modal.Body>
         <div className="card-modal-thanks__text">{message}</div>
         {button && (
-          <Link to={`/`} className="btn btn--primary btn--centered">
+          <Link to={ROUTES.HOME} className="btn btn--primary btn--centered">
             {t("CardProduct.backHome")}{" "}
           </Link>
         )}

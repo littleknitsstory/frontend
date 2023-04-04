@@ -119,7 +119,7 @@ export interface FormValues {
 
 export interface IUserData {
   username: string;
-  avatar: "";
+  avatar: string;
   first_name: string;
   last_name: string;
   birth_data: string;

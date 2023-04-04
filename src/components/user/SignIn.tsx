@@ -12,6 +12,7 @@ import { notificationError } from "../../components/modal/Notification";
 import Spinner from "../utils/Spinner";
 import eye from "../../assets/icons/eye.svg";
 import { ISignIn } from "../../app/types";
+import { ROUTES } from "../../app/routes";
 
 interface errorType {
   status: number;
@@ -46,7 +47,7 @@ const SignIn = () => {
       const payload = await signIn({ credentials, lang: i18n.language }).unwrap();
       const { access, refresh } = payload;
       localStorage.setItem("tokens", JSON.stringify({ access, refresh }));
-      navigate("/profile");
+      navigate(ROUTES.PROFILE);
       resetForm();
     } catch (error) {
       const myError = error as errorType;

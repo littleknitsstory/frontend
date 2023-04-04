@@ -18,7 +18,7 @@ const useModalState = () => {
   };
 
   const onSubmitOrder = (): void => {
-    //e.preventDefault();
+    // e.preventDefault();
     setShowModal(false);
     setShowModalThanks(true);
   };

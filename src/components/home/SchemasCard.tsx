@@ -2,6 +2,7 @@ import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useGetProductQuery } from "../features/api/apiSlice";
+import { ROUTES } from "../../app/routes";
 // components
 import SchemaCard from "../product/SchemaCard";
 import Spinner from "../utils/Spinner";
@@ -34,7 +35,7 @@ const SchemasCard = () => {
       <Container>
         <h3 className="title">{t("SchemasCard.title")}</h3>
         {product && <SchemaCard product={product} />}
-        <Link to="/products/">
+        <Link to={ROUTES.PRODUCTS}>
           <button className="btn btn--primary">{t("SchemasCard.button")}</button>
         </Link>
       </Container>
