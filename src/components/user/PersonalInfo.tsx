@@ -89,6 +89,7 @@ const PersonalInfo = () => {
         const updatedUser: IUserData = {
           ...userUpdatedData,
           avatar: "test",
+          country: "MNE",
         };
         try {
           const data = await updateUser({ user: updatedUser, token: tokens.access }).unwrap();
@@ -108,6 +109,7 @@ const PersonalInfo = () => {
       ...userUpdatedData,
       [social]: null,
       avatar: "test",
+      country: "MNE",
     };
     try {
       const data = await updateUser({ user: updatedUser, token: tokens.access }).unwrap();
@@ -171,6 +173,7 @@ const PersonalInfo = () => {
             {t("profile.email")}
           </label>
           <input
+            disabled
             type="email"
             className="profile-info__form-input form-control"
             id="email"
