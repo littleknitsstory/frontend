@@ -2,18 +2,15 @@ import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import parse from "html-react-parser";
 import { PICTURE_BASE_URL, useGetArticleQuery } from "../features/api/apiSlice";
+import { ROUTES } from "../../app/routes";
 import { IArticle } from "../../app/types";
-import { ReactComponent as BookmarkIcon } from "../../assets/icons/bookmark.svg";
-import avatar from "../../assets/images/test-avatar.png";
-import { useAppDispatch } from "../../app/hooks";
-import { addToSavedPost } from "../features/posts/postsSlice";
 import Spinner from "../utils/Spinner";
 import PageError from "../../pages/PageError";
-import { ROUTES } from "../../app/routes";
+import Bookmark from "./Bookmark";
+import avatar from "../../assets/images/test-avatar.png";
 
 const CardArticle = ({ article }: { article: IArticle }) => {
   const { t, i18n } = useTranslation();
-  const dispatch = useAppDispatch();
 
   const {
     data: post,
@@ -45,10 +42,7 @@ const CardArticle = ({ article }: { article: IArticle }) => {
 
             <div className="card-article__title-wrapper">
               <h2 className="card-article__title">{post.title}</h2>
-              <BookmarkIcon
-                onClick={() => dispatch(addToSavedPost(post))}
-                className="card-article__save-icon"
-              />
+              <Bookmark slugPost={post.slug} />
             </div>
             <NavLink to={ROUTES.ARTICLES + "/" + post?.slug}>
               <div className="card-article__content-wrapper">

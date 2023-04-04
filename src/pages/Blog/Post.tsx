@@ -22,6 +22,8 @@ import { ReactComponent as HeartIcon } from "../../assets/icons/reactions/heart.
 import { ReactComponent as SpeechBubbleIcon } from "../../assets/icons/reactions/speech-bubble.svg";
 import { ReactComponent as ArrowRightSVG } from "../../assets/icons/arrow-right-nd.svg";
 import { ROUTES } from "../../app/routes";
+import { useAppDispatch } from "../../app/hooks";
+import Bookmark from "../../components/blog/Bookmark";
 
 const Post = () => {
   const { slug } = useParams<string>();
@@ -34,6 +36,7 @@ const Post = () => {
     isError,
     error,
   } = useGetArticleQuery({ slug, lang: i18n.language });
+  const dispatch = useAppDispatch();
 
   const { data: articles } = useGetArticlesQuery({ limit: 3, offset, lang: i18n.language });
   const navigate = useNavigate();
@@ -102,7 +105,10 @@ const Post = () => {
       </p>
 
       <article className="post__wrapper">
-        <h2 className="post__title">{article?.title}</h2>
+        <h2 className="post__title">
+          {article?.title} <Bookmark slugPost={article?.slug} />
+        </h2>
+
         <div className="post__about">
           <img src={avatar} alt="avatar" className="post__avatar" />
           <p>{article?.author}</p>
@@ -141,7 +147,6 @@ const Post = () => {
         </div>
         <div className="post__divider"></div>
       </article>
-
       <section className="post__comments">
         <h4>{t("posts.comments")}</h4>
         <div className="post__comments--wrapper">
@@ -153,7 +158,6 @@ const Post = () => {
             placeholder={t("posts.placeholderComments")}
           />
           <div className="post__comments--buttons">
-            <button className="btn btn--transparent">{t("posts.cancel")}</button>
             <button
               className="btn btn--primary"
               disabled={message.length === 0}
@@ -164,7 +168,6 @@ const Post = () => {
           </div>
         </div>
       </section>
-
       <section className="post__more-posts">
         <h4 className="post__subtitle">{t("posts.readAlso")}</h4>
         <div className="post__slider">
