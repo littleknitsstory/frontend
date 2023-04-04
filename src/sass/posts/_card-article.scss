@@ -12,7 +12,7 @@
   }
 
   &:hover {
-    background: #F1F1F1;
+    background: #f1f1f1;
     border-radius: 16px;
   }
 
@@ -26,7 +26,7 @@
   &__text {
     color: $black-text;
     font-size: 1.25rem;
-    
+
     &--small {
       font-size: 0.875rem;
       color: $tertiary-grey;
@@ -81,11 +81,16 @@
     margin-bottom: 2rem;
     border-bottom: 1px solid $secondary-grey;
   }
-
+  // svg styling
+  @mixin bookmark-icon-active {
+    .pressed {
+      fill: red;
+    }
+  }
   &__save-icon {
     cursor: pointer;
+    &.active {
+      @include bookmark-icon-active();
+    }
   }
-
-  
 }
-

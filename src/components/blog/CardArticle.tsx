@@ -1,14 +1,16 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import parse from "html-react-parser";
 import { PICTURE_BASE_URL, useGetArticleQuery } from "../features/api/apiSlice";
+import { addToSavedPost, removeSavedPost } from "../../components/features/posts/postsSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { IArticle } from "../../app/types";
-import { ReactComponent as BookmarkIcon } from "../../assets/icons/bookmark.svg";
-import avatar from "../../assets/images/test-avatar.png";
-import { useAppDispatch } from "../../app/hooks";
-import { addToSavedPost } from "../features/posts/postsSlice";
 import Spinner from "../utils/Spinner";
 import PageError from "../../pages/PageError";
+import { ReactComponent as BookmarkIcon } from "../../assets/icons/bookmark.svg";
+import avatar from "../../assets/images/test-avatar.png";
+import Bookmark from "./Bookmark";
 
 const CardArticle = ({ article }: { article: IArticle }) => {
   const { t, i18n } = useTranslation();
@@ -20,6 +22,8 @@ const CardArticle = ({ article }: { article: IArticle }) => {
     isError,
     error,
   } = useGetArticleQuery({ slug: article.slug, lang: i18n.language });
+
+  const [isAddedPost, setIsAddedPost] = useState<Boolean>(false);
 
   if (isLoading) {
     return <Spinner />;
@@ -44,10 +48,7 @@ const CardArticle = ({ article }: { article: IArticle }) => {
 
             <div className="card-article__title-wrapper">
               <h2 className="card-article__title">{post.title}</h2>
-              <BookmarkIcon
-                onClick={() => dispatch(addToSavedPost(post))}
-                className="card-article__save-icon"
-              />
+              <Bookmark slugPost={post.slug} />
             </div>
             {/* TODO: magic articles */}
             <Link to={`/articles/${post?.slug}`}>
