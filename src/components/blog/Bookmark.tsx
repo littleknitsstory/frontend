@@ -17,8 +17,10 @@ const Bookmark = ({ slugPost }: IBookmarks) => {
   const { data: article } = useGetArticleQuery({ slug: slugPost, lang: i18n.language });
 
   const addSavedPost = (post: any): void => {
-    dispatch(addToSavedPost(post));
-    setIsAddedPost(true);
+    if (post) {
+      dispatch(addToSavedPost(post));
+      setIsAddedPost(true);
+    }
   };
 
   const removeToSavedPost = (post: any): void => {
@@ -27,12 +29,14 @@ const Bookmark = ({ slugPost }: IBookmarks) => {
   };
 
   useEffect(() => {
-    savedPosts.map((item: any) => {
-      if (item.slug === slugPost) {
-        setIsAddedPost(true);
-      }
-    });
-  }, []);
+    const isSaved = savedPosts.some((item) => item.slug === slugPost);
+    if (isSaved) {
+      setIsAddedPost(true);
+    }
+    return () => {
+      setIsAddedPost(false);
+    };
+  }, [slugPost]);
 
   return (
     <BookmarkIcon
