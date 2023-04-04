@@ -103,7 +103,7 @@ const Post = () => {
       </Link>
       <article className="post__wrapper">
         <h2 className="post__title">
-          {article?.title} <Bookmark slugPost={article?.slug} />
+          {article?.title} {article && <Bookmark slugPost={article?.slug} />}
         </h2>
 
         <div className="post__about">
