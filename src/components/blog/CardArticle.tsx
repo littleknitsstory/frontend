@@ -3,13 +3,12 @@ import { useTranslation } from "react-i18next";
 import parse from "html-react-parser";
 import { PICTURE_BASE_URL, useGetArticleQuery } from "../features/api/apiSlice";
 import { ROUTES } from "../../app/routes";
-import { IArticle } from "../../app/types";
 import Spinner from "../utils/Spinner";
 import PageError from "../../pages/PageError";
 import Bookmark from "./Bookmark";
 import avatar from "../../assets/images/test-avatar.png";
 
-const CardArticle = ({ article }: { article: IArticle }) => {
+const CardArticle = ({ slug }: { slug: string }) => {
   const { t, i18n } = useTranslation();
 
   const {
@@ -17,7 +16,7 @@ const CardArticle = ({ article }: { article: IArticle }) => {
     isLoading,
     isError,
     error,
-  } = useGetArticleQuery({ slug: article.slug, lang: i18n.language });
+  } = useGetArticleQuery({ slug, lang: i18n.language });
 
   if (isLoading) {
     return <Spinner />;

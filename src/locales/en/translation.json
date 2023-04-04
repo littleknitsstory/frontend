@@ -177,20 +177,6 @@
     "noAuthorize": "Please login",
     "successSend": "Thanks, your message sent"
   },
-  "lastReviews": "Last Reviews",
-  "otherPosts": "Other posts",
-  "seeMore": "More",
-  "read": "Read",
-  "popular": "Popular",
-  "goCart": "Cart",
-  "reviews": "Reviews",
-  "quickOrder": "Quick Order",
-  "price": "Price",
-  "color": "Color",
-  "fullName": "Full Name",
-  "comments": "Comments",
-  "address": "Address",
-
   "FormFields": {
     "email": "Email",
     "fullName": "Full Name",
@@ -221,6 +207,20 @@
     "linkSocial": "Link",
     "deliveryAddress": "Delivery Address",
     "modalTitle": "Paste link to your account"
-  }
+  },
+  "lastReviews": "Last Reviews",
+  "otherPosts": "Other posts",
+  "seeMore": "More",
+  "read": "Read",
+  "popular": "Popular",
+  "goCart": "Cart",
+  "reviews": "Reviews",
+  "quickOrder": "Quick Order",
+  "price": "Price",
+  "color": "Color",
+  "fullName": "Full Name",
+  "comments": "Comments",
+  "address": "Address",
+  "emptyBookmarks": "No Bookmarks"
 }
 

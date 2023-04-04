@@ -16,7 +16,7 @@ import AuthRequired from "../components/utils/AuthRequired";
 import Ordering from "../pages/Cart/Ordering";
 import Home from "../pages/Home";
 import PersonalInfo from "../components/user/PersonalInfo";
-import Bookmarks from "../components/blog/Bookmarks";
+import Bookmarks from "../pages/Bookmarks";
 import UserCourses from "../components/user/UserCourses";
 import UserArticles from "../components/user/UserArticles";
 import Orders from "../components/user/Orders";

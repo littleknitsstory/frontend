@@ -1,4 +1,4 @@
 const UserCourses = () => {
-  return <div>UserCourses</div>;
+  return <div>User Courses</div>;
 };
 export default UserCourses;

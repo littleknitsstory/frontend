@@ -43,7 +43,6 @@ const Ordering = () => {
         code: product.code,
       };
     });
-    console.log(values);
     addOrder({ products, ...values });
     resetForm();
   };

@@ -1,7 +1,7 @@
 import { Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import PrimaryNav from "../../components/primary-nav/PrimaryNav";
+import Menu from "../../components/menu/Menu";
 import { ReactComponent as ProfileIcon } from "../../assets/icons/user.svg";
 import { ReactComponent as HeartIcon } from "../../assets/icons/heart-big.svg";
 import { ReactComponent as BagIcon } from "../../assets/icons/bag.svg";
@@ -64,7 +64,7 @@ const NavBar = () => {
       </nav>
 
       <Navbar.Collapse className="navbar__main">
-        <PrimaryNav type={"header"} className="navbar__main-link" />
+        <Menu type={"header"} className="navbar__main-link" />
       </Navbar.Collapse>
     </Navbar>
   );
