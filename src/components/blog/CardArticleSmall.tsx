@@ -8,7 +8,7 @@ import { ROUTES } from "../../app/routes";
 const CardArticleSmall = ({ ...article }: IArticle) => {
   return (
     <div className="card-article-small">
-      <Link to={ROUTES.ARTICLES + article?.slug}>
+      <Link to={ROUTES.ARTICLES + "/" + article?.slug}>
         <img
           src={PICTURE_BASE_URL + article.image_preview}
           alt=""
