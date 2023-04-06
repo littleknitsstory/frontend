@@ -105,6 +105,7 @@ const PersonalInfo = () => {
 
   const clearSocialLink = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const social: string = e.currentTarget.dataset.social!;
+    console.log(social);
     const updatedUser: IUserData = {
       ...userUpdatedData,
       [social]: null,
@@ -323,7 +324,11 @@ const PersonalInfo = () => {
             <FacebookLogo /> Facebook
           </a>
           {userUpdatedData.fb_profile && (
-            <button className="btn btn--transparent" data-social="fb_profile">
+            <button
+              className="btn btn--transparent"
+              data-social="fb_profile"
+              onClick={clearSocialLink}
+            >
               <Cross />
             </button>
           )}

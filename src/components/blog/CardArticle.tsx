@@ -9,7 +9,7 @@ import Bookmark from "./Bookmark";
 import avatar from "../../assets/images/test-avatar.png";
 
 const CardArticle = ({ slug }: { slug: string }) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   const {
     data: post,
