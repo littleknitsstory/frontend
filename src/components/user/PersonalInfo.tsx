@@ -194,6 +194,7 @@ const PersonalInfo = () => {
             id="phone_number"
             name="phone_number"
             value={userUpdatedData.phone_number ?? ""}
+            maxLength={13}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
             onBlur={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateUser(e)}
           />
