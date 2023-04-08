@@ -7,9 +7,12 @@ import Spinner from "../utils/Spinner";
 import PageError from "../../pages/PageError";
 import Bookmark from "./Bookmark";
 import avatar from "../../assets/images/test-avatar.png";
+import { useAppDispatch } from "../../app/hooks";
+import { removeSavedPost } from "../features/posts/postsSlice";
 
 const CardArticle = ({ slug }: { slug: string }) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
+  const dispatch = useAppDispatch();
 
   const {
     data: post,
@@ -23,6 +26,7 @@ const CardArticle = ({ slug }: { slug: string }) => {
   }
 
   if (isError) {
+    dispatch(removeSavedPost(slug));
     if ("originalStatus" in error) {
       return <PageError errorStatus={error.originalStatus} />;
     }

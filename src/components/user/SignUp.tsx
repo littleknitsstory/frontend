@@ -69,8 +69,7 @@ const SignUp = () => {
         password: Yup.string()
           .min(8, t("Forms.lengthMin8"))
           .max(30, t("Forms.lengthMax30"))
-          .required(t("Forms.required"))
-          .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, t("Forms.weakPassword")),
+          .required(t("Forms.required")),
         confirmPassword: Yup.string().oneOf([Yup.ref("password")], "Passwords must match"),
       })}
       onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}

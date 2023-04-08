@@ -105,6 +105,7 @@ const PersonalInfo = () => {
 
   const clearSocialLink = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const social: string = e.currentTarget.dataset.social!;
+    console.log(social);
     const updatedUser: IUserData = {
       ...userUpdatedData,
       [social]: null,
@@ -193,6 +194,7 @@ const PersonalInfo = () => {
             id="phone_number"
             name="phone_number"
             value={userUpdatedData.phone_number ?? ""}
+            maxLength={13}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
             onBlur={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateUser(e)}
           />
@@ -323,7 +325,11 @@ const PersonalInfo = () => {
             <FacebookLogo /> Facebook
           </a>
           {userUpdatedData.fb_profile && (
-            <button className="btn btn--transparent" data-social="fb_profile">
+            <button
+              className="btn btn--transparent"
+              data-social="fb_profile"
+              onClick={clearSocialLink}
+            >
               <Cross />
             </button>
           )}
