@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
-import { useGetProductQuery } from "../../components/features/api/apiSlice";
+import { useGetFeaturesQuery, useGetProductQuery } from "../../components/features/api/apiSlice";
 // components
 import PageError from "../PageError";
 import PopularProducts from "../../components/products/PopularProducts";
@@ -10,6 +10,7 @@ import SchemaCard from "../../components/product/SchemaCard";
 import Spinner from "../../components/utils/Spinner";
 
 const Product = () => {
+  const { data: feature } = useGetFeaturesQuery();
   const { slug } = useParams<string>();
   const { i18n } = useTranslation();
   const {
@@ -29,14 +30,22 @@ const Product = () => {
     }
   }
 
+  if (!feature?.shop) {
+    return <PageError errorStatus={404} />;
+  }
+
   return (
-    <section className="product">
-      <Container>
-        {product && <SchemaCard product={product} />}
-        <PopularProducts />
-        <Reviews />
-      </Container>
-    </section>
+    <>
+      {feature?.shop && (
+        <section className="product">
+          <Container>
+            {product && <SchemaCard product={product} />}
+            <PopularProducts />
+            {<Reviews />}
+          </Container>
+        </section>
+      )}
+    </>
   );
 };
 

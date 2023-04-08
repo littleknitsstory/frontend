@@ -13,6 +13,19 @@ import {
   IUserData,
 } from "../../../app/types";
 
+interface IFeaturesFlags {
+  account: boolean;
+  blog: boolean;
+  comments: boolean;
+  contacts: boolean;
+  course: boolean;
+  feed: boolean;
+  menu: boolean;
+  reviews: boolean;
+  shop: boolean;
+  slider: boolean;
+}
+
 interface ILoginResponse {
   access: string;
   refresh: string;
@@ -53,6 +66,7 @@ export enum URLS {
   PROFILE = "/profile/",
   COMMENTS = "/comments/",
   ORDER = "/orders/",
+  FEATURES_FLAGS = "/features/",
 }
 
 export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";
@@ -62,6 +76,9 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_API_URL }),
   tagTypes: ["user"],
   endpoints: (builder) => ({
+    getFeatures: builder.query<IFeaturesFlags, void>({
+      query: () => URLS.FEATURES_FLAGS,
+    }),
     getMenu: builder.query<IMenuResponse, { lang: string }>({
       query: ({ lang }) => ({
         url: URLS.MENU,
@@ -180,6 +197,7 @@ export const apiSlice = createApi({
 });
 
 export const {
+  useGetFeaturesQuery,
   useGetProductsQuery,
   useGetArticlesQuery,
   useGetMenuQuery,

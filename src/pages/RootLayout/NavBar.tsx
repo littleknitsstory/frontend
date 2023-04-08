@@ -1,6 +1,7 @@
 import { Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useGetFeaturesQuery } from "../../components/features/api/apiSlice";
 import Menu from "../../components/menu/Menu";
 import { ReactComponent as ProfileIcon } from "../../assets/icons/user.svg";
 import { ReactComponent as HeartIcon } from "../../assets/icons/heart-big.svg";
@@ -10,6 +11,7 @@ import { useEffect, useState } from "react";
 import { ROUTES } from "../../app/routes";
 
 const NavBar = () => {
+  const { data: feature } = useGetFeaturesQuery();
   const { i18n } = useTranslation();
   const [lang, setLang] = useState(localStorage.getItem("lang") || "English");
 
@@ -37,13 +39,16 @@ const NavBar = () => {
 
       <nav className="navbar__aside">
         <div className="navbar__divider"></div>
-        <NavLink to="/profile" className="profile-icon">
-          {({ isActive, isPending }) => (
-            <span className={isActive ? "active" : ""}>
-              <ProfileIcon id="profile-icon-svg" />
-            </span>
-          )}
-        </NavLink>
+        {feature?.account && (
+          <NavLink to="/profile" className="profile-icon">
+            {({ isActive, isPending }) => (
+              <span className={isActive ? "active" : ""}>
+                <ProfileIcon id="profile-icon-svg" />
+              </span>
+            )}
+          </NavLink>
+        )}
+
         <NavLink to={ROUTES.BOOKMARKS} className="profile-icon">
           <BookmarksIcon id="profile-icon-svg" />
         </NavLink>

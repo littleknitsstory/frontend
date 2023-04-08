@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IArticle } from "../../app/types";
-import { useGetArticlesQuery } from "../../components/features/api/apiSlice";
+import { useGetArticlesQuery, useGetFeaturesQuery } from "../../components/features/api/apiSlice";
 import CardArticle from "../../components/blog/CardArticle";
 import PageError from "../PageError";
 import Spinner from "../../components/utils/Spinner";
@@ -17,8 +17,9 @@ interface Tag {
 const INITIAL_LIMIT = 3;
 
 const Posts = () => {
+  const { data: feature } = useGetFeaturesQuery();
   const [limit, setLimit] = useState<number>(INITIAL_LIMIT);
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const [tags, setTags] = useState<Tag[]>([]);
   const [selectedTag, setSelectedTag] = useState<string>("");
   const [filteredPosts, setFilteredPosts] = useState<IArticle[]>([]);
@@ -124,36 +125,42 @@ const Posts = () => {
     }
   }
 
+  if (!feature?.blog) {
+    return <PageError errorStatus={404} />;
+  }
+
   return (
     <>
-      <main className="posts">
-        <div className="posts__wrapper">
-          <div className="posts__tags-slider">
-            <ArrowLeftSVG onClick={sliderBackward} className="posts__btn--arrow" />
-            <div className="posts__tags">
-              {tags.map((item) => (
-                <button
-                  key={item.slug}
-                  onClick={(e: React.SyntheticEvent<HTMLButtonElement>) => handleSelectTag(e)}
-                  data-slug={item.slug}
-                  className="btn btn--tag"
-                  style={selectedTag === item.slug ? activeStyle : {}}
-                >
-                  {item.title}
-                </button>
-              ))}
+      {feature?.blog && (
+        <main className="posts">
+          <div className="posts__wrapper">
+            <div className="posts__tags-slider">
+              <ArrowLeftSVG onClick={sliderBackward} className="posts__btn--arrow" />
+              <div className="posts__tags">
+                {tags.map((item) => (
+                  <button
+                    key={item.slug}
+                    onClick={(e: React.SyntheticEvent<HTMLButtonElement>) => handleSelectTag(e)}
+                    data-slug={item.slug}
+                    className="btn btn--tag"
+                    style={selectedTag === item.slug ? activeStyle : {}}
+                  >
+                    {item.title}
+                  </button>
+                ))}
+              </div>
+              <ArrowRightSVG onClick={sliderForward} className="posts__btn--arrow" />
             </div>
-            <ArrowRightSVG onClick={sliderForward} className="posts__btn--arrow" />
+            {isFetching && <Spinner />}
+            <article className="posts__articles">
+              {shownPosts?.map((post) => (
+                <CardArticle key={post.slug} slug={post.slug} />
+              ))}
+            </article>
+            <div ref={loaderRef} />
           </div>
-          {isFetching && <Spinner />}
-          <article className="posts__articles">
-            {shownPosts?.map((post) => (
-              <CardArticle key={post.slug} slug={post.slug} />
-            ))}
-          </article>
-          <div ref={loaderRef} />
-        </div>
-      </main>
+        </main>
+      )}
     </>
   );
 };

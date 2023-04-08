@@ -4,7 +4,11 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Store } from "react-notifications-component";
 import parse from "html-react-parser";
-import { PICTURE_BASE_URL, useAddCommentsMutation } from "../../components/features/api/apiSlice";
+import {
+  PICTURE_BASE_URL,
+  useAddCommentsMutation,
+  useGetFeaturesQuery,
+} from "../../components/features/api/apiSlice";
 import { useGetArticleQuery, useGetArticlesQuery } from "../../components/features/api/apiSlice";
 import PageError from "../PageError";
 import Spinner from "../../components/utils/Spinner";
@@ -22,10 +26,10 @@ import { ReactComponent as HeartIcon } from "../../assets/icons/reactions/heart.
 import { ReactComponent as SpeechBubbleIcon } from "../../assets/icons/reactions/speech-bubble.svg";
 import { ReactComponent as ArrowRightSVG } from "../../assets/icons/arrow-right-nd.svg";
 import { ROUTES } from "../../app/routes";
-import { useAppDispatch } from "../../app/hooks";
 import Bookmark from "../../components/blog/Bookmark";
 
 const Post = () => {
+  const { data: feature } = useGetFeaturesQuery();
   const { slug } = useParams<string>();
   const { t, i18n } = useTranslation();
   const [offset, setOffset] = useState<number>(0);
@@ -36,7 +40,6 @@ const Post = () => {
     isError,
     error,
   } = useGetArticleQuery({ slug, lang: i18n.language });
-  const dispatch = useAppDispatch();
 
   const { data: articles } = useGetArticlesQuery({ limit: 3, offset, lang: i18n.language });
   const navigate = useNavigate();
@@ -97,94 +100,104 @@ const Post = () => {
       return <PageError errorStatus={error.originalStatus} />;
     }
   }
+  if (!feature?.blog) {
+    return <PageError errorStatus={404} />;
+  }
 
   return (
-    <section className="post">
-      <p onClick={() => navigate(-1)} className="link link--with-icon">
-        <ArrowLeftSVG /> {t("posts.back")}
-      </p>
+    <>
+      {feature?.blog && (
+        <section className="post">
+          <p onClick={() => navigate(-1)} className="link link--with-icon">
+            <ArrowLeftSVG /> {t("posts.back")}
+          </p>
 
-      <article className="post__wrapper">
-        <h2 className="post__title">
-          {article?.title} {article && <Bookmark slugPost={article?.slug} />}
-        </h2>
+          <article className="post__wrapper">
+            <h2 className="post__title">
+              {article?.title} {article && <Bookmark slugPost={article?.slug} />}
+            </h2>
 
-        <div className="post__about">
-          <img src={avatar} alt="avatar" className="post__avatar" />
-          <p>{article?.author}</p>
-          <p>·</p>
-          <p>{article?.created_at}</p>
-          <p>·</p>
-          <p>{t("posts.tempRead")}</p>
-        </div>
-        <div className="post__content-wrapper">
-          {article && parse(article.content)}
-          <img
-            src={PICTURE_BASE_URL + article?.image_preview}
-            alt={article?.image_alt}
-            className="post__image"
-          />
-        </div>
-        <div className="post__footer">
-          <h4 className="post__footer-text">{t("posts.share")}</h4>
-          <div className="post__footer--wrapper">
-            <div className="post__share-links">
-              <VKIcon />
-              <FacebookIcon />
-              <InstagramIcon />
-              <PinterestIcon />
-              <ChainIcon onClick={copyToClipboard} />
+            <div className="post__about">
+              <img src={avatar} alt="avatar" className="post__avatar" />
+              <p>{article?.author}</p>
+              <p>·</p>
+              <p>{article?.created_at}</p>
+              <p>·</p>
+              <p>{t("posts.tempRead")}</p>
             </div>
-            <div className="post__reactions">
-              <HandIcon />
-              <p>50</p>
-              <HeartIcon />
-              <p>23</p>
-              <SpeechBubbleIcon />
-              <p>32</p>
+            <div className="post__content-wrapper">
+              {article && parse(article.content)}
+              <img
+                src={PICTURE_BASE_URL + article?.image_preview}
+                alt={article?.image_alt}
+                className="post__image"
+              />
             </div>
-          </div>
-        </div>
-        <div className="post__divider"></div>
-      </article>
-      <section className="post__comments">
-        <h4>{t("posts.comments")}</h4>
-        <div className="post__comments--wrapper">
-          <textarea
-            name="postContent"
-            rows={5}
-            value={message}
-            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleChange(e)}
-            placeholder={t("posts.placeholderComments")}
-          />
-          <div className="post__comments--buttons">
-            <button
-              className="btn btn--primary"
-              disabled={message.length === 0}
-              onClick={handleSubmit}
-            >
-              {t("posts.send")}
-            </button>
-          </div>
-        </div>
-      </section>
-      <section className="post__more-posts">
-        <h4 className="post__subtitle">{t("posts.readAlso")}</h4>
-        <div className="post__slider">
-          <ArrowLeftSVG className="posts__btn--arrow" onClick={sliderBackward} />
-          <div className="post__card-container">
-            {articles &&
-              articles.results.map((article) => (
-                <CardArticleSmall key={article.slug} {...article} />
-              ))}
-          </div>
-          <ArrowRightSVG className="posts__btn--arrow" onClick={sliderForward} />
-        </div>
-        <Link to={ROUTES.ARTICLES} className="link link--with-icon link--centered">
-          {t("posts.watchAll")} <ArrowRightSVG />
-        </Link>
-      </section>
-    </section>
+            <div className="post__footer">
+              <h4 className="post__footer-text">{t("posts.share")}</h4>
+              <div className="post__footer--wrapper">
+                <div className="post__share-links">
+                  <VKIcon />
+                  <FacebookIcon />
+                  <InstagramIcon />
+                  <PinterestIcon />
+                  <ChainIcon onClick={copyToClipboard} />
+                </div>
+                <div className="post__reactions">
+                  <HandIcon />
+                  <p>50</p>
+                  <HeartIcon />
+                  <p>23</p>
+                  <SpeechBubbleIcon />
+                  <p>32</p>
+                </div>
+              </div>
+            </div>
+            <div className="post__divider"></div>
+          </article>
+          {feature?.comments && (
+            <section className="post__comments">
+              <h4>{t("posts.comments")}</h4>
+              <div className="post__comments--wrapper">
+                <textarea
+                  name="postContent"
+                  rows={5}
+                  value={message}
+                  onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleChange(e)}
+                  placeholder={t("posts.placeholderComments")}
+                />
+                <div className="post__comments--buttons">
+                  <button
+                    className="btn btn--primary"
+                    disabled={message.length === 0}
+                    onClick={handleSubmit}
+                  >
+                    {t("posts.send")}
+                  </button>
+                </div>
+              </div>
+            </section>
+          )}
+
+          <section className="post__more-posts">
+            <h4 className="post__subtitle">{t("posts.readAlso")}</h4>
+            <div className="post__slider">
+              <ArrowLeftSVG className="posts__btn--arrow" onClick={sliderBackward} />
+              <div className="post__card-container">
+                {articles &&
+                  articles.results.map((article) => (
+                    <CardArticleSmall key={article.slug} {...article} />
+                  ))}
+              </div>
+              <ArrowRightSVG className="posts__btn--arrow" onClick={sliderForward} />
+            </div>
+            <Link to={ROUTES.ARTICLES} className="link link--with-icon link--centered">
+              {t("posts.watchAll")} <ArrowRightSVG />
+            </Link>
+          </section>
+        </section>
+      )}
+    </>
   );
 };
 
