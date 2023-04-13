@@ -134,6 +134,7 @@
     "lengthMax10" : "Maximum of 10 characters",
     "lengthMax30" : "Maximum of 30 characters",
     "lengthMax100" : "Maximum of 100 characters",
+    "lengthMax15" : "Maximum of 15 characters",
     "incorrectPhone": "Please enter a valid Montenegro phone number",
     "weakPassword": "At least one uppercase letter, one lowercase letter and one number",
     "lengthMin8" : "Minimum of 8 characters",

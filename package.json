@@ -25,6 +25,7 @@
     "react-dom": "^18.2.0",
     "react-i18next": "^12.1.5",
     "react-notifications-component": "^4.0.1",
+    "react-phone-number-input": "^3.2.19",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.2",
     "react-scripts": "5.0.1",
