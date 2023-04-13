@@ -136,7 +136,10 @@
     "lengthMax100" : "Maximum of 100 characters",
     "incorrectPhone": "Please enter a valid Montenegro phone number",
     "weakPassword": "At least one uppercase letter, one lowercase letter and one number",
-    "lengthMin8" : "Minimum of 8 characters"
+    "lengthMin8" : "Minimum of 8 characters",
+    "containOneNumber" : "Must contain at least one number",
+    "containOneLetter" : "Must contain at least one letter",
+    "PasswordRequirement": "Password requirement"
   },
   "Notification": {
     "isSaved": "The product is saved",

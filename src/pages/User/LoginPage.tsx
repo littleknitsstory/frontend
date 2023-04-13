@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate } from "react-router-dom";
 import { useGetAllUsersQuery, useGetFeaturesQuery } from "../../components/features/api/apiSlice";
-import Social from "../../components/Social";
+import AuthSocial from "../../components/utils/AuthSocial";
 import SignIn from "../../components/user/SignIn";
 import SignUp from "../../components/user/SignUp";
 import PageError from "../PageError";
@@ -53,7 +53,7 @@ const LoginPage = () => {
           <div className="login__footer">
             <p className="login__forgot-password">{t("Login.forgotPassword")}</p>
             <p>{t("Login.quickAccess")}</p>
-            <Social />
+            <AuthSocial />
           </div>
         </div>
       )}
