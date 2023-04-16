@@ -8,84 +8,46 @@
   }
 }
 
+.header-nav-link {
+  position: relative;
+  color: $black-text;
+  &.active {
+    font-weight: 500;
+    border-bottom: 2px solid $black-text;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background-color: $secondary-dark-grey;
+    border-radius: 4px;
+    scale: 0 1;
+    transform-origin: right;
+    transition: scale 0.25s;
+  }
+  &:hover::before {
+    scale: 1;
+    transform-origin: left;
+  }
+}
+
 .navbar {
-  // margin-top: 3.75rem;
-  // display: flex;
-  // @include container;
-
-  &__main {
-    margin-top: 3rem;
-    display: flex;
-    flex-direction: column;
-    font-size: 1.25rem;
-    color: $black-text;
-    text-transform: uppercase;
-    gap: 1.75rem;
-
-    &-link {
-      position: relative;
-      display: inline-block;
-      padding: 0 0.25rem 0.5rem;
-
-      &.active {
-        border-bottom: 2px solid $black-text;
-      }
-      &::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -2px;
-        width: 100%;
-        height: 1px;
-        background-color: $secondary-dark-grey;
-        border-radius: 4px;
-        scale: 0 1;
-        transform-origin: right;
-        transition: scale 0.25s;
-      }
-      &:hover::before {
-        scale: 1;
-        transform-origin: left;
-      }
-    }
-  }
-
-  &__aside {
-    display: flex;
-    gap: 1rem;
-
-    .profile-icon {
-      position: relative;
-      padding: 0.2rem 0;
-      &:active,
-      &.active {
-        @include profile-icon-active();
-      }
-      &:hover {
-        animation: shake 0.1s;
-      }
-    }
-  }
-
-  &__divider {
-    border-right: 1px solid $secondary-dark-grey;
-  }
-
   &__change-lang {
     margin: 0;
     cursor: pointer;
     font-size: 1.25rem;
-    color: $black-text;
     align-self: center;
   }
-}
-
-@media (min-width: 992px) {
-  .navbar {
-    flex-direction: row-reverse;
-    &__main {
-      flex-direction: row;
-      margin-top: 0;
+  &__icon {
+    &:hover {
+      animation: shake 0.1s;
+    }
+    &:active,
+    &.active {
+      @include profile-icon-active();
     }
   }
 }

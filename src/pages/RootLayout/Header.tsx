@@ -26,13 +26,13 @@ const Header = () => {
               src={logoMobile}
               alt="Little Knit Story Logo"
               width="250px"
-              className="logo-mobile"
+              className="d-sm-block d-md-none"
             />
-            <img src={logoLKS} alt="Little Knit Story Logo" className="hidden-small-screens" />
+            <img src={logoLKS} alt="Little Knit Story Logo" className="d-none d-md-inline" />
           </a>
-          <h1 className="text text--md hidden-small-screens mt-2">Блог и магазин по вязанию</h1>
+          <h1 className="text text--md d-none d-md-inline mt-2">Блог и магазин по вязанию</h1>
           <button
-            className="navbar-toggler header-toggler collapsed"
+            className="navbar-toggler header-toggler collapsed d-sm-block d-md-none"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarProfile"
@@ -47,7 +47,7 @@ const Header = () => {
               <HamburgerIcon />
             </span>
           </button>
-          <div className="collapse navbar-collapse mt-4" id="navbarProfile">
+          <div className="collapse navbar-collapse mt-4 d-md-block d-md-none" id="navbarProfile">
             <ul className="navbar-nav">
               <li className="nav-item">
                 <Link to={ROUTES.PROFILE} className="nav-link d-flex align-items-center gap-2">

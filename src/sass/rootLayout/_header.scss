@@ -16,28 +16,10 @@
   }
 }
 
-.hidden-small-screens {
-  display: none;
-}
-
 .navbar-toggler > .opened {
   display: inline;
 }
 .navbar-toggler.collapsed > .opened,
 .navbar-toggler:not(.collapsed) > .collapsed {
   display: none;
-}
-
-@media (min-width: 768px) {
-  .navbar-toggler,
-  .navbar-collapse {
-    display: none;
-  }
-
-  .hidden-small-screens {
-    display: inline;
-  }
-  .logo-mobile {
-    display: none;
-  }
 }
