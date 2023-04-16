@@ -34,17 +34,16 @@ const NavBar = () => {
   };
 
   return (
-    <Navbar expand="lg" className="navbar">
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-
+    <Navbar className="navbar">
+      {/* <NavLink to={ROUTES.PROFILE} className="">
+        {({ isActive, isPending }) => <ProfileIcon className={isActive ? "active" : ""} id="" />}
+      </NavLink> */}
       <nav className="navbar__aside">
         <div className="navbar__divider"></div>
         {feature?.account && (
-          <NavLink to="/profile" className="profile-icon">
+          <NavLink to={ROUTES.PROFILE} className="profile-icon">
             {({ isActive, isPending }) => (
-              <span className={isActive ? "active" : ""}>
-                <ProfileIcon id="profile-icon-svg" />
-              </span>
+              <ProfileIcon className={isActive ? "active" : ""} id="" />
             )}
           </NavLink>
         )}
@@ -53,9 +52,6 @@ const NavBar = () => {
           <BookmarksIcon id="profile-icon-svg" />
         </NavLink>
         <div className="navbar__divider"></div>
-        {/* <a href="#">
-          <img src={logout} alt="logout" />
-        </a> */}
         <NavLink to={ROUTES.FAVORITE_PRODUCTS} className="profile-icon">
           <HeartIcon id="favorite-icon-svg" />
         </NavLink>
@@ -68,9 +64,7 @@ const NavBar = () => {
         </p>
       </nav>
 
-      <Navbar.Collapse className="navbar__main">
-        <Menu type={"header"} className="navbar__main-link" />
-      </Navbar.Collapse>
+      <Menu type={"header"} className="navbar__main-link" />
     </Navbar>
   );
 };

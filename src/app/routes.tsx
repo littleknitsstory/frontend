@@ -33,10 +33,10 @@ export const ROUTES = {
   FAVORITE_PRODUCTS: "/favorites",
   PRIVACY_POLICY: "/privacyPolicy",
   PROFILE: "/profile",
-  PROFILE_INFO: "info",
-  PROFILE_COURSES: "courses",
-  PROFILE_ARTICLES: "articles",
-  PROFILE_ORDERS: "orders",
+  PROFILE_INFO: "/profile/info",
+  PROFILE_COURSES: "/profile/courses",
+  PROFILE_ARTICLES: "/profile/articles",
+  PROFILE_ORDERS: "/profile/orders",
   BOOKMARKS: "/bookmarks",
 };
 

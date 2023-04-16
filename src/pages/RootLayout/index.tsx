@@ -15,7 +15,7 @@ const RootLayout = () => {
       <ScrollToTop />
       <Header />
       {data?.menu && <NavBar />}
-      <Outlet />
+      {/* <Outlet /> */}
       <Footer />
     </>
   );

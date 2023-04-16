@@ -1,23 +1,43 @@
-@use "../_variables" as *;
-@use "../mixins.scss" as *;
+.header-toggler {
+  border: none;
 
-header {
-  @include container;
-  margin-top: 2.5rem;
-  text-align: center;
-  color: $secondary-dark-grey;
-  color: $black;
+  &:focus {
+    box-shadow: 0 0 0 1px;
+  }
 }
 
-.header {
-  &__title {
-    margin-top: 1.31125rem;
-    font-size: 1.25rem;
-    line-height: 150%;
-    font-weight: 400;
+.header-navbar {
+  &--icon {
+    width: 24px;
+  }
+  &--divider {
+    width: 100%;
+    border-bottom: 1px solid #989898;
+  }
+}
+
+.hidden-small-screens {
+  display: none;
+}
+
+.navbar-toggler > .opened {
+  display: inline;
+}
+.navbar-toggler.collapsed > .opened,
+.navbar-toggler:not(.collapsed) > .collapsed {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .navbar-toggler,
+  .navbar-collapse {
+    display: none;
   }
 
-  &__logo {
-    width: 100%;
+  .hidden-small-screens {
+    display: inline;
+  }
+  .logo-mobile {
+    display: none;
   }
 }

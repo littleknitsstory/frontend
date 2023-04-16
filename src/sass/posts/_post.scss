@@ -2,12 +2,40 @@
 @use "../variables" as *;
 
 .post {
-  margin-top: 6rem;
+  margin-top: 2rem;
   color: $black-text;
-  @include container;
+  // @include container;
 
   &__wrapper {
-    margin-top: 5.75rem;
+    margin-top: 3.25rem;
+  }
+
+  &__header {
+    padding: 2rem 1rem;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+
+    svg {
+      &:hover {
+        cursor: pointer;
+      }
+      &.active {
+        .pressed {
+          fill: #fefefe;
+        }
+      }
+      .bookmark-color {
+        fill: #fefefe;
+      }
+    }
+  }
+
+  &__tags-list {
+    margin-top: auto;
+    margin-left: auto;
+    font-size: 1.25rem;
+    text-shadow: 0 0 15px black;
   }
 
   &__about {
@@ -16,7 +44,7 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    font-size: 1.25rem;
+    font-size: 1rem;
 
     p {
       margin: 0;
@@ -30,12 +58,23 @@
   }
 
   &__image {
-    width: clamp(200px, 50% ,600px);
+    width: clamp(200px, 50%, 600px);
     object-fit: contain;
   }
 
   &__title {
-    font-size: 2.375rem;
+    font-size: 1.25rem;
+    color: $white;
+    font-weight: 500;
+    margin: 0;
+    width: 240px;
+
+    &-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      gap: 1.125rem;
+    }
   }
 
   &__avatar {
@@ -91,7 +130,7 @@
       padding: 1.5rem;
       border: 1px solid $tertiary-grey;
       border-radius: 24px;
-      max-width: 685px;
+      // max-width: 685px;
     }
     &--buttons {
       width: 100%;
@@ -107,7 +146,7 @@
       width: 100%;
     }
     textarea::placeholder {
-      color: #ABA8A8;
+      color: #aba8a8;
     }
   }
 
@@ -135,4 +174,3 @@
     margin-bottom: 3.3125rem;
   }
 }
-

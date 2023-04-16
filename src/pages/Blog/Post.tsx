@@ -25,6 +25,7 @@ import { ReactComponent as HandIcon } from "../../assets/icons/reactions/hand.sv
 import { ReactComponent as HeartIcon } from "../../assets/icons/reactions/heart.svg";
 import { ReactComponent as SpeechBubbleIcon } from "../../assets/icons/reactions/speech-bubble.svg";
 import { ReactComponent as ArrowRightSVG } from "../../assets/icons/arrow-right-nd.svg";
+import { ReactComponent as ShareIcon } from "../../assets/icons/share.svg";
 import { ROUTES } from "../../app/routes";
 import Bookmark from "../../components/blog/Bookmark";
 
@@ -40,6 +41,8 @@ const Post = () => {
     isError,
     error,
   } = useGetArticleQuery({ slug, lang: i18n.language });
+
+  console.log(article);
 
   const { data: articles } = useGetArticlesQuery({ limit: 3, offset, lang: i18n.language });
   const navigate = useNavigate();
@@ -86,6 +89,24 @@ const Post = () => {
     }
   };
 
+  const styles = {
+    backgroundImage: `url(${PICTURE_BASE_URL + article?.image_preview})`,
+    backgroundColor: "rgba(0,0,0,0.4)",
+    width: "100%",
+    height: "560px",
+    backgroundBlendMode: "darken",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+  };
+
+  /* Randomize "Time to read" until we have calculated time */
+  function randomReadTime() {
+    return Math.floor(Math.random() * 15) + 1;
+  }
+
+  console.log();
+
   const copyToClipboard = (): void => {
     const currentUrl = window.location.href;
     navigator.clipboard.writeText(currentUrl);
@@ -113,26 +134,35 @@ const Post = () => {
           </p>
 
           <article className="post__wrapper">
-            <h2 className="post__title">
-              {article?.title} {article && <Bookmark slugPost={article?.slug} />}
-            </h2>
-
-            <div className="post__about">
-              <img src={avatar} alt="avatar" className="post__avatar" />
-              <p>{article?.author}</p>
-              <p>·</p>
-              <p>{article?.created_at}</p>
-              <p>·</p>
-              <p>{t("posts.tempRead")}</p>
+            <div className="post__header" style={styles}>
+              <div className="post__title-wrapper">
+                <h2 className="post__title">{article?.title}</h2>
+                {article && <Bookmark slugPost={article?.slug} />}
+                <ShareIcon />
+              </div>
+              <div className="post__author">
+                <img src={avatar} alt="avatar" className="post__avatar" />
+                <p>{article?.author}</p>
+                <div className="post__about">
+                  <p>{article?.created_at}</p>
+                  <p>·</p>
+                  <p>
+                    {randomReadTime()} {t("posts.tempRead")}
+                  </p>
+                </div>
+              </div>
+              <div className="post__tags-list">{article?.tags.map((tag) => `#${tag.title}`)}</div>
             </div>
-            <div className="post__content-wrapper">
+
+            {/* <div className="post__content-wrapper">
               {article && parse(article.content)}
               <img
                 src={PICTURE_BASE_URL + article?.image_preview}
                 alt={article?.image_alt}
                 className="post__image"
               />
-            </div>
+            </div> */}
+
             <div className="post__footer">
               <h4 className="post__footer-text">{t("posts.share")}</h4>
               <div className="post__footer--wrapper">
@@ -143,14 +173,14 @@ const Post = () => {
                   <PinterestIcon />
                   <ChainIcon onClick={copyToClipboard} />
                 </div>
-                <div className="post__reactions">
-                  <HandIcon />
-                  <p>50</p>
-                  <HeartIcon />
-                  <p>23</p>
-                  <SpeechBubbleIcon />
-                  <p>32</p>
-                </div>
+              </div>
+              <div className="post__reactions">
+                <HandIcon />
+                <p>50</p>
+                <HeartIcon />
+                <p>23</p>
+                <SpeechBubbleIcon />
+                <p>32</p>
               </div>
             </div>
             <div className="post__divider"></div>

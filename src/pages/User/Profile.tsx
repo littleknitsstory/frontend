@@ -38,6 +38,7 @@ const Profile = () => {
     return <Navigate to={ROUTES.LOGIN} />;
   }
 
+  //? when loading feature flags can return error
   if (!feature?.account) {
     return <PageError errorStatus={404} />;
   }
