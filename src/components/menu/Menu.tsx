@@ -36,12 +36,8 @@ const PrimaryNav = (props: propTypes) => {
             {item.name}
           </a>
         ) : (
-          <li className="nav-item">
-            <NavLink
-              key={item.id}
-              className="nav-link text-uppercase header-nav-link"
-              to={item.url}
-            >
+          <li key={item.id} className="nav-item">
+            <NavLink className="nav-link text-uppercase header-nav-link" to={item.url}>
               {({ isActive, isPending }) => (
                 <span className={isActive ? "active" : ""}>{item.name}</span>
               )}

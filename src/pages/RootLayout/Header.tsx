@@ -20,7 +20,7 @@ const Header = () => {
   return (
     <header>
       <nav className="navbar header-navbar">
-        <div className="container-fluid justify-content-md-center flex-md-column">
+        <div className="container justify-content-md-center flex-md-column">
           <a className="navbar-brand" href={ROUTES.HOME}>
             <img
               src={logoMobile}
@@ -52,13 +52,13 @@ const Header = () => {
               <li className="nav-item">
                 <Link to={ROUTES.PROFILE} className="nav-link d-flex align-items-center gap-2">
                   <ProfileHeaderIcon className="header-navbar--icon" />
-                  <span className="text text--md">Личный кабинет</span>
+                  <span className="text">Личный кабинет</span>
                 </Link>
               </li>
               <li className="nav-item">
                 <Link to={ROUTES.CART} className="nav-link d-flex align-items-center gap-2">
                   <BagIcon className="header-navbar--icon" />
-                  <span className="text text--md">Корзина</span>
+                  <span className="text">Корзина</span>
                 </Link>
               </li>
               <li className="nav-item">
@@ -67,7 +67,7 @@ const Header = () => {
                   className="nav-link d-flex align-items-center gap-2"
                 >
                   <HeartIcon className="header-navbar--icon" />
-                  <span className="text text--md">Избранное</span>
+                  <span className="text">Избранное</span>
                 </Link>
               </li>
               <div className="header-navbar--divider my-3"></div>
@@ -77,7 +77,7 @@ const Header = () => {
                   className="nav-link d-flex align-items-center gap-2"
                 >
                   <CoursesIcon className="header-navbar--icon" />
-                  <span className="text text--md">Мои курсы</span>
+                  <span className="text">Мои курсы</span>
                 </Link>
               </li>
               <li className="nav-item">
@@ -86,7 +86,7 @@ const Header = () => {
                   className="nav-link d-flex align-items-center gap-2"
                 >
                   <PostsIcon className="header-navbar--icon" />
-                  <span className="text text--md">Мои посты</span>
+                  <span className="text">Мои посты</span>
                 </Link>
               </li>
               <li className="nav-item">
@@ -95,13 +95,13 @@ const Header = () => {
                   className="nav-link d-flex align-items-center gap-2"
                 >
                   <OrdersIcon className="header-navbar--icon" />
-                  <span className="text text--md">Мои заказы</span>
+                  <span className="text">Мои заказы</span>
                 </Link>
               </li>
               <li className="nav-item">
                 <Link to={ROUTES.BOOKMARKS} className="nav-link d-flex align-items-center gap-2">
                   <BookmarksIcon className="header-navbar--icon" />
-                  <span className="text text--md">Список для чтения</span>
+                  <span className="text">Список для чтения</span>
                 </Link>
               </li>
               <div className="header-navbar--divider my-3"></div>
@@ -110,7 +110,7 @@ const Header = () => {
               <li className="nav-item">
                 <Link to={ROUTES.PROFILE} className="nav-link d-flex align-items-center gap-2">
                   <LogoutIcon className="header-navbar--icon" />
-                  <span className="text text--md">Выйти</span>
+                  <span className="text">Выйти</span>
                 </Link>
               </li>
             </ul>
