@@ -102,6 +102,8 @@ const Post = () => {
     backgroundSize: "cover",
   };
 
+  console.log(article);
+
   /* Randomize "Time to read" until we have calculated time */
   function randomReadTime() {
     return Math.floor(Math.random() * 15) + 1;
@@ -166,25 +168,27 @@ const Post = () => {
           </div>
 
           <div className="container-md mt-4">
-            <div className="d-flex justify-content-between">
+            {article && parse(article.content)}
+
+            {/* <div className="d-flex justify-content-between">
               <div className="pe-md-3">
                 <div className="page-chapters">
                   <h2>Содержание</h2>
-                  <ol className="page-chapters__list d-flex flex-column gap-3 mt-3">
+                  <ol className="page-chapters__list d-inline-flex flex-column gap-3 mt-3 list-unstyled mb-5">
                     <a href="#section1">
-                      <li className="page-chapters__list-item">Секция 1</li>
+                      <li className="post-chapters__list-item">Секция 1</li>
                     </a>
                     <a href="#section2">
-                      <li className="page-chapters__list-item">Секция 2</li>
+                      <li className="post-chapters__list-item">Секция 2</li>
                     </a>
                     <a href="#section3">
-                      <li className="page-chapters__list-item">Секция 3</li>
+                      <li className="post-chapters__list-item">Секция 3</li>
                     </a>
                     <a href="#section4">
-                      <li className="page-chapters__list-item">Секция 4</li>
+                      <li className="post-chapters__list-item">Секция 4</li>
                     </a>
                     <a href="#section5">
-                      <li className="page-chapters__list-item">Секция 5</li>
+                      <li className="post-chapters__list-item">Секция 5</li>
                     </a>
                   </ol>
                 </div>
@@ -250,23 +254,23 @@ const Post = () => {
               <div className="navigation-widget d-none d-md-block sticky-top flex-shrink-0 px-4 h-100">
                 <ul className="list-unstyled d-flex flex-column gap-3">
                   <a href="#section1">
-                    <li className="page-chapters__list-item">Секция 1</li>
+                    <li className="post-chapters__list-item">Секция 1</li>
                   </a>
                   <a href="#section2">
-                    <li className="page-chapters__list-item">Секция 2</li>
+                    <li className="post-chapters__list-item">Секция 2</li>
                   </a>
                   <a href="#section3">
-                    <li className="page-chapters__list-item">Секция 3</li>
+                    <li className="post-chapters__list-item">Секция 3</li>
                   </a>
                   <a href="#section4">
-                    <li className="page-chapters__list-item">Секция 4</li>
+                    <li className="post-chapters__list-item">Секция 4</li>
                   </a>
                   <a href="#section5">
-                    <li className="page-chapters__list-item">Секция 5</li>
+                    <li className="post-chapters__list-item">Секция 5</li>
                   </a>
                 </ul>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* <article className="post__wrapper">

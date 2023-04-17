@@ -13,9 +13,29 @@ import { ReactComponent as CoursesIcon } from "../../assets/icons/courses.svg";
 import { ReactComponent as PostsIcon } from "../../assets/icons/posts.svg";
 import { ReactComponent as OrdersIcon } from "../../assets/icons/orders.svg";
 import { ReactComponent as LogoutIcon } from "../../assets/icons/logout.svg";
+import { useEffect, useState } from "react";
 
 const Header = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [lang, setLang] = useState(localStorage.getItem("lang") || "English");
+
+  useEffect(() => {
+    if (lang) {
+      i18n.changeLanguage(localStorage.getItem("i18nextLng") || "en");
+    }
+  }, [i18n, lang]);
+
+  const changeLang = (e: React.MouseEvent) => {
+    if (e.currentTarget.textContent === "English") {
+      setLang("Русский");
+      i18n.changeLanguage("ru");
+      localStorage.setItem("lang", "Русский");
+    } else {
+      setLang("English");
+      i18n.changeLanguage("en");
+      localStorage.setItem("lang", "English");
+    }
+  };
 
   return (
     <header>
@@ -50,13 +70,19 @@ const Header = () => {
           <div className="collapse navbar-collapse mt-4 d-md-block d-md-none" id="navbarProfile">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link to={ROUTES.PROFILE} className="nav-link d-flex align-items-center gap-2">
+                <Link
+                  to={ROUTES.PROFILE}
+                  className="nav-link header__nav-link d-flex align-items-center gap-2"
+                >
                   <ProfileHeaderIcon className="header-navbar--icon" />
                   <span className="text">Личный кабинет</span>
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to={ROUTES.CART} className="nav-link d-flex align-items-center gap-2">
+                <Link
+                  to={ROUTES.CART}
+                  className="nav-link header__nav-link d-flex align-items-center gap-2"
+                >
                   <BagIcon className="header-navbar--icon" />
                   <span className="text">Корзина</span>
                 </Link>
@@ -64,7 +90,7 @@ const Header = () => {
               <li className="nav-item">
                 <Link
                   to={ROUTES.FAVORITE_PRODUCTS}
-                  className="nav-link d-flex align-items-center gap-2"
+                  className="nav-link header__nav-link d-flex align-items-center gap-2"
                 >
                   <HeartIcon className="header-navbar--icon" />
                   <span className="text">Избранное</span>
@@ -74,7 +100,7 @@ const Header = () => {
               <li className="nav-item">
                 <Link
                   to={ROUTES.PROFILE_COURSES}
-                  className="nav-link d-flex align-items-center gap-2"
+                  className="nav-link header__nav-link d-flex align-items-center gap-2"
                 >
                   <CoursesIcon className="header-navbar--icon" />
                   <span className="text">Мои курсы</span>
@@ -83,7 +109,7 @@ const Header = () => {
               <li className="nav-item">
                 <Link
                   to={ROUTES.PROFILE_ARTICLES}
-                  className="nav-link d-flex align-items-center gap-2"
+                  className="nav-link header__nav-link d-flex align-items-center gap-2"
                 >
                   <PostsIcon className="header-navbar--icon" />
                   <span className="text">Мои посты</span>
@@ -92,14 +118,17 @@ const Header = () => {
               <li className="nav-item">
                 <Link
                   to={ROUTES.PROFILE_ORDERS}
-                  className="nav-link d-flex align-items-center gap-2"
+                  className="nav-link header__nav-link d-flex align-items-center gap-2"
                 >
                   <OrdersIcon className="header-navbar--icon" />
                   <span className="text">Мои заказы</span>
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to={ROUTES.BOOKMARKS} className="nav-link d-flex align-items-center gap-2">
+                <Link
+                  to={ROUTES.BOOKMARKS}
+                  className="nav-link header__nav-link d-flex align-items-center gap-2"
+                >
                   <BookmarksIcon className="header-navbar--icon" />
                   <span className="text">Список для чтения</span>
                 </Link>
@@ -108,7 +137,18 @@ const Header = () => {
 
               {/* TODO Logout functionality */}
               <li className="nav-item">
-                <Link to={ROUTES.PROFILE} className="nav-link d-flex align-items-center gap-2">
+                <button
+                  className="header-change-lang nav-link header__nav-link align-self-start m-0"
+                  onClick={changeLang}
+                >
+                  <span>{lang}</span>
+                </button>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to={ROUTES.PROFILE}
+                  className="nav-link header__nav-link d-flex align-items-center gap-2"
+                >
                   <LogoutIcon className="header-navbar--icon" />
                   <span className="text">Выйти</span>
                 </Link>

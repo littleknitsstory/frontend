@@ -1,3 +1,5 @@
+@use "../variables" as *;
+
 .header-toggler {
   border: none;
 
@@ -13,6 +15,28 @@
   &--divider {
     width: 100%;
     border-bottom: 1px solid #989898;
+  }
+}
+
+.header-change-lang {
+  border: none;
+  background-color: transparent;
+  color: $black-text;
+  font-weight: 400;
+  font-size: 1rem;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.header {
+  &__nav-link {
+    span {
+      &:hover {
+        color: black;
+        font-weight: 600;
+      }
+    }
   }
 }
 
