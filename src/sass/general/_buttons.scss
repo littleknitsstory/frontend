@@ -53,6 +53,7 @@
 
 .link {
   &--with-icon {
+    box-sizing: content-box;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
