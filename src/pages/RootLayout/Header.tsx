@@ -40,7 +40,7 @@ const Header = () => {
   return (
     <header>
       <nav className="navbar header-navbar">
-        <div className="container justify-content-md-center flex-md-column">
+        <div className="container-lg justify-content-md-center flex-md-column">
           <a className="navbar-brand" href={ROUTES.HOME}>
             <img
               src={logoMobile}
@@ -69,7 +69,7 @@ const Header = () => {
           </button>
           <div className="collapse navbar-collapse mt-4 d-md-block d-md-none" id="navbarProfile">
             <ul className="navbar-nav">
-              <li className="nav-item">
+              <li className="nav-item" data-bs-toggle="collapse" data-bs-target="#navbarProfile">
                 <Link
                   to={ROUTES.PROFILE}
                   className="nav-link header__nav-link d-flex align-items-center gap-2"
@@ -78,7 +78,7 @@ const Header = () => {
                   <span className="text">Личный кабинет</span>
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item" data-bs-toggle="collapse" data-bs-target="#navbarProfile">
                 <Link
                   to={ROUTES.CART}
                   className="nav-link header__nav-link d-flex align-items-center gap-2"
@@ -87,7 +87,7 @@ const Header = () => {
                   <span className="text">Корзина</span>
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item" data-bs-toggle="collapse" data-bs-target="#navbarProfile">
                 <Link
                   to={ROUTES.FAVORITE_PRODUCTS}
                   className="nav-link header__nav-link d-flex align-items-center gap-2"
@@ -97,7 +97,7 @@ const Header = () => {
                 </Link>
               </li>
               <div className="header-navbar--divider my-3"></div>
-              <li className="nav-item">
+              <li className="nav-item" data-bs-toggle="collapse" data-bs-target="#navbarProfile">
                 <Link
                   to={ROUTES.PROFILE_COURSES}
                   className="nav-link header__nav-link d-flex align-items-center gap-2"
@@ -106,7 +106,7 @@ const Header = () => {
                   <span className="text">Мои курсы</span>
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item" data-bs-toggle="collapse" data-bs-target="#navbarProfile">
                 <Link
                   to={ROUTES.PROFILE_ARTICLES}
                   className="nav-link header__nav-link d-flex align-items-center gap-2"
@@ -115,7 +115,7 @@ const Header = () => {
                   <span className="text">Мои посты</span>
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item" data-bs-toggle="collapse" data-bs-target="#navbarProfile">
                 <Link
                   to={ROUTES.PROFILE_ORDERS}
                   className="nav-link header__nav-link d-flex align-items-center gap-2"
@@ -124,7 +124,7 @@ const Header = () => {
                   <span className="text">Мои заказы</span>
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item" data-bs-toggle="collapse" data-bs-target="#navbarProfile">
                 <Link
                   to={ROUTES.BOOKMARKS}
                   className="nav-link header__nav-link d-flex align-items-center gap-2"
@@ -136,7 +136,7 @@ const Header = () => {
               <div className="header-navbar--divider my-3"></div>
 
               {/* TODO Logout functionality */}
-              <li className="nav-item">
+              <li className="nav-item" data-bs-toggle="collapse" data-bs-target="#navbarProfile">
                 <button
                   className="header-change-lang nav-link header__nav-link align-self-start m-0"
                   onClick={changeLang}
@@ -144,7 +144,7 @@ const Header = () => {
                   <span>{lang}</span>
                 </button>
               </li>
-              <li className="nav-item">
+              <li className="nav-item" data-bs-toggle="collapse" data-bs-target="#navbarProfile">
                 <Link
                   to={ROUTES.PROFILE}
                   className="nav-link header__nav-link d-flex align-items-center gap-2"

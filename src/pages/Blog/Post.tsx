@@ -130,7 +130,7 @@ const Post = () => {
   return (
     <>
       {feature?.blog && (
-        <section className="post container-md p-0">
+        <section className="post container-lg p-0">
           {/* TODO Change to Link */}
           <p
             onClick={() => navigate(-1)}
@@ -139,8 +139,8 @@ const Post = () => {
             <ArrowLeftSVG /> {t("posts.back")}
           </p>
 
-          <div className="post__header d-flex flex-column px-2 mt-4" style={styles}>
-            <div className="d-flex align-items-center gap-2 py-3 ">
+          <div className="post__header d-flex flex-column p-3 p-md-5 mt-4" style={styles}>
+            <div className="d-flex align-items-center gap-2">
               <h2 className="post__title me-auto text text--md text--bold text--white my-0">
                 {article?.title}
               </h2>
@@ -167,143 +167,9 @@ const Post = () => {
             </div>
           </div>
 
-          <div className="container-md mt-4">
-            {article && parse(article.content)}
+          <div className="container-lg mt-4">{article && parse(article.content)}</div>
 
-            {/* <div className="d-flex justify-content-between">
-              <div className="pe-md-3">
-                <div className="page-chapters">
-                  <h2>Содержание</h2>
-                  <ol className="page-chapters__list d-inline-flex flex-column gap-3 mt-3 list-unstyled mb-5">
-                    <a href="#section1">
-                      <li className="post-chapters__list-item">Секция 1</li>
-                    </a>
-                    <a href="#section2">
-                      <li className="post-chapters__list-item">Секция 2</li>
-                    </a>
-                    <a href="#section3">
-                      <li className="post-chapters__list-item">Секция 3</li>
-                    </a>
-                    <a href="#section4">
-                      <li className="post-chapters__list-item">Секция 4</li>
-                    </a>
-                    <a href="#section5">
-                      <li className="post-chapters__list-item">Секция 5</li>
-                    </a>
-                  </ol>
-                </div>
-
-                <div id="section1">
-                  <h3>Секция 1</h3>
-                  <p>
-                    Значимость этих проблем настолько очевидна, что управление и развитие структуры
-                    представляет собой интересный эксперимент прогресса профессионального общества.
-                    Таким образом консультация с широким активом позволяет выполнять важные задания
-                    по разработке дальнейших направлений развития. Разнообразный и богатый опыт
-                    выбранный нами инновационный путь требует анализа системы массового участия.
-                  </p>
-                </div>
-                <div id="section2">
-                  <h3>Секция 2</h3>
-                  <p>
-                    Не следует, однако, забывать, что постоянный количественный рост и сфера нашей
-                    активности создаёт предпосылки качественно новых шагов для системы обучения
-                    кадров, соответствующей насущным потребностям. Таким образом новая модель
-                    организационной деятельности позволяет оценить значение поэтапного и
-                    последовательного развития общества. Разнообразный и богатый опыт постоянное
-                    информационно-пропогандистское обеспечение нашей деятельности требует анализа
-                    системы массового участия.
-                  </p>
-                </div>
-                <div id="section3">
-                  <h3>Секция 3</h3>
-                  <p>
-                    Следует отметить, что понимание сущности ресурсосберегающих технологий
-                    способствует подготовке и реализации новых принципов формирования
-                    материально-технической и кадровой базы. Таким образом сложившаяся структура
-                    организации требует определения и уточнения существующий финансовых и
-                    административных условий. Для современного мира повышение уровня гражданского
-                    сознания напрямую зависит от поставленных обществом и правительством задач.
-                  </p>
-                </div>
-                <div id="section4">
-                  <h3>Секция 4</h3>
-                  <p>
-                    Задача организации, в особенности же начало повседневной работы по формированию
-                    позиции требует от нас анализа новых принципов формирования
-                    материально-технической и кадровой базы. Повседневная практика показывает, что
-                    сложившаяся структура организации играет важную роль в формировании поставленных
-                    обществом и правительством задач. Следует отметить, что консультация с широким
-                    активом способствует повышению качества системы массового участия.
-                  </p>
-                </div>
-                <div id="section5">
-                  <h3>Секция 5</h3>
-                  <p>
-                    Повседневная практика показывает, что курс на социально-ориентированный
-                    национальный проект требует от нас анализа системы обучения кадров,
-                    соответствующей насущным потребностям. Разнообразный и богатый опыт постоянное
-                    информационно-пропогандистское обеспечение нашей деятельности обеспечивает
-                    актуальность системы массового участия. Разнообразный и богатый опыт
-                    социально-экономическое развитие играет важную роль в формировании прогресса
-                    профессионального общества.
-                  </p>
-                </div>
-              </div>
-              <div className="vr"></div>
-              <div className="navigation-widget d-none d-md-block sticky-top flex-shrink-0 px-4 h-100">
-                <ul className="list-unstyled d-flex flex-column gap-3">
-                  <a href="#section1">
-                    <li className="post-chapters__list-item">Секция 1</li>
-                  </a>
-                  <a href="#section2">
-                    <li className="post-chapters__list-item">Секция 2</li>
-                  </a>
-                  <a href="#section3">
-                    <li className="post-chapters__list-item">Секция 3</li>
-                  </a>
-                  <a href="#section4">
-                    <li className="post-chapters__list-item">Секция 4</li>
-                  </a>
-                  <a href="#section5">
-                    <li className="post-chapters__list-item">Секция 5</li>
-                  </a>
-                </ul>
-              </div>
-            </div> */}
-          </div>
-
-          {/* <article className="post__wrapper">
-            <div className="post__header" style={styles}>
-              <div className="post__title-wrapper">
-                <h2 className="post__title">{article?.title}</h2>
-                {article && <Bookmark slugPost={article?.slug} />}
-                <ShareIcon />
-              </div>
-              <div className="post__author">
-                <img src={avatar} alt="avatar" className="post__avatar" />
-                <p>{article?.author}</p>
-                <div className="post__about">
-                  <p>{article?.created_at}</p>
-                  <p>·</p>
-                  <p>
-                    {randomReadTime()} {t("posts.tempRead")}
-                  </p>
-                </div>
-              </div>
-              <div className="post__tags-list">{article?.tags.map((tag) => `#${tag.title}`)}</div>
-            </div> */}
-
-          {/* <div className="post__content-wrapper">
-              {article && parse(article.content)}
-              <img
-                src={PICTURE_BASE_URL + article?.image_preview}
-                alt={article?.image_alt}
-                className="post__image"
-              />
-            </div> */}
-
-          <div className="post__footer container-md">
+          <div className="post__footer container-lg">
             {/* <h4 className="post__footer-text">{t("posts.share")}</h4> */}
             {/* <div className="post__footer--wrapper">
               <div className="post__share-links">
@@ -314,7 +180,7 @@ const Post = () => {
                 <ChainIcon onClick={copyToClipboard} />
               </div>
             </div> */}
-            <div className="post__reactions d-flex gap-5 mt-3 ">
+            <div className=" post__reactions d-flex gap-5 mt-3 ">
               <div className="d-flex flex-column align-items-center">
                 <HandIcon />
                 <p className="m-0 ">50</p>
@@ -330,10 +196,8 @@ const Post = () => {
               <ShareIconGrey />
             </div>
           </div>
-          {/* <div className="post__divider"></div> */}
-          {/* </article> */}
           {feature?.comments && (
-            <form className="post__comments d-flex flex-column container-md mt-4 col-md-8 col-lg-6 mx-0">
+            <form className="post__comments d-flex flex-column container-lg mt-4 col-md-8 col-lg-6 mx-0">
               <h4 className="text text--md text--bold">{t("posts.comments")}</h4>
               <textarea
                 name="postContent"

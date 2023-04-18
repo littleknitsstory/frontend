@@ -33,7 +33,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container-lg">
       <nav className="navbar">
         <ul className="navbar-nav flex-row text text--md w-100 justify-content-evenly justify-content-md-start mt-3 gap-4">
           <Menu type={"header"} />

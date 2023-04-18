@@ -132,7 +132,7 @@ const Posts = () => {
   return (
     <>
       {feature?.blog && (
-        <main className="container mt-5">
+        <main className="container-lg mt-5">
           <div className="d-flex align-items-center justify-content-evenly mb-4">
             <ArrowLeftSVG
               onClick={sliderBackward}
