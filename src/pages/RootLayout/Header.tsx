@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import logoLKS from "../../assets/images/logo-lks.svg";
 import { ROUTES } from "../../app/routes";
@@ -14,10 +14,18 @@ import { ReactComponent as PostsIcon } from "../../assets/icons/posts.svg";
 import { ReactComponent as OrdersIcon } from "../../assets/icons/orders.svg";
 import { ReactComponent as LogoutIcon } from "../../assets/icons/logout.svg";
 import { useEffect, useState } from "react";
+import { ITokens } from "../User/Profile";
+import { useLogoutMutation } from "../../components/features/api/apiSlice";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
   const [lang, setLang] = useState(localStorage.getItem("lang") || "English");
+  const tokens: ITokens = localStorage.getItem("tokens")
+    ? JSON.parse(localStorage.getItem("tokens") || "")
+    : { tokens: { access: "", refresh: "" } };
+  const navigate = useNavigate();
+
+  const [logoutRequest] = useLogoutMutation();
 
   useEffect(() => {
     if (lang) {
@@ -25,7 +33,7 @@ const Header = () => {
     }
   }, [i18n, lang]);
 
-  const changeLang = (e: React.MouseEvent) => {
+  const changeLang = (e: React.MouseEvent): void => {
     if (e.currentTarget.textContent === "English") {
       setLang("Русский");
       i18n.changeLanguage("ru");
@@ -35,6 +43,13 @@ const Header = () => {
       i18n.changeLanguage("en");
       localStorage.setItem("lang", "English");
     }
+  };
+
+  const logout = (): void => {
+    localStorage.removeItem("tokens");
+    console.log(tokens);
+    logoutRequest(tokens);
+    navigate("/login/");
   };
 
   return (
@@ -135,7 +150,6 @@ const Header = () => {
               </li>
               <div className="header-navbar--divider my-3"></div>
 
-              {/* TODO Logout functionality */}
               <li className="nav-item" data-bs-toggle="collapse" data-bs-target="#navbarProfile">
                 <button
                   className="header-change-lang nav-link header__nav-link align-self-start m-0"
@@ -145,13 +159,13 @@ const Header = () => {
                 </button>
               </li>
               <li className="nav-item" data-bs-toggle="collapse" data-bs-target="#navbarProfile">
-                <Link
-                  to={ROUTES.PROFILE}
-                  className="nav-link header__nav-link d-flex align-items-center gap-2"
+                <button
+                  className="header-logout nav-link header__nav-link d-flex align-items-center gap-2"
+                  onClick={logout}
                 >
                   <LogoutIcon className="header-navbar--icon" />
                   <span className="text">Выйти</span>
-                </Link>
+                </button>
               </li>
             </ul>
           </div>

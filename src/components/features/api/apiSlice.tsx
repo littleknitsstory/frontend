@@ -67,6 +67,7 @@ export enum URLS {
   COMMENTS = "/comments/",
   ORDER = "/orders/",
   FEATURES_FLAGS = "/features/",
+  LOGOUT = "/sign-out/",
 }
 
 export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";
@@ -193,6 +194,16 @@ export const apiSlice = createApi({
         body: { refresh: token },
       }),
     }),
+    logout: builder.mutation({
+      query: (tokens) => ({
+        url: URLS.LOGOUT,
+        method: "POST",
+        body: { refresh: tokens.refresh },
+        headers: {
+          Authorization: "Bearer " + tokens.access,
+        },
+      }),
+    }),
   }),
 });
 
@@ -214,4 +225,5 @@ export const {
   useAddCommentsMutation,
   useRefreshTokenMutation,
   useAddOrderMutation,
+  useLogoutMutation,
 } = apiSlice;
