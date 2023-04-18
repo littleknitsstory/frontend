@@ -77,6 +77,7 @@ export enum URLS {
   ORDER = "/orders/",
   FEATURES_FLAGS = "/features/",
   LOGOUT = "/sign-out/",
+  REACTIONS = "/reactions/",
 }
 
 export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";
@@ -183,14 +184,15 @@ export const apiSlice = createApi({
       invalidatesTags: ["Comments"],
     }),
     deleteComment: builder.mutation({
-      query: (postId: number) => ({
+      query: ({ postId, lang }: { postId: number; lang: string }) => ({
         url: URLS.COMMENTS + postId,
         method: "DELETE",
         headers: {
+          "Accept-Language": lang,
           Authorization: "Bearer " + JSON.parse(localStorage.getItem("tokens") || "{}")?.access,
         },
       }),
-      invalidatesTags: (result, error, arg) => [{ type: "Comments", id: arg }],
+      invalidatesTags: (result, error, arg) => [{ type: "Comments", id: arg.postId }],
     }),
 
     getAllUsers: builder.query<IUserData[], string>({
@@ -234,6 +236,17 @@ export const apiSlice = createApi({
         },
       }),
     }),
+    addReaction: builder.mutation({
+      query: ({ reaction, articleId }: { reaction: string; articleId: number }) => ({
+        url: URLS.REACTIONS,
+        method: "POST",
+        body: { reaction: "SMILING" },
+        headers: {
+          Authorization: "Bearer " + JSON.parse(localStorage.getItem("tokens") || "{}")?.access,
+          "Content-Type": "application/json",
+        },
+      }),
+    }),
   }),
 });
 
@@ -258,4 +271,5 @@ export const {
   useAddOrderMutation,
   useLogoutMutation,
   useGetCommentsQuery,
+  useAddReactionMutation,
 } = apiSlice;

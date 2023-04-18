@@ -12,7 +12,7 @@ const RootLayout = () => {
   return (
     <>
       <ReactNotifications />
-      {/* <ScrollToTop /> */}
+      <ScrollToTop />
       <Header />
       {data?.menu && <NavBar />}
       <Outlet />

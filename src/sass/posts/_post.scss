@@ -70,6 +70,17 @@
       }
     }
   }
+
+  &__share-btn {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__popover-share {
+    background-color: $secondary-light-grey;
+    --bs-popover-max-width: 500px;
+  }
 }
 
 @media (min-width: 992px) {

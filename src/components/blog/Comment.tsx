@@ -2,13 +2,22 @@ import { CommentsData } from "../../app/types";
 import { useDeleteCommentMutation } from "../features/api/apiSlice";
 import { useTranslation } from "react-i18next";
 import Spinner from "../utils/Spinner";
+import { Store } from "react-notifications-component";
+import { notificationError } from "../modal/Notification";
 
 const Comment = (comment: CommentsData) => {
-  const [deleteComment, { isLoading }] = useDeleteCommentMutation();
-  const { t } = useTranslation();
+  const [deleteComment, { isLoading, isError, error }] = useDeleteCommentMutation();
+  const { t, i18n } = useTranslation();
 
   async function handleDeleteComment(): Promise<void> {
-    deleteComment(comment.id);
+    deleteComment({ postId: comment.id, lang: i18n.language })
+      .unwrap()
+      .catch((error) => {
+        Store.addNotification({
+          ...notificationError,
+          title: error.data.detail,
+        });
+      });
   }
 
   if (isLoading) {

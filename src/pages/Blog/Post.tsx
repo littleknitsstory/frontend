@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -7,6 +7,7 @@ import parse from "html-react-parser";
 import {
   PICTURE_BASE_URL,
   useAddCommentMutation,
+  useAddReactionMutation,
   useGetCommentsQuery,
   useGetFeaturesQuery,
 } from "../../components/features/api/apiSlice";
@@ -17,9 +18,8 @@ import avatar from "../../assets/images/test-avatar.png";
 import CardArticleSmall from "../../components/blog/CardArticleSmall";
 import { notificationError, notificationSuccess } from "../../components/modal/Notification";
 import { ReactComponent as ArrowLeftSVG } from "../../assets/icons/arrow-left-nd.svg";
-import { ReactComponent as VKIcon } from "../../assets/icons/social/vkontakte.svg";
+import { ReactComponent as TelegramIcon } from "../../assets/icons/social/telegram.svg";
 import { ReactComponent as FacebookIcon } from "../../assets/icons/social/facebook.svg";
-import { ReactComponent as InstagramIcon } from "../../assets/icons/social/instagram.svg";
 import { ReactComponent as PinterestIcon } from "../../assets/icons/social/pinterest.svg";
 import { ReactComponent as ChainIcon } from "../../assets/icons/chain.svg";
 import { ReactComponent as HandIcon } from "../../assets/icons/reactions/hand.svg";
@@ -31,6 +31,9 @@ import { ReactComponent as ShareIcon } from "../../assets/icons/share.svg";
 import { ROUTES } from "../../app/routes";
 import Bookmark from "../../components/blog/Bookmark";
 import Comment from "../../components/blog/Comment";
+
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Popover from "react-bootstrap/Popover";
 
 export const COMMENTS_PER_PAGE = 5;
 
@@ -59,6 +62,7 @@ const Post = () => {
     isError: commentsIsError,
   } = useGetCommentsQuery({ offset: offsetCommentsRequest });
   const [postComment] = useAddCommentMutation();
+  const [addReaction] = useAddReactionMutation();
 
   const sliderForward = () => {
     if (articles) {
@@ -120,6 +124,11 @@ const Post = () => {
   const copyToClipboard = (): void => {
     const currentUrl = window.location.href;
     navigator.clipboard.writeText(currentUrl);
+
+    Store.addNotification({
+      ...notificationSuccess,
+      title: "Copied to clipboard",
+    });
   };
 
   if (isLoading) {
@@ -155,6 +164,48 @@ const Post = () => {
     }
   }
 
+  function testReaction() {
+    addReaction({ reaction: "test", articleId: 1 });
+  }
+
+  const popoverShare = (
+    <Popover className="post__popover-share">
+      <Popover.Body>
+        <div className="text text--18 text--bold d-flex flex-column gap-3">
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+            className="d-flex align-items-center gap-2 p-1 post__share-btn"
+          >
+            <FacebookIcon />
+            <p className="m-0">Facebook</p>
+          </a>
+          <a
+            href={`https://t.me/share/url?url=${window.location.href}`}
+            target="_blank"
+            rel="noreferrer"
+            className="d-flex align-items-center gap-2 post__share-btn p-1"
+          >
+            <TelegramIcon />
+            <p className="m-0">Telegram</p>
+          </a>
+          <div className="d-flex align-items-center gap-2 post__share-btn p-1">
+            <PinterestIcon />
+            <p className="m-0">Pinterest</p>
+          </div>
+          <div
+            className="d-flex align-items-center gap-2 post__share-btn p-1"
+            onClick={copyToClipboard}
+          >
+            <ChainIcon />
+            <p className="m-0">Копировать ссылку</p>
+          </div>
+        </div>
+      </Popover.Body>
+    </Popover>
+  );
+
   return (
     <>
       {feature?.blog && (
@@ -172,7 +223,9 @@ const Post = () => {
                 {article?.title}
               </h2>
               {article && <Bookmark slugPost={article?.slug} />}
-              <ShareIcon />
+              <OverlayTrigger trigger="click" placement="bottom" overlay={popoverShare}>
+                <ShareIcon />
+              </OverlayTrigger>
             </div>
             <div className="d-flex align-items-center gap-3 mt-2">
               <img src={avatar} alt="avatar" className="rounded-circle" width="50" />
@@ -222,7 +275,9 @@ const Post = () => {
                 <SpeechBubbleIcon />
                 <p className="m-0">32</p>
               </div>
-              <ShareIconGrey />
+              <OverlayTrigger trigger="click" placement="bottom" overlay={popoverShare}>
+                <ShareIconGrey />
+              </OverlayTrigger>
             </div>
           </div>
           {feature?.comments && (
