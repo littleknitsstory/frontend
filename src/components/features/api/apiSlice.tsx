@@ -11,7 +11,9 @@ import {
   ISignUp,
   ISignIn,
   IUserData,
+  CommentsData,
 } from "../../../app/types";
+import { COMMENTS_PER_PAGE } from "../../../pages/Blog/Post";
 
 interface IFeaturesFlags {
   account: boolean;
@@ -24,6 +26,13 @@ interface IFeaturesFlags {
   reviews: boolean;
   shop: boolean;
   slider: boolean;
+}
+
+interface CommentsResponse {
+  count: number;
+  next: number;
+  previous: number;
+  results: CommentsData[];
 }
 
 interface ILoginResponse {
@@ -75,7 +84,7 @@ export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_API_URL }),
-  tagTypes: ["user"],
+  tagTypes: ["user", "Comments"],
   endpoints: (builder) => ({
     getFeatures: builder.query<IFeaturesFlags, void>({
       query: () => URLS.FEATURES_FLAGS,
@@ -153,6 +162,12 @@ export const apiSlice = createApi({
         headers: { "Accept-Language": lang },
       }),
     }),
+    getComments: builder.query<CommentsResponse, { offset: number }>({
+      query: ({ offset }) => ({
+        url: URLS.COMMENTS + `?offset=${offset}&limit=${COMMENTS_PER_PAGE}`,
+      }),
+      providesTags: ["Comments"],
+    }),
     addComments: builder.mutation({
       query: (message: string) => ({
         url: URLS.COMMENTS,
@@ -162,6 +177,7 @@ export const apiSlice = createApi({
           Authorization: "Bearer " + JSON.parse(localStorage.getItem("tokens") || "{}")?.access,
         },
       }),
+      invalidatesTags: ["Comments"],
     }),
     getAllUsers: builder.query<IUserData[], string>({
       query: (token) => ({
@@ -226,4 +242,5 @@ export const {
   useRefreshTokenMutation,
   useAddOrderMutation,
   useLogoutMutation,
+  useGetCommentsQuery,
 } = apiSlice;

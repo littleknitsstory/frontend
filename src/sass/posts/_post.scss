@@ -46,6 +46,30 @@
       fill: #fefefe;
     }
   }
+
+  &__comments-page-btn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    &--active {
+      background-color: $secondary-light-grey;
+    }
+    &:hover {
+      background-color: $secondary-grey;
+    }
+
+    &--slider {
+      padding: 0.55rem;
+
+      &:hover {
+        background-color: $secondary-light-grey;
+      }
+      &:disabled {
+        border: none;
+        cursor: not-allowed;
+      }
+    }
+  }
 }
 
 @media (min-width: 992px) {

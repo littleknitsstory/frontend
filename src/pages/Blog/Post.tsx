@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -7,6 +7,7 @@ import parse from "html-react-parser";
 import {
   PICTURE_BASE_URL,
   useAddCommentsMutation,
+  useGetCommentsQuery,
   useGetFeaturesQuery,
 } from "../../components/features/api/apiSlice";
 import { useGetArticleQuery, useGetArticlesQuery } from "../../components/features/api/apiSlice";
@@ -29,12 +30,18 @@ import { ReactComponent as ArrowRightSVG } from "../../assets/icons/arrow-right-
 import { ReactComponent as ShareIcon } from "../../assets/icons/share.svg";
 import { ROUTES } from "../../app/routes";
 import Bookmark from "../../components/blog/Bookmark";
+import Comment from "../../components/blog/Comment";
+
+export const COMMENTS_PER_PAGE = 5;
 
 const Post = () => {
   const { data: feature } = useGetFeaturesQuery();
   const { slug } = useParams<string>();
   const { t, i18n } = useTranslation();
   const [offset, setOffset] = useState<number>(0);
+  const [offsetCommentsRequest, setOffsetCommentsRequest] = useState<number>(0);
+  const [offsetCommentsPage, setOffsetCommentsPage] = useState<number>(0);
+  const [currentCommentsPage, setCurrentCommentsPage] = useState<number>(0);
   const [message, setMessage] = useState<string>("");
   const {
     data: article,
@@ -43,11 +50,14 @@ const Post = () => {
     error,
   } = useGetArticleQuery({ slug, lang: i18n.language });
 
-  console.log(article);
-
   const { data: articles } = useGetArticlesQuery({ limit: 10, offset, lang: i18n.language });
   const navigate = useNavigate();
 
+  const {
+    data: comments,
+    isFetching: commentsIsFetching,
+    isError: commentsIsError,
+  } = useGetCommentsQuery({ offset: offsetCommentsRequest });
   const [postComment] = useAddCommentsMutation();
 
   const sliderForward = () => {
@@ -102,8 +112,6 @@ const Post = () => {
     backgroundSize: "cover",
   };
 
-  console.log(article);
-
   /* Randomize "Time to read" until we have calculated time */
   function randomReadTime() {
     return Math.floor(Math.random() * 15) + 1;
@@ -127,17 +135,36 @@ const Post = () => {
     return <PageError errorStatus={404} />;
   }
 
+  function goToCommentsPage(e: React.MouseEvent<HTMLElement>) {
+    const pageNumber = e.currentTarget.dataset.page;
+
+    if (pageNumber) {
+      setOffsetCommentsRequest(+pageNumber * COMMENTS_PER_PAGE);
+      setCurrentCommentsPage(+pageNumber);
+    }
+  }
+
+  function slideCommentsPage(direction: string): void {
+    const pagesAmount = comments?.count! / COMMENTS_PER_PAGE;
+    const lastPage = pagesAmount <= offsetCommentsPage + 5;
+
+    if (direction === "next" && !lastPage) {
+      setOffsetCommentsPage((prev) => prev + 1);
+    } else if (direction === "prev" && offsetCommentsPage > 0) {
+      setOffsetCommentsPage((prev) => prev - 1);
+    }
+  }
+
   return (
     <>
       {feature?.blog && (
         <section className="post container-lg p-0">
-          {/* TODO Change to Link */}
-          <p
+          <button
             onClick={() => navigate(-1)}
-            className="link link--with-icon m-0 mt-5 ms-2 text text--md text--bold"
+            className="btn link link--with-icon m-0 mt-5 ms-2 text text--md text--bold"
           >
             <ArrowLeftSVG /> {t("posts.back")}
-          </p>
+          </button>
 
           <div className="post__header d-flex flex-column p-3 p-md-5 mt-4" style={styles}>
             <div className="d-flex align-items-center gap-2">
@@ -162,7 +189,9 @@ const Post = () => {
 
             <div className="d-flex gap-4 mt-auto">
               {article?.tags.map((tag) => (
-                <p className="text--white">#{tag.title}</p>
+                <p key={tag.slug} className="text--white">
+                  #{tag.title}
+                </p>
               ))}
             </div>
           </div>
@@ -197,27 +226,63 @@ const Post = () => {
             </div>
           </div>
           {feature?.comments && (
-            <form className="post__comments d-flex flex-column container-lg mt-4 col-md-8 col-lg-6 mx-0">
-              <h4 className="text text--md text--bold">{t("posts.comments")}</h4>
-              <textarea
-                name="postContent"
-                rows={5}
-                value={message}
-                onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleChange(e)}
-                placeholder={t("posts.placeholderComments")}
-                className="w-100 rounded-4 p-3"
-              />
-              <button
-                className="btn btn--primary mt-2 align-self-end"
-                disabled={message.length === 0}
-                onClick={(e: React.FormEvent) => handleSubmit(e)}
-              >
-                {t("posts.send")}
-              </button>
-              <div className="post__comments--buttons">
-                <div className="post__comments--wrapper"></div>
+            <>
+              <form className="post__comments d-flex flex-column container-lg mt-5 col-md-8 col-lg-6 mx-0">
+                <h4 className="text text--md text--bold">{t("posts.comments")}</h4>
+                <textarea
+                  name="postContent"
+                  rows={5}
+                  value={message}
+                  onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleChange(e)}
+                  placeholder={t("posts.placeholderComments")}
+                  className="w-100 rounded-4 p-3"
+                />
+                <button
+                  className="btn btn--primary mt-3 d-sm-block align-self-sm-end"
+                  disabled={message.length === 0}
+                  onClick={(e: React.FormEvent) => handleSubmit(e)}
+                >
+                  {t("posts.send")}
+                </button>
+              </form>
+              <div className="mt-5 col-md-8 col-lg-6 mx-0">
+                {commentsIsFetching && <Spinner />}
+                {comments?.results.map((comment) => (
+                  <Comment key={comment.id} {...comment} />
+                ))}
+                <div className="d-flex gap-1 justify-content-evenly align-items-center text text--md mx-auto">
+                  <button
+                    className="btn btn--transparent post__comments-page-btn--slider"
+                    onClick={() => slideCommentsPage("prev")}
+                  >
+                    <ArrowLeftSVG />
+                  </button>
+                  {comments &&
+                    /* Creating an array of pages number */
+                    [...Array(Math.ceil(comments?.count / COMMENTS_PER_PAGE)).keys()]
+                      .slice(offsetCommentsPage, offsetCommentsPage + 5)
+                      .map((number: number) => (
+                        <button
+                          key={number}
+                          data-page={number}
+                          onClick={goToCommentsPage}
+                          className={`btn btn--transparent post__comments-page-btn ${
+                            currentCommentsPage === number ? "post__comments-page-btn--active" : ""
+                          }`}
+                        >
+                          {number + 1}
+                        </button>
+                      ))}
+                  <button
+                    className="btn btn--transparent post__comments-page-btn--slider"
+                    onClick={() => slideCommentsPage("next")}
+                  >
+                    <ArrowRightSVG />
+                  </button>
+                </div>
               </div>
-            </form>
+              <div className="post__comments--buttons"></div>
+            </>
           )}
 
           <div className="container-md text-center">
