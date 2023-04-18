@@ -166,9 +166,12 @@ export const apiSlice = createApi({
       query: ({ offset }) => ({
         url: URLS.COMMENTS + `?offset=${offset}&limit=${COMMENTS_PER_PAGE}`,
       }),
-      providesTags: ["Comments"],
+      providesTags: (result, error, arg) =>
+        result
+          ? [...result.results.map(({ id }) => ({ type: "Comments" as const, id })), "Comments"]
+          : ["Comments"],
     }),
-    addComments: builder.mutation({
+    addComment: builder.mutation({
       query: (message: string) => ({
         url: URLS.COMMENTS,
         method: "POST",
@@ -179,6 +182,17 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Comments"],
     }),
+    deleteComment: builder.mutation({
+      query: (postId: number) => ({
+        url: URLS.COMMENTS + postId,
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + JSON.parse(localStorage.getItem("tokens") || "{}")?.access,
+        },
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: "Comments", id: arg }],
+    }),
+
     getAllUsers: builder.query<IUserData[], string>({
       query: (token) => ({
         url: URLS.PROFILE,
@@ -238,7 +252,8 @@ export const {
   useGetAllUsersQuery,
   useGetUserQuery,
   useUpdateUserMutation,
-  useAddCommentsMutation,
+  useAddCommentMutation,
+  useDeleteCommentMutation,
   useRefreshTokenMutation,
   useAddOrderMutation,
   useLogoutMutation,

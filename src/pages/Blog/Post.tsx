@@ -6,7 +6,7 @@ import { Store } from "react-notifications-component";
 import parse from "html-react-parser";
 import {
   PICTURE_BASE_URL,
-  useAddCommentsMutation,
+  useAddCommentMutation,
   useGetCommentsQuery,
   useGetFeaturesQuery,
 } from "../../components/features/api/apiSlice";
@@ -58,7 +58,7 @@ const Post = () => {
     isFetching: commentsIsFetching,
     isError: commentsIsError,
   } = useGetCommentsQuery({ offset: offsetCommentsRequest });
-  const [postComment] = useAddCommentsMutation();
+  const [postComment] = useAddCommentMutation();
 
   const sliderForward = () => {
     if (articles) {
@@ -226,8 +226,8 @@ const Post = () => {
             </div>
           </div>
           {feature?.comments && (
-            <>
-              <form className="post__comments d-flex flex-column container-lg mt-5 col-md-8 col-lg-6 mx-0">
+            <div className="container-lg">
+              <form className="post__comments d-flex flex-column mt-5 col-md-8 col-lg-6 mx-0">
                 <h4 className="text text--md text--bold">{t("posts.comments")}</h4>
                 <textarea
                   name="postContent"
@@ -282,7 +282,7 @@ const Post = () => {
                 </div>
               </div>
               <div className="post__comments--buttons"></div>
-            </>
+            </div>
           )}
 
           <div className="container-md text-center">
