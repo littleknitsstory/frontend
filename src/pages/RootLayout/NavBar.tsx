@@ -5,6 +5,7 @@ import Menu from "../../components/menu/Menu";
 import { ReactComponent as ProfileIcon } from "../../assets/icons/user.svg";
 import { ReactComponent as HeartIcon } from "../../assets/icons/heart-big.svg";
 import { ReactComponent as BagIcon } from "../../assets/icons/bag.svg";
+import { ReactComponent as BookMarkIcon } from "../../assets/icons/bookmark-link.svg";
 import { useEffect, useState } from "react";
 import { ROUTES } from "../../app/routes";
 
@@ -46,8 +47,11 @@ const NavBar = () => {
               </NavLink>
             )}
 
-            <div className="vr"></div>
             <NavLink to={ROUTES.FAVORITE_PRODUCTS} className="navbar__icon align-self-center">
+              <BookMarkIcon id="bookmark-icon-svg" className="align-self-center" />
+            </NavLink>
+            <div className="vr"></div>
+            <NavLink to={ROUTES.BOOKMARKS} className="navbar__icon align-self-center">
               <HeartIcon id="favorite-icon-svg" className="align-self-center" />
             </NavLink>
             <NavLink to={ROUTES.CART} className="navbar__icon align-self-center">
