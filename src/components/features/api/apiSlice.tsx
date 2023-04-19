@@ -243,7 +243,6 @@ export const apiSlice = createApi({
         body: { reaction: "SMILING" },
         headers: {
           Authorization: "Bearer " + JSON.parse(localStorage.getItem("tokens") || "{}")?.access,
-          "Content-Type": "application/json",
         },
       }),
     }),

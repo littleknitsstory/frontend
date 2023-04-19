@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -7,7 +7,6 @@ import parse from "html-react-parser";
 import {
   PICTURE_BASE_URL,
   useAddCommentMutation,
-  useAddReactionMutation,
   useGetCommentsQuery,
   useGetFeaturesQuery,
 } from "../../components/features/api/apiSlice";
@@ -62,27 +61,6 @@ const Post = () => {
     isError: commentsIsError,
   } = useGetCommentsQuery({ offset: offsetCommentsRequest });
   const [postComment] = useAddCommentMutation();
-  const [addReaction] = useAddReactionMutation();
-
-  const sliderForward = () => {
-    if (articles) {
-      if (offset === articles.count - 3) {
-        setOffset(0);
-      } else {
-        setOffset((prevOffset) => prevOffset + 1);
-      }
-    }
-  };
-
-  const sliderBackward = () => {
-    if (articles) {
-      if (offset === 0) {
-        setOffset(articles.count - 3);
-      } else {
-        setOffset((prevOffset) => prevOffset - 1);
-      }
-    }
-  };
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
     setMessage(e.currentTarget.value);
@@ -162,10 +140,6 @@ const Post = () => {
     } else if (direction === "prev" && offsetCommentsPage > 0) {
       setOffsetCommentsPage((prev) => prev - 1);
     }
-  }
-
-  function testReaction() {
-    addReaction({ reaction: "test", articleId: 1 });
   }
 
   const popoverShare = (
