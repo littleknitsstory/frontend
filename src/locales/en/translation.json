@@ -1,6 +1,16 @@
 {
   "Header": {
-    "title": "Blog and knitting shop"
+    "title": "Blog and knitting shop",
+    "nav": {
+      "account": "Account",
+      "cart": "Cart",
+      "favorites": "Favorites",
+      "courses": "My Courses",
+      "posts": "My Articles",
+      "orders": "My Orders",
+      "bookmarks": "Bookmarks",
+      "logout": "Logout"
+    }
   },
   "SchemasCard": {
     "title": "Knitting patterns",
@@ -131,20 +141,20 @@
     "required": "Required field!",
     "lengthRequired": "Minimum of 2 characters",
     "incorrectEmail": "Please enter a valid email address",
-    "lengthMax10" : "Maximum of 10 characters",
-    "lengthMax30" : "Maximum of 30 characters",
-    "lengthMax100" : "Maximum of 100 characters",
+    "lengthMax10": "Maximum of 10 characters",
+    "lengthMax30": "Maximum of 30 characters",
+    "lengthMax100": "Maximum of 100 characters",
     "incorrectPhone": "Please enter a valid Montenegro phone number",
     "weakPassword": "At least one uppercase letter, one lowercase letter and one number",
-    "lengthMin8" : "Minimum of 8 characters"
+    "lengthMin8": "Minimum of 8 characters"
   },
   "Notification": {
     "isSaved": "The product is saved",
     "alreadySaved": "The product has already been saved",
     "isAdded": "The product is added to the cart",
-    "alreadyAdded" : "The product has already been added",
-    "somethingWrong" : "Something went wrong",
-    "subscribed" : "Successfully subscribed",
+    "alreadyAdded": "The product has already been added",
+    "somethingWrong": "Something went wrong",
+    "subscribed": "Successfully subscribed",
     "alreadySubscribed": "Already subscribed"
   },
   "Login": {
@@ -223,4 +233,3 @@
   "address": "Address",
   "emptyBookmarks": "No Bookmarks"
 }
-

@@ -47,7 +47,6 @@ const Header = () => {
 
   const logout = (): void => {
     localStorage.removeItem("tokens");
-    console.log(tokens);
     logoutRequest(tokens);
     navigate("/login/");
   };
@@ -65,7 +64,7 @@ const Header = () => {
             />
             <img src={logoLKS} alt="Little Knit Story Logo" className="d-none d-md-inline" />
           </a>
-          <h1 className="text text--md d-none d-md-inline mt-2">Блог и магазин по вязанию</h1>
+          <h1 className="text text--md d-none d-md-inline mt-2">{t("Header.title")}</h1>
           <button
             className="navbar-toggler header-toggler collapsed d-sm-block d-md-none"
             type="button"
@@ -90,7 +89,7 @@ const Header = () => {
                   className="nav-link header__nav-link d-flex align-items-center gap-2"
                 >
                   <ProfileHeaderIcon className="header-navbar--icon" />
-                  <span className="text">Личный кабинет</span>
+                  <span className="text">{t("Header.nav.account")}</span>
                 </Link>
               </li>
               <li className="nav-item" data-bs-toggle="collapse" data-bs-target="#navbarProfile">
@@ -99,7 +98,7 @@ const Header = () => {
                   className="nav-link header__nav-link d-flex align-items-center gap-2"
                 >
                   <BagIcon className="header-navbar--icon" />
-                  <span className="text">Корзина</span>
+                  <span className="text">{t("Header.nav.cart")}</span>
                 </Link>
               </li>
               <li className="nav-item" data-bs-toggle="collapse" data-bs-target="#navbarProfile">
@@ -108,17 +107,17 @@ const Header = () => {
                   className="nav-link header__nav-link d-flex align-items-center gap-2"
                 >
                   <HeartIcon className="header-navbar--icon" />
-                  <span className="text">Избранное</span>
+                  <span className="text">{t("Header.nav.favorites")}</span>
                 </Link>
               </li>
-              <div className="header-navbar--divider my-3"></div>
+              <div className="header-navbar--divider my-3 w-100"></div>
               <li className="nav-item" data-bs-toggle="collapse" data-bs-target="#navbarProfile">
                 <Link
                   to={ROUTES.PROFILE_COURSES}
                   className="nav-link header__nav-link d-flex align-items-center gap-2"
                 >
                   <CoursesIcon className="header-navbar--icon" />
-                  <span className="text">Мои курсы</span>
+                  <span className="text">{t("Header.nav.courses")}</span>
                 </Link>
               </li>
               <li className="nav-item" data-bs-toggle="collapse" data-bs-target="#navbarProfile">
@@ -127,7 +126,7 @@ const Header = () => {
                   className="nav-link header__nav-link d-flex align-items-center gap-2"
                 >
                   <PostsIcon className="header-navbar--icon" />
-                  <span className="text">Мои посты</span>
+                  <span className="text">{t("Header.nav.posts")}</span>
                 </Link>
               </li>
               <li className="nav-item" data-bs-toggle="collapse" data-bs-target="#navbarProfile">
@@ -136,7 +135,7 @@ const Header = () => {
                   className="nav-link header__nav-link d-flex align-items-center gap-2"
                 >
                   <OrdersIcon className="header-navbar--icon" />
-                  <span className="text">Мои заказы</span>
+                  <span className="text">{t("Header.nav.orders")}</span>
                 </Link>
               </li>
               <li className="nav-item" data-bs-toggle="collapse" data-bs-target="#navbarProfile">
@@ -145,7 +144,7 @@ const Header = () => {
                   className="nav-link header__nav-link d-flex align-items-center gap-2"
                 >
                   <BookmarksIcon className="header-navbar--icon" />
-                  <span className="text">Список для чтения</span>
+                  <span className="text">{t("Header.nav.bookmarks")}</span>
                 </Link>
               </li>
               <div className="header-navbar--divider my-3"></div>
@@ -164,7 +163,7 @@ const Header = () => {
                   onClick={logout}
                 >
                   <LogoutIcon className="header-navbar--icon" />
-                  <span className="text">Выйти</span>
+                  <span className="text">{t("Header.nav.logout")}</span>
                 </button>
               </li>
             </ul>
