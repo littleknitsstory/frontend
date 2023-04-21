@@ -25,6 +25,7 @@ export const FormsInput = ({
   ClassAttributes<HTMLInputElement> &
   FieldHookConfig<string>) => {
   const [field, meta] = useField(props);
+
   return (
     <>
       <Form.Group as={Col} md={col} controlId={controlId} className="form-group">

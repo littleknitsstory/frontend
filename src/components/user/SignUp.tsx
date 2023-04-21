@@ -11,6 +11,8 @@ import Spinner from "../utils/Spinner";
 import { useNavigate } from "react-router-dom";
 import { notificationError } from "../../components/modal/Notification";
 import { ISignUp } from "../../app/types";
+import { ReactComponent as Cross } from "../../assets/icons/cross-1.svg";
+import { ReactComponent as Check } from "../../assets/icons/check.svg";
 
 interface errorType {
   status: number;
@@ -60,6 +62,18 @@ const SignUp = () => {
   if (isLoading) {
     return <Spinner />;
   }
+  function containsNumber(str: string): boolean {
+    const regex = /\d/;
+    return regex.test(str);
+  }
+  function containsLetter(str: string): boolean {
+    const regex = /[a-zA-Zа-яА-ЯёЁ]/;
+    return regex.test(str);
+  }
+  function isLengthAtLeast8(str: string): boolean {
+    const regex = /^.{8,}$/;
+    return regex.test(str);
+  }
 
   return (
     <Formik
@@ -69,50 +83,100 @@ const SignUp = () => {
         password: Yup.string()
           .min(8, t("Forms.lengthMin8"))
           .max(30, t("Forms.lengthMax30"))
+          .matches(/\d/, t("Forms.containOneNumber"))
+          .matches(/[a-zA-Zа-яА-ЯёЁ]/, t("Forms.containOneLetter"))
           .required(t("Forms.required")),
         confirmPassword: Yup.string().oneOf([Yup.ref("password")], "Passwords must match"),
       })}
       onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}
     >
-      <FormikForm className="contacts__form">
-        <FormsInput
-          controlId={"email"}
-          type="email"
-          placeholder={t("FormFields.email")}
-          name="email"
-        />
-        <div className="input--with-icon">
+      {({ errors, values }) => (
+        <FormikForm className="contacts__form">
           <FormsInput
-            controlId={"password"}
-            type={passwordShown ? "text" : "password"}
-            placeholder={t("FormFields.password")}
-            name="password"
+            controlId={"email"}
+            type="email"
+            placeholder={t("FormFields.email")}
+            name="email"
           />
-          <img
-            onClick={() => setPasswordShown((prev) => !prev)}
-            src={eye}
-            alt="eye-logo"
-            className="input__icon"
-          />
-        </div>
-        <div className="input--with-icon">
-          <FormsInput
-            controlId={"confirmPassword"}
-            type={passwordConfirmShown ? "text" : "password"}
-            placeholder={t("FormFields.confirmPassword")}
-            name="confirmPassword"
-          />
-          <img
-            onClick={() => setPasswordConfirmShown((prev) => !prev)}
-            src={eye}
-            alt="eye-logo"
-            className="input__icon"
-          />
-        </div>
-        <button type="submit" className="btn btn--primary">
-          {t("Login.createAccount")}
-        </button>
-      </FormikForm>
+          <div className="input--with-icon">
+            <FormsInput
+              controlId={"password"}
+              type={passwordShown ? "text" : "password"}
+              placeholder={t("FormFields.password")}
+              name="password"
+            />
+            <img
+              onClick={() => setPasswordShown((prev) => !prev)}
+              src={eye}
+              alt="eye-logo"
+              className="input__icon"
+            />
+          </div>
+
+          <div className="requirements-hint">
+            <h6 className="requirements-hint__title">{t("Forms.PasswordRequirement")}</h6>
+            <div className="requirements-hint__rules">
+              <div className="requirements-hint__rule">
+                <div className="requirements-hint__rule__icon">
+                  {(errors.password && errors.password === t("Forms.lengthMin8")) ||
+                  (errors.password && values.password === "") ? (
+                    <Cross />
+                  ) : values.password === "" ? null : isLengthAtLeast8(values.password) ? (
+                    <Check />
+                  ) : (
+                    <Cross />
+                  )}
+                </div>
+                <span className="requirements-hint__rule__text">{t("Forms.lengthMin8")}</span>
+              </div>
+              <div className="requirements-hint__rule">
+                <div className="requirements-hint__rule__icon">
+                  {(errors.password && errors.password === t("Forms.containOneLetter")) ||
+                  (errors.password && values.password === "") ? (
+                    <Cross />
+                  ) : values.password === "" ? null : containsLetter(values.password) ? (
+                    <Check />
+                  ) : (
+                    <Cross />
+                  )}
+                </div>
+                <span className="requirements-hint__rule__text">{t("Forms.containOneLetter")}</span>
+              </div>
+              <div className="requirements-hint__rule">
+                <div className="requirements-hint__rule__icon">
+                  {(errors.password && errors.password === t("Forms.containOneNumber")) ||
+                  (errors.password && values.password === "") ? (
+                    <Cross />
+                  ) : values.password === "" ? null : containsNumber(values.password) ? (
+                    <Check />
+                  ) : (
+                    <Cross />
+                  )}
+                </div>
+                <span className="requirements-hint__rule__text">{t("Forms.containOneNumber")}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="input--with-icon">
+            <FormsInput
+              controlId={"confirmPassword"}
+              type={passwordConfirmShown ? "text" : "password"}
+              placeholder={t("FormFields.confirmPassword")}
+              name="confirmPassword"
+            />
+            <img
+              onClick={() => setPasswordConfirmShown((prev) => !prev)}
+              src={eye}
+              alt="eye-logo"
+              className="input__icon"
+            />
+          </div>
+          <button type="submit" className="btn btn--primary">
+            {t("Login.createAccount")}
+          </button>
+        </FormikForm>
+      )}
     </Formik>
   );
 };

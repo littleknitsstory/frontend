@@ -3,11 +3,13 @@ import { useTranslation } from "react-i18next";
 import { Formik, Form as FormikForm, FormikState } from "formik";
 import * as Yup from "yup";
 import "yup-phone-lite";
+import PhoneInput from "react-phone-number-input";
 import { useAddContactsMutation } from "../../components/features/api/apiSlice";
 import useModalState from "../../components/hooks/useModalState";
 import ModalThanks from "../../components/modal/ModalThanks";
 import { FormsInput } from "../../components/utils/Forms";
 import { FormValues } from "../../app/types";
+import "react-phone-number-input/style.css";
 // assets
 import envelope from "../../assets/icons/envelope.svg";
 import map from "../../assets/icons/map-point.svg";
@@ -29,10 +31,12 @@ const Contacts = () => {
   const handleFormSubmit = (
     values: FormValues,
     resetForm: (nextState?: Partial<FormikState<FormValues>> | undefined) => void,
+    setFieldValue: (field: string, value: any) => void,
   ): void => {
     addContacts(values);
     handleShowThanks();
     resetForm();
+    setFieldValue("phone_number", "");
   };
 
   return (
@@ -48,6 +52,7 @@ const Contacts = () => {
           >
             <div className="coffee-card">
               <div className="coffee-card__title">{t("Contacts.title")}</div>
+
               <Formik
                 initialValues={initialFormDataState}
                 validationSchema={Yup.object().shape({
@@ -59,62 +64,74 @@ const Contacts = () => {
                     .email(t("Forms.incorrectEmail"))
                     .required(t("Forms.required")),
                   phone_number: Yup.string()
-                    .phone("ME", t("Forms.incorrectPhone"))
-                    .required(t("Forms.required")),
+                    .required(t("Forms.required"))
+                    .max(15, t("Forms.lengthMax15")),
                   company: Yup.string().max(30, t("Forms.lengthMax30")),
-                  message: Yup.string().max(100, t("Forms.lengthMax100")),
+                  message: Yup.string()
+                    .max(100, t("Forms.lengthMax100"))
+                    .required(t("Forms.required")),
                 })}
-                onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}
+                onSubmit={(values, { resetForm, setFieldValue }) => {
+                  handleFormSubmit(values, resetForm, setFieldValue);
+                }}
               >
-                <FormikForm className="contacts__form">
-                  <Row>
-                    <FormsInput
-                      col={6}
-                      controlId={"name"}
-                      type="text"
-                      placeholder={t("FormFields.name")}
-                      name="name"
-                    />
-                    <FormsInput
-                      col={6}
-                      controlId={"theme"}
-                      type="text"
-                      placeholder={t("FormFields.subject")}
-                      name="company"
-                    />
-                  </Row>
+                {({ values, setFieldValue, errors }) => (
+                  <FormikForm className="contacts__form">
+                    <Row>
+                      <FormsInput
+                        col={6}
+                        controlId={"name"}
+                        type="text"
+                        placeholder={t("FormFields.name")}
+                        name="name"
+                      />
+                      <FormsInput
+                        col={6}
+                        controlId={"theme"}
+                        type="text"
+                        placeholder={t("FormFields.subject")}
+                        name="company"
+                      />
+                    </Row>
 
-                  <Row>
-                    <FormsInput
-                      col={12}
-                      controlId={"phone"}
-                      type="tel"
-                      placeholder={t("FormFields.phone")}
-                      name="phone_number"
-                    />
+                    <Row>
+                      <div className={errors.phone_number && "PhoneInputInputError"}>
+                        <PhoneInput
+                          id="phone_number"
+                          name="phone_number"
+                          placeholder={t("FormFields.phone")}
+                          value={values.phone_number}
+                          onChange={(value) => setFieldValue("phone_number", value)}
+                        />
+                      </div>
 
-                    <FormsInput
-                      col={12}
-                      controlId={"email"}
-                      type="text"
-                      placeholder={t("FormFields.email")}
-                      name="email"
-                    />
-                  </Row>
-                  <Row>
-                    <FormsInput
-                      as="textarea"
-                      col={12}
-                      controlId={"message"}
-                      placeholder={t("FormFields.message")}
-                      name="message"
-                    />
-                  </Row>
-                  <button className="btn btn--primary">{t("Contacts.send")}</button>
-                  {/* <button className="btn btn_white btn_center contacts__btn" type="submit">
+                      {errors.phone_number && <p className="form-error">{errors.phone_number}</p>}
+
+                      <FormsInput
+                        col={12}
+                        controlId={"email"}
+                        type="text"
+                        placeholder={t("FormFields.email")}
+                        name="email"
+                      />
+                    </Row>
+                    <Row>
+                      <FormsInput
+                        as="textarea"
+                        col={12}
+                        controlId={"message"}
+                        placeholder={t("FormFields.message")}
+                        name="message"
+                      />
+                    </Row>
+                    <button type="submit" className="btn btn--primary">
+                      {t("Contacts.send")}
+                    </button>
+                    {/* <button className="btn btn_white btn_center contacts__btn" type="submit">
                     <div className="btn__text btn__text_center">{t("Contacts.send")}</div>
                   </button> */}
-                </FormikForm>
+                  </FormikForm>
+                )}
               </Formik>
 
               <div className="contacts__policy">{t("Contacts.policy")}</div>

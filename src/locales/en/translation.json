@@ -141,12 +141,16 @@
     "required": "Required field!",
     "lengthRequired": "Minimum of 2 characters",
     "incorrectEmail": "Please enter a valid email address",
-    "lengthMax10": "Maximum of 10 characters",
-    "lengthMax30": "Maximum of 30 characters",
-    "lengthMax100": "Maximum of 100 characters",
-    "incorrectPhone": "Please enter a valid Montenegro phone number",
+    "lengthMax10" : "Maximum of 10 characters",
+    "lengthMax30" : "Maximum of 30 characters",
+    "lengthMax100" : "Maximum of 100 characters",
+    "lengthMax15" : "Maximum of 15 characters",
+    "incorrectPhone": "Please enter a valid phone number",
     "weakPassword": "At least one uppercase letter, one lowercase letter and one number",
-    "lengthMin8": "Minimum of 8 characters"
+    "lengthMin8" : "Minimum of 8 characters",
+    "containOneNumber" : "Must contain at least one number",
+    "containOneLetter" : "Must contain at least one letter",
+    "PasswordRequirement": "Password requirement"
   },
   "Notification": {
     "isSaved": "The product is saved",
