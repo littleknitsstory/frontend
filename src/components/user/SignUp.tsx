@@ -11,7 +11,7 @@ import Spinner from "../utils/Spinner";
 import { useNavigate } from "react-router-dom";
 import { notificationError } from "../../components/modal/Notification";
 import { ISignUp } from "../../app/types";
-import { ReactComponent as Cross } from "../../assets/icons/cross.svg";
+import { ReactComponent as Cross } from "../../assets/icons/cross-1.svg";
 import { ReactComponent as Check } from "../../assets/icons/check.svg";
 
 interface errorType {
