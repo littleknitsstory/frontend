@@ -1,4 +1,3 @@
-import { Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useGetFeaturesQuery } from "../../components/features/api/apiSlice";
@@ -6,7 +5,7 @@ import Menu from "../../components/menu/Menu";
 import { ReactComponent as ProfileIcon } from "../../assets/icons/user.svg";
 import { ReactComponent as HeartIcon } from "../../assets/icons/heart-big.svg";
 import { ReactComponent as BagIcon } from "../../assets/icons/bag.svg";
-import { ReactComponent as BookmarksIcon } from "../../assets/icons/bookmark-link.svg";
+import { ReactComponent as BookMarkIcon } from "../../assets/icons/bookmark-link.svg";
 import { useEffect, useState } from "react";
 import { ROUTES } from "../../app/routes";
 
@@ -34,44 +33,41 @@ const NavBar = () => {
   };
 
   return (
-    <Navbar expand="lg" className="navbar">
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-
-      <nav className="navbar__aside">
-        <div className="navbar__divider"></div>
-        {feature?.account && (
-          <NavLink to="/profile" className="profile-icon">
-            {({ isActive, isPending }) => (
-              <span className={isActive ? "active" : ""}>
-                <ProfileIcon id="profile-icon-svg" />
-              </span>
+    <div className="container-lg">
+      <nav className="navbar">
+        <ul className="navbar-nav flex-row text text--md w-100 justify-content-evenly justify-content-md-start mt-3 gap-4">
+          <Menu type={"header"} />
+          <div className="d-flex ms-auto gap-3 d-none d-md-flex">
+            <div className="vr"></div>
+            {feature?.account && (
+              <NavLink to={ROUTES.PROFILE} className="navbar__icon align-self-center">
+                {({ isActive, isPending }) => (
+                  <ProfileIcon className={isActive ? "active" : ""} id="" />
+                )}
+              </NavLink>
             )}
-          </NavLink>
-        )}
 
-        <NavLink to={ROUTES.BOOKMARKS} className="profile-icon">
-          <BookmarksIcon id="profile-icon-svg" />
-        </NavLink>
-        <div className="navbar__divider"></div>
-        {/* <a href="#">
-          <img src={logout} alt="logout" />
-        </a> */}
-        <NavLink to={ROUTES.FAVORITE_PRODUCTS} className="profile-icon">
-          <HeartIcon id="favorite-icon-svg" />
-        </NavLink>
-        <NavLink to={ROUTES.CART} className="profile-icon">
-          <BagIcon id="bag-icon-svg" />
-        </NavLink>
-        <div className="navbar__divider"></div>
-        <p className="navbar__change-lang" onClick={changeLang}>
-          {lang}
-        </p>
+            <NavLink to={ROUTES.FAVORITE_PRODUCTS} className="navbar__icon align-self-center">
+              <BookMarkIcon id="bookmark-icon-svg" className="align-self-center" />
+            </NavLink>
+            <div className="vr"></div>
+            <NavLink to={ROUTES.BOOKMARKS} className="navbar__icon align-self-center">
+              <HeartIcon id="favorite-icon-svg" className="align-self-center" />
+            </NavLink>
+            <NavLink to={ROUTES.CART} className="navbar__icon align-self-center">
+              <BagIcon id="bag-icon-svg" />
+            </NavLink>
+            <div className="vr"></div>
+            <p
+              className="navbar__change-lang navbar__icon align-self-center m-0"
+              onClick={changeLang}
+            >
+              {lang}
+            </p>
+          </div>
+        </ul>
       </nav>
-
-      <Navbar.Collapse className="navbar__main">
-        <Menu type={"header"} className="navbar__main-link" />
-      </Navbar.Collapse>
-    </Navbar>
+    </div>
   );
 };
 

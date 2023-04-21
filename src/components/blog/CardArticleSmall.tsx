@@ -15,11 +15,9 @@ const CardArticleSmall = ({ ...article }: IArticle) => {
           className="card-article-small__image"
         />
         <div className="card-article-small__body">
-          <h2 className="card-article-small__title">{article.title}</h2>
+          <h2 className="text text--md text--bold">{article.title}</h2>
           <div className="card-article-small__content">{parse(article.content)}</div>
-          <p className="card-article-small__text card-article-small__text--grey">
-            3 минуты на чтение
-          </p>
+          <small>3 минуты на чтение</small>
           <div className="divider"></div>
           <div className="card-article-small__description">
             <img src={avatar} alt="avatar" className="avatar" />

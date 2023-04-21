@@ -7,7 +7,7 @@ import { useGetMenuQuery } from "../features/api/apiSlice";
 
 interface propTypes {
   type: "footer" | "header";
-  className: string;
+  // className: string;
 }
 
 const PrimaryNav = (props: propTypes) => {
@@ -32,15 +32,17 @@ const PrimaryNav = (props: propTypes) => {
     <>
       {sortedMenuItem.map((item) =>
         item.target ? (
-          <a key={item.id} className={props.className} href={item.url} target={item.target}>
+          <a key={item.id} href={item.url} target={item.target}>
             {item.name}
           </a>
         ) : (
-          <NavLink key={item.id} className={props.className} to={item.url}>
-            {({ isActive, isPending }) => (
-              <span className={isActive ? "active" : ""}>{item.name}</span>
-            )}
-          </NavLink>
+          <li key={item.id} className="nav-item">
+            <NavLink className="nav-link text-uppercase header-nav-link" to={item.url}>
+              {({ isActive, isPending }) => (
+                <span className={isActive ? "active" : ""}>{item.name}</span>
+              )}
+            </NavLink>
+          </li>
         ),
       )}
     </>
