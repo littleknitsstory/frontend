@@ -197,7 +197,12 @@ const Post = () => {
                 {article?.title}
               </h2>
               {article && <Bookmark slugPost={article?.slug} />}
-              <OverlayTrigger trigger="click" placement="bottom" overlay={popoverShare}>
+              <OverlayTrigger
+                trigger="click"
+                placement="bottom"
+                overlay={popoverShare}
+                rootClose={true}
+              >
                 <ShareIcon />
               </OverlayTrigger>
             </div>
@@ -249,7 +254,12 @@ const Post = () => {
                 <SpeechBubbleIcon />
                 <p className="m-0">32</p>
               </div>
-              <OverlayTrigger trigger="click" placement="bottom" overlay={popoverShare}>
+              <OverlayTrigger
+                trigger="click"
+                placement="bottom"
+                overlay={popoverShare}
+                rootClose={true}
+              >
                 <ShareIconGrey />
               </OverlayTrigger>
             </div>
