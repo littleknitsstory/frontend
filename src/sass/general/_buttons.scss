@@ -53,11 +53,14 @@
 
 .link {
   &--with-icon {
+    box-sizing: content-box;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     font-size: 1.25rem;
     font-weight: 500;
+    border-radius: 0;
+    padding: 0;
   }
   &:hover {
     cursor: pointer;

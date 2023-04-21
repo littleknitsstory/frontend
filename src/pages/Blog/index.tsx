@@ -132,33 +132,35 @@ const Posts = () => {
   return (
     <>
       {feature?.blog && (
-        <main className="posts">
-          <div className="posts__wrapper">
-            <div className="posts__tags-slider">
-              <ArrowLeftSVG onClick={sliderBackward} className="posts__btn--arrow" />
-              <div className="posts__tags">
-                {tags.map((item) => (
-                  <button
-                    key={item.slug}
-                    onClick={(e: React.SyntheticEvent<HTMLButtonElement>) => handleSelectTag(e)}
-                    data-slug={item.slug}
-                    className="btn btn--tag"
-                    style={selectedTag === item.slug ? activeStyle : {}}
-                  >
-                    {item.title}
-                  </button>
-                ))}
-              </div>
-              <ArrowRightSVG onClick={sliderForward} className="posts__btn--arrow" />
-            </div>
-            {isFetching && <Spinner />}
-            <article className="posts__articles">
-              {shownPosts?.map((post) => (
-                <CardArticle key={post.slug} slug={post.slug} />
+        <main className="container-lg mt-5">
+          <div className="d-flex align-items-center justify-content-evenly mb-4">
+            <ArrowLeftSVG
+              onClick={sliderBackward}
+              className="posts__btn--arrow d-none d-md-block"
+            />
+            <div className="d-flex gap-3">
+              {tags.map((item) => (
+                <button
+                  key={item.slug}
+                  onClick={(e: React.SyntheticEvent<HTMLButtonElement>) => handleSelectTag(e)}
+                  data-slug={item.slug}
+                  className="btn btn--tag"
+                  style={selectedTag === item.slug ? activeStyle : {}}
+                >
+                  {item.title}
+                </button>
               ))}
-            </article>
-            <div ref={loaderRef} />
+            </div>
+            <ArrowRightSVG
+              onClick={sliderForward}
+              className="posts__btn--arrow d-none d-md-block"
+            />
           </div>
+          {isFetching && <Spinner />}
+          {shownPosts?.map((post) => (
+            <CardArticle key={post.slug} slug={post.slug} />
+          ))}
+          <div ref={loaderRef} />
         </main>
       )}
     </>

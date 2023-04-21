@@ -17,7 +17,7 @@ const Bookmarks = () => {
   }
 
   return (
-    <div className="bookmarks">
+    <div className="container mt-5">
       <article className="posts__articles">
         {savedPostsSlugs?.map((slug) => (
           <CardArticle key={slug} slug={slug} />

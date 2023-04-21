@@ -1,0 +1,44 @@
+@use "../variables" as *;
+
+.text {
+  font-family: "Montserrat", sans-serif;
+  color: $black-text;
+  font-weight: 400;
+  font-size: 1rem;
+
+  &--xl {
+    font-size: 2.375rem;
+  }
+
+  &--lg {
+    font-size: 2rem;
+  }
+
+  &--md {
+    font-size: 1.25rem;
+  }
+
+  &--18 {
+    font-size: 1.125rem;
+  }
+
+  &--sm {
+    font-size: 0.875rem;
+  }
+
+  &--bold {
+    font-weight: 500;
+  }
+
+  &--white {
+    color: $white;
+  }
+
+  &--grey {
+    color: $secondary-grey;
+  }
+
+  &--light-grey {
+    color: $secondary-light-grey;
+  }
+}
