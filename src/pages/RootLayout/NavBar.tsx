@@ -47,11 +47,11 @@ const NavBar = () => {
               </NavLink>
             )}
 
-            <NavLink to={ROUTES.FAVORITE_PRODUCTS} className="navbar__icon align-self-center">
+            <NavLink to={ROUTES.BOOKMARKS} className="navbar__icon align-self-center">
               <BookMarkIcon id="bookmark-icon-svg" className="align-self-center" />
             </NavLink>
             <div className="vr"></div>
-            <NavLink to={ROUTES.BOOKMARKS} className="navbar__icon align-self-center">
+            <NavLink to={ROUTES.FAVORITE_PRODUCTS} className="navbar__icon align-self-center">
               <HeartIcon id="favorite-icon-svg" className="align-self-center" />
             </NavLink>
             <NavLink to={ROUTES.CART} className="navbar__icon align-self-center">

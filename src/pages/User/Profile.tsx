@@ -47,7 +47,6 @@ const Profile = () => {
     <>
       {feature?.account && (
         <div className="profile">
-          <button onClick={() => logout()}>logout</button>
           <nav className="profile__nav">
             <ul className="profile__links">
               <li className="profile__list">
