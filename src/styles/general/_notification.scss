@@ -1,0 +1,16 @@
+@use "../variables" as *;
+
+.rnc__notification-item--success {
+  background-color: $vinous-color;
+  border-left: 8px solid $vinous-color;
+  cursor: default;
+}
+.rnc__notification-title {
+  font-size: 1.3rem;
+}
+
+.rnc__notification-item--warning {
+  background-color: $coffee-color;
+  border-left: 8px solid $coffee-color;
+  cursor: default;
+}

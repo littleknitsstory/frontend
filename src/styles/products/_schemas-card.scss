@@ -1,0 +1,26 @@
+.schemas-card {
+  margin-top: 7rem;
+}
+
+@media (max-width: 992px) {
+  .schemas-card {
+    margin-top: 4rem;
+    &__btn {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .schemas-card {
+    &__btn {
+      padding-left: 0;
+    }
+    .btn {
+      &_vinous {
+        margin: 1.875rem auto;
+      }
+    }
+  }
+}

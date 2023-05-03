@@ -1,0 +1,13 @@
+@use "./_buttons.scss";
+@use "./forms";
+@use "./notification";
+@use "./page-error";
+@use "./typography";
+
+a {
+  text-decoration: none;
+  color: inherit;
+  &:hover {
+    color: inherit;
+  }
+}

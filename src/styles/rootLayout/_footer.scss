@@ -1,0 +1,112 @@
+@use "../variables" as *;
+
+footer {
+  text-align: center;
+  margin-top: 11.875rem;
+  color: $black;
+  // @include container;
+}
+
+.footer {
+  &__title {
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: 150%;
+    margin-bottom: 2rem;
+    margin-top: 4rem;
+  }
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  &__link {
+    font-size: 1.25rem;
+    color: $black-text;
+    &--small {
+      font-size: 0.875rem;
+    }
+    &:hover {
+      border-bottom: 1px solid $secondary-dark-grey;
+    }
+  }
+
+  &__text {
+    font-size: 1.25rem;
+    line-height: 150%;
+    &--small {
+      font-size: 0.875rem;
+    }
+  }
+
+  &__form {
+    position: relative;
+    margin-top: 1.875rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    input {
+      padding: 0.75rem 1.5rem;
+      border-radius: 48px;
+    }
+    & .form-error {
+      position: absolute;
+      left: 5px;
+    }
+  }
+  &__logo-img {
+    width: 100%;
+    margin: 7.5rem auto 0;
+  }
+  &__logo-text {
+    margin-top: 1.31125rem;
+    font-size: 1.5rem;
+    line-height: 150%;
+    font-weight: 400;
+    text-align: center;
+  }
+}
+
+.break-line {
+  border: 1px solid $light-grey;
+  margin-top: 5rem;
+  margin-bottom: 1.875rem;
+}
+
+@media (min-width: 650px) {
+  .footer {
+    &__flex-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      gap: 2rem;
+    }
+    &__form {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+    }
+    &__subscribe {
+      max-width: 480px;
+    }
+    &__copyrights {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+  }
+}
+
+@media (min-width: 1089px) {
+  .footer {
+    &__flex-container {
+      text-align: left;
+      justify-content: space-between;
+    }
+    &__nav {
+      align-items: flex-start;
+    }
+  }
+}

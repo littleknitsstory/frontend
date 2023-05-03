@@ -1,0 +1,14 @@
+@use "../variables" as *;
+
+.posts {
+  &__btn {
+    &--arrow {
+      box-sizing: content-box;
+      padding: 0.25rem;
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.25);
+      }
+    }
+  }
+}

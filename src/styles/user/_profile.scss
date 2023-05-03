@@ -1,0 +1,48 @@
+@use "../variables" as *;
+
+.profile {
+  margin-top: 3.125rem;
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0;
+    padding-bottom: 0.5rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__link {
+    font-size: 1.25rem;
+    color: $black-text;
+    font-weight: 400;
+
+    &:hover {
+      font-weight: 500;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #242121;
+    }
+
+    &.active {
+      font-weight: 500;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #242121;
+    }
+  }
+
+  &__list {
+    list-style: none;
+  }
+}
+
+@media (min-width: 905px) {
+  .profile {
+    margin-top: 6.25rem;
+    &__links {
+      flex-direction: row;
+      width: fit-content;
+      border-bottom: 1px solid $secondary-grey;
+    }
+  }
+}
