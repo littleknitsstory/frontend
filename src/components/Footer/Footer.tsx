@@ -21,7 +21,7 @@ export default function Footer() {
     if ("originalStatus" in error) {
       Store.addNotification({
         ...notificationError,
-        title: "test",
+        title: "Something went wrong",
       });
     }
     if ("data" in error) {
@@ -29,7 +29,7 @@ export default function Footer() {
         if (error.data.hasOwnProperty("email")) {
           Store.addNotification({
             ...notificationError,
-            title: "error.data.email",
+            title: error.data.email,
           });
         }
       }
@@ -117,7 +117,9 @@ export default function Footer() {
           <Formik
             initialValues={initialValue}
             validationSchema={Yup.object().shape({
-              email: Yup.string().email(t("incorrectEmail")).required(t("required")),
+              email: Yup.string()
+                .email(t("incorrectEmail") || "")
+                .required(t("required") || ""),
             })}
             onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}
           >
@@ -138,7 +140,11 @@ export default function Footer() {
       </div>
 
       <Link href={ROUTES.HOME}>
-        <Image src={footerLogo} alt="Little Knits Story Logo" className="mt-5" />
+        <Image
+          src={footerLogo}
+          alt="Little Knits Story Logo"
+          className="mt-5 px-3 img-responsive w-100"
+        />
         <h2 className="footer__logo-text">{t("title")}</h2>
       </Link>
 

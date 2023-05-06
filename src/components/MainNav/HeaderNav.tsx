@@ -1,38 +1,95 @@
 import Link from "next/link";
-import { useGetMenuQuery } from "@/services/features/api/apiSlice";
-import styles from "./mainNav.module.scss";
+import Image from "next/image";
 import { useRouter } from "next/router";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { IMenuResponse } from "@/services/types";
+import { useEffect, useState } from "react";
 
-function HeaderNav() {
-  const { locale: language } = useRouter();
+import { useGetFeaturesQuery } from "@/services/features/api/apiSlice";
+import { ROUTES } from "../../services/routes";
+import Menu from "./Menu";
+import UserSVG from "../SVG/UserSVG";
 
-  const { data: menuClient, isLoading, isError } = useGetMenuQuery({ lang: language ?? "en" });
+const HeaderNav = () => {
+  const router = useRouter();
+  const { data: feature } = useGetFeaturesQuery();
+  const [currentLanguage, setCurrentLanguage] = useState("English");
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
+  useEffect(() => {
+    switch (router.locale) {
+      case "ru":
+        setCurrentLanguage("Русский");
+        break;
+      case "en":
+        setCurrentLanguage("English");
+        break;
+    }
+  }, [router.locale]);
 
-  if (isError) {
-    return <p>Cannot load menu, please refresh page!</p>;
-  }
+  const languageToggler = (): string => {
+    switch (router.locale) {
+      case "ru":
+        return "en";
+      case "en":
+        return "ru";
+      default:
+        return "en";
+    }
+  };
 
-  // const menu = props.menuSSG
+  const changeLanguageHandler = (): void => {
+    const { pathname, query } = router;
+    router.push({ pathname, query }, router.asPath, { locale: languageToggler() });
+  };
 
   return (
-    <ul className="navbar-nav flex-row justify-content-between text-uppercase mt-3">
-      {menuClient?.results
-        .filter((navItem) => navItem.menu.hint === "header")
-        .sort((a, b) => a.ordering - b.ordering)
-        .map((navItem) => (
-          <li key={navItem.id} className="nav-item">
-            <Link href={navItem.url} className={`${styles.navLink} nav-link text--md`}>
-              {navItem.name}
+    <nav className="navbar">
+      <ul className="navbar-nav flex-row text text--md w-100 justify-content-between justify-content-md-start mt-3 gap-lg-5 gap-4">
+        <Menu type={"header"} />
+        <div className="d-flex ms-auto gap-3 d-none d-md-flex">
+          <div className="vr"></div>
+          {feature?.account && (
+            <Link href={ROUTES.PROFILE} className="navbar__icon align-self-center">
+              <UserSVG active={router.pathname === "/" ? true : false} />
             </Link>
-          </li>
-        ))}
-    </ul>
+          )}
+
+          <Link href={ROUTES.BOOKMARKS} className="navbar__icon align-self-center">
+            <Image
+              src="/icons/bookmark-link.svg"
+              alt="Bookmark Icon"
+              className={router.pathname == "/" ? "active" : ""}
+              width={30}
+              height={30}
+            />
+          </Link>
+          <div className="vr"></div>
+          <Link href={ROUTES.FAVORITE_PRODUCTS} className="navbar__icon align-self-center">
+            <Image
+              src="/icons/heart-big.svg"
+              alt="Heart Icon"
+              className={router.pathname == "/" ? "active" : ""}
+              width={30}
+              height={30}
+            />
+          </Link>
+          <Link href={ROUTES.CART} className="navbar__icon align-self-center">
+            <Image
+              src="/icons/bag.svg"
+              alt="Bag Icon"
+              className={router.pathname == "/" ? "active" : ""}
+              width={30}
+              height={30}
+            />
+          </Link>
+          <div className="vr"></div>
+          <p
+            className="navbar__change-lang navbar__icon align-self-center m-0"
+            onClick={changeLanguageHandler}
+          >
+            {currentLanguage}
+          </p>
+        </div>
+      </ul>
+    </nav>
   );
-}
+};
 export default HeaderNav;

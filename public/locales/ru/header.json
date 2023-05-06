@@ -1,3 +1,9 @@
 {
-  "title": "Блог и магазин по вязанию"
+  "title": "Блог и магазин по вязанию",
+  "account": "Account",
+  "courses": "My Courses",
+  "articles": "My Articles",
+  "orders": "My Orders",
+  "bookmarks": "Bookmarks",
+  "logout": "Logout"
 }

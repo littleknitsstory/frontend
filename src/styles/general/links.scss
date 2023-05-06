@@ -1,0 +1,28 @@
+@use "../../styles/variables.scss" as *;
+
+.nav-link {
+  display: inline;
+  position: relative;
+  color: $black-text;
+  &.active {
+    font-weight: 500;
+    border-bottom: 2px solid $black-text;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background-color: $secondary-dark-grey;
+    border-radius: 4px;
+    scale: 0 1;
+    transform-origin: right;
+    transition: scale 0.25s;
+  }
+  &:hover::before {
+    scale: 1;
+    transform-origin: left;
+  }
+}

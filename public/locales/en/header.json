@@ -1,3 +1,9 @@
 {
-  "title": "Blog and knitting shop"
+  "title": "Blog and knitting shop",
+  "account": "Личный кабинет",
+  "courses": "Мои курсы",
+  "articles": "Мои посты",
+  "orders": "Мои заказы",
+  "bookmarks": "Список для чтения",
+  "logout": "Выйти"
 }

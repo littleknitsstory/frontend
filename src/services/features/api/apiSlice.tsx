@@ -1,4 +1,4 @@
-import { IMenuResponse } from "@/services/types";
+import { IFeaturesFlags, IMenuResponse } from "@/services/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export enum URLS {
@@ -20,6 +20,8 @@ export enum URLS {
   REACTIONS = "/reactions/",
 }
 
+export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363/";
+
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: process.env.API_BASE_URL }),
@@ -37,7 +39,10 @@ export const apiSlice = createApi({
         body: email,
       }),
     }),
+    getFeatures: builder.query<IFeaturesFlags, void>({
+      query: () => URLS.FEATURES_FLAGS,
+    }),
   }),
 });
 
-export const { useGetMenuQuery, useAddSubscriptionMutation } = apiSlice;
+export const { useGetMenuQuery, useAddSubscriptionMutation, useGetFeaturesQuery } = apiSlice;

@@ -13,6 +13,6 @@
   },
 
   "required": "Required field!",
-  "lengthRequired": "Minimum of 2 characters",
+  "somethingWrong": "Something went wrong",
   "incorrectEmail": "Please enter a valid email address"
 }

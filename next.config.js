@@ -8,6 +8,25 @@ const nextConfig = {
     defaultLocale: "en",
     locales: ["en", "ru"],
   },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/articles",
+        permanent: true,
+      },
+    ];
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "dev.backend.littleknitsstory.com",
+        port: "26363",
+        pathname: "/**",
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;
