@@ -1,0 +1,23 @@
+@use "./variables" as *;
+
+.btn-primary {
+  background-color: $accent-burgundy;
+  border-radius: 60px;
+  padding: 0.75rem 2rem;
+  color: $white;
+  border: none;
+  font-size: 1.25rem;
+
+  &:hover {
+    background-color: $accent-burgundy-dark;
+    color: $white;
+  }
+  &:disabled {
+    background-color: #c05e5b;
+    color: #fefefe;
+  }
+  &:active,
+  &:focus-visible {
+    background-color: $accent-burgundy !important;
+  }
+}

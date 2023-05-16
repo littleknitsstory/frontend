@@ -60,33 +60,37 @@ export default function SubscribeForm({ dictionary }: Props) {
 
   return (
     <>
-      <div className="footer__subscribe">
-        <h2 className="footer__title">{dictionary.title}</h2>
-        <p className="footer__text">{dictionary.text}</p>
+      <h2 className="text--md mb-4">{dictionary.title}</h2>
+      <p className="text">{dictionary.text}</p>
 
-        <Formik
-          initialValues={initialValue}
-          validationSchema={Yup.object().shape({
-            email: Yup.string()
-              .email(dictionary.incorrectEmail)
-              .required(dictionary.required),
-          })}
-          onSubmit={(values, { resetForm }) => submitHandler(values, resetForm)}
+      <Formik
+        initialValues={initialValue}
+        validationSchema={Yup.object().shape({
+          email: Yup.string()
+            .email(dictionary.incorrectEmail)
+            .required(dictionary.required),
+        })}
+        onSubmit={(values, { resetForm }) => submitHandler(values, resetForm)}
+      >
+        <FormikForm
+          className="d-md-flex align-items-center justify-content-between gap-2"
+          noValidate
         >
-          <FormikForm className="footer__form" noValidate>
-            <FormsInput
-              className="footer__input"
-              name="email"
-              type="email"
-              placeholder="e-mail"
-              controlId={"formGroupEmail"}
-            />
-            <button className="btn btn--primary" type="submit">
-              {dictionary.buttonText}
-            </button>
-          </FormikForm>
-        </Formik>
-      </div>
+          <FormsInput
+            className="w-50"
+            name="email"
+            type="email"
+            placeholder="e-mail"
+            controlId={"formGroupEmail"}
+          />
+          <button
+            className="btn btn-primary mt-4 mt-md-0 col-12 col-md-auto col-lg-5"
+            type="submit"
+          >
+            {dictionary.buttonText}
+          </button>
+        </FormikForm>
+      </Formik>
       <ToastContainer theme="colored" autoClose={3000} />
     </>
   );
