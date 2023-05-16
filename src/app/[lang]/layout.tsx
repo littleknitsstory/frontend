@@ -32,8 +32,8 @@ export default async function RootLayout({
   return (
     <html lang={params.lang}>
       <body className={montserrat.className}>
-        <div className="container">
-          <Header dictionary={dictionary} />
+        <div className="container-lg">
+          <Header dictionary={dictionary.header} />
           {children}
           <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
         </div>

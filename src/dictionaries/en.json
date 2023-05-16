@@ -1,5 +1,15 @@
 {
   "header": {
-    "title": "Blog and knitting shop"
+    "title": "Blog and knitting shop",
+    "nav": {
+      "account": "Account",
+      "cart": "Cart",
+      "favorites": "Favorites",
+      "courses": "My Courses",
+      "articles": "My Articles",
+      "orders": "My Orders",
+      "bookmarks": "Bookmarks",
+      "logout": "Logout"
+    }
   }
 }

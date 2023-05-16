@@ -1,0 +1,17 @@
+/* Hamburger header styling */
+
+.header-toggler {
+  border: none;
+
+  &:focus {
+    box-shadow: 0 0 0 1px;
+  }
+}
+
+.navbar-toggler > .opened {
+  display: inline;
+}
+.navbar-toggler.collapsed > .opened,
+.navbar-toggler:not(.collapsed) > .collapsed {
+  display: none;
+}
