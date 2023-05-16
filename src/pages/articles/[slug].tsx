@@ -1,4 +1,6 @@
+import Head from "next/head";
 import { getArticleDetails, getArticles, getFeaturesFlags } from "@/services/api/apiClient";
+
 import { IArticle, IArticlesResponse, IFeaturesFlags } from "@/services/types";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
@@ -9,7 +11,9 @@ import parse from "html-react-parser";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
-import Bookmark from "@/components/SVG/BookmarkSVG";
+import Bookmark from "@/components/Blog/Bookmark";
+import { OverlayTrigger, Popover } from "react-bootstrap";
+import PopoverShare from "@/components/Blog/PopoverShare";
 
 interface IParams extends ParsedUrlQuery {
   slug: string;
@@ -22,7 +26,7 @@ interface Props {
 
 const ArticleDetails = ({ articleDetails, features }: Props) => {
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
 
   const styles = {
     backgroundImage: `url(${PICTURE_BASE_URL + articleDetails?.image_preview})`,
@@ -37,29 +41,28 @@ const ArticleDetails = ({ articleDetails, features }: Props) => {
 
   return (
     <>
+      <Head>
+        <meta name="description" content={articleDetails.meta_description} />
+        <meta name="title" content={articleDetails.title_seo} />
+        <meta name="keywords" content={articleDetails.meta_keywords} />
+      </Head>
       {features?.blog && (
         <section className="post container-lg p-0">
           <button
             onClick={() => router.back()}
             className="btn link link--with-icon m-0 mt-5 ms-2 text text--md text--bold"
           >
-            {/* <ArrowLeftSVG /> {t("posts.back")} */}
+            <Image src="/icons/arrow-left.svg" alt="Arrow back" width={30} height={30} />
+            {t("back")}
           </button>
 
           <div className="post__header d-flex flex-column p-3 p-md-5 mt-4" style={styles}>
-            <div className="d-flex align-items-center gap-2">
+            <div className="d-flex align-items-center gap-3">
               <h2 className="post__title me-auto text text--md text--bold text--white my-0">
                 {articleDetails?.title}
               </h2>
-              {/* {articleDetails && <Bookmark slugPost={articleDetails?.slug} />} */}
-              {/* <OverlayTrigger
-                trigger="click"
-                placement="bottom"
-                overlay={popoverShare}
-                rootClose={true}
-              >
-                <ShareIcon />
-              </OverlayTrigger> */}
+              <Bookmark slug={articleDetails?.slug} />
+              <PopoverShare />
             </div>
             <div className="d-flex align-items-center gap-3 mt-2">
               <Image
@@ -87,7 +90,7 @@ const ArticleDetails = ({ articleDetails, features }: Props) => {
             </div>
           </div>
 
-          <div className="container-lg mt-4">{articleDetails && parse(articleDetails.content)}</div>
+          <div className="container-lg mt-4">{articleDetails.content}</div>
 
           <div className="post__footer container-lg">
             {/* <h4 className="post__footer-text">{t("posts.share")}</h4> */}
@@ -144,14 +147,15 @@ const ArticleDetails = ({ articleDetails, features }: Props) => {
     </>
   );
 };
-export default ArticleDetails;
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params as IParams;
-  const currentLanguage = context.locale ?? "en";
+  const language = context.locale ?? "en";
 
-  const articleDetails = await getArticleDetails(slug, currentLanguage);
+  const articleDetails = await getArticleDetails(slug, language);
   const features = await getFeaturesFlags();
+
+  console.log(articleDetails);
 
   if (!articleDetails.title) {
     return {
@@ -161,26 +165,57 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   return {
     props: {
+      ...(await serverSideTranslations(language, ["header", "footer", "common"])),
       articleDetails,
       features,
-      ...(await serverSideTranslations(currentLanguage, ["header", "footer"])),
     },
   };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async (context) => {
+  const locales = context.locales;
   const lastArticles = await getArticles("en");
 
-  const paths = lastArticles.map((article) => {
+  type PathsType = {
+    params: { slug: string };
+    locale: string;
+  }[];
+
+  let pathsWithLocales: PathsType = [];
+
+  locales?.forEach((locale) => {
+    lastArticles.map((article) => {
+      pathsWithLocales.push({
+        params: {
+          slug: article.slug,
+        },
+        locale,
+      });
+    });
+  });
+
+  const pathsEn = lastArticles.map((article) => {
     return {
       params: {
         slug: article.slug,
       },
+      locale: "en",
+    };
+  });
+
+  const pathsRu = lastArticles.map((article) => {
+    return {
+      params: {
+        slug: article.slug,
+      },
+      locale: "ru",
     };
   });
 
   return {
-    paths,
+    paths: pathsWithLocales,
     fallback: true,
   };
 };
+
+export default ArticleDetails;

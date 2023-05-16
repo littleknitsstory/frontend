@@ -60,7 +60,7 @@ const CardArticle = ({ article }: { article: IArticle }) => {
             <Link href={ROUTES.ARTICLES + "/" + article.slug}>
               <h2 className="card-article__title text text--md text--bold my-2">{article.title}</h2>
             </Link>
-            <Bookmark slugPost={article.slug} />
+            <Bookmark slug={article.slug} />
           </div>
           <Link href={ROUTES.ARTICLES + "/" + article.slug}>
             <div className="mb-2">{article.content}</div>

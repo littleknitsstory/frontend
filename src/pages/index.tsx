@@ -25,8 +25,5 @@ export async function getStaticProps({ locale }: { locale: string }) {
     props: {
       ...(await serverSideTranslations(locale, ["header", "footer"])),
     },
-    redirect: {
-      destination: "/articles",
-    },
   };
 }

@@ -23,7 +23,7 @@ const BASE_URL = process.env.API_BASE_URL;
 
 export const getArticles = async (locale: string): Promise<IArticle[]> => {
   /* Temporary add "limit=200" to fetch all articles -> remove after API will change */
-  const response = await fetch(BASE_URL + URLS.ARTICLES + "?limit=200", {
+  const response = await fetch(BASE_URL + URLS.ARTICLES, {
     headers: {
       "Accept-Language": locale,
     },

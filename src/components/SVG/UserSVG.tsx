@@ -16,9 +16,9 @@ const UserSVG = ({ active }: Props) => {
           d="M22.4275 9.82526C22.4275 13.1924 19.5844 15.9845 15.9989 15.9845C12.4134 15.9845 9.57031 13.1924 9.57031 9.82526C9.57031 6.45809 12.4134 3.66602 15.9989 3.66602C19.5844 3.66602 22.4275 6.45809 22.4275 9.82526Z"
           fill="#484848"
           stroke="#484848"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <mask id="path-2-inside-1_925_9721" fill="white">
           <path d="M4 27.9986C4 22.4915 8.57143 16.9844 16 16.9844C23.4286 16.9844 28 22.4915 28 27.9986" />
@@ -41,9 +41,9 @@ const UserSVG = ({ active }: Props) => {
       <path
         d="M21.9275 9.82526C21.9275 12.899 19.3258 15.4845 15.9989 15.4845C12.6719 15.4845 10.0703 12.899 10.0703 9.82526C10.0703 6.75147 12.6719 4.16602 15.9989 4.16602C19.3258 4.16602 21.9275 6.75147 21.9275 9.82526Z"
         stroke="#484848"
-        stroke-width="3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <mask id="path-2-inside-1_741_8478" fill="white">
         <path d="M4 27.9986C4 22.4915 8.57143 16.9844 16 16.9844C23.4286 16.9844 28 22.4915 28 27.9986" />

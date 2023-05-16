@@ -96,6 +96,9 @@ export interface IArticle {
   image_alt: string;
   created_at: string;
   tags: { slug: string; title: string }[];
+  title_seo: string;
+  meta_keywords: string;
+  meta_description: string;
 }
 
 export interface IArticlesResponse {
