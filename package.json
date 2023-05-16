@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "next-template",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,31 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.9.5",
-    "@types/node": "18.15.13",
-    "@types/react": "18.0.37",
-    "@types/react-dom": "18.0.11",
-    "animate.css": "^4.1.1",
-    "bootstrap": "^5.2.3",
-    "formik": "^2.2.9",
-    "html-react-parser": "^3.0.16",
-    "i18next": "^22.4.15",
-    "jwt-decode": "^3.1.2",
-    "next": "13.3.0",
-    "next-i18next": "^13.2.2",
+    "@types/node": "20.1.5",
+    "@types/react": "18.2.6",
+    "@types/react-dom": "18.2.4",
+    "eslint": "8.40.0",
+    "eslint-config-next": "13.4.2",
+    "next": "13.4.2",
     "react": "18.2.0",
-    "react-bootstrap": "^2.7.4",
     "react-dom": "18.2.0",
-    "react-i18next": "^12.2.0",
-    "react-icons": "^4.8.0",
-    "react-notifications": "^1.7.4",
-    "react-notifications-component": "^4.0.1",
-    "react-overlays": "^5.2.1",
-    "react-phone-number-input": "^3.2.19",
-    "react-redux": "^8.0.5",
-    "sass": "^1.62.0",
-    "typescript": "5.0.4",
-    "yup": "^1.1.1",
-    "yup-phone-lite": "^2.0.1"
+    "typescript": "5.0.4"
   }
 }
