@@ -4,7 +4,7 @@ import { Montserrat } from "next/font/google";
 import { Locale, i18n } from "@/i18n-config";
 import { getDictionary } from "@/get-dictionaries";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer/Footer";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "@/styles/globals.scss";
@@ -37,7 +37,7 @@ export default async function RootLayout({
         <div className="container-lg min-vh-100 d-flex flex-column">
           <Header dictionary={dictionary.header} />
           {children}
-          <Footer />
+          <Footer dictionary={dictionary.footer} />
           <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
         </div>
       </body>

@@ -1,3 +1,9 @@
 {
-  "cSpell.ignoreWords": ["formatjs", "localematcher"]
+  "cSpell.ignoreWords": [
+    "Formik",
+    "PINTEREST",
+    "formatjs",
+    "localematcher",
+    "toastify"
+  ]
 }

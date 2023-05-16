@@ -69,14 +69,14 @@ export default function Header({ dictionary }: { dictionary: Dictionary }) {
           </span>
         </button>
         <div
-          className="collapse navbar-collapse mt-3 d-md-none"
+          className="collapse navbar-collapse mt-3 d-md-none "
           id="navbarProfile"
         >
-          <ul className="navbar-nav">
+          <ul className="navbar-nav gap-1">
             <li className="nav-item">
               <Link
                 href={ROUTES.PROFILE}
-                className="nav-link d-flex align-items-center gap-2"
+                className="nav-link d-inline-flex py-2 align-items-center gap-2"
                 data-bs-target="navbarProfile"
               >
                 <Image src={user} alt="User icon" />
@@ -86,7 +86,7 @@ export default function Header({ dictionary }: { dictionary: Dictionary }) {
             <li className="nav-item">
               <Link
                 href={ROUTES.PROFILE_COURSES}
-                className="nav-link d-flex align-items-center gap-2"
+                className="nav-link d-inline-flex py-2 align-items-center gap-2"
                 data-bs-target="navbarProfile"
               >
                 <Image src={courses} alt="Courses icon" />
@@ -96,7 +96,7 @@ export default function Header({ dictionary }: { dictionary: Dictionary }) {
             <li className="nav-item">
               <Link
                 href={ROUTES.ARTICLES}
-                className="nav-link d-flex align-items-center gap-2"
+                className="nav-link d-inline-flex py-2 align-items-center gap-2"
                 data-bs-target="navbarProfile"
               >
                 <Image src={articles} alt="Articles icon" />
@@ -106,7 +106,7 @@ export default function Header({ dictionary }: { dictionary: Dictionary }) {
             <li className="nav-item">
               <Link
                 href={ROUTES.PROFILE_ORDERS}
-                className="nav-link d-flex align-items-center gap-2"
+                className="nav-link d-inline-flex py-2 align-items-center gap-2"
                 data-bs-target="navbarProfile"
               >
                 <Image src={orders} alt="Orders icon" />
@@ -116,7 +116,7 @@ export default function Header({ dictionary }: { dictionary: Dictionary }) {
             <li className="nav-item">
               <Link
                 href={ROUTES.BOOKMARKS}
-                className="nav-link d-flex align-items-center gap-2"
+                className="nav-link d-inline-flex py-2 align-items-center gap-2"
                 data-bs-target="navbarProfile"
               >
                 <Image src={bookmarks} alt="Orders icon" />

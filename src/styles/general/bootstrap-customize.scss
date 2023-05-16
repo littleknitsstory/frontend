@@ -1,3 +1,4 @@
+@use "variables" as *;
 /* Hamburger header styling */
 
 .header-toggler {
@@ -14,4 +15,39 @@
 .navbar-toggler.collapsed > .opened,
 .navbar-toggler:not(.collapsed) > .collapsed {
   display: none;
+}
+
+/* Links */
+
+.nav-link {
+  position: relative;
+  display: inline-block;
+  padding: 5px 2px;
+  color: $black-text;
+  &.active {
+    font-weight: 500;
+    border-bottom: 2px solid $black-text;
+  }
+  &:hover {
+    color: inherit;
+    font-weight: 500;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    width: 100%;
+    height: 1px;
+    background-color: $secondary-dark-grey;
+    border-radius: 1px;
+    scale: 0 1;
+    transform-origin: right;
+    transition: scale 0.25s;
+  }
+  &:hover::before {
+    scale: 1;
+    transform-origin: left;
+  }
 }

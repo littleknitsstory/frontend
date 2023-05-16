@@ -11,5 +11,22 @@
       "bookmarks": "Bookmarks",
       "logout": "Logout"
     }
+  },
+
+  "footer": {
+    "about": "About",
+    "history": "Our history",
+    "ad": "Advertising",
+    "contacts": "Contacts",
+    "title": "Blog and knitting shop",
+    "policy": "Privacy Policy",
+    "subscribe": {
+      "title": "Subscription",
+      "text": "Subscribe to know about our special promotions",
+      "email": "Email",
+      "buttonText": "Subscribe",
+      "incorrectEmail": "Please enter a valid email address",
+      "required": "Required field!"
+    }
   }
 }
