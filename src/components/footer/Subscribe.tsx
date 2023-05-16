@@ -31,7 +31,7 @@ export default function SubscribeForm({ dictionary }: Props) {
     ) => void
   ): Promise<void> => {
     try {
-      toast.info("Adding your email to subscription", {
+      toast.info("Subscribing...", {
         hideProgressBar: true,
       });
       const response = await fetch(
@@ -73,7 +73,7 @@ export default function SubscribeForm({ dictionary }: Props) {
         onSubmit={(values, { resetForm }) => submitHandler(values, resetForm)}
       >
         <FormikForm
-          className="d-md-flex align-items-center justify-content-between gap-2"
+          className="d-md-flex align-items-start justify-content-between gap-2"
           noValidate
         >
           <FormsInput

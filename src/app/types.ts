@@ -157,3 +157,16 @@ export interface CommentsData {
   text: string;
   created_at: string;
 }
+
+export interface IFeaturesFlags {
+  account: boolean;
+  blog: boolean;
+  comments: boolean;
+  contacts: boolean;
+  course: boolean;
+  feed: boolean;
+  menu: boolean;
+  reviews: boolean;
+  shop: boolean;
+  slider: boolean;
+}

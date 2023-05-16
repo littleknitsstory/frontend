@@ -6,10 +6,12 @@ import { getDictionary } from "@/get-dictionaries";
 import Header from "@/components/Header";
 import Footer from "@/components/footer/Footer";
 
-import "bootstrap/dist/css/bootstrap.css";
-import "@/styles/globals.scss";
+import Menu from "@/components/menu/Menu";
+import { IFeaturesFlags } from "../types";
 
 const montserrat = Montserrat({ subsets: ["latin", "cyrillic"] });
+import "bootstrap/dist/css/bootstrap.css";
+import "@/styles/globals.scss";
 
 export async function generateMetadata({
   params,
@@ -28,14 +30,23 @@ export default async function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { lang: Locale };
+  params: { lang: Locale; features: IFeaturesFlags };
 }) {
   const dictionary = await getDictionary(params.lang);
+  const featuresData = await fetch(
+    "http://dev.backend.littleknitsstory.com:26363/api/v1/features/",
+    {
+      next: { revalidate: 10 },
+    }
+  );
+  const features = await featuresData.json();
+
   return (
     <html lang={params.lang}>
       <body className={montserrat.className}>
         <div className="container-lg min-vh-100 d-flex flex-column">
           <Header dictionary={dictionary.header} />
+          <Menu features={features} />
           {children}
           <Footer dictionary={dictionary.footer} />
           <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
@@ -46,5 +57,7 @@ export default async function RootLayout({
 }
 
 export function generateStaticParams() {
-  return i18n.locales.map((locale) => ({ lang: locale }));
+  const locales = i18n.locales.map((locale) => ({ lang: locale }));
+
+  return locales;
 }
