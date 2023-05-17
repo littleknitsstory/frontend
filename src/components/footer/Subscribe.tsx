@@ -4,7 +4,7 @@ import { Formik, Form as FormikForm, FormikState } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 
-import { FormValues } from "@/app/types";
+import { FormValues } from "@/styles/types";
 
 import "react-toastify/dist/ReactToastify.css";
 import { FormsInput } from "../utils/Forms";
@@ -73,18 +73,18 @@ export default function SubscribeForm({ dictionary }: Props) {
         onSubmit={(values, { resetForm }) => submitHandler(values, resetForm)}
       >
         <FormikForm
-          className="d-md-flex align-items-start justify-content-between gap-2"
+          className="d-md-flex align-items-start justify-content-between gap-3"
           noValidate
         >
           <FormsInput
-            className="w-50"
+            className=""
             name="email"
             type="email"
             placeholder="e-mail"
             controlId={"formGroupEmail"}
           />
           <button
-            className="btn btn-primary mt-4 mt-md-0 col-12 col-md-auto col-lg-5"
+            className="btn btn-primary mt-2 mt-md-0 col-12 col-md-auto col-lg-5"
             type="submit"
           >
             {dictionary.buttonText}

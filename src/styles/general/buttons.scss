@@ -19,5 +19,6 @@
   &:active,
   &:focus-visible {
     background-color: $accent-burgundy !important;
+    scale: (0.99);
   }
 }

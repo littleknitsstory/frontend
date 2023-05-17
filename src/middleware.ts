@@ -34,9 +34,9 @@ export function middleware(request: NextRequest) {
       new URL(`/${locale}/${pathname}`, request.url)
     );
   }
+  console.log(pathname);
 }
 
 export const config = {
-  // Matcher ignoring `/_next/` and `/api/`
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|icon.png).*)"],
 };

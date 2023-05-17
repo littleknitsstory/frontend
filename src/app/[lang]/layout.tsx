@@ -7,7 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/footer/Footer";
 
 import Menu from "@/components/menu/Menu";
-import { IFeaturesFlags } from "../types";
+import { IFeaturesFlags } from "../../styles/types";
 
 const montserrat = Montserrat({ subsets: ["latin", "cyrillic"] });
 import "bootstrap/dist/css/bootstrap.css";
@@ -25,6 +25,8 @@ export async function generateMetadata({
   };
 }
 
+export const revalidate = 1000;
+
 export default async function RootLayout({
   children,
   params,
@@ -33,20 +35,18 @@ export default async function RootLayout({
   params: { lang: Locale; features: IFeaturesFlags };
 }) {
   const dictionary = await getDictionary(params.lang);
-  const featuresData = await fetch(
-    "http://dev.backend.littleknitsstory.com:26363/api/v1/features/",
-    {
-      next: { revalidate: 10 },
-    }
-  );
-  const features = await featuresData.json();
+  const featuresData = await fetch(process.env.API_BASE_URL + "/features/", {
+    next: { revalidate: 60 },
+  });
+  const features: IFeaturesFlags = await featuresData.json();
 
   return (
     <html lang={params.lang}>
       <body className={montserrat.className}>
         <div className="container-lg min-vh-100 d-flex flex-column">
           <Header dictionary={dictionary.header} />
-          <Menu features={features} />
+          {/* @ts-expect-error Async Server Component */}
+          {features.menu && <Menu features={features} />}
           {children}
           <Footer dictionary={dictionary.footer} />
           <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />

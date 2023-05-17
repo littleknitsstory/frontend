@@ -91,7 +91,13 @@ export interface IArticle {
   title: string;
   slug: string;
   content: string;
-  author: number;
+  author: {
+    id: number;
+    username: string;
+    avatar: string;
+    first_name: string;
+    last_name: string;
+  };
   image_preview: string;
   image_alt: string;
   created_at: string;

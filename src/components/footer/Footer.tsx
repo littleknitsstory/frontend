@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 import SubscribeForm from "./Subscribe";
-import { SOCIAL } from "@/app/constants";
+import { SOCIAL } from "@/services/constants";
 
 import logoMobile from "@/assets/images/logo-mobile.svg";
-import { ROUTES } from "@/app/routes";
+import { ROUTES } from "@/services/constants";
 
 interface Props {
   dictionary: {
@@ -33,7 +33,7 @@ export default function Footer({ dictionary }: Props) {
         <ul className="nav flex-column gap-2 col-md-3">
           <h2 className="text--md mb-3">{dictionary.about}</h2>
           <li className="nav-item">
-            <Link className="nav-link " href="#">
+            <Link className="nav-link" href="#">
               {dictionary.history}
             </Link>
           </li>

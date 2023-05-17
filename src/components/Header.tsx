@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { ROUTES } from "@/app/routes";
+import { ROUTES } from "@/services/constants";
 
 import logoMobile from "@/assets/images/logo-mobile.svg";
 import logoDesktop from "@/assets/images/logo-desktop.svg";

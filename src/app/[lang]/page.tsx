@@ -1,5 +1,5 @@
-import Script from "next/script";
-import { getDictionary } from "@/get-dictionaries";
+import { redirect } from "next/navigation";
+
 import { Locale } from "@/i18n-config";
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default async function Home({ params }: Props) {
-  const dictionary = await getDictionary(params.lang);
+  redirect("/articles");
 
   return (
     <>

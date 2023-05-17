@@ -1,6 +1,6 @@
 export const ROUTES = {
   HOME: "/",
-  ARTICLES: "/articles",
+  ARTICLES: "/articles/",
   PRODUCTS: "/products",
   CONTACTS: "/contacts",
   CART: "/cart",
@@ -15,3 +15,13 @@ export const ROUTES = {
   PROFILE_ORDERS: "/profile/orders",
   BOOKMARKS: "/bookmarks",
 };
+
+/* Social links */
+export const SOCIAL = {
+  FACEBOOK: "https://www.facebook.com/littleknitsstory/",
+  INSTAGRAM: "https://www.instagram.com/littleknitsstory/",
+  PINTEREST: "https://www.pinterest.ru/littleknitsstory/",
+  VK: "https://vk.com/littleknitsstory",
+};
+
+export const baseUrl = "http://dev.backend.littleknitsstory.com:26363";
