@@ -34,7 +34,6 @@ export function middleware(request: NextRequest) {
       new URL(`/${locale}/${pathname}`, request.url)
     );
   }
-  console.log(pathname);
 }
 
 export const config = {

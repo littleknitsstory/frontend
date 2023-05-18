@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default async function Home({ params }: Props) {
-  redirect("/articles");
+  // redirect("/articles");
 
   return (
     <>

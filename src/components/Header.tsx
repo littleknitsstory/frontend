@@ -46,6 +46,7 @@ export default function Header({ dictionary }: { dictionary: Dictionary }) {
             className="d-none d-md-inline"
             width={416}
             height={112}
+            priority
           />
         </Link>
 
@@ -68,7 +69,9 @@ export default function Header({ dictionary }: { dictionary: Dictionary }) {
             <Image src={hamburger} alt="Cross Icon" />
           </span>
         </button>
-        <div
+
+        {/* Comment out because this routes not ready */}
+        {/* <div
           className="collapse navbar-collapse mt-3 d-md-none "
           id="navbarProfile"
         >
@@ -127,7 +130,7 @@ export default function Header({ dictionary }: { dictionary: Dictionary }) {
             </li>
             <hr />
           </ul>
-        </div>
+        </div> */}
       </nav>
     </header>
   );

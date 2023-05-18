@@ -45,8 +45,7 @@ export default async function RootLayout({
       <body className={montserrat.className}>
         <div className="container-lg min-vh-100 d-flex flex-column">
           <Header dictionary={dictionary.header} />
-          {/* @ts-expect-error Async Server Component */}
-          {features.menu && <Menu features={features} />}
+          {features.menu && <Menu />}
           {children}
           <Footer dictionary={dictionary.footer} />
           <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />

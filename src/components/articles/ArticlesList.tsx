@@ -10,15 +10,8 @@ interface Props {
 export default function ArticlesList({ children, articles }: Props) {
   return (
     <>
-      <div>
-        <h2>Client Component </h2>
-      </div>
-
-      <div className="border bg-grey mt-5">
-        <h2>Server Component</h2>
-
-        {children}
-      </div>
+      <div className="mt-4"></div>
+      {children}
     </>
   );
 }
