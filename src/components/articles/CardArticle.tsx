@@ -44,7 +44,7 @@ export default function CardArticle({ article, lang }: Props) {
   return (
     <>
       <Link
-        href={ROUTES.ARTICLES + "/" + article.slug}
+        href={`/${lang}` + ROUTES.ARTICLES + "/" + article.slug}
         className={classes.cardWrapper + " py-3"}
       >
         <div className="d-md-flex gap-3 flex-md-row-reverse align-items-center">
