@@ -33,6 +33,8 @@
   "article": {
     "tempRead": "min read",
     "copyLink": "Copy link",
-    "CopiedToClipboard": "Copied to clipboard"
+    "CopiedToClipboard": "Copied to clipboard",
+    "readAlso": "Also read",
+    "watchAll": "See All"
   }
 }

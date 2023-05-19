@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Locale } from "@/i18n-config";
@@ -6,7 +7,7 @@ import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import { ToastContainer, toast } from "react-toastify";
 import { IArticle, IFeaturesFlags } from "@/styles/types";
-import { PICTURE_BASE_URL } from "@/services/constants";
+import { PICTURE_BASE_URL, ROUTES } from "@/services/constants";
 
 import telegram from "@/assets/icons/social/telegram.svg";
 import facebook from "@/assets/icons/social/facebook.svg";
@@ -22,11 +23,14 @@ import speechBubbleIcon from "@/assets/icons/reactions/speech-bubble.svg";
 import shareIconGrey from "@/assets/icons/reactions/share.svg";
 import Bookmark from "../bookmark/Bookmark";
 import { dateFromLang, getDisplayedName } from "../articles/CardArticle";
+import CardArticleSmall from "../card-article-small/CardArticleSmall";
+import classes from "./article-detail.module.scss";
 
 interface Props {
   article: IArticle;
   features: IFeaturesFlags;
   lang: Locale;
+  articles: IArticle[];
   dictionary: IDictionary;
 }
 
@@ -36,10 +40,18 @@ interface IDictionary {
     tempRead: string;
     copyLink: string;
     CopiedToClipboard: string;
+    readAlso: string;
+    watchAll: string;
   };
 }
 
-const ArticleDetail = ({ article, features, dictionary, lang }: Props) => {
+const ArticleDetail = ({
+  article,
+  features,
+  dictionary,
+  lang,
+  articles,
+}: Props) => {
   const router = useRouter();
 
   function randomReadTime() {
@@ -62,14 +74,14 @@ const ArticleDetail = ({ article, features, dictionary, lang }: Props) => {
   };
 
   const popoverShare = (
-    <Popover className="popover-share">
+    <Popover className={classes.popoverShare}>
       <Popover.Body>
         <div className="text text--18 text--bold d-flex flex-column gap-3">
           <a
             target="_blank"
             rel="noreferrer"
             href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
-            className="d-flex align-items-center gap-2 p-1 cursor-pointer"
+            className="d-flex align-items-center gap-2 p-1"
           >
             <Image src={facebook} alt="facebook" />
             <p className="m-0">Facebook</p>
@@ -151,6 +163,13 @@ const ArticleDetail = ({ article, features, dictionary, lang }: Props) => {
                 {randomReadTime()} {dictionary.article.tempRead}
               </p>
             </div>
+            <div className="d-flex gap-4 mt-auto">
+              {article.tags.map((tag) => (
+                <p key={tag.slug} className="text--white">
+                  #{tag.title}
+                </p>
+              ))}
+            </div>
           </div>
 
           <div className="container-lg mt-4">{article.content}</div>
@@ -177,6 +196,28 @@ const ArticleDetail = ({ article, features, dictionary, lang }: Props) => {
                 <Image src={shareIconGrey} alt="shareIconGrey" role="button" />
               </OverlayTrigger>
             </div>
+          </div>
+          <div className="container-md text-center">
+            <h4 className="text text--md text--bold text-center mt-5 mb-3">
+              {dictionary.article.readAlso}
+            </h4>
+
+            <div className="d-flex justify-content-center gap-5">
+              {articles.map((article) => (
+                <CardArticleSmall key={article.slug} {...article} />
+              ))}
+            </div>
+            <Link
+              href={ROUTES.ARTICLES}
+              className={
+                classes.link +
+                " d-inline-flex align-items-center gap-3 mt-5 p-0 text--bold text--md"
+              }
+              role="button"
+            >
+              {dictionary.article.watchAll}
+              <Image src={arrowRightSVG} alt="arrowRightSVG" />
+            </Link>
           </div>
         </section>
       )}

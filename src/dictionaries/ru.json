@@ -33,6 +33,8 @@
   "article": {
     "tempRead": "мин на чтение",
     "copyLink": "Копировать ссылку",
-    "CopiedToClipboard": "Ссылка скопирована"
+    "CopiedToClipboard": "Ссылка скопирована",
+    "readAlso": "Читайте также",
+    "watchAll": "Смотреть все"
   }
 }

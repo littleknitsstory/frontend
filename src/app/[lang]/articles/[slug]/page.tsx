@@ -25,10 +25,22 @@ export default async function Article({ params }: { params: paramsProps }) {
   );
 
   const article: IArticle = await articleData.json();
+
   const featuresData = await fetch(process.env.API_BASE_URL + "/features/", {
     next: { revalidate: 60 },
   });
   const features: IFeaturesFlags = await featuresData.json();
+
+  const articlesData = await fetch(process.env.API_BASE_URL + "/articles/", {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept-Language": params.lang,
+    },
+    next: {
+      revalidate: 60,
+    },
+  });
+  const articles: IArticle[] = await articlesData.json();
 
   const dictionary = await getDictionary(lang);
   return (
@@ -37,6 +49,7 @@ export default async function Article({ params }: { params: paramsProps }) {
       features={features}
       dictionary={dictionary}
       lang={lang}
+      articles={articles}
     />
   );
 }
