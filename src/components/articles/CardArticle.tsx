@@ -17,29 +17,32 @@ interface Props {
   lang: Locale;
 }
 
-export default function CardArticle({ article, lang }: Props) {
-  const hasImage = article.image_preview;
+export function getDisplayedName(author: any) {
+  if (author) {
+    const { first_name, last_name, username } = author;
 
-  const date = new Date(article.created_at).toLocaleDateString(lang, {
+    if (first_name && last_name) {
+      return first_name + " " + last_name;
+    }
+
+    if (username) {
+      return username;
+    }
+  }
+  return "Unknown author";
+}
+
+export function dateFromLang(date: string, lang: Locale) {
+  const changedDate = new Date(date).toLocaleDateString(lang, {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
+  return changedDate;
+}
 
-  function getDisplayedName() {
-    if (article.author) {
-      const { first_name, last_name, username } = article.author;
-
-      if (first_name && last_name) {
-        return first_name + " " + last_name;
-      }
-
-      if (username) {
-        return username;
-      }
-    }
-    return "Unknown author";
-  }
+export default function CardArticle({ article, lang }: Props) {
+  const hasImage = article.image_preview;
 
   return (
     <>
@@ -79,9 +82,11 @@ export default function CardArticle({ article, lang }: Props) {
                 width={50}
                 height={50}
               />
-              <p className="m-0">{getDisplayedName()}</p>
+              <p className="m-0">{getDisplayedName(article.author)}</p>
               <span>•</span>
-              <p className="card-article__text m-0">{date}</p>
+              <p className="card-article__text m-0">
+                {dateFromLang(article.created_at, lang)}
+              </p>
             </div>
             <div className="d-flex justify-content-between align-items-center">
               <h2 className="card-article__title text text--md text--bold mt-3">

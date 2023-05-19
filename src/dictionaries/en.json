@@ -28,5 +28,11 @@
       "incorrectEmail": "Please enter a valid email address",
       "required": "Required field!"
     }
+  },
+  "back": "Back",
+  "article": {
+    "tempRead": "min read",
+    "copyLink": "Copy link",
+    "CopiedToClipboard": "Copied to clipboard"
   }
 }

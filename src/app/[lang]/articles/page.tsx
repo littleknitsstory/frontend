@@ -5,10 +5,6 @@ import CardArticle from "@/components/articles/CardArticle";
 
 import { IArticle } from "@/styles/types";
 
-export function generateStaticParams() {
-  return i18n.locales.map((locale) => ({ lang: locale }));
-}
-
 export default async function Articles({
   params,
 }: {
@@ -32,4 +28,8 @@ export default async function Articles({
       ))}
     </ArticlesList>
   );
+}
+
+export function generateStaticParams() {
+  return i18n.locales.map((locale) => ({ lang: locale }));
 }

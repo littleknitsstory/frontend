@@ -25,3 +25,5 @@ export const SOCIAL = {
 };
 
 export const baseUrl = "http://dev.backend.littleknitsstory.com:26363";
+
+export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";

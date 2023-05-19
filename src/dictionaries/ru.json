@@ -28,5 +28,11 @@
       "required": "Обязательное поле!",
       "incorrectEmail": "Введите корректный email адреc"
     }
+  },
+  "back": "Назад",
+  "article": {
+    "tempRead": "мин на чтение",
+    "copyLink": "Копировать ссылку",
+    "CopiedToClipboard": "Ссылка скопирована"
   }
 }
