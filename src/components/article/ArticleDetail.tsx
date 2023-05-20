@@ -6,7 +6,7 @@ import { Locale } from "@/i18n-config";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import { ToastContainer, toast } from "react-toastify";
-import { IArticle, IFeaturesFlags } from "@/styles/types";
+import { IArticle, ICommentsData, IFeaturesFlags } from "@/styles/types";
 import { PICTURE_BASE_URL, ROUTES } from "@/services/constants";
 
 import telegram from "@/assets/icons/social/telegram.svg";
@@ -25,6 +25,7 @@ import Bookmark from "../bookmark/Bookmark";
 import { dateFromLang, getDisplayedName } from "../articles/CardArticle";
 import CardArticleSmall from "../card-article-small/CardArticleSmall";
 import classes from "./article-detail.module.scss";
+import CommentsList from "../comments/CommentsList";
 
 interface Props {
   article: IArticle;
@@ -32,6 +33,7 @@ interface Props {
   lang: Locale;
   articles: IArticle[];
   dictionary: IDictionary;
+  comments: ICommentsData[];
 }
 
 interface IDictionary {
@@ -43,6 +45,14 @@ interface IDictionary {
     readAlso: string;
     watchAll: string;
   };
+  comments: {
+    send: string;
+    comments: string;
+    noAuthorize: string;
+    successSend: string;
+    reply: string;
+    placeholderComments: string;
+  };
 }
 
 const ArticleDetail = ({
@@ -51,6 +61,7 @@ const ArticleDetail = ({
   dictionary,
   lang,
   articles,
+  comments,
 }: Props) => {
   const router = useRouter();
 
@@ -171,8 +182,7 @@ const ArticleDetail = ({
               ))}
             </div>
           </div>
-
-          <div className="container-lg mt-4">{article.content}</div>
+          <div className="container-lg mt-4">{article.content}</div>comments
           <div className="post__footer container-lg">
             <div className=" post__reactions d-flex gap-5 mt-3 ">
               <div className="d-flex flex-column align-items-center">
@@ -197,6 +207,11 @@ const ArticleDetail = ({
               </OverlayTrigger>
             </div>
           </div>
+          <CommentsList
+            comments={comments}
+            features={features}
+            dictionary={dictionary}
+          />
           <div className="container-md text-center">
             <h4 className="text text--md text--bold text-center mt-5 mb-3">
               {dictionary.article.readAlso}

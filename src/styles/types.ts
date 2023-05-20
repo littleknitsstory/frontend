@@ -152,7 +152,7 @@ export interface ISignUp {
   password: string;
 }
 
-export interface CommentsData {
+export interface ICommentsData {
   id: number;
   author: {
     id: number;

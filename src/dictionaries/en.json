@@ -36,5 +36,13 @@
     "CopiedToClipboard": "Copied to clipboard",
     "readAlso": "Also read",
     "watchAll": "See All"
+  },
+  "comments": {
+    "send": "Send",
+    "comments": "Comments",
+    "noAuthorize": "Please login",
+    "successSend": "Thanks, your message sent",
+    "reply": "Reply",
+    "placeholderComments": "What do you think?"
   }
 }

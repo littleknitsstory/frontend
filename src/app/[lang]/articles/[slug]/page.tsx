@@ -1,7 +1,7 @@
 import ArticleDetail from "@/components/article/ArticleDetail";
 import { getDictionary } from "@/get-dictionaries";
 import { Locale, i18n } from "@/i18n-config";
-import { IArticle, IFeaturesFlags } from "@/styles/types";
+import { IArticle, ICommentsData, IFeaturesFlags } from "@/styles/types";
 
 interface paramsProps {
   slug: string;
@@ -23,13 +23,7 @@ export default async function Article({ params }: { params: paramsProps }) {
       },
     }
   );
-
   const article: IArticle = await articleData.json();
-
-  const featuresData = await fetch(process.env.API_BASE_URL + "/features/", {
-    next: { revalidate: 60 },
-  });
-  const features: IFeaturesFlags = await featuresData.json();
 
   const articlesData = await fetch(process.env.API_BASE_URL + "/articles/", {
     headers: {
@@ -42,7 +36,18 @@ export default async function Article({ params }: { params: paramsProps }) {
   });
   const articles: IArticle[] = await articlesData.json();
 
+  const featuresData = await fetch(process.env.API_BASE_URL + "/features/", {
+    next: { revalidate: 60 },
+  });
+  const features: IFeaturesFlags = await featuresData.json();
+
+  const commentsData = await fetch(process.env.API_BASE_URL + "/comments/", {
+    next: { revalidate: 60 },
+  });
+  const comments: ICommentsData[] = await commentsData.json();
+
   const dictionary = await getDictionary(lang);
+
   return (
     <ArticleDetail
       article={article}
@@ -50,6 +55,7 @@ export default async function Article({ params }: { params: paramsProps }) {
       dictionary={dictionary}
       lang={lang}
       articles={articles}
+      comments={comments}
     />
   );
 }
