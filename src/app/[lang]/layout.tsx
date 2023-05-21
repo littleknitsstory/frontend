@@ -12,6 +12,7 @@ import { IFeaturesFlags } from "../../styles/types";
 const montserrat = Montserrat({ subsets: ["latin", "cyrillic"] });
 import "bootstrap/dist/css/bootstrap.css";
 import "@/styles/globals.scss";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params,

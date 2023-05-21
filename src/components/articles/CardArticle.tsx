@@ -4,12 +4,15 @@ import { ROUTES, baseUrl } from "@/services/constants";
 import { IArticle } from "@/styles/types";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import tempAvatar from "@/assets/temp-avatar.png";
 import tempArticleImage from "@/assets/temp-article-image.png";
 
 import classes from "./cart-article.module.scss";
 import { Locale } from "@/i18n-config";
+import Bookmark from "../bookmark/Bookmark";
+import { MouseEvent } from "react";
 
 interface Props {
   article: IArticle;
@@ -43,11 +46,21 @@ export function dateFromLang(date: string, lang: Locale) {
 
 export default function CardArticle({ article, lang }: Props) {
   const hasImage = article.image_preview;
+  const router = useRouter();
+  const handleCardClick = (e: MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    router.push(`${ROUTES.ARTICLES + "/" + article.slug}`);
+  };
 
+  const handleBookmarkClick = (e: MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    router.push("/bookmarks");
+  };
   return (
     <>
-      <Link
-        href={ROUTES.ARTICLES + "/" + article.slug}
+      <div
+        onClick={handleCardClick}
+        role="button"
         className={classes.cardWrapper + " py-3"}
       >
         <div className="d-md-flex gap-3 flex-md-row-reverse align-items-center">
@@ -87,6 +100,9 @@ export default function CardArticle({ article, lang }: Props) {
               <p className="card-article__text m-0">
                 {dateFromLang(article.created_at, lang)}
               </p>
+              <p onClick={handleBookmarkClick} role="button">
+                <Bookmark />
+              </p>
             </div>
             <div className="d-flex justify-content-between align-items-center">
               <h2 className="card-article__title text text--md text--bold mt-3">
@@ -97,7 +113,7 @@ export default function CardArticle({ article, lang }: Props) {
             <small>3 минуты на чтение (HC)</small>
           </div>
         </div>
-      </Link>
+      </div>
       <hr />
     </>
   );

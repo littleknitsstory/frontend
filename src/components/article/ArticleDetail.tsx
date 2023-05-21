@@ -145,7 +145,7 @@ const ArticleDetail = ({
               <h2 className="me-auto text text--md text--bold text--white my-0">
                 {article.title}
               </h2>
-              <Bookmark slugPost={article.slug} />
+              <Bookmark />
               <OverlayTrigger
                 trigger="click"
                 placement="bottom"

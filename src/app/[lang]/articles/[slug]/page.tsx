@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import ArticleDetail from "@/components/article/ArticleDetail";
 import { getDictionary } from "@/get-dictionaries";
 import { Locale, i18n } from "@/i18n-config";
@@ -23,6 +24,7 @@ export default async function Article({ params }: { params: paramsProps }) {
       },
     }
   );
+
   const article: IArticle = await articleData.json();
 
   const articlesData = await fetch(process.env.API_BASE_URL + "/articles/", {
