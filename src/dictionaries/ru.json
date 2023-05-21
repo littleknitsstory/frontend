@@ -44,5 +44,8 @@
     "successSend": "Спасибо, ваш комментарий отправлен",
     "reply": "Ответить",
     "placeholderComments": "Что вы об этом думаете?"
+  },
+  "notification": {
+    "somethingWrong": "Что-то пошло не так"
   }
 }

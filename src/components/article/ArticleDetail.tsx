@@ -53,6 +53,9 @@ interface IDictionary {
     reply: string;
     placeholderComments: string;
   };
+  notification: {
+    somethingWrong: string;
+  };
 }
 
 const ArticleDetail = ({

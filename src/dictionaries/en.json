@@ -44,5 +44,8 @@
     "successSend": "Thanks, your message sent",
     "reply": "Reply",
     "placeholderComments": "What do you think?"
+  },
+  "notification": {
+    "somethingWrong": "Something went wrong"
   }
 }

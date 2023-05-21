@@ -24,6 +24,9 @@ interface IDictionary {
     reply: string;
     placeholderComments: string;
   };
+  notification: {
+    somethingWrong: string;
+  };
 }
 
 const CommentsList = ({ features, comments, dictionary }: Props) => {
@@ -48,12 +51,12 @@ const CommentsList = ({ features, comments, dictionary }: Props) => {
       toast.dismiss();
       if (!response.ok) {
         const error = await response.json();
-        toast.error(error.detail);
+        toast.error(dictionary.comments.noAuthorize);
       } else {
-        toast.success("comment");
+        toast.success(dictionary.comments.successSend);
       }
     } catch (error) {
-      toast.error("Something went wrong. Please try again");
+      toast.error(dictionary.notification.somethingWrong);
     }
   };
 
@@ -89,42 +92,7 @@ const CommentsList = ({ features, comments, dictionary }: Props) => {
                 dictionary={dictionary}
               />
             ))}
-            <div className="d-flex gap-1 justify-content-evenly align-items-center text text--md mx-auto">
-              {/* <button
-                className="btn btn--transparent post__comments-page-btn--slider"
-                onClick={() => slideCommentsPage("prev")}
-              >
-                <Image src={arrowLeftSVG} alt="arrowLeftSVG" />
-              </button> */}
-              {/* {comments &&
-
-                [
-                  ...Array(
-                    Math.ceil(comments?.count / COMMENTS_PER_PAGE)
-                  ).keys(),
-                ]
-                  .slice(offsetCommentsPage, offsetCommentsPage + 5)
-                  .map((number: number) => (
-                    <button
-                      key={number}
-                      data-page={number}
-                      onClick={goToCommentsPage}
-                      className={`btn btn--transparent post__comments-page-btn ${
-                        currentCommentsPage === number
-                          ? "post__comments-page-btn--active"
-                          : ""
-                      }`}
-                    >
-                      {number + 1}
-                    </button>
-                  ))}
-              <button
-                className="btn btn--transparent post__comments-page-btn--slider"
-                onClick={() => slideCommentsPage("next")}
-              >
-                <Image src={arrowRightSVG} alt="arrowRightSVG" />
-              </button> */}
-            </div>
+            <div className="d-flex gap-1 justify-content-evenly align-items-center text text--md mx-auto"></div>
           </div>
           <div className="post__comments--buttons"></div>
         </div>
