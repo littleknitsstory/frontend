@@ -11,7 +11,6 @@ import {
 } from "@/services/services";
 import { Suspense } from "react";
 import Spinner from "@/components/utils/Spinner";
-
 interface paramsProps {
   slug: string;
   lang: Locale;
@@ -20,16 +19,23 @@ interface paramsProps {
 export default async function Article({ params }: { params: paramsProps }) {
   const { slug, lang } = params;
 
-  const article: IArticle = await getArticle(slug, lang);
+  const articleData: IArticle = await getArticle(slug, lang);
 
-  const articles: IArticle[] = await getAllArticles(lang);
+  const articlesData: IArticle[] = await getAllArticles(lang);
 
-  const features: IFeaturesFlags = await getFeatures();
+  const featuresData: IFeaturesFlags = await getFeatures();
 
-  const comments: ICommentsData[] = await getComments();
+  const commentsData: ICommentsData[] = await getComments();
 
   const dictionary = await getDictionary(lang);
-  //Promise.All() ??? не типизированное значение на выходе
+
+  const [article, articles, features, comments] = await Promise.all([
+    articleData,
+    articlesData,
+    featuresData,
+    commentsData,
+  ]);
+
   return (
     <Suspense fallback={<Spinner />}>
       <ArticleDetail

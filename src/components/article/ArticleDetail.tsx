@@ -5,9 +5,14 @@ import Image from "next/image";
 import { Locale } from "@/i18n-config";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { IArticle, ICommentsData, IFeaturesFlags } from "@/styles/types";
 import { PICTURE_BASE_URL, ROUTES } from "@/services/constants";
+import { dateFromLang, getDisplayedName } from "../articles/CardArticle";
+
+import Bookmark from "../bookmark/Bookmark";
+import CommentsList from "../comments/CommentsList";
+import CardArticleSmall from "../card-article-small/CardArticleSmall";
 
 import telegram from "@/assets/icons/social/telegram.svg";
 import facebook from "@/assets/icons/social/facebook.svg";
@@ -21,11 +26,7 @@ import handIcon from "@/assets/icons/reactions/hand.svg";
 import heartIcon from "@/assets/icons/reactions/heart.svg";
 import speechBubbleIcon from "@/assets/icons/reactions/speech-bubble.svg";
 import shareIconGrey from "@/assets/icons/reactions/share.svg";
-import Bookmark from "../bookmark/Bookmark";
-import { dateFromLang, getDisplayedName } from "../articles/CardArticle";
-import CardArticleSmall from "../card-article-small/CardArticleSmall";
 import classes from "./article-detail.module.scss";
-import CommentsList from "../comments/CommentsList";
 
 interface Props {
   article: IArticle;
