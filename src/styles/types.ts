@@ -102,6 +102,7 @@ export interface IArticle {
   image_alt: string;
   created_at: string;
   tags: { slug: string; title: string }[];
+  time_for_read: number;
 }
 
 export interface IArticlesResponse {

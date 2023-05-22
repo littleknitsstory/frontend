@@ -68,9 +68,6 @@ const ArticleDetail = ({
 }: Props) => {
   const router = useRouter();
 
-  function randomReadTime() {
-    return Math.floor(Math.random() * 15) + 1;
-  }
   const copyToClipboard = (): void => {
     const currentUrl = window.location.href;
     navigator.clipboard.writeText(currentUrl);
@@ -174,7 +171,7 @@ const ArticleDetail = ({
               </p>
               <p className="text--white">&bull;</p>
               <p className="text--white">
-                {randomReadTime()} {dictionary.article.tempRead}
+                {article.time_for_read} {dictionary.article.tempRead}
               </p>
             </div>
             <div className="d-flex gap-4 mt-auto">
