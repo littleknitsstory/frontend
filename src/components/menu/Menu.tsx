@@ -4,9 +4,11 @@ import { usePathname, useSelectedLayoutSegment } from "next/navigation";
 
 import { ROUTES } from "@/services/constants";
 import LanguageToggler from "../misc/LanguageToggler";
+import LinkLocale from "../misc/LinkLocale";
 
 export default function Menu() {
   const segment = useSelectedLayoutSegment() ?? "";
+  const pathname = usePathname();
 
   return (
     <nav className="">
@@ -14,13 +16,18 @@ export default function Menu() {
         <ul className="nav flex-row text text--md w-100 justify-content-evenly justify-content-md-start mt-3 gap-5 align-items-center">
           <li>
             <Link
-              href={ROUTES.ARTICLES}
+              href={`${ROUTES.ARTICLES}`}
               className={`nav-link ${
                 ROUTES.ARTICLES === `/${segment}` ? "active" : ""
               }`}
             >
               Articles
             </Link>
+          </li>
+          <li>
+            <LinkLocale href={ROUTES.ARTICLES} className="nav-link">
+              Articles
+            </LinkLocale>
           </li>
           <div className="ms-auto text">
             <LanguageToggler />

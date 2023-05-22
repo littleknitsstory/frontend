@@ -1,28 +1,32 @@
 "use client";
-import { i18n } from "@/i18n-config";
+import { Locale, i18n } from "@/i18n-config";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function LanguageToggler() {
   const pathname = usePathname();
   const locales = i18n.locales;
+  const currentLanguage = pathname.split("/")[1] as Locale;
 
   const togglerText = {
     en: "English",
     ru: "Русский",
   };
 
-  const index = locales.findIndex((locale) =>
-    pathname.startsWith(`/${locale}`)
-  );
-
   function toggleLanguages() {
     let nextLanguage: string;
 
-    if (index >= locales.length - 1) {
-      nextLanguage = `${pathname.replace(locales[index], locales[0])}`;
+    const currentLanguageIndex = locales.findIndex(
+      (locale) => locale === currentLanguage
+    );
+
+    if (currentLanguageIndex >= locales.length - 1) {
+      nextLanguage = `${pathname.replace(currentLanguage, locales[0])}`;
     } else {
-      nextLanguage = `${pathname.replace(locales[index], locales[index + 1])}`;
+      nextLanguage = `${pathname.replace(
+        currentLanguage,
+        locales[currentLanguageIndex + 1]
+      )}`;
     }
 
     return nextLanguage;
@@ -30,7 +34,7 @@ export default function LanguageToggler() {
 
   return (
     <Link href={toggleLanguages()} className="link">
-      {togglerText[locales[index]]}
+      {togglerText[currentLanguage]}
     </Link>
   );
 }
