@@ -1,25 +1,26 @@
-import ArticleDetail from "@/components/article/ArticleDetail";
+import { Suspense } from "react";
 import { getDictionary } from "@/get-dictionaries";
 import { Locale } from "@/i18n-config";
-import { Article } from "@/services/types";
+
 import {
   getAllArticles,
   getArticle,
   getComments,
   getFeatures,
 } from "@/services/services";
-import { Suspense } from "react";
+
+import ArticleDetail from "@/components/article/ArticleDetail";
 import Spinner from "@/components/utils/Spinner";
 import ReadMoreArticles from "@/components/read-more-articles/ReadMoreArticles";
 import ButtonBack from "@/components/button-back/ButtonBack";
 import CommentsList from "@/components/comments/CommentsList";
 
-interface paramsProps {
+interface ParamsProps {
   slug: string;
   lang: Locale;
 }
 
-export default async function Article({ params }: { params: paramsProps }) {
+export default async function Article({ params }: { params: ParamsProps }) {
   const { slug, lang } = params;
   const dictionary = await getDictionary(lang);
 

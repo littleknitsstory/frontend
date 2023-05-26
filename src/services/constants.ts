@@ -47,3 +47,5 @@ export const SOCIAL = {
   PINTEREST: "https://www.pinterest.ru/littleknitsstory/",
   VK: "https://vk.com/littleknitsstory",
 };
+
+export const PICTURE_BASE_URL = "http://dev.backend.littleknitsstory.com:26363";

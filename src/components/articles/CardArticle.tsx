@@ -1,6 +1,6 @@
 "use client";
 
-import { ROUTES, baseUrl } from "@/services/constants";
+import { PICTURE_BASE_URL, ROUTES } from "@/services/constants";
 import { Article } from "@/services/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -38,7 +38,7 @@ export default function CardArticle({ article, lang }: Props) {
           <div className="">
             {hasImage && (
               <Image
-                src={baseUrl + article.image_preview}
+                src={PICTURE_BASE_URL + article.image_preview}
                 alt={article.image_alt}
                 className="rounded-4 "
                 width={360}
