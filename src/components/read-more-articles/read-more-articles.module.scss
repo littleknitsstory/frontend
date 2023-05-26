@@ -1,8 +1,0 @@
-@use "@/styles/general/variables" as *;
-
-.link {
-  box-sizing: content-box;
-  &:hover {
-    border-bottom: 1px solid $secondary-dark-grey;
-  }
-}

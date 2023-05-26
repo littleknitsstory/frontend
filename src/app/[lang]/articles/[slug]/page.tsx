@@ -12,6 +12,7 @@ import {
 import { Suspense } from "react";
 import Spinner from "@/components/utils/Spinner";
 import ReadMoreArticles from "@/components/read-more-articles/ReadMoreArticles";
+import ButtonBack from "@/components/button-back/ButtonBack";
 
 interface paramsProps {
   slug: string;
@@ -39,17 +40,20 @@ export default async function Article({ params }: { params: paramsProps }) {
   ]);
 
   return (
-    <Suspense fallback={<Spinner />}>
-      <ArticleDetail
-        article={article}
-        features={features}
-        dictionary={dictionary}
-        lang={lang}
-        articles={articles}
-        comments={comments}
-      />
-      <ReadMoreArticles articles={articles} dictionary={dictionary} />
-    </Suspense>
+    <>
+      <ButtonBack back={dictionary.back} />
+      <Suspense fallback={<Spinner />}>
+        <ArticleDetail
+          article={article}
+          features={features}
+          dictionary={dictionary}
+          lang={lang}
+          articles={articles}
+          comments={comments}
+        />
+        <ReadMoreArticles articles={articles} dictionary={dictionary} />
+      </Suspense>
+    </>
   );
 }
 

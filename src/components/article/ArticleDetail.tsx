@@ -4,13 +4,15 @@ import Image from "next/image";
 import { Locale } from "@/i18n-config";
 
 import { Article, CommentsData, FeaturesFlags } from "@/services/types";
-import { PICTURE_BASE_URL } from "@/services/constants";
-import { getLocaleDate, getDisplayedName } from "@/helpers/utils";
+import {
+  getLocaleDate,
+  getDisplayedName,
+  getStyleBackground,
+} from "@/helpers/utils";
 
 import Bookmark from "../bookmark/Bookmark";
 import CommentsList from "../comments/CommentsList";
 import PopoverOverlay from "../popover-overlay/PopoverOverlay";
-import ButtonBack from "../button-back/ButtonBack";
 
 import tempAvatar from "@/assets/temp-avatar.png";
 import handIcon from "@/assets/icons/reactions/hand.svg";
@@ -56,24 +58,13 @@ export default function ArticleDetail({
   articles,
   comments,
 }: Props) {
-  const style = {
-    backgroundImage: `url(${PICTURE_BASE_URL + article?.image_preview})`,
-    backgroundColor: "rgba(0,0,0,0.4)",
-    height: "560px",
-    backgroundBlendMode: "darken",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-  };
-
   return (
     <>
       {features.blog && (
         <section className="container-lg p-0">
-          <ButtonBack back={dictionary.back} />
           <div
             className="d-flex flex-column p-3 p-md-5 mt-4 w-100"
-            style={style}
+            style={getStyleBackground(article.image_preview)}
           >
             <div className="d-flex align-items-center gap-2">
               <h2 className="me-auto text text--md text--bold text--white my-0">

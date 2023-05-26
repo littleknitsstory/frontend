@@ -1,4 +1,5 @@
 import { Locale } from "@/i18n-config";
+import { PICTURE_BASE_URL } from "@/services/constants";
 
 export function getDisplayedName(author: {
   first_name: string;
@@ -33,4 +34,17 @@ export function getLocaleDate(date: string, lang: Locale) {
   });
 
   return changedDate;
+}
+
+export function getStyleBackground(image: string) {
+  const style = {
+    backgroundImage: `url(${PICTURE_BASE_URL + image})`,
+    backgroundColor: "rgba(0,0,0,0.4)",
+    height: "560px",
+    backgroundBlendMode: "darken",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+  };
+  return style;
 }

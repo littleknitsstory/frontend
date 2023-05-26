@@ -1,20 +1,24 @@
 "use client";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import arrowLeftSVG from "@/assets/icons/arrow-left-nd.svg";
 
+import Link from "next/link";
+import Image from "next/image";
+import { ROUTES } from "@/services/constants";
+
+import arrowLeftSVG from "@/assets/icons/arrow-left-nd.svg";
 interface Props {
   back: string;
 }
 
 export default function ButtonBack({ back }: Props) {
-  const router = useRouter();
   return (
-    <button
-      onClick={() => router.back()}
-      className="btn link link--with-icon m-0 mt-5 ms-2 text text--md text--bold"
-    >
-      <Image src={arrowLeftSVG} alt="arrowLeftSVG" /> {back}
-    </button>
+    <div className="container-md p-0 text-start">
+      <Link
+        href={ROUTES.ARTICLES}
+        className="linkArrow d-inline-flex align-items-center gap-3 mt-5 p-0 text--bold text--md"
+        role="button"
+      >
+        <Image src={arrowLeftSVG} alt="arrowLeftSVG" /> {back}
+      </Link>
+    </div>
   );
 }
