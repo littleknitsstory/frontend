@@ -1,6 +1,6 @@
 "use client";
 
-import { ICommentsData } from "@/styles/types";
+import { ICommentsData } from "@/services/types";
 
 interface Props {
   comment: ICommentsData;

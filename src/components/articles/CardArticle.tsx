@@ -1,7 +1,7 @@
 "use client";
 
 import { ROUTES, baseUrl } from "@/services/constants";
-import { IArticle } from "@/styles/types";
+import { IArticle } from "@/services/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

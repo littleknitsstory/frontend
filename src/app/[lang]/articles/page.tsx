@@ -3,7 +3,7 @@ import { Locale, i18n } from "@/i18n-config";
 import ArticlesList from "@/components/articles/ArticlesList";
 import CardArticle from "@/components/articles/CardArticle";
 
-import { IArticle } from "@/styles/types";
+import { IArticle } from "@/services/types";
 
 export default async function Articles({
   params,

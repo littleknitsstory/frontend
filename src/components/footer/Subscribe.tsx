@@ -4,7 +4,7 @@ import { Formik, Form as FormikForm, FormikState } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 
-import { FormValues } from "@/styles/types";
+import { FormValues } from "@/services/types";
 
 import "react-toastify/dist/ReactToastify.css";
 import { FormsInput } from "../utils/Forms";

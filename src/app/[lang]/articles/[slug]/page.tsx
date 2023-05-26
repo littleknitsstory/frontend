@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import ArticleDetail from "@/components/article/ArticleDetail";
 import { getDictionary } from "@/get-dictionaries";
 import { Locale, i18n } from "@/i18n-config";
-import { IArticle, ICommentsData, IFeaturesFlags } from "@/styles/types";
+import { IArticle, ICommentsData, IFeaturesFlags } from "@/services/types";
 import {
   getAllArticles,
   getArticle,

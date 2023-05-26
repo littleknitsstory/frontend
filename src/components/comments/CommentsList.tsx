@@ -1,6 +1,6 @@
 "use client";
 
-import { ICommentsData, IFeaturesFlags } from "@/styles/types";
+import { ICommentsData, IFeaturesFlags } from "@/services/types";
 import CardComment from "./CardComment";
 
 import arrowLeftSVG from "@/assets/icons/arrow-left-nd.svg";

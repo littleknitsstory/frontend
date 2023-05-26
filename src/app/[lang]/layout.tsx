@@ -7,7 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/footer/Footer";
 
 import Menu from "@/components/menu/Menu";
-import { IFeaturesFlags } from "../../styles/types";
+import { IFeaturesFlags } from "../../services/types";
 
 const montserrat = Montserrat({ subsets: ["latin", "cyrillic"] });
 import "bootstrap/dist/css/bootstrap.css";

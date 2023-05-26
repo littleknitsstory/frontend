@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Locale } from "@/i18n-config";
 
-import { IArticle, ICommentsData, IFeaturesFlags } from "@/styles/types";
+import { IArticle, ICommentsData, IFeaturesFlags } from "@/services/types";
 import { PICTURE_BASE_URL } from "@/services/constants";
 import { dateFromLang, getDisplayedName } from "../articles/CardArticle";
 

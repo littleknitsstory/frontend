@@ -1,5 +1,5 @@
 "use client";
-import { IArticle } from "../../styles/types";
+import { IArticle } from "../../services/types";
 
 interface Props {
   articles: IArticle[];

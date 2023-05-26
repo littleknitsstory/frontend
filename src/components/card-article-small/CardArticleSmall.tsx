@@ -1,6 +1,6 @@
 "use client";
 import { PICTURE_BASE_URL, ROUTES } from "@/services/constants";
-import { IArticle } from "@/styles/types";
+import { IArticle } from "@/services/types";
 import Image from "next/image";
 import Link from "next/link";
 import { getDisplayedName } from "../articles/CardArticle";
