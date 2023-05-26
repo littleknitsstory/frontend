@@ -3,7 +3,7 @@ import { Locale, i18n } from "@/i18n-config";
 import ArticlesList from "@/components/articles/ArticlesList";
 import CardArticle from "@/components/articles/CardArticle";
 
-import { IArticle } from "@/services/types";
+import { Article } from "@/services/types";
 
 export default async function Articles({
   params,
@@ -19,7 +19,7 @@ export default async function Articles({
       revalidate: 60,
     },
   });
-  const articles: IArticle[] = await articlesData.json();
+  const articles: Article[] = await articlesData.json();
 
   return (
     <ArticlesList articles={articles}>

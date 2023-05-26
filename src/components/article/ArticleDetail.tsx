@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Locale } from "@/i18n-config";
 
-import { IArticle, ICommentsData, IFeaturesFlags } from "@/services/types";
+import { Article, CommentsData, FeaturesFlags } from "@/services/types";
 import { PICTURE_BASE_URL } from "@/services/constants";
 import { getLocaleDate, getDisplayedName } from "@/helpers/utils";
 
@@ -20,12 +20,12 @@ import shareIcon from "@/assets/icons/share.svg";
 import shareIconGrey from "@/assets/icons/reactions/share.svg";
 
 interface Props {
-  article: IArticle;
-  features: IFeaturesFlags;
+  article: Article;
+  features: FeaturesFlags;
   lang: Locale;
-  articles: IArticle[];
+  articles: Article[];
   dictionary: Dictionary;
-  comments: ICommentsData[];
+  comments: CommentsData[];
 }
 
 interface Dictionary {

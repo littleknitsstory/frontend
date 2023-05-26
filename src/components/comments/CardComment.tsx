@@ -1,9 +1,9 @@
 "use client";
 
-import { ICommentsData } from "@/services/types";
+import { CommentsData } from "@/services/types";
 
 interface Props {
-  comment: ICommentsData;
+  comment: CommentsData;
   dictionary: IDictionary;
 }
 

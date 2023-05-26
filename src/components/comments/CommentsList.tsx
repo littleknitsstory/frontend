@@ -1,6 +1,6 @@
 "use client";
 
-import { ICommentsData, IFeaturesFlags } from "@/services/types";
+import { CommentsData, FeaturesFlags } from "@/services/types";
 import CardComment from "./CardComment";
 
 import arrowLeftSVG from "@/assets/icons/arrow-left-nd.svg";
@@ -10,8 +10,8 @@ import { ChangeEvent, useState } from "react";
 import { toast } from "react-toastify";
 
 interface Props {
-  comments: ICommentsData[];
-  features: IFeaturesFlags;
+  comments: CommentsData[];
+  features: FeaturesFlags;
   dictionary: IDictionary;
 }
 

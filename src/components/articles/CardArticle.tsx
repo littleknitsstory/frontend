@@ -1,7 +1,7 @@
 "use client";
 
 import { ROUTES, baseUrl } from "@/services/constants";
-import { IArticle } from "@/services/types";
+import { Article } from "@/services/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -16,7 +16,7 @@ import { MouseEvent } from "react";
 import { getLocaleDate, getDisplayedName } from "@/helpers/utils";
 
 interface Props {
-  article: IArticle;
+  article: Article;
   lang: Locale;
 }
 

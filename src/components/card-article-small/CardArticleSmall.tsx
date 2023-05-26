@@ -1,13 +1,13 @@
 "use client";
 import { PICTURE_BASE_URL, ROUTES } from "@/services/constants";
-import { IArticle } from "@/services/types";
+import { Article } from "@/services/types";
 import Image from "next/image";
 import Link from "next/link";
 import { getDisplayedName } from "@/helpers/utils";
 import tempAvatar from "@/assets/temp-avatar.png";
 import classes from "./card-article-small.module.scss";
 
-const CardArticleSmall = ({ ...article }: IArticle) => {
+const CardArticleSmall = ({ ...article }: Article) => {
   return (
     <div
       className={

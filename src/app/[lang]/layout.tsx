@@ -7,7 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/footer/Footer";
 
 import Menu from "@/components/menu/Menu";
-import { IFeaturesFlags } from "../../services/types";
+import { FeaturesFlags } from "../../services/types";
 
 const montserrat = Montserrat({ subsets: ["latin", "cyrillic"] });
 import "bootstrap/dist/css/bootstrap.css";
@@ -33,13 +33,13 @@ export default async function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { lang: Locale; features: IFeaturesFlags };
+  params: { lang: Locale; features: FeaturesFlags };
 }) {
   const dictionary = await getDictionary(params.lang);
   const featuresData = await fetch(process.env.API_BASE_URL + "/features/", {
     next: { revalidate: 60 },
   });
-  const features: IFeaturesFlags = await featuresData.json();
+  const features: FeaturesFlags = await featuresData.json();
 
   return (
     <html lang={params.lang}>

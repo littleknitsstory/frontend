@@ -1,4 +1,4 @@
-export interface IProduct {
+export interface Product {
   id: number;
   code: number;
   title: string;
@@ -13,14 +13,14 @@ export interface IProduct {
   image_alt: string;
 }
 
-export interface IProductsResponse {
+export interface ProductsResponse {
   count: number;
   next: string;
   previous: string;
-  results: IProduct[];
+  results: Product[];
 }
 
-export interface IProductDetails {
+export interface ProductDetails {
   id: number;
   code: number;
   title: string;
@@ -57,14 +57,14 @@ export interface IProductDetails {
   updated_at: string;
 }
 
-export interface IMenuResponse {
+export interface MenuResponse {
   count: number;
   next: string;
   previous: string;
-  results: IMenu[];
+  results: Menu[];
 }
 
-export interface IMenu {
+export interface Menu {
   id: number;
   name: string;
   url: string;
@@ -79,7 +79,7 @@ export interface IMenu {
   is_active: boolean;
 }
 
-export interface IContactRequest {
+export interface ContactRequest {
   name?: string;
   email: string;
   message: string;
@@ -87,7 +87,7 @@ export interface IContactRequest {
   company?: string;
 }
 
-export interface IArticle {
+export interface Article {
   title: string;
   slug: string;
   content: string;
@@ -105,14 +105,14 @@ export interface IArticle {
   time_for_read: number;
 }
 
-export interface IArticlesResponse {
+export interface ArticlesResponse {
   count: number;
   next: string;
   previous: string;
-  results: IArticle[];
+  results: Article[];
 }
 
-export interface IReviewsResponse {
+export interface ReviewsResponse {
   title: string;
   author: string;
   comment: string;
@@ -124,7 +124,7 @@ export interface FormValues {
   [key: string]: string;
 }
 
-export interface IUserData {
+export interface UserData {
   username: string;
   avatar: string;
   first_name: string;
@@ -143,17 +143,17 @@ export interface IUserData {
   tg_profile: string;
 }
 
-export interface ISignIn {
+export interface SignIn {
   username: string;
   email: string;
   password: string;
 }
-export interface ISignUp {
+export interface SignUp {
   email: string;
   password: string;
 }
 
-export interface ICommentsData {
+export interface CommentsData {
   id: number;
   author: {
     id: number;
@@ -165,7 +165,7 @@ export interface ICommentsData {
   created_at: string;
 }
 
-export interface IFeaturesFlags {
+export interface FeaturesFlags {
   account: boolean;
   blog: boolean;
   comments: boolean;

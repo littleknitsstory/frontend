@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import ArticleDetail from "@/components/article/ArticleDetail";
 import { getDictionary } from "@/get-dictionaries";
 import { Locale, i18n } from "@/i18n-config";
-import { IArticle, ICommentsData, IFeaturesFlags } from "@/services/types";
+import { Article, CommentsData, FeaturesFlags } from "@/services/types";
 import {
   getAllArticles,
   getArticle,
@@ -21,13 +21,13 @@ interface paramsProps {
 export default async function Article({ params }: { params: paramsProps }) {
   const { slug, lang } = params;
 
-  const articleData: IArticle = await getArticle(slug, lang);
+  const articleData: Article = await getArticle(slug, lang);
 
-  const articlesData: IArticle[] = await getAllArticles(lang);
+  const articlesData: Article[] = await getAllArticles(lang);
 
-  const featuresData: IFeaturesFlags = await getFeatures();
+  const featuresData: FeaturesFlags = await getFeatures();
 
-  const commentsData: ICommentsData[] = await getComments();
+  const commentsData: CommentsData[] = await getComments();
 
   const dictionary = await getDictionary(lang);
 
@@ -54,7 +54,7 @@ export default async function Article({ params }: { params: paramsProps }) {
 }
 
 export async function generateStaticParams() {
-  const articles: IArticle[] = await getAllArticles();
+  const articles: Article[] = await getAllArticles();
 
   const slug = articles.map((article) => ({
     slug: article.slug,

@@ -4,10 +4,10 @@ import CardArticleSmall from "../card-article-small/CardArticleSmall";
 import classes from "./read-more-articles.module.scss";
 import { ROUTES } from "@/services/constants";
 import arrowRightSVG from "@/assets/icons/arrow-right-nd.svg";
-import { IArticle } from "@/services/types";
+import { Article } from "@/services/types";
 
 interface Props {
-  articles: IArticle[];
+  articles: Article[];
   dictionary: Dictionary;
 }
 
