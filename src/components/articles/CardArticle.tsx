@@ -13,34 +13,11 @@ import classes from "./cart-article.module.scss";
 import { Locale } from "@/i18n-config";
 import Bookmark from "../bookmark/Bookmark";
 import { MouseEvent } from "react";
+import { getLocaleDate, getDisplayedName } from "@/helpers/utils";
 
 interface Props {
   article: IArticle;
   lang: Locale;
-}
-
-export function getDisplayedName(author: any) {
-  if (author) {
-    const { first_name, last_name, username } = author;
-
-    if (first_name && last_name) {
-      return first_name + " " + last_name;
-    }
-
-    if (username) {
-      return username;
-    }
-  }
-  return "Unknown author";
-}
-
-export function dateFromLang(date: string, lang: Locale) {
-  const changedDate = new Date(date).toLocaleDateString(lang, {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-  return changedDate;
 }
 
 export default function CardArticle({ article, lang }: Props) {
@@ -92,7 +69,7 @@ export default function CardArticle({ article, lang }: Props) {
               <p className="m-0">{getDisplayedName(article.author)}</p>
               <span>•</span>
               <p className="card-article__text m-0">
-                {dateFromLang(article.created_at, lang)}
+                {getLocaleDate(article.created_at, lang)}
               </p>
 
               {/* <p onClick={handleBookmarkClick} role="button">

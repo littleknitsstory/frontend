@@ -3,7 +3,7 @@ import { PICTURE_BASE_URL, ROUTES } from "@/services/constants";
 import { IArticle } from "@/services/types";
 import Image from "next/image";
 import Link from "next/link";
-import { getDisplayedName } from "../articles/CardArticle";
+import { getDisplayedName } from "@/helpers/utils";
 import tempAvatar from "@/assets/temp-avatar.png";
 import classes from "./card-article-small.module.scss";
 

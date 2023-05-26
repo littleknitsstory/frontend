@@ -5,7 +5,7 @@ import { Locale } from "@/i18n-config";
 
 import { IArticle, ICommentsData, IFeaturesFlags } from "@/services/types";
 import { PICTURE_BASE_URL } from "@/services/constants";
-import { dateFromLang, getDisplayedName } from "../articles/CardArticle";
+import { getLocaleDate, getDisplayedName } from "@/helpers/utils";
 
 import Bookmark from "../bookmark/Bookmark";
 import CommentsList from "../comments/CommentsList";
@@ -97,7 +97,7 @@ const ArticleDetail = ({
 
             <div className="d-flex gap-3 mt-3">
               <p className="text--white">
-                {dateFromLang(article.created_at, lang)}
+                {getLocaleDate(article.created_at, lang)}
               </p>
               <p className="text--white">&bull;</p>
               <p className="text--white">
