@@ -6,14 +6,16 @@ export function getDisplayedName(author: {
   last_name: string;
   username: string;
 }) {
-  const { first_name, last_name, username } = author;
+  if (author) {
+    const { first_name, last_name, username } = author;
 
-  if (first_name && last_name) {
-    return first_name + " " + last_name;
-  }
+    if (first_name && last_name) {
+      return first_name + " " + last_name;
+    }
 
-  if (username) {
-    return username;
+    if (username) {
+      return username;
+    }
   }
 
   return "Unknown author";
