@@ -1,3 +1,4 @@
+"use client";
 import { PICTURE_BASE_URL, ROUTES } from "@/services/constants";
 import { IArticle } from "@/styles/types";
 import Image from "next/image";

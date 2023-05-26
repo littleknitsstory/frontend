@@ -1,0 +1,5 @@
+@use "@/styles/general/variables" as *;
+.popoverShare {
+  background-color: $secondary-light-grey;
+  --bs-popover-max-width: 500px;
+}

@@ -1,50 +1,39 @@
 "use client";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+
 import Image from "next/image";
 import { Locale } from "@/i18n-config";
-import Popover from "react-bootstrap/Popover";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import { toast } from "react-toastify";
+
 import { IArticle, ICommentsData, IFeaturesFlags } from "@/styles/types";
-import { PICTURE_BASE_URL, ROUTES } from "@/services/constants";
+import { PICTURE_BASE_URL } from "@/services/constants";
 import { dateFromLang, getDisplayedName } from "../articles/CardArticle";
 
 import Bookmark from "../bookmark/Bookmark";
 import CommentsList from "../comments/CommentsList";
-import CardArticleSmall from "../card-article-small/CardArticleSmall";
+import PopoverOverlay from "../popover-overlay/PopoverOverlay";
+import ButtonBack from "../button-back/ButtonBack";
 
-import telegram from "@/assets/icons/social/telegram.svg";
-import facebook from "@/assets/icons/social/facebook.svg";
-import pinterest from "@/assets/icons/social/pinterest.svg";
-import chain from "@/assets/icons/chain.svg";
-import shareIcon from "@/assets/icons/share.svg";
 import tempAvatar from "@/assets/temp-avatar.png";
-import arrowLeftSVG from "@/assets/icons/arrow-left-nd.svg";
-import arrowRightSVG from "@/assets/icons/arrow-right-nd.svg";
 import handIcon from "@/assets/icons/reactions/hand.svg";
 import heartIcon from "@/assets/icons/reactions/heart.svg";
 import speechBubbleIcon from "@/assets/icons/reactions/speech-bubble.svg";
+import shareIcon from "@/assets/icons/share.svg";
 import shareIconGrey from "@/assets/icons/reactions/share.svg";
-import classes from "./article-detail.module.scss";
 
 interface Props {
   article: IArticle;
   features: IFeaturesFlags;
   lang: Locale;
   articles: IArticle[];
-  dictionary: IDictionary;
+  dictionary: Dictionary;
   comments: ICommentsData[];
 }
 
-interface IDictionary {
+interface Dictionary {
   back: string;
   article: {
     tempRead: string;
     copyLink: string;
     CopiedToClipboard: string;
-    readAlso: string;
-    watchAll: string;
   };
   comments: {
     send: string;
@@ -67,14 +56,6 @@ const ArticleDetail = ({
   articles,
   comments,
 }: Props) => {
-  const router = useRouter();
-
-  const copyToClipboard = (): void => {
-    const currentUrl = window.location.href;
-    navigator.clipboard.writeText(currentUrl);
-    toast.success(dictionary.article.CopiedToClipboard);
-  };
-
   const style = {
     backgroundImage: `url(${PICTURE_BASE_URL + article?.image_preview})`,
     backgroundColor: "rgba(0,0,0,0.4)",
@@ -85,56 +66,11 @@ const ArticleDetail = ({
     backgroundSize: "cover",
   };
 
-  const popoverShare = (
-    <Popover className={classes.popoverShare}>
-      <Popover.Body>
-        <div className="text text--18 text--bold d-flex flex-column gap-3">
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
-            className="d-flex align-items-center gap-2 p-1"
-          >
-            <Image src={facebook} alt="facebook" />
-            <p className="m-0">Facebook</p>
-          </a>
-          <a
-            href={`https://t.me/share/url?url=${window.location.href}`}
-            target="_blank"
-            rel="noreferrer"
-            className="d-flex align-items-center gap-2 post__share-btn p-1"
-          >
-            <Image src={telegram} alt="telegram" />
-            <p className="m-0">Telegram</p>
-          </a>
-          <div className="d-flex align-items-center gap-2 post__share-btn p-1">
-            <Image src={pinterest} alt="pinterest" />
-            <p className="m-0">Pinterest</p>
-          </div>
-          <div
-            className="d-flex align-items-center gap-2 post__share-btn p-1"
-            onClick={copyToClipboard}
-          >
-            <Image src={chain} alt="chain" role="button" />
-            <p className="m-0" role="button">
-              {dictionary.article.copyLink}
-            </p>
-          </div>
-        </div>
-      </Popover.Body>
-    </Popover>
-  );
-
   return (
     <>
       {features.blog && (
-        <section className="container-lg p-0 pb-5">
-          <button
-            onClick={() => router.back()}
-            className="btn link link--with-icon m-0 mt-5 ms-2 text text--md text--bold"
-          >
-            <Image src={arrowLeftSVG} alt="arrowLeftSVG" /> {dictionary.back}
-          </button>
+        <section className="container-lg p-0">
+          <ButtonBack back={dictionary.back} />
           <div
             className="d-flex flex-column p-3 p-md-5 mt-4 w-100"
             style={style}
@@ -143,15 +79,8 @@ const ArticleDetail = ({
               <h2 className="me-auto text text--md text--bold text--white my-0">
                 {article.title}
               </h2>
-              <Bookmark />
-              <OverlayTrigger
-                trigger="click"
-                placement="bottom"
-                overlay={popoverShare}
-                rootClose={true}
-              >
-                <Image src={shareIcon} alt="shareIcon" role="button" />
-              </OverlayTrigger>
+              {/* <Bookmark /> */}
+              <PopoverOverlay icon={shareIcon} dictionary={dictionary} />
             </div>
             <div className="d-flex align-items-center gap-3 mt-2">
               <Image
@@ -198,14 +127,7 @@ const ArticleDetail = ({
                 <Image src={speechBubbleIcon} alt="speechBubbleIcon" />
                 <p className="m-0">32</p>
               </div>
-              <OverlayTrigger
-                trigger="click"
-                placement="bottom"
-                overlay={popoverShare}
-                rootClose={true}
-              >
-                <Image src={shareIconGrey} alt="shareIconGrey" role="button" />
-              </OverlayTrigger>
+              <PopoverOverlay icon={shareIconGrey} dictionary={dictionary} />
             </div>
           </div>
           <CommentsList
@@ -213,28 +135,6 @@ const ArticleDetail = ({
             features={features}
             dictionary={dictionary}
           />
-          <div className="container-md text-center">
-            <h4 className="text text--md text--bold text-center mt-5 mb-3">
-              {dictionary.article.readAlso}
-            </h4>
-
-            <div className="d-flex justify-content-center gap-5">
-              {articles.map((article) => (
-                <CardArticleSmall key={article.slug} {...article} />
-              ))}
-            </div>
-            <Link
-              href={ROUTES.ARTICLES}
-              className={
-                classes.link +
-                " d-inline-flex align-items-center gap-3 mt-5 p-0 text--bold text--md"
-              }
-              role="button"
-            >
-              {dictionary.article.watchAll}
-              <Image src={arrowRightSVG} alt="arrowRightSVG" />
-            </Link>
-          </div>
         </section>
       )}
     </>

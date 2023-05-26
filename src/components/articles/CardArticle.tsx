@@ -47,10 +47,6 @@ export function dateFromLang(date: string, lang: Locale) {
 export default function CardArticle({ article, lang }: Props) {
   const hasImage = article.image_preview;
   const router = useRouter();
-  const handleCardClick = (e: MouseEvent<HTMLElement>) => {
-    e.stopPropagation();
-    router.push(`${ROUTES.ARTICLES + "/" + article.slug}`);
-  };
 
   const handleBookmarkClick = (e: MouseEvent<HTMLElement>) => {
     e.stopPropagation();
@@ -58,8 +54,8 @@ export default function CardArticle({ article, lang }: Props) {
   };
   return (
     <>
-      <div
-        onClick={handleCardClick}
+      <Link
+        href={`${ROUTES.ARTICLES + "/" + article.slug}`}
         role="button"
         className={classes.cardWrapper + " py-3"}
       >
@@ -100,9 +96,10 @@ export default function CardArticle({ article, lang }: Props) {
               <p className="card-article__text m-0">
                 {dateFromLang(article.created_at, lang)}
               </p>
-              <p onClick={handleBookmarkClick} role="button">
+
+              {/* <p onClick={handleBookmarkClick} role="button">
                 <Bookmark />
-              </p>
+              </p> */}
             </div>
             <div className="d-flex justify-content-between align-items-center">
               <h2 className="card-article__title text text--md text--bold mt-3">
@@ -113,7 +110,7 @@ export default function CardArticle({ article, lang }: Props) {
             <small>3 минуты на чтение (HC)</small>
           </div>
         </div>
-      </div>
+      </Link>
       <hr />
     </>
   );

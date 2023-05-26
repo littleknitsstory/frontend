@@ -11,6 +11,8 @@ import {
 } from "@/services/services";
 import { Suspense } from "react";
 import Spinner from "@/components/utils/Spinner";
+import ReadMoreArticles from "@/components/read-more-articles/ReadMoreArticles";
+
 interface paramsProps {
   slug: string;
   lang: Locale;
@@ -46,6 +48,7 @@ export default async function Article({ params }: { params: paramsProps }) {
         articles={articles}
         comments={comments}
       />
+      <ReadMoreArticles articles={articles} dictionary={dictionary} />
     </Suspense>
   );
 }
