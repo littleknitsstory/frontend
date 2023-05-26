@@ -1,8 +1,7 @@
-import { notFound } from "next/navigation";
 import ArticleDetail from "@/components/article/ArticleDetail";
 import { getDictionary } from "@/get-dictionaries";
-import { Locale, i18n } from "@/i18n-config";
-import { Article, CommentsData, FeaturesFlags } from "@/services/types";
+import { Locale } from "@/i18n-config";
+import { Article } from "@/services/types";
 import {
   getAllArticles,
   getArticle,
@@ -22,16 +21,12 @@ interface paramsProps {
 
 export default async function Article({ params }: { params: paramsProps }) {
   const { slug, lang } = params;
-
-  const articleData = getArticle(slug, lang);
-
-  const articlesData = getAllArticles(lang);
-
-  const featuresData = getFeatures();
-
-  const commentsData = getComments();
-
   const dictionary = await getDictionary(lang);
+
+  const articleData = getArticle(slug, lang, { next: { revalidate: 60 } });
+  const articlesData = getAllArticles(lang);
+  const featuresData = getFeatures();
+  const commentsData = getComments();
 
   const [article, articles, features, comments] = await Promise.all([
     articleData,
@@ -64,7 +59,7 @@ export default async function Article({ params }: { params: paramsProps }) {
 }
 
 export async function generateStaticParams() {
-  const articles: Article[] = await getAllArticles();
+  const articles = await getAllArticles();
 
   const slug = articles.map((article) => ({
     slug: article.slug,

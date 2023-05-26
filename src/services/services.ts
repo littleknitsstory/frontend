@@ -1,88 +1,64 @@
-import { Locale } from "@/i18n-config";
+import { ENDPOINTS } from "./constants";
 import { Article, CommentsData, FeaturesFlags } from "./types";
-import { ROUTES } from "./constants";
+import { Locale } from "@/i18n-config";
 
-export const request = async (
-  url: string,
-  method = "GET",
-  body = null,
-  headers = { "Content-Type": "application/json" },
-  ...args: any
-) => {
+// fetch wrapper to config base parameters
+async function fetcher(endpoint: string, options?: RequestInit, lang?: Locale) {
+  const URL = process.env.API_BASE_URL + endpoint;
+  const headers = {
+    "Content-Type": "application/json",
+    "Accept-Language": lang ?? "en",
+  };
+
   try {
-    const response = await fetch(url, { method, body, headers, ...args });
-
+    const response = await fetch(URL, { ...options, headers });
     if (!response.ok) {
-      throw new Error(`Could not fetch ${url}, status: ${response.status}`);
+      throw new Error(`Could not fetch. ${response.status}`);
     }
 
-    const data = await response.json();
-
-    return data;
-  } catch (e) {
-    throw e;
+    return response.json();
+  } catch (error) {
+    throw Error("Something went wrong");
   }
-};
-
-export async function getArticle(slug: string, lang: Locale) {
-  const headers = {
-    "Content-Type": "application/json",
-    "Accept-Language": lang,
-  };
-  const next = {
-    revalidate: 60,
-  };
-  const res: Promise<Article> = await request(
-    process.env.API_BASE_URL + `/${ROUTES.ARTICLES}/${slug}`,
-    "GET",
-    null,
-    headers,
-    next
-  );
-  return res;
 }
 
-export async function getAllArticles(lang: Locale = "en") {
-  const headers = {
-    "Content-Type": "application/json",
-    "Accept-Language": lang,
-  };
-  const next = {
-    revalidate: 60,
-  };
-  const res: Promise<Article[]> = await request(
-    process.env.API_BASE_URL + `/${ROUTES.ARTICLES}/`,
-    "GET",
-    null,
-    headers,
-    next
-  );
-  return res;
+export async function getArticle(
+  slug: string,
+  lang: Locale = "en",
+  options?: RequestInit
+) {
+  const endpoint = ENDPOINTS.ARTICLES + slug;
+  const response: Promise<Article> = await fetcher(endpoint, options, lang);
+
+  return response;
 }
 
-export async function getFeatures() {
-  const next = {
-    revalidate: 60,
-  };
-  const res: Promise<FeaturesFlags> = await request(
-    process.env.API_BASE_URL + `/${ROUTES.FEATURES_FLAGS}/`,
-    "GET",
-    null,
-    { "Content-Type": "application/json" },
-    next
+export async function getAllArticles(
+  lang: Locale = "en",
+  options?: RequestInit
+) {
+  const response: Promise<Article[]> = await fetcher(
+    ENDPOINTS.ARTICLES,
+    options,
+    lang
   );
-  return res;
+
+  return response;
 }
-export async function getComments() {
-  const next = {
-    revalidate: 60,
-  };
-  const res: Promise<CommentsData[]> = await request(
-    process.env.API_BASE_URL + `/${ROUTES.COMMENTS}/`,
-    "GET",
-    null,
-    { "Content-Type": "application/json" },
-    next
+
+export async function getFeatures(options?: RequestInit) {
+  const response: Promise<FeaturesFlags> = await fetcher(
+    ENDPOINTS.FEATURES,
+    options
   );
-  return res;
+
+  return response;
+}
+
+export async function getComments(options?: RequestInit) {
+  const response: Promise<CommentsData[]> = await fetcher(
+    ENDPOINTS.COMMENTS,
+    options
+  );
+  return response;
 }
