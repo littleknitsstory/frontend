@@ -7,7 +7,7 @@ import { getDisplayedName } from "@/helpers/utils";
 import tempAvatar from "@/assets/temp-avatar.png";
 import classes from "./card-article-small.module.scss";
 
-const CardArticleSmall = ({ ...article }: Article) => {
+export default function CardArticleSmall({ ...article }: Article) {
   return (
     <div
       className={
@@ -49,5 +49,4 @@ const CardArticleSmall = ({ ...article }: Article) => {
       </Link>
     </div>
   );
-};
-export default CardArticleSmall;
+}

@@ -13,7 +13,7 @@ interface Dictionary {
   };
 }
 
-const Comment = ({ comment, dictionary }: Props) => {
+export default function Comment({ comment, dictionary }: Props) {
   return (
     <div className="d-flex flex-column mb-4 rounded-4 py-2 px-3 shadow-sm">
       <p className="text text--md text--bold m-0">{comment.author.username}</p>
@@ -28,5 +28,4 @@ const Comment = ({ comment, dictionary }: Props) => {
       </p>
     </div>
   );
-};
-export default Comment;
+}

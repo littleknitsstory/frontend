@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ROUTES } from "@/services/constants";
 
-const PageError404 = () => {
+export default function PageError404() {
   return (
     <section className="container-lg p-0 pb-5">
       <div className="text--burgundy mt-5 text-uppercase fs-2 text-center">
@@ -19,6 +19,4 @@ const PageError404 = () => {
       </div>
     </section>
   );
-};
-
-export default PageError404;
+}

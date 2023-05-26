@@ -48,14 +48,14 @@ interface Dictionary {
   };
 }
 
-const ArticleDetail = ({
+export default function ArticleDetail({
   article,
   features,
   dictionary,
   lang,
   articles,
   comments,
-}: Props) => {
+}: Props) {
   const style = {
     backgroundImage: `url(${PICTURE_BASE_URL + article?.image_preview})`,
     backgroundColor: "rgba(0,0,0,0.4)",
@@ -139,6 +139,4 @@ const ArticleDetail = ({
       )}
     </>
   );
-};
-
-export default ArticleDetail;
+}

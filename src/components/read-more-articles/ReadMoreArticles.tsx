@@ -18,7 +18,7 @@ interface Dictionary {
   };
 }
 
-const ReadMoreArticles = ({ articles, dictionary }: Props) => {
+export default function ReadMoreArticles({ articles, dictionary }: Props) {
   return (
     <section className="container-lg p-0 pb-5">
       <div className="container-md text-center">
@@ -45,6 +45,4 @@ const ReadMoreArticles = ({ articles, dictionary }: Props) => {
       </div>
     </section>
   );
-};
-
-export default ReadMoreArticles;
+}

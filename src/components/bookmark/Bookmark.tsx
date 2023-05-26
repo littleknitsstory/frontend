@@ -2,8 +2,6 @@
 import Image from "next/image";
 import bookmark from "@/assets/icons/bookmark.svg";
 
-const Bookmark = () => {
+export default function Bookmark() {
   return <Image src={bookmark} alt="bookmark" role="button" />;
-};
-
-export default Bookmark;
+}

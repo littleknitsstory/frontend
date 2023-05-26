@@ -7,7 +7,7 @@ interface Props {
   back: string;
 }
 
-const ButtonBack = ({ back }: Props) => {
+export default function ButtonBack({ back }: Props) {
   const router = useRouter();
   return (
     <button
@@ -17,6 +17,4 @@ const ButtonBack = ({ back }: Props) => {
       <Image src={arrowLeftSVG} alt="arrowLeftSVG" /> {back}
     </button>
   );
-};
-
-export default ButtonBack;
+}
