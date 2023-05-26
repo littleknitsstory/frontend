@@ -12,10 +12,10 @@ import { toast } from "react-toastify";
 interface Props {
   comments: CommentsData[];
   features: FeaturesFlags;
-  dictionary: IDictionary;
+  dictionary: Dictionary;
 }
 
-interface IDictionary {
+interface Dictionary {
   comments: {
     send: string;
     comments: string;

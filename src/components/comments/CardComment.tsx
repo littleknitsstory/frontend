@@ -4,10 +4,10 @@ import { CommentsData } from "@/services/types";
 
 interface Props {
   comment: CommentsData;
-  dictionary: IDictionary;
+  dictionary: Dictionary;
 }
 
-interface IDictionary {
+interface Dictionary {
   comments: {
     reply: string;
   };

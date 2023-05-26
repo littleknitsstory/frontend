@@ -1,25 +1,16 @@
-import { Locale, i18n } from "@/i18n-config";
+import { Locale } from "@/i18n-config";
 
 import ArticlesList from "@/components/articles/ArticlesList";
 import CardArticle from "@/components/articles/CardArticle";
 
-import { Article } from "@/services/types";
+import { getAllArticles } from "@/services/services";
 
 export default async function Articles({
   params,
 }: {
   params: { lang: Locale };
 }) {
-  const articlesData = await fetch(process.env.API_BASE_URL + "/articles/", {
-    headers: {
-      "Content-Type": "application/json",
-      "Accept-Language": params.lang,
-    },
-    next: {
-      revalidate: 60,
-    },
-  });
-  const articles: Article[] = await articlesData.json();
+  const articles = await getAllArticles(params.lang);
 
   return (
     <ArticlesList articles={articles}>
@@ -28,8 +19,4 @@ export default async function Articles({
       ))}
     </ArticlesList>
   );
-}
-
-export function generateStaticParams() {
-  return i18n.locales.map((locale) => ({ lang: locale }));
 }

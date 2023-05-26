@@ -21,13 +21,13 @@ interface paramsProps {
 export default async function Article({ params }: { params: paramsProps }) {
   const { slug, lang } = params;
 
-  const articleData: Article = await getArticle(slug, lang);
+  const articleData = getArticle(slug, lang);
 
-  const articlesData: Article[] = await getAllArticles(lang);
+  const articlesData = getAllArticles(lang);
 
-  const featuresData: FeaturesFlags = await getFeatures();
+  const featuresData = getFeatures();
 
-  const commentsData: CommentsData[] = await getComments();
+  const commentsData = getComments();
 
   const dictionary = await getDictionary(lang);
 
@@ -59,7 +59,6 @@ export async function generateStaticParams() {
   const slug = articles.map((article) => ({
     slug: article.slug,
   }));
-  const lang = i18n.locales.map((locale) => ({ lang: locale }));
 
-  return [lang, slug];
+  return slug;
 }

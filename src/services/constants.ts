@@ -14,6 +14,8 @@ export const ROUTES = {
   PROFILE_ARTICLES: "/profile/articles",
   PROFILE_ORDERS: "/profile/orders",
   BOOKMARKS: "/bookmarks",
+  FEATURES_FLAGS: "/features",
+  COMMENTS: "/comments",
 };
 
 /* Social links */

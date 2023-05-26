@@ -1,4 +1,6 @@
 import { Locale } from "@/i18n-config";
+import { Article, CommentsData, FeaturesFlags } from "./types";
+import { ROUTES } from "./constants";
 
 export const request = async (
   url: string,
@@ -30,8 +32,8 @@ export async function getArticle(slug: string, lang: Locale) {
   const next = {
     revalidate: 60,
   };
-  const res = await request(
-    process.env.API_BASE_URL + `/articles/${slug}`,
+  const res: Promise<Article> = await request(
+    process.env.API_BASE_URL + `/${ROUTES.ARTICLES}/${slug}`,
     "GET",
     null,
     headers,
@@ -39,7 +41,7 @@ export async function getArticle(slug: string, lang: Locale) {
   );
   return res;
 }
-// дефолтное значение???
+
 export async function getAllArticles(lang: Locale = "en") {
   const headers = {
     "Content-Type": "application/json",
@@ -48,8 +50,8 @@ export async function getAllArticles(lang: Locale = "en") {
   const next = {
     revalidate: 60,
   };
-  const res = await request(
-    process.env.API_BASE_URL + "/articles/",
+  const res: Promise<Article[]> = await request(
+    process.env.API_BASE_URL + `/${ROUTES.ARTICLES}/`,
     "GET",
     null,
     headers,
@@ -62,8 +64,8 @@ export async function getFeatures() {
   const next = {
     revalidate: 60,
   };
-  const res = await request(
-    process.env.API_BASE_URL + "/features/",
+  const res: Promise<FeaturesFlags> = await request(
+    process.env.API_BASE_URL + `/${ROUTES.FEATURES_FLAGS}/`,
     "GET",
     null,
     { "Content-Type": "application/json" },
@@ -75,8 +77,8 @@ export async function getComments() {
   const next = {
     revalidate: 60,
   };
-  const res = await request(
-    process.env.API_BASE_URL + "/comments/",
+  const res: Promise<CommentsData[]> = await request(
+    process.env.API_BASE_URL + `/${ROUTES.COMMENTS}/`,
     "GET",
     null,
     { "Content-Type": "application/json" },
