@@ -14,6 +14,7 @@ import { Locale } from "@/i18n-config";
 import Bookmark from "../bookmark/Bookmark";
 import { MouseEvent } from "react";
 import { getLocaleDate, getDisplayedName } from "@/helpers/utils";
+import LinkLocale from "../utils/LinkLocale";
 
 interface Props {
   article: Article;
@@ -30,8 +31,8 @@ export default function CardArticle({ article, lang }: Props) {
   };
   return (
     <>
-      <Link
-        href={`/${lang}` + ROUTES.ARTICLES + "/" + article.slug}
+      <LinkLocale
+        href={ROUTES.ARTICLES + "/" + article.slug}
         className={classes.cardWrapper + " py-3"}
       >
         <div className="d-md-flex gap-3 flex-md-row-reverse align-items-center">
@@ -85,7 +86,7 @@ export default function CardArticle({ article, lang }: Props) {
             <small>3 минуты на чтение (HC)</small>
           </div>
         </div>
-      </Link>
+      </LinkLocale>
       <hr />
     </>
   );

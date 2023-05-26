@@ -43,9 +43,6 @@ const CommentsList = ({ features, comments, dictionary }: Props) => {
         {
           method: "POST",
           body: JSON.stringify(message),
-          headers: {
-            "Content-Type": "application/json",
-          },
         }
       );
       toast.dismiss();

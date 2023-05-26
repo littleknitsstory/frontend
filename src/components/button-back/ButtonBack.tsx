@@ -11,7 +11,7 @@ interface Props {
 
 export default function ButtonBack({ back }: Props) {
   return (
-    <div className="container-md p-0 text-start">
+    <div className="container-lg p-0 text-start">
       <Link
         href={ROUTES.ARTICLES}
         className="linkArrow d-inline-flex align-items-center gap-3 mt-5 p-0 text--bold text--md"
