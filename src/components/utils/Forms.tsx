@@ -28,15 +28,24 @@ export const FormsInput = ({
 
   return (
     <>
-      <Form.Group as={Col} md={col} controlId={controlId} className="form-group">
+      <Form.Group
+        as={Col}
+        md={col}
+        controlId={controlId}
+        className="form-group"
+      >
         <Field
           {...field}
           {...props}
           className={
-            meta.touched && meta.error ? "form-control form-control_error" : "form-control"
+            meta.touched && meta.error
+              ? "form-control form-control_error"
+              : "form-control"
           }
         />
-        {meta.touched && meta.error ? <p className="form-error">{meta.error}</p> : null}
+        {meta.touched && meta.error ? (
+          <span className="form-error">{meta.error}</span>
+        ) : null}
       </Form.Group>
     </>
   );

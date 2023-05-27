@@ -1,4 +1,4 @@
-const Spinner = () => {
+export default function Spinner() {
   return (
     <svg
       style={{
@@ -157,6 +157,4 @@ const Spinner = () => {
       </g>
     </svg>
   );
-};
-
-export default Spinner;
+}

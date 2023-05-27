@@ -1,0 +1,40 @@
+@use "variables" as *;
+
+.text {
+  font-weight: 400;
+  font-size: 1rem;
+  color: $black-text;
+
+  &--xl {
+    font-size: 2.375rem;
+  }
+  &--lg {
+    font-size: 2rem;
+  }
+  &--md {
+    font-size: 1.25rem;
+  }
+  &--sm {
+    font-size: 0.875rem;
+  }
+  &--xs {
+    font-size: 0.75rem;
+  }
+
+  &--bold {
+    font-weight: 500;
+  }
+
+  &--white {
+    color: $white;
+  }
+  &--grey {
+    color: $secondary-dark-grey;
+  }
+  &--light-grey {
+    color: $secondary-light-grey;
+  }
+  &--burgundy {
+    color: $accent-burgundy;
+  }
+}

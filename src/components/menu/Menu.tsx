@@ -1,52 +1,29 @@
-import { useState, useEffect } from "react";
-import { IMenu } from "../../app/types";
-import { NavLink } from "react-router-dom";
+"use client";
+import Link from "next/link";
+import { usePathname, useSelectedLayoutSegment } from "next/navigation";
 
-import i18next from "../../i18n";
-import { useGetMenuQuery } from "../features/api/apiSlice";
+import { ROUTES } from "@/services/constants";
+import LanguageToggler from "../utils/LanguageToggler";
+import LinkLocale from "../utils/LinkLocale";
 
-interface propTypes {
-  type: "footer" | "header";
-  // className: string;
-}
-
-const PrimaryNav = (props: propTypes) => {
-  const { data: menu, isError } = useGetMenuQuery({ lang: i18next.language });
-  const [sortedMenuItem, setSortedMenuItem] = useState<IMenu[] | []>([]);
-
-  useEffect(() => {
-    // Filtering "Header" / "Footer" menu items
-    if (menu) {
-      const filteredMenu: IMenu[] = menu.results
-        .filter((item) => item.menu.hint === props.type)
-        .sort((a, b) => a.ordering - b.ordering);
-      setSortedMenuItem(filteredMenu);
-    }
-  }, [menu, props.type]);
-
-  if (isError) {
-    return <div className="error--menu">Cannot load menu, please refresh page!</div>;
-  }
+export default function Menu() {
+  const segment = useSelectedLayoutSegment() ?? "";
+  const pathname = usePathname();
 
   return (
-    <>
-      {sortedMenuItem.map((item) =>
-        item.target ? (
-          <a key={item.id} href={item.url} target={item.target}>
-            {item.name}
-          </a>
-        ) : (
-          <li key={item.id} className="nav-item">
-            <NavLink className="nav-link text-uppercase header-nav-link" to={item.url}>
-              {({ isActive, isPending }) => (
-                <span className={isActive ? "active" : ""}>{item.name}</span>
-              )}
-            </NavLink>
+    <nav className="">
+      <div className="">
+        <ul className="nav flex-row text text--md w-100 justify-content-evenly justify-content-md-start mt-3 gap-5 align-items-center">
+          <li>
+            <LinkLocale href={ROUTES.ARTICLES} className="nav-link">
+              Articles
+            </LinkLocale>
           </li>
-        ),
-      )}
-    </>
+          <div className="ms-auto text">
+            <LanguageToggler />
+          </div>
+        </ul>
+      </div>
+    </nav>
   );
-};
-
-export default PrimaryNav;
+}

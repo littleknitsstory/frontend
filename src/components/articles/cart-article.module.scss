@@ -1,0 +1,29 @@
+@use "@/styles/general/variables" as *;
+.image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 18/11;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.cardWrapper {
+  border-radius: 12px;
+  padding: 0 6px;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &:hover {
+    background-color: $secondary-light-grey;
+  }
+}
+
+@media (min-width: 768px) {
+  .image {
+    height: 200px;
+    aspect-ratio: 10/7;
+  }
+}

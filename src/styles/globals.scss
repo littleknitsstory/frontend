@@ -1,0 +1,15 @@
+@use "general";
+
+* {
+  margin: 0;
+}
+
+a {
+  color: inherit !important ;
+  text-decoration: none !important;
+}
+
+body {
+  box-sizing: border-box;
+  background-color: #fafafa;
+}

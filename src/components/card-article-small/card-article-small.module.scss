@@ -1,0 +1,16 @@
+@use "@/styles/general/variables" as *;
+.cardArticleSmall {
+  width: 325px;
+
+  &__content {
+    height: 85px;
+  }
+
+  // &__image {
+  //   border-radius: 12px 12px 0 0;
+  //   width: 325px;
+  //   height: 200px;
+  //   object-fit: cover;
+  //   object-position: center;
+  // }
+}

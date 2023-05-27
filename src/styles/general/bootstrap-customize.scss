@@ -1,0 +1,70 @@
+@use "variables" as *;
+/* Hamburger header styling */
+
+.header-toggler {
+  border: none;
+
+  &:focus {
+    box-shadow: 0 0 0 1px;
+  }
+}
+
+.navbar-toggler > .opened {
+  display: inline;
+}
+.navbar-toggler.collapsed > .opened,
+.navbar-toggler:not(.collapsed) > .collapsed {
+  display: none;
+}
+
+/* Links */
+
+.link {
+  text-decoration: none !important;
+
+  &:hover {
+    color: $black-text !important;
+    font-weight: 500 !important;
+  }
+}
+
+.nav-link {
+  position: relative !important;
+  display: inline-block !important;
+  padding: 2px 2px !important;
+  color: $black-text !important;
+  &.active {
+    color: inherit !important;
+    font-weight: 500 !important;
+    border-bottom: 2px solid $black-text !important;
+    &:hover {
+      color: lighten($color: $black-text, $amount: 30) !important;
+    }
+  }
+  &:visited,
+  &:focus {
+    color: inherit !important;
+  }
+  &:hover {
+    color: inherit !important;
+    font-weight: 500 !important;
+  }
+
+  &::before {
+    content: "";
+    position: absolute !important;
+    left: 0 !important;
+    bottom: -1px !important;
+    width: 100% !important ;
+    height: 1px !important;
+    background-color: $secondary-dark-grey !important;
+    border-radius: 1px !important;
+    scale: 0 1 !important;
+    transform-origin: right !important;
+    transition: scale 0.25s !important;
+  }
+  &:hover::before {
+    scale: 1 !important;
+    transform-origin: left !important;
+  }
+}

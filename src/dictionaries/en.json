@@ -1,0 +1,51 @@
+{
+  "header": {
+    "title": "Blog and knitting shop",
+    "nav": {
+      "account": "Account",
+      "cart": "Cart",
+      "favorites": "Favorites",
+      "courses": "My Courses",
+      "articles": "My Articles",
+      "orders": "My Orders",
+      "bookmarks": "Bookmarks",
+      "logout": "Logout"
+    }
+  },
+
+  "footer": {
+    "about": "About",
+    "history": "Our history",
+    "ad": "Advertising",
+    "contacts": "Contacts",
+    "title": "Blog and knitting shop",
+    "policy": "Privacy Policy",
+    "subscribe": {
+      "title": "Subscription",
+      "text": "Subscribe to know about our special promotions",
+      "email": "Email",
+      "buttonText": "Subscribe",
+      "incorrectEmail": "Please enter a valid email address",
+      "required": "Required field!"
+    }
+  },
+  "back": "Back",
+  "article": {
+    "tempRead": "min read",
+    "copyLink": "Copy link",
+    "CopiedToClipboard": "Copied to clipboard",
+    "readAlso": "Also read",
+    "watchAll": "See All"
+  },
+  "comments": {
+    "send": "Send",
+    "comments": "Comments",
+    "noAuthorize": "Please login",
+    "successSend": "Thanks, your message sent",
+    "reply": "Reply",
+    "placeholderComments": "What do you think?"
+  },
+  "notification": {
+    "somethingWrong": "Something went wrong"
+  }
+}
