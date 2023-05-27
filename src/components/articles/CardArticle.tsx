@@ -33,9 +33,9 @@ export default function CardArticle({ article, lang }: Props) {
     <>
       <LinkLocale
         href={ROUTES.ARTICLES + "/" + article.slug}
-        className={classes.cardWrapper + " py-3"}
+        className={classes.cardWrapper}
       >
-        <div className="d-md-flex gap-3 flex-md-row-reverse align-items-center">
+        <div className="d-md-flex gap-3 flex-md-row-reverse align-items-center justify-content-between">
           <div className="">
             {hasImage && (
               <Image

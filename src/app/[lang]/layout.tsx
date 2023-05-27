@@ -10,8 +10,8 @@ import Menu from "@/components/menu/Menu";
 import { FeaturesFlags } from "../../services/types";
 
 const montserrat = Montserrat({ subsets: ["latin", "cyrillic"] });
-import "bootstrap/dist/css/bootstrap.css";
 import "@/styles/globals.scss";
+import "bootstrap/dist/css/bootstrap.css";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({
