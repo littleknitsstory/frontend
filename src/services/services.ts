@@ -3,11 +3,15 @@ import { Article, CommentsData, FeaturesFlags } from "./types";
 import { Locale } from "@/i18n-config";
 
 // fetch wrapper to config base parameters
-async function fetcher(endpoint: string, options?: RequestInit, lang?: Locale) {
-  const URL = process.env.API_BASE_URL + endpoint;
+async function fetcher(
+  endpoint: string,
+  options?: RequestInit,
+  lang: Locale = "en"
+) {
+  const URL = process.env.REACT_APP_BASE_API_URL + endpoint;
   const headers = {
     "Content-Type": "application/json",
-    "Accept-Language": lang ?? "en",
+    "Accept-Language": lang,
   };
 
   try {

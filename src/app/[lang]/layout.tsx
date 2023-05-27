@@ -36,9 +36,12 @@ export default async function RootLayout({
   params: { lang: Locale; features: FeaturesFlags };
 }) {
   const dictionary = await getDictionary(params.lang);
-  const featuresData = await fetch(process.env.API_BASE_URL + "/features/", {
-    next: { revalidate: 60 },
-  });
+  const featuresData = await fetch(
+    process.env.REACT_APP_BASE_API_URL + "/features/",
+    {
+      next: { revalidate: 60 },
+    }
+  );
   const features: FeaturesFlags = await featuresData.json();
 
   return (
