@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { getDictionary } from "@/get-dictionaries";
 import { Locale } from "@/i18n-config";
@@ -22,6 +23,9 @@ interface ParamsProps {
 
 export default async function Article({ params }: { params: ParamsProps }) {
   const { slug, lang } = params;
+  if (!slug) {
+    notFound();
+  }
   const dictionary = await getDictionary(lang);
 
   const articleData = getArticle(slug, lang, { next: { revalidate: 60 } });
