@@ -12,12 +12,10 @@ Yup.addMethod(Yup.string, "email", function validateEmail(message) {
 });
 
 interface IFormsInputProps {
-  col?: number;
   controlId: string;
 }
 
 export const FormsInput = ({
-  col,
   controlId,
   ...props
 }: IFormsInputProps &
@@ -28,12 +26,7 @@ export const FormsInput = ({
 
   return (
     <>
-      <Form.Group
-        as={Col}
-        md={col}
-        controlId={controlId}
-        className="form-group"
-      >
+      <Form.Group controlId={controlId} className="form-group">
         <Field
           {...field}
           {...props}
