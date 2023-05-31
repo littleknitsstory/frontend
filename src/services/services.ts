@@ -10,16 +10,12 @@ async function fetcher(endpoint: string, options?: RequestInit, lang?: Locale) {
     "Accept-Language": lang ?? "en",
   };
 
-  try {
-    const response = await fetch(URL, { ...options, headers });
-    if (!response.ok) {
-      throw new Error(`Could not fetch. ${response.status}`);
-    }
-
-    return response.json();
-  } catch (error) {
-    throw Error("Something went wrong");
+  const response = await fetch(URL, { ...options, headers });
+  if (!response.ok) {
+    return undefined;
   }
+
+  return response.json();
 }
 
 export async function getArticle(

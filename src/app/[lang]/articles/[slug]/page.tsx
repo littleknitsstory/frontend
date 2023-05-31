@@ -23,9 +23,7 @@ interface ParamsProps {
 
 export default async function Article({ params }: { params: ParamsProps }) {
   const { slug, lang } = params;
-  if (!slug) {
-    notFound();
-  }
+
   const dictionary = await getDictionary(lang);
 
   const articleData = getArticle(slug, lang, { next: { revalidate: 60 } });
@@ -39,6 +37,10 @@ export default async function Article({ params }: { params: ParamsProps }) {
     featuresData,
     commentsData,
   ]);
+
+  if (!article) {
+    notFound();
+  }
 
   return (
     <>

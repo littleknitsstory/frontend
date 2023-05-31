@@ -33,7 +33,7 @@ export default function LanguageToggler() {
   }
 
   return (
-    <Link href={toggleLanguages()} className="link">
+    <Link replace href={toggleLanguages()} className="link">
       {togglerText[currentLanguage]}
     </Link>
   );

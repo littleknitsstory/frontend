@@ -1,3 +1,5 @@
-export default function notFound() {
-  return <div>not-found</div>;
+import PageError404 from "@/components/404/404";
+
+export default function NotFound() {
+  return <PageError404 />;
 }

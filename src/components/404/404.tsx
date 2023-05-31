@@ -1,7 +1,10 @@
+"use client";
 import Link from "next/link";
 import { ROUTES } from "@/services/constants";
+import { useRouter } from "next/navigation";
 
 export default function PageError404() {
+  const router = useRouter();
   return (
     <section className="container-lg p-0 pb-5">
       <div className="text--burgundy mt-5 text-uppercase fs-2 text-center">
@@ -14,7 +17,7 @@ export default function PageError404() {
         The page you are trying to reach does not exist or has been deleted.
         <br />
         <span>
-          <Link href={ROUTES.HOME}>Click to home</Link>
+          <button onClick={() => router.back()}>Click to home</button>
         </span>
       </div>
     </section>
