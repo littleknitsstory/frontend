@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { getDictionary } from "@/get-dictionaries";
@@ -19,6 +20,25 @@ import CommentsList from "@/components/comments/CommentsList";
 interface ParamsProps {
   slug: string;
   lang: Locale;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: ParamsProps;
+}): Promise<Metadata> {
+  const { lang, slug } = params;
+
+  const article = await getArticle(slug, lang, { next: { revalidate: 60 } });
+
+  return {
+    // title: article.title,
+    description: article.description,
+    openGraph: {
+      title: article.title,
+      description: article.description,
+    },
+  };
 }
 
 export default async function Article({ params }: { params: ParamsProps }) {

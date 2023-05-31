@@ -2,10 +2,9 @@ import { Locale } from "@/i18n-config";
 import Header from "@/components/Header";
 import Footer from "@/components/footer/Footer";
 import Menu from "@/components/menu/Menu";
-import { getDictionary } from "@/get-dictionaries";
+
 import { getFeatures } from "@/services/services";
-import "@/styles/globals.scss";
-import "bootstrap/dist/css/bootstrap.css";
+import { getDictionary } from "@/get-dictionaries";
 
 export async function generateMetadata({
   params,
@@ -16,9 +15,15 @@ export async function generateMetadata({
   return {
     title: "Little Knits Story",
     description: dictionary.header.title,
+    openGraph: {
+      title: "Little Knits Story",
+      description: dictionary.header.title,
+      type: "website",
+      // url: "https://littleknitsstory.com/",
+      // images: "icon.png",
+    },
   };
 }
-
 export const revalidate = 1000;
 
 export default async function GeneralLayout({

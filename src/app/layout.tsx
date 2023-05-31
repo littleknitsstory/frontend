@@ -1,7 +1,8 @@
-import { i18n } from "@/i18n-config";
-import { Locale } from "next/dist/compiled/@vercel/og/satori";
+import { i18n, Locale } from "@/i18n-config";
 import Script from "next/script";
 import { Montserrat } from "next/font/google";
+import "@/styles/globals.scss";
+import "bootstrap/dist/css/bootstrap.css";
 
 const montserrat = Montserrat({ subsets: ["latin", "cyrillic"] });
 

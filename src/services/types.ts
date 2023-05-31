@@ -90,6 +90,7 @@ export interface ContactRequest {
 export interface Article {
   title: string;
   slug: string;
+  description: string;
   content: string;
   author: {
     id: number;

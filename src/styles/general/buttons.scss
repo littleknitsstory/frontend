@@ -22,3 +22,11 @@
     scale: (0.98) !important;
   }
 }
+
+.btn--link {
+  background-color: inherit;
+  border: none;
+  &:hover {
+    border-bottom: 1px solid $secondary-dark-grey;
+  }
+}
