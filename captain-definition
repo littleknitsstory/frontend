@@ -13,7 +13,7 @@
     "WORKDIR /app",
     "COPY package*.json ./",
     "RUN npm install --only=production",
-    "COPY --from=builder /app/.next ./.next",
+    "COPY --from=builder /app/build ./.next",
     "COPY --from=builder /app/public ./public",
     "ENV NEXT_PUBLIC_BASE_PATH /",
     "EXPOSE 3000",
