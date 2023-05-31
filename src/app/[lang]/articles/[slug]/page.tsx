@@ -33,9 +33,15 @@ export async function generateMetadata({
 
   return {
     // title: article.title,
-    description: article.description,
+
     openGraph: {
       title: article.title,
+      description: article.description,
+      type: "article",
+      publishedTime: article.created_at,
+      //authors: article.author.first_name,
+    },
+    twitter: {
       description: article.description,
     },
   };

@@ -19,8 +19,17 @@ export async function generateMetadata({
       title: "Little Knits Story",
       description: dictionary.header.title,
       type: "website",
+      siteName: "Little Knits Story",
+
       // url: "https://littleknitsstory.com/",
       // images: "icon.png",
+      icons: {
+        icon: "icon.png",
+      },
+    },
+    twitter: {
+      title: "Little Knits Story",
+      description: dictionary.header.title,
     },
   };
 }

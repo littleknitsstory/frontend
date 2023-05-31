@@ -1,6 +1,6 @@
-import { Locale } from "@/i18n-config";
 import Link from "next/link";
 import { usePathname, useSelectedLayoutSegment } from "next/navigation";
+import { Locale } from "@/i18n-config";
 
 export default function LinkLocale({
   children,

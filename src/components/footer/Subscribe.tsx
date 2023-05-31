@@ -5,9 +5,9 @@ import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 
 import { FormValues } from "@/services/types";
+import { FormsInput } from "../utils/Forms";
 
 import "react-toastify/dist/ReactToastify.css";
-import { FormsInput } from "../utils/Forms";
 
 interface Props {
   dictionary: {

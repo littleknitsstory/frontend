@@ -1,12 +1,9 @@
 "use client";
 
-import { CommentsData, FeaturesFlags } from "@/services/types";
-import CardComment from "./CardComment";
-
-import arrowLeftSVG from "@/assets/icons/arrow-left-nd.svg";
-import arrowRightSVG from "@/assets/icons/arrow-right-nd.svg";
-import Image from "next/image";
 import { ChangeEvent, useState } from "react";
+import { CommentsData, FeaturesFlags } from "@/services/types";
+import { ENDPOINTS } from "@/services/constants";
+import CardComment from "./CardComment";
 import { toast } from "react-toastify";
 
 interface Props {
@@ -39,7 +36,7 @@ const CommentsList = ({ features, comments, dictionary }: Props) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "http://dev.backend.littleknitsstory.com:26363/api/v1/comments/",
+        `${process.env.API_BASE_URL}${ENDPOINTS.COMMENTS}`,
         {
           method: "POST",
           body: JSON.stringify(message),

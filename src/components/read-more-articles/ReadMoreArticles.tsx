@@ -1,10 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import CardArticleSmall from "../card-article-small/CardArticleSmall";
-
 import { ROUTES } from "@/services/constants";
-import arrowRightSVG from "@/assets/icons/arrow-right-nd.svg";
 import { Article } from "@/services/types";
+import CardArticleSmall from "../card-article-small/CardArticleSmall";
+import arrowRightSVG from "@/assets/icons/arrow-right-nd.svg";
 
 interface Props {
   articles: Article[];

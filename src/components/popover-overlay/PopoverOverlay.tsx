@@ -4,11 +4,11 @@ import Image from "next/image";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import { toast } from "react-toastify";
-import classes from "./popover.module.scss";
 import telegram from "@/assets/icons/social/telegram.svg";
 import facebook from "@/assets/icons/social/facebook.svg";
 import pinterest from "@/assets/icons/social/pinterest.svg";
 import chain from "@/assets/icons/chain.svg";
+import classes from "./popover.module.scss";
 
 interface Props {
   icon: string;

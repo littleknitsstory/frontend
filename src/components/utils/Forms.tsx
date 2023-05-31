@@ -1,7 +1,7 @@
 import { ClassAttributes, InputHTMLAttributes } from "react";
 import { FieldHookConfig, useField, Field } from "formik";
 import * as Yup from "yup";
-import { Form, Col } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 Yup.addMethod(Yup.string, "email", function validateEmail(message) {
   return this.matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, {
