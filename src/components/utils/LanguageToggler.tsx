@@ -1,7 +1,7 @@
 "use client";
-import { Locale, i18n } from "@/i18n-config";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Locale, i18n } from "@/i18n-config";
 
 export default function LanguageToggler() {
   const pathname = usePathname();
@@ -33,7 +33,7 @@ export default function LanguageToggler() {
   }
 
   return (
-    <Link href={toggleLanguages()} className="link">
+    <Link replace href={toggleLanguages()} className="link">
       {togglerText[currentLanguage]}
     </Link>
   );

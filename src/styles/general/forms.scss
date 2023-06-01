@@ -1,11 +1,11 @@
 @use "variables" as *;
 .form-control {
-  border-radius: 40px;
-  padding: 12px 24px;
-  border: 1px solid $secondary-dark-grey;
+  border-radius: 40px !important;
+  padding: 12px 24px !important;
+  border: 1px solid $secondary-dark-grey !important;
   &:focus {
-    box-shadow: 0 0 0 0.25rem $border-color;
-    border-color: $light-grey;
+    box-shadow: 0 0 0 0.25rem $border-color !important;
+    border-color: $light-grey !important;
   }
   &_error {
     margin-bottom: 0;
@@ -16,7 +16,6 @@
 .form-error {
   font-size: 1rem;
   color: #870101;
-  margin: 0.2rem 0;
 }
 
 .input--with-icon {

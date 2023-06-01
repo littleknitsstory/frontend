@@ -2,10 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 import SubscribeForm from "./Subscribe";
-import { SOCIAL } from "@/services/constants";
+import { SOCIAL, ROUTES } from "@/services/constants";
 
 import logoMobile from "@/assets/images/logo-mobile.svg";
-import { ROUTES } from "@/services/constants";
 
 interface Props {
   dictionary: {

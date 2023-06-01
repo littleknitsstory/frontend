@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { getDictionary } from "@/get-dictionaries";
 import { Locale } from "@/i18n-config";
@@ -20,8 +22,34 @@ interface ParamsProps {
   lang: Locale;
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: ParamsProps;
+}): Promise<Metadata> {
+  const { lang, slug } = params;
+
+  const article = await getArticle(slug, lang, { next: { revalidate: 60 } });
+
+  return {
+    // title: article.title,
+
+    openGraph: {
+      title: article.title,
+      description: article.description,
+      type: "article",
+      publishedTime: article.created_at,
+      //authors: article.author.first_name,
+    },
+    twitter: {
+      description: article.description,
+    },
+  };
+}
+
 export default async function Article({ params }: { params: ParamsProps }) {
   const { slug, lang } = params;
+
   const dictionary = await getDictionary(lang);
 
   const articleData = getArticle(slug, lang, { next: { revalidate: 60 } });
@@ -35,6 +63,10 @@ export default async function Article({ params }: { params: ParamsProps }) {
     featuresData,
     commentsData,
   ]);
+
+  if (!article) {
+    notFound();
+  }
 
   return (
     <>

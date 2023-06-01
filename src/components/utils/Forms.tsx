@@ -1,7 +1,7 @@
 import { ClassAttributes, InputHTMLAttributes } from "react";
 import { FieldHookConfig, useField, Field } from "formik";
 import * as Yup from "yup";
-import { Form, Col } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 Yup.addMethod(Yup.string, "email", function validateEmail(message) {
   return this.matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, {
@@ -12,12 +12,10 @@ Yup.addMethod(Yup.string, "email", function validateEmail(message) {
 });
 
 interface IFormsInputProps {
-  col?: number;
   controlId: string;
 }
 
 export const FormsInput = ({
-  col,
   controlId,
   ...props
 }: IFormsInputProps &
@@ -28,12 +26,7 @@ export const FormsInput = ({
 
   return (
     <>
-      <Form.Group
-        as={Col}
-        md={col}
-        controlId={controlId}
-        className="form-group"
-      >
+      <Form.Group controlId={controlId} className="form-group">
         <Field
           {...field}
           {...props}

@@ -8,22 +8,18 @@ async function fetcher(
   options?: RequestInit,
   lang: Locale = "en"
 ) {
-  const URL = process.env.REACT_APP_BASE_API_URL + endpoint;
+  const URL = process.env.API_BASE_URL + endpoint;
   const headers = {
     "Content-Type": "application/json",
     "Accept-Language": lang,
   };
 
-  try {
-    const response = await fetch(URL, { ...options, headers });
-    if (!response.ok) {
-      throw new Error(`Could not fetch. ${response.status}`);
-    }
-
-    return response.json();
-  } catch (error) {
-    throw Error("Something went wrong");
+  const response = await fetch(URL, { ...options, headers });
+  if (!response.ok) {
+    return undefined;
   }
+
+  return response.json();
 }
 
 export async function getArticle(
