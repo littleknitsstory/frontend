@@ -12,11 +12,15 @@ jobs:
       - uses: actions/checkout@v3
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@v4
+        env:
+          API_BASE_URL: http://dev.backend.littleknitsstory.com:26363/api/v1
         with:
-          name: littleknitsstory/frontend:latest
+          name: littleknitsstory/frontend
           username: ${{ github.actor }}
           password: ${{ secrets.PACKAGE_TOKEN }}
           registry: ghcr.io
+          tags: ${{ steps.meta.outputs.tags }}
+          buildargs: API_BASE_URL
 
   deploy:
     needs: build
