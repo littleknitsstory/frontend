@@ -41,7 +41,7 @@ export default function CardArticle({ article, lang }: Props) {
               <Image
                 src={article.contents[0].image}
                 alt={article.contents[0].image_alt}
-                className="rounded-4 "
+                className={classes.image}
                 width={360}
                 height={220}
               />

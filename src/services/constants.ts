@@ -21,7 +21,7 @@ export const ROUTES = {
 
 // API Endpoints
 export const ENDPOINTS = {
-  ARTICLES: "/articles/",
+  ARTICLES: "/article/",
   CATEGORIES: "/categories/",
   COMMENTS: "/comments/",
   CONTACTS: "/contacts/",
