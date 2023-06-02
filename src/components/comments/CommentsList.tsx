@@ -42,8 +42,6 @@ export default function CommentsList({ dictionary }: Props) {
     fetcher
   );
 
-  console.log(comments);
-
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
     setMessage(e.currentTarget.value);
   };
