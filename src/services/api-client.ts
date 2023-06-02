@@ -1,5 +1,5 @@
 import { ENDPOINTS } from "./constants";
-import { Article, CommentsData, FeaturesFlags } from "./types";
+import { Article, Articles, CommentsData, FeaturesFlags } from "./types";
 import { Locale } from "@/i18n-config";
 
 // fetch wrapper to config base parameters
@@ -17,7 +17,7 @@ async function fetcher(
   const response = await fetch(URL, { ...options, headers });
 
   if (!response.ok) {
-    throw new Error(`${response.status} ${response.statusText}`);
+    throw new Error(`Could not fetch data (${response.status})`);
   }
 
   return response.json();
@@ -38,7 +38,7 @@ export async function getAllArticles(
   lang: Locale = "en",
   options?: RequestInit
 ) {
-  const response: Promise<Article[]> = await fetcher(
+  const response: Promise<Articles[]> = await fetcher(
     ENDPOINTS.ARTICLES,
     options,
     lang

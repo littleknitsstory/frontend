@@ -88,7 +88,7 @@ export default function ArticleDetail({ article, dictionary, lang }: Props) {
           ))}
         </div>
       </div>
-      <div className="container-lg mt-4">{article.content}</div>comments
+      <div className="container-lg mt-4">{article.content}</div>
       <div className="post__footer container-lg">
         <div className=" post__reactions d-flex gap-5 mt-3 ">
           <div className="d-flex flex-column align-items-center">

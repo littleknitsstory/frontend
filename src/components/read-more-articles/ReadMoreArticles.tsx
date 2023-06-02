@@ -1,12 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ROUTES } from "@/services/constants";
-import { Article } from "@/services/types";
+import { Articles } from "@/services/types";
 import CardArticleSmall from "../card-article-small/CardArticleSmall";
 import arrowRightSVG from "@/assets/icons/arrow-right-nd.svg";
 
 interface Props {
-  articles: Article[];
+  articles: Articles[];
   dictionary: Dictionary;
 }
 

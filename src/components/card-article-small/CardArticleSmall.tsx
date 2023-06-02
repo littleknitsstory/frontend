@@ -1,13 +1,13 @@
 "use client";
 import { PICTURE_BASE_URL, ROUTES } from "@/services/constants";
-import { Article } from "@/services/types";
+import { Articles } from "@/services/types";
 import Image from "next/image";
 import Link from "next/link";
 import { getDisplayedName } from "@/helpers/utils";
 import tempAvatar from "@/assets/temp-avatar.png";
 import classes from "./card-article-small.module.scss";
 
-export default function CardArticleSmall({ ...article }: Article) {
+export default function CardArticleSmall({ ...article }: Articles) {
   return (
     <div
       className={
@@ -23,7 +23,7 @@ export default function CardArticleSmall({ ...article }: Article) {
               " my-2 text text--sm overflow-hidden"
             }
           >
-            {article.content}
+            {article.description}
           </div>
 
           <small className="text--grey">3 минуты на чтение</small>

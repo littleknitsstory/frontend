@@ -1,8 +1,8 @@
 "use client";
-import { Article } from "../../services/types";
+import { Articles } from "../../services/types";
 
 interface Props {
-  articles: Article[];
+  articles: Articles[];
   children: React.ReactNode;
 }
 

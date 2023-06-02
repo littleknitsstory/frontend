@@ -1,7 +1,7 @@
 "use client";
 
 import { PICTURE_BASE_URL, ROUTES } from "@/services/constants";
-import { Article } from "@/services/types";
+import { Articles } from "@/services/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -17,12 +17,12 @@ import { getLocaleDate, getDisplayedName } from "@/helpers/utils";
 import LinkLocale from "../utils/LinkLocale";
 
 interface Props {
-  article: Article;
+  article: Articles;
   lang: Locale;
 }
 
 export default function CardArticle({ article, lang }: Props) {
-  const hasImage = article.image_preview;
+  const hasImage = article.contents[0].image;
   const router = useRouter();
 
   const handleBookmarkClick = (e: MouseEvent<HTMLElement>) => {
@@ -39,8 +39,8 @@ export default function CardArticle({ article, lang }: Props) {
           <div className="">
             {hasImage && (
               <Image
-                src={PICTURE_BASE_URL + article.image_preview}
-                alt={article.image_alt}
+                src={article.contents[0].image}
+                alt={article.contents[0].image_alt}
                 className="rounded-4 "
                 width={360}
                 height={220}
@@ -82,8 +82,8 @@ export default function CardArticle({ article, lang }: Props) {
                 {article.title}
               </h2>
             </div>
-            <p>{article.content}</p>
-            <small>3 минуты на чтение (HC)</small>
+            <p>{article.description}</p>
+            <small>Time to read! (change API to get data)</small>
           </div>
         </div>
       </LinkLocale>

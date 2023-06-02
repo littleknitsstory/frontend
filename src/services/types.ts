@@ -87,6 +87,27 @@ export interface ContactRequest {
   company?: string;
 }
 
+export interface Articles {
+  title: string;
+  slug: string;
+  description: string;
+  contents: [
+    {
+      text: string;
+      image: string;
+      image_alt: string;
+    }
+  ];
+  author: null;
+  tags: [
+    {
+      title: string;
+      slug: string;
+    }
+  ];
+  created_at: string;
+}
+
 export interface Article {
   title: string;
   slug: string;
@@ -104,13 +125,6 @@ export interface Article {
   created_at: string;
   tags: { slug: string; title: string }[];
   time_for_read: number;
-}
-
-export interface ArticlesResponse {
-  count: number;
-  next: string;
-  previous: string;
-  results: Article[];
 }
 
 export interface ReviewsResponse {

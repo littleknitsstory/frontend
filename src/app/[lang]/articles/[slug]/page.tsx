@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { Suspense } from "react";
+
 import { getDictionary } from "@/get-dictionaries";
 import { Locale } from "@/i18n-config";
 
@@ -29,7 +29,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang, slug } = params;
 
-  const article = await getArticle(slug, lang, { next: { revalidate: 60 } });
+  const article = await getArticle(slug, lang, { next: { revalidate: 600 } });
 
   return {
     // title: article.title,
@@ -54,7 +54,7 @@ export default async function Article({ params }: { params: ParamsProps }) {
 
   const dictionary = await getDictionary(lang);
 
-  const articleData = getArticle(slug, lang, { next: { revalidate: 60 } });
+  const articleData = getArticle(slug, lang, { next: { revalidate: 600 } });
   const articlesData = getAllArticles(lang);
   const featuresData = getFeatures();
   const commentsData = getComments();
@@ -65,10 +65,6 @@ export default async function Article({ params }: { params: ParamsProps }) {
     featuresData,
     commentsData,
   ]);
-
-  // if (!article) {
-  //   notFound();
-  // }
 
   return (
     <>
@@ -81,14 +77,12 @@ export default async function Article({ params }: { params: ParamsProps }) {
             lang={lang}
           />
         )}
-
-        <CommentsList
-          comments={comments}
-          features={features}
-          dictionary={dictionary}
-        />
-        <ReadMoreArticles articles={articles} dictionary={dictionary} />
       </Suspense>
+
+      {features.comments && (
+        <CommentsList comments={comments} dictionary={dictionary} />
+      )}
+      <ReadMoreArticles articles={articles} dictionary={dictionary} />
     </>
   );
 }
