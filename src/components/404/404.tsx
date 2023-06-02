@@ -17,7 +17,7 @@ export default function PageError404() {
         <br />
         <span>
           <button className="btn--link" onClick={() => router.back()}>
-            Click to home
+            Go back
           </button>
         </span>
       </div>

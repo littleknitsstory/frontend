@@ -15,8 +15,9 @@ async function fetcher(
   };
 
   const response = await fetch(URL, { ...options, headers });
+
   if (!response.ok) {
-    return undefined;
+    throw new Error(`${response.status} ${response.statusText}`);
   }
 
   return response.json();

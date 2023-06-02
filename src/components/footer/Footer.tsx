@@ -27,7 +27,7 @@ interface Props {
 
 export default function Footer({ dictionary }: Props) {
   return (
-    <footer className="mt-5">
+    <footer className="mt-auto">
       <div className="text--md  row row-cols-2 row-cols-md-3 mx-0">
         <ul className="nav flex-column gap-2 col-md-3">
           <h2 className="text--md mb-3">{dictionary.about}</h2>

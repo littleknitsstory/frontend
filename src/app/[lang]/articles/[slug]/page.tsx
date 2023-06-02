@@ -9,7 +9,7 @@ import {
   getArticle,
   getComments,
   getFeatures,
-} from "@/services/services";
+} from "@/services/api-client";
 
 import ArticleDetail from "@/components/article/ArticleDetail";
 import Spinner from "@/components/utils/Spinner";
@@ -47,6 +47,8 @@ export async function generateMetadata({
   };
 }
 
+export const dynamicParams = false;
+
 export default async function Article({ params }: { params: ParamsProps }) {
   const { slug, lang } = params;
 
@@ -64,9 +66,9 @@ export default async function Article({ params }: { params: ParamsProps }) {
     commentsData,
   ]);
 
-  if (!article) {
-    notFound();
-  }
+  // if (!article) {
+  //   notFound();
+  // }
 
   return (
     <>
