@@ -8,7 +8,7 @@ async function fetcher(
   options?: RequestInit,
   lang: Locale = "en"
 ) {
-  const URL = process.env.API_BASE_URL + endpoint;
+  const URL = process.env.NEXT_PUBLIC_API_BASE_URL + endpoint;
   const headers = {
     "Content-Type": "application/json",
     "Accept-Language": lang,

@@ -7,18 +7,19 @@ import { ROUTES } from "@/services/constants";
 import arrowLeftSVG from "@/assets/icons/arrow-left-nd.svg";
 import { useRouter } from "next/navigation";
 interface Props {
-  back: string;
+  dictionary: string;
 }
 
-export default function ButtonBack({ back }: Props) {
+export default function ButtonBack({ dictionary }: Props) {
   const router = useRouter();
   return (
     <div className="container-lg p-0 text-start">
       <button
-        className="btn--link d-inline-flex align-items-center gap-3 mt-5 p-0 text--bold text--md"
+        className="btn--link d-inline-flex align-items-center gap-2 mt-5 p-0 text--bold text--md"
         onClick={() => router.back()}
       >
-        <Image src={arrowLeftSVG} alt="arrowLeftSVG" /> {back}
+        <Image src={arrowLeftSVG} alt="arrowLeftSVG" />
+        <span>{dictionary}</span>
       </button>
     </div>
   );

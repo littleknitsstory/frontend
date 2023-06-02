@@ -9,7 +9,7 @@ export default function LinkLocale({
 }: {
   children: React.ReactNode;
   href: string;
-  className: string;
+  className?: string;
 }) {
   const pathname = usePathname();
   const segment = useSelectedLayoutSegment();

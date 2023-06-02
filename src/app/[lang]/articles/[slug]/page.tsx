@@ -57,18 +57,18 @@ export default async function Article({ params }: { params: ParamsProps }) {
   const articleData = getArticle(slug, lang, { next: { revalidate: 600 } });
   const articlesData = getAllArticles(lang);
   const featuresData = getFeatures();
-  const commentsData = getComments();
+  // const commentsData = getComments();
 
-  const [article, articles, features, comments] = await Promise.all([
+  const [article, articles, features] = await Promise.all([
     articleData,
     articlesData,
     featuresData,
-    commentsData,
+    // commentsData,
   ]);
 
   return (
     <>
-      <ButtonBack back={dictionary.back} />
+      <ButtonBack dictionary={dictionary.back} />
       <Suspense fallback={<Spinner />}>
         {features.blog && (
           <ArticleDetail
@@ -79,9 +79,7 @@ export default async function Article({ params }: { params: ParamsProps }) {
         )}
       </Suspense>
 
-      {features.comments && (
-        <CommentsList comments={comments} dictionary={dictionary} />
-      )}
+      {features.comments && <CommentsList dictionary={dictionary} />}
       <ReadMoreArticles articles={articles} dictionary={dictionary} />
     </>
   );

@@ -1,9 +1,7 @@
 import { Locale } from "@/i18n-config";
-
-import ArticlesList from "@/components/articles/ArticlesList";
-import CardArticle from "@/components/articles/CardArticle";
-
 import { getAllArticles } from "@/services/api-client";
+
+import CardArticle from "@/components/articles/CardArticle";
 
 export default async function Articles({
   params: { lang },
@@ -13,10 +11,13 @@ export default async function Articles({
   const articles = await getAllArticles(lang);
 
   return (
-    <ArticlesList articles={articles}>
+    <div className="my-5">
       {articles.map((article) => (
-        <CardArticle key={article.slug} article={article} lang={lang} />
+        <>
+          <CardArticle key={article.slug} article={article} lang={lang} />
+          <hr />
+        </>
       ))}
-    </ArticlesList>
+    </div>
   );
 }

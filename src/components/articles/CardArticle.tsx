@@ -30,11 +30,8 @@ export default function CardArticle({ article, lang }: Props) {
     router.push("/bookmarks");
   };
   return (
-    <>
-      <LinkLocale
-        href={ROUTES.ARTICLES + "/" + article.slug}
-        className={classes.cardWrapper + " py-2"}
-      >
+    <div className={classes.cardWrapper + " py-2"}>
+      <LinkLocale href={ROUTES.ARTICLES + "/" + article.slug} className="">
         <div className="d-md-flex gap-3 flex-md-row-reverse align-items-center justify-content-between">
           <div className="">
             {hasImage && (
@@ -87,7 +84,6 @@ export default function CardArticle({ article, lang }: Props) {
           </div>
         </div>
       </LinkLocale>
-      <hr />
-    </>
+    </div>
   );
 }

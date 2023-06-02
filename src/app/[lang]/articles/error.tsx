@@ -10,7 +10,7 @@ export default function Error({
   return (
     <div className="text-center mt-3">
       <h2 className="text text--md text--burgundy">
-        <i>{error.message} </i>
+        <i>{error.message}</i>
       </h2>
     </div>
   );

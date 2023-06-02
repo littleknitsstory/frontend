@@ -1,13 +1,16 @@
 "use client";
+import useSWR from "swr";
 
 import { ChangeEvent, useState } from "react";
 import { CommentsData, FeaturesFlags } from "@/services/types";
 import { ENDPOINTS } from "@/services/constants";
 import CardComment from "./CardComment";
 import { toast } from "react-toastify";
+import { getComments } from "@/services/api-client";
+import Spinner from "../utils/Spinner";
 
 interface Props {
-  comments: CommentsData[];
+  // comments: CommentsData[];
   dictionary: Dictionary;
 }
 
@@ -25,8 +28,22 @@ interface Dictionary {
   };
 }
 
-const CommentsList = ({ comments, dictionary }: Props) => {
+export default function CommentsList({ dictionary }: Props) {
   const [message, setMessage] = useState<string>("");
+
+  const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+  const {
+    data: comments,
+    error,
+    isLoading,
+  } = useSWR<CommentsData[]>(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}${ENDPOINTS.COMMENTS}?model_type=ARTICLE`,
+    fetcher
+  );
+
+  console.log(comments);
+
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
     setMessage(e.currentTarget.value);
   };
@@ -35,7 +52,7 @@ const CommentsList = ({ comments, dictionary }: Props) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `${process.env.API_BASE_URL}${ENDPOINTS.COMMENTS}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}${ENDPOINTS.COMMENTS}`,
         {
           method: "POST",
           body: JSON.stringify(message),
@@ -43,8 +60,11 @@ const CommentsList = ({ comments, dictionary }: Props) => {
       );
       toast.dismiss();
       if (!response.ok) {
-        const error = await response.json();
-        toast.error(dictionary.comments.noAuthorize);
+        if (response.status === 401) {
+          toast.error(dictionary.comments.noAuthorize);
+        } else {
+          toast.error(dictionary.notification.somethingWrong);
+        }
       } else {
         toast.success(dictionary.comments.successSend);
       }
@@ -56,7 +76,7 @@ const CommentsList = ({ comments, dictionary }: Props) => {
   return (
     <>
       <div className="container-lg">
-        <form className=" d-flex flex-column mt-5 col-md-8 col-lg-6 mx-0">
+        <form className="d-flex flex-column mt-5 col-md-8 col-lg-6 mx-0">
           <h4 className="text text--md text--bold">
             {dictionary.comments.comments}
           </h4>
@@ -77,7 +97,13 @@ const CommentsList = ({ comments, dictionary }: Props) => {
           </button>
         </form>
         <div className="mt-5 col-md-8 col-lg-6 mx-0">
-          {comments.map((comment) => (
+          {isLoading && <Spinner />}
+          {error && (
+            <p className="text text--burgundy text-center">
+              Cannot load comments
+            </p>
+          )}
+          {comments?.map((comment) => (
             <CardComment
               key={comment.id}
               comment={comment}
@@ -90,6 +116,4 @@ const CommentsList = ({ comments, dictionary }: Props) => {
       </div>
     </>
   );
-};
-
-export default CommentsList;
+}
