@@ -1,11 +1,13 @@
 import { Locale } from "@/i18n-config";
 import { PICTURE_BASE_URL } from "@/services/constants";
 
-export function getDisplayedName(author: {
-  first_name: string;
-  last_name: string;
-  username: string;
-}) {
+export function getDisplayedName(
+  author: {
+    first_name: string;
+    last_name: string;
+    username: string;
+  } | null
+) {
   if (author) {
     const { first_name, last_name, username } = author;
 

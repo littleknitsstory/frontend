@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { Suspense } from "react";
+
 import { getDictionary } from "@/get-dictionaries";
 import { Locale } from "@/i18n-config";
 
@@ -9,7 +9,7 @@ import {
   getArticle,
   getComments,
   getFeatures,
-} from "@/services/services";
+} from "@/services/api-client";
 
 import ArticleDetail from "@/components/article/ArticleDetail";
 import Spinner from "@/components/utils/Spinner";
@@ -29,7 +29,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang, slug } = params;
 
-  const article = await getArticle(slug, lang, { next: { revalidate: 60 } });
+  const article = await getArticle(slug, lang, { next: { revalidate: 600 } });
 
   return {
     // title: article.title,
@@ -47,30 +47,28 @@ export async function generateMetadata({
   };
 }
 
+export const dynamicParams = false;
+
 export default async function Article({ params }: { params: ParamsProps }) {
   const { slug, lang } = params;
 
   const dictionary = await getDictionary(lang);
 
-  const articleData = getArticle(slug, lang, { next: { revalidate: 60 } });
+  const articleData = getArticle(slug, lang, { next: { revalidate: 600 } });
   const articlesData = getAllArticles(lang);
   const featuresData = getFeatures();
-  const commentsData = getComments();
+  // const commentsData = getComments();
 
-  const [article, articles, features, comments] = await Promise.all([
+  const [article, articles, features] = await Promise.all([
     articleData,
     articlesData,
     featuresData,
-    commentsData,
+    // commentsData,
   ]);
-
-  if (!article) {
-    notFound();
-  }
 
   return (
     <>
-      <ButtonBack back={dictionary.back} />
+      <ButtonBack dictionary={dictionary.back} />
       <Suspense fallback={<Spinner />}>
         {features.blog && (
           <ArticleDetail
@@ -79,14 +77,10 @@ export default async function Article({ params }: { params: ParamsProps }) {
             lang={lang}
           />
         )}
-
-        <CommentsList
-          comments={comments}
-          features={features}
-          dictionary={dictionary}
-        />
-        <ReadMoreArticles articles={articles} dictionary={dictionary} />
       </Suspense>
+
+      {features.comments && <CommentsList dictionary={dictionary} />}
+      <ReadMoreArticles articles={articles} dictionary={dictionary} />
     </>
   );
 }

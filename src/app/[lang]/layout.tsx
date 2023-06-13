@@ -1,10 +1,14 @@
-import { Locale } from "@/i18n-config";
+import { Locale, i18n } from "@/i18n-config";
 import Header from "@/components/Header";
 import Footer from "@/components/footer/Footer";
 import Menu from "@/components/menu/Menu";
 
-import { getFeatures } from "@/services/services";
+import { getFeatures } from "@/services/api-client";
 import { getDictionary } from "@/get-dictionaries";
+import { Montserrat } from "next/font/google";
+import "@/styles/globals.scss";
+import "bootstrap/dist/css/bootstrap.css";
+import Script from "next/script";
 
 export async function generateMetadata({
   params,
@@ -33,9 +37,10 @@ export async function generateMetadata({
     },
   };
 }
-export const revalidate = 1000;
 
-export default async function GeneralLayout({
+const montserrat = Montserrat({ subsets: ["latin", "cyrillic"] });
+
+export default async function RootLayout({
   children,
   params,
 }: {
@@ -43,14 +48,25 @@ export default async function GeneralLayout({
   params: { lang: Locale };
 }) {
   const dictionary = await getDictionary(params.lang);
-  const features = await getFeatures({ next: { revalidate: 60 } });
+  const features = await getFeatures({ next: { revalidate: 600 } });
 
   return (
-    <div className="container-lg min-vh-100 d-flex flex-column">
-      <Header dictionary={dictionary.header} />
-      {features.menu && <Menu />}
-      {children}
-      <Footer dictionary={dictionary.footer} />
-    </div>
+    <html lang={params.lang}>
+      <body className={montserrat.className}>
+        <div className="container-lg min-vh-100 d-flex flex-column">
+          <Header dictionary={dictionary.header} />
+          {features.menu && <Menu />}
+          {children}
+          <Footer dictionary={dictionary.footer} />
+        </div>
+        <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
+      </body>
+    </html>
   );
+}
+
+export function generateStaticParams() {
+  const locales = i18n.locales.map((locale) => ({ lang: locale }));
+
+  return locales;
 }
