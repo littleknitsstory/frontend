@@ -7,5 +7,5 @@ services:
     ports:
       - "63000:80/tcp"
     volumes:
-      - /app/node_modules
+      - ./app/node_modules
       - .:/app
