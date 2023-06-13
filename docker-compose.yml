@@ -5,7 +5,7 @@ services:
     container_name: frontend
     image: ghcr.io/littleknitsstory/frontend:latest
     ports:
-      - "63000:80/tcp"
+      - "63000:3000/tcp"
     volumes:
       - ./app/node_modules
       - .:/app
