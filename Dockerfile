@@ -19,8 +19,8 @@ RUN \
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
-ARG API_BASE_URL
-ENV API_BASE_URL=$API_BASE_URL
+ARG NEXT_PUBLIC_API_BASE_URL
+ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
