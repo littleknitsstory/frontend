@@ -181,14 +181,17 @@ export interface CommentsData {
 }
 
 export interface FeaturesFlags {
-  account: boolean;
+  articles: boolean;
   blog: boolean;
-  comments: boolean;
-  contacts: boolean;
-  course: boolean;
-  feed: boolean;
   menu: boolean;
-  reviews: boolean;
-  shop: boolean;
-  slider: boolean;
+  // account: boolean;
+  // blog: boolean;
+  // comments: boolean;
+  // contacts: boolean;
+  // course: boolean;
+  // feed: boolean;
+  // menu: boolean;
+  // reviews: boolean;
+  // shop: boolean;
+  // slider: boolean;
 }
