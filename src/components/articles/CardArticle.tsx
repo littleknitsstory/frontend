@@ -22,7 +22,7 @@ interface Props {
 }
 
 export default function CardArticle({ article, lang }: Props) {
-  const hasImage = article.contents[0].image;
+  //const hasImage = article.contents[0].image;
   const router = useRouter();
 
   const handleBookmarkClick = (e: MouseEvent<HTMLElement>) => {
@@ -34,7 +34,7 @@ export default function CardArticle({ article, lang }: Props) {
       <LinkLocale href={ROUTES.ARTICLES + "/" + article.slug} className="">
         <div className="d-md-flex gap-3 flex-md-row-reverse align-items-center justify-content-between">
           <div className="">
-            {hasImage && (
+            {/* {hasImage && (
               <Image
                 src={article.contents[0].image}
                 alt={article.contents[0].image_alt}
@@ -42,10 +42,10 @@ export default function CardArticle({ article, lang }: Props) {
                 width={360}
                 height={220}
               />
-            )}
+            )} */}
 
             {/* TODO: Temporary image for articles without image */}
-            {!hasImage && (
+            {/* {!hasImage && (
               <Image
                 src={tempArticleImage}
                 alt=""
@@ -53,7 +53,7 @@ export default function CardArticle({ article, lang }: Props) {
                 height={220}
                 className={classes.image}
               />
-            )}
+            )} */}
           </div>
           <div className="">
             <div className="d-flex gap-2 align-items-center text mt-3 md-mt-0">
