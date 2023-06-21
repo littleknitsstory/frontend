@@ -112,7 +112,12 @@ export interface Article {
   title: string;
   slug: string;
   description: string;
-  content: string;
+  contents: {
+    text: string;
+    image: string;
+    image_alt: string;
+  }[];
+  is_active: boolean;
   author: {
     id: number;
     username: string;
@@ -120,11 +125,13 @@ export interface Article {
     first_name: string;
     last_name: string;
   };
-  image_preview: string;
-  image_alt: string;
-  created_at: string;
   tags: { slug: string; title: string }[];
-  time_for_read: number;
+  meta_title: string;
+  meta_keywords: string;
+  meta_description: string;
+  created_at: string;
+  updated_at: string;
+  is_bookmarked: string;
 }
 
 export interface ReviewsResponse {
@@ -181,17 +188,12 @@ export interface CommentsData {
 }
 
 export interface FeaturesFlags {
+  menu: boolean;
   articles: boolean;
   blog: boolean;
-  menu: boolean;
-  // account: boolean;
-  // blog: boolean;
-  // comments: boolean;
-  // contacts: boolean;
-  // course: boolean;
-  // feed: boolean;
-  // menu: boolean;
-  // reviews: boolean;
-  // shop: boolean;
-  // slider: boolean;
+  shop: boolean;
+  slider: boolean;
+  account: boolean;
+  comments: boolean;
+  contacts: boolean;
 }

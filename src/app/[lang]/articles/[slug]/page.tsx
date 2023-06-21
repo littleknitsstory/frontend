@@ -57,13 +57,13 @@ export default async function Article({ params }: { params: ParamsProps }) {
   const articleData = getArticle(slug, lang, { next: { revalidate: 600 } });
   const articlesData = getAllArticles(lang);
   const featuresData = getFeatures();
-  // const commentsData = getComments();
+  const commentsData = getComments();
 
   const [article, articles, features] = await Promise.all([
     articleData,
     articlesData,
     featuresData,
-    // commentsData,
+    commentsData,
   ]);
 
   return (

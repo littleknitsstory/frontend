@@ -49,7 +49,7 @@ export default function ArticleDetail({ article, dictionary, lang }: Props) {
     <section className="container-lg p-0">
       <div
         className="d-flex flex-column p-3 p-md-5 mt-4 w-100"
-        style={getStyleBackground(article.image_preview)}
+        style={getStyleBackground(article.contents[0].image)}
       >
         <div className="d-flex align-items-center gap-2">
           <h2 className="me-auto text text--md text--bold text--white my-0">
@@ -77,7 +77,8 @@ export default function ArticleDetail({ article, dictionary, lang }: Props) {
           </p>
           <p className="text--white">&bull;</p>
           <p className="text--white">
-            {article.time_for_read} {dictionary.article.tempRead}
+            {/* {article.time_for_read} {dictionary.article.tempRead} */}0{" "}
+            {dictionary.article.tempRead}
           </p>
         </div>
         <div className="d-flex gap-4 mt-auto">
@@ -88,7 +89,21 @@ export default function ArticleDetail({ article, dictionary, lang }: Props) {
           ))}
         </div>
       </div>
-      <div className="container-lg mt-4">{article.content}</div>
+      <div className="container-lg mt-4">
+        {article.contents.map((content, index) => (
+          <>
+            <p key={index} className="text">
+              {content.text}
+            </p>
+            <Image
+              src="http://dev.backend.littleknitsstory.com:26363/media/Snapseed_2_bvLKktd.jpg"
+              alt={content.image_alt}
+              width={300}
+              height={300}
+            />
+          </>
+        ))}
+      </div>
       <div className="post__footer container-lg">
         <div className=" post__reactions d-flex gap-5 mt-3 ">
           <div className="d-flex flex-column align-items-center">
