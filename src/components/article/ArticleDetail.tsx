@@ -95,10 +95,11 @@ export default function ArticleDetail({ article, dictionary, lang }: Props) {
               {content.text}
             </p>
             <Image
-              src="http://dev.backend.littleknitsstory.com:26363/media/Snapseed_2_bvLKktd.jpg"
+              src={content.image}
               alt={content.image_alt}
               width={300}
               height={300}
+              priority
             />
           </>
         ))}
