@@ -132,6 +132,7 @@ export interface Article {
   created_at: string;
   updated_at: string;
   is_bookmarked: string;
+  time_for_read: string;
 }
 
 export interface ReviewsResponse {

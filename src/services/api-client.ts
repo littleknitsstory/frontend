@@ -1,5 +1,5 @@
 import { ENDPOINTS } from "./constants";
-import { Article, Articles, CommentsData, FeaturesFlags } from "./types";
+import { Article, Articles, CommentsData, FeaturesFlags, Menu } from "./types";
 import { Locale } from "@/i18n-config";
 
 // fetch wrapper to config base parameters
@@ -61,5 +61,18 @@ export async function getComments(options?: RequestInit) {
     ENDPOINTS.COMMENTS,
     options
   );
+  return response;
+}
+
+export async function getMenu(
+  lang: Locale = "en",
+  options?: RequestInit
+) {
+  const response: Promise<Menu[]> = await fetcher(
+    ENDPOINTS.MENU,
+    options,
+    lang
+  );
+
   return response;
 }

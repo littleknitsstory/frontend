@@ -79,7 +79,7 @@ export default async function Article({ params }: { params: ParamsProps }) {
         )}
       </Suspense>
 
-      {/* {features.comments && <CommentsList dictionary={dictionary} />} */}
+      {features.comments && <CommentsList dictionary={dictionary} />}
       <ReadMoreArticles articles={articles} dictionary={dictionary} />
     </>
   );

@@ -77,8 +77,7 @@ export default function ArticleDetail({ article, dictionary, lang }: Props) {
           </p>
           <p className="text--white">&bull;</p>
           <p className="text--white">
-            {/* {article.time_for_read} {dictionary.article.tempRead} */}0{" "}
-            {dictionary.article.tempRead}
+            {article.time_for_read} {dictionary.article.tempRead}
           </p>
         </div>
         <div className="d-flex gap-4 mt-auto">

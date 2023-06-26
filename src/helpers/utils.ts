@@ -42,7 +42,7 @@ export function getLocaleDate(date: string, lang: Locale) {
 
 export function getStyleBackground(image: string) {
   const style = {
-    backgroundImage: `${image}`,
+    backgroundImage: `url(${image})`,
     backgroundColor: "rgba(0,0,0,0.4)",
     height: "560px",
     backgroundBlendMode: "darken",

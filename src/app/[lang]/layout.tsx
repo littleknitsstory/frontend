@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/footer/Footer";
 import Menu from "@/components/menu/Menu";
 
-import { getFeatures } from "@/services/api-client";
+import { getFeatures, getMenu } from "@/services/api-client";
 import { getDictionary } from "@/get-dictionaries";
 import { Montserrat } from "next/font/google";
 import "@/styles/globals.scss";
@@ -49,13 +49,14 @@ export default async function RootLayout({
 }) {
   const dictionary = await getDictionary(params.lang);
   const features = await getFeatures({ next: { revalidate: 600 } });
+  const menu = await getMenu(params.lang, { next: { revalidate: 600 } });
 
   return (
     <html lang={params.lang}>
       <body className={montserrat.className}>
         <div className="container-lg min-vh-100 d-flex flex-column">
           <Header dictionary={dictionary.header} />
-          {features.menu && <Menu />}
+          {features.menu && <Menu menu={menu} type="header" />}
           {children}
           <Footer dictionary={dictionary.footer} />
         </div>
