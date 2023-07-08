@@ -22,6 +22,8 @@ interface ParamsProps {
   lang: Locale;
 }
 
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: {
@@ -46,8 +48,6 @@ export async function generateMetadata({
     },
   };
 }
-
-export const dynamicParams = false;
 
 export default async function Article({ params }: { params: ParamsProps }) {
   const { slug, lang } = params;
