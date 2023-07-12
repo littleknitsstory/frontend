@@ -17,7 +17,7 @@ export default function LinkLocale({
   return (
     <Link
       href={`/${currentLanguage}${href}`}
-      className={`${className} ${href === `/${segment}` ? "active" : ""}`}
+      className={`${className} ${href === segment ? "active" : ""}`}
     >
       {children}
     </Link>

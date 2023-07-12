@@ -12,7 +12,7 @@ import tempArticleImage from "@/assets/temp-article-image.png";
 import classes from "./cart-article.module.scss";
 import { Locale } from "@/i18n-config";
 import Bookmark from "../bookmark/Bookmark";
-import { MouseEvent } from "react";
+import { MouseEvent, useId } from "react";
 import { getLocaleDate, getDisplayedName } from "@/helpers/utils";
 import LinkLocale from "../utils/LinkLocale";
 
@@ -29,6 +29,7 @@ export default function CardArticle({ article, lang }: Props) {
     e.stopPropagation();
     router.push("/bookmarks");
   };
+
   return (
     <div className={classes.cardWrapper + " py-2"}>
       <LinkLocale href={ROUTES.ARTICLES + "/" + article.slug} className="">
@@ -75,7 +76,7 @@ export default function CardArticle({ article, lang }: Props) {
               </p> */}
             </div>
             <div className="d-flex justify-content-between align-items-center">
-              <h2 className="card-article__title text text--md text--bold mt-3">
+              <h2 className="card-article__title text text--md text--bold mt-3 ">
                 {article.title}
               </h2>
             </div>

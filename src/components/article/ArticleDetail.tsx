@@ -49,11 +49,11 @@ export default function ArticleDetail({ article, dictionary, lang }: Props) {
     <section className="container-lg p-0">
       <div
         className="d-flex flex-column p-3 p-md-5 mt-4 w-100"
-        style={getStyleBackground(article.contents[0].image)}
+        style={getStyleBackground(article.contents[0]?.image)}
       >
         <div className="d-flex align-items-center gap-2">
           <h2 className="me-auto text text--md text--bold text--white my-0">
-            {article.title}
+            {article?.title}
           </h2>
           {/* <Bookmark /> */}
           <PopoverOverlay icon={shareIcon} dictionary={dictionary} />
@@ -67,7 +67,7 @@ export default function ArticleDetail({ article, dictionary, lang }: Props) {
             height={50}
           />
           <p className="text text--white m-0">
-            {getDisplayedName(article.author)}
+            {getDisplayedName(article?.author)}
           </p>
         </div>
 
@@ -89,19 +89,20 @@ export default function ArticleDetail({ article, dictionary, lang }: Props) {
         </div>
       </div>
       <div className="container-lg mt-4">
-        {article.contents.map((content, index) => (
-          <>
-            <p key={index} className="text">
-              {content.text}
-            </p>
-            <Image
-              src={content.image}
-              alt={content.image_alt}
-              width={300}
-              height={300}
-              priority
-            />
-          </>
+        {article?.contents.map((content, index) => (
+          <div key={article.slug} className="d-flex">
+            <p className="text">{content?.text}</p>
+            {content.image && (
+              <Image
+                src={content?.image}
+                alt={content?.image_alt}
+                width={300}
+                height={300}
+                priority
+                className="float-right"
+              />
+            )}
+          </div>
         ))}
       </div>
       <div className="post__footer container-lg">

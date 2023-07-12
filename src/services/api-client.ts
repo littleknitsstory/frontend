@@ -8,7 +8,7 @@ async function fetcher(
   options?: RequestInit,
   lang: Locale = "en"
 ) {
-  const URL = process.env.NEXT_PUBLIC_API_BASE_URL + endpoint;
+  const URL = "http://dev.backend.littleknitsstory.com:26363/api/v1" + endpoint;
   const headers = {
     "Content-Type": "application/json",
     "Accept-Language": lang,
@@ -64,10 +64,7 @@ export async function getComments(options?: RequestInit) {
   return response;
 }
 
-export async function getMenu(
-  lang: Locale = "en",
-  options?: RequestInit
-) {
+export async function getMenu(lang: Locale = "en", options?: RequestInit) {
   const response: Promise<Menu[]> = await fetcher(
     ENDPOINTS.MENU,
     options,
